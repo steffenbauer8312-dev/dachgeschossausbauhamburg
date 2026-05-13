@@ -109,3 +109,45 @@ export function generateHowToSchema(steps: { name: string; text: string }[]) {
     }))
   }
 }
+
+export function generateArticleSchema({
+  headline,
+  description,
+  author = "Dachgeschossausbau Hamburg",
+  datePublished,
+  dateModified,
+  image = "https://dachgeschossausbauhamburg.de/og-image.jpg",
+  url,
+}: {
+  headline: string;
+  description: string;
+  author?: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+  url?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": headline,
+    "description": description,
+    "image": image,
+    "author": {
+      "@type": "Organization",
+      "name": author,
+      "url": "https://dachgeschossausbauhamburg.de"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Dachgeschossausbau Hamburg",
+      "url": "https://dachgeschossausbauhamburg.de"
+    },
+    "datePublished": datePublished,
+    "dateModified": dateModified || datePublished,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url || "https://dachgeschossausbauhamburg.de/ratgeber/foerdermittel/"
+    }
+  }
+}

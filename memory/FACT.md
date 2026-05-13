@@ -94,10 +94,11 @@
 - "hamburgische bauordnung 2026 dachgeschoss"
 
 ## Design-Richtung
-- **Visueller Stil: "Backstein & Wasser"**
-- Rotklinker-Töne (#8B3A3A / #A0522D) als Primär-Akzent auf hellerem Untergrund
-- Maritime Blaunuancen als sekundäre Akzente
-- Kommuniziert: hanseatische Bodenständigkeit, Handwerkstradition
+- **Visueller Stil: "Dunkelgrau & Wasser"**
+- Primärfarbe: #3D3D3D (Dunkelgrau, ersetzt Rotklinker #8B3A3A) — weniger aufdringlich, professionell
+- Sekundär: #C9A96E (verblichenes Gold)
+- Akzent: #2C5F7D (Wasser-Blau, nordisch) — bleibt unverändert
+- Kommuniziert: hanseatische Seriosität, Handwerkstradition
 - Referenz: Münchner Design neu interpretiert für Hamburg-Identität
 
 ## Content-Strategie
@@ -107,6 +108,9 @@
 - Fokus auf Entity-Cluster-Aufbau
 - AI-Footprint-freier Content mit humanizer skill prüfen
 
+## Geplanter Content (Backlog)
+- **Ratgeber-Long-Form**: Deep-Authority-Artikel geplant als separate Ratgeber-Texte (nicht FAQ-Format). Themen: Kostenoptimierung, Denkmalschutz, Fördermittel-Strategie, Bezirks-spezifische Deep-Dives. Zeitpunkt: nach Launch.
+
 ## Design-Referenz
 - Quelle: C:\Users\steff\dachgeschossausbau-muenchen
 - Stack: Astro, Tailwind CSS, TypeScript
@@ -115,6 +119,11 @@
 
 ## Technische Stack (Projekt)
 - Framework: Astro
-- Styling: Tailwind CSS
+- Styling: Tailwind CSS (tailwind.config.mjs mit Custom Colors)
 - Deployment: Vercel (analog München)
 - Schema: LocalBusiness, Service, FAQPage, HowTo, BreadcrumbList, Organization, ImageObject
+
+## Kontaktdaten (Impressum/Datenschutz)
+- Inhaber: Steffen Bauer
+- Adresse: Schockenriedstr. 12, 70565 Stuttgart
+- E-Mail: info@dachgeschossausbauhamburg.de

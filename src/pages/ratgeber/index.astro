@@ -1,0 +1,258 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const currentPath = '/ratgeber/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+];
+---
+
+<BaseLayout
+  title="Ratgeber zum Dachgeschossausbau in Hamburg – Alle Guides"
+  description="Deep-Content Ratgeber zum Dachgeschossausbau in Hamburg: Denkmalschutz, Fördermittel 2026, Kosten optimieren. 2.500+ Wörter pro Artikel – alle Hamburger Besonderheiten erklärt."
+  canonical="/ratgeber/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Wissen &amp; Beratung
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Ratgeber zum Dachgeschossausbau in Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Detaillierte Deep-Content-Ratgeber für Eigentümer, die ihr Hamburger Dachgeschoss ausbauen möchten. Alles zu Denkmalschutz, Fördermitteln und Kosten – mit Hamburg-spezifischem Bezug.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70">
+          <span class="bg-white/10 px-4 py-2 rounded-full">§6 HDSchG</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">KfW 261</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">HBauO 2026 §62</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">Erhaltungssatzung</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">BAFA Einzelmaßnahmen</span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       RATGEBER-KARTEN (Large Cards)
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Karte 1: Denkmalschutz -->
+        <a href="/ratgeber/denkmalschutz/" class="group block bg-surface rounded-2xl border border-border hover:border-primary transition-all overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+            <div class="md:col-span-3 p-8 lg:p-10">
+              <span class="inline-block text-sm font-medium text-secondary mb-4">Recht &amp; Genehmigung</span>
+              <h2 class="text-2xl lg:text-3xl font-bold text-text-primary mb-4 group-hover:text-primary transition-colors">
+                Denkmalschutz &amp; Denkmalschutz-Objekte in Hamburg
+              </h2>
+              <p class="text-text-secondary leading-relaxed mb-6">
+                Für Eigentümer denkmalgeschützter Altbauten in Hamburg ist der DG-Ausbau eine besondere Herausforderung. Dieser Ratgeber erklärt das Genehmigungsverfahren nach §6 HDSchG, was in Baudenkmälern und Erhaltungssatzungsgebieten genehmigt wird, welche Kosten anfallen und welche Förderungen es gibt.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-text-secondary">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">§6 HDSchG</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">2-Monats-Frist</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">80–500 € Gebühren</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">Praxishilfe Denkmalpflege</span>
+              </div>
+              <div class="mt-6 flex items-center gap-2 text-primary font-semibold text-sm group-hover:underline">
+                <span>Artikel lesen</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </div>
+            </div>
+            <div class="md:col-span-2 bg-primary/5 flex items-center justify-center p-8">
+              <div class="text-center">
+                <div class="text-5xl font-bold text-primary mb-2">2.500+</div>
+                <div class="text-sm text-text-secondary">Wörter Deep-Content</div>
+                <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs">
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Denkmalschutz</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Gauben</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Förderung</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Karte 2: Fördermittel -->
+        <a href="/ratgeber/foerdermittel/" class="group block bg-surface rounded-2xl border border-border hover:border-primary transition-all overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+            <div class="md:col-span-3 p-8 lg:p-10">
+              <span class="inline-block text-sm font-medium text-secondary mb-4">Finanzierung</span>
+              <h2 class="text-2xl lg:text-3xl font-bold text-text-primary mb-4 group-hover:text-primary transition-colors">
+                Fördermittel &amp; Finanzierung 2026 – Hamburg
+              </h2>
+              <p class="text-text-secondary leading-relaxed mb-6">
+                KfW 261, BAFA Einzelmaßnahmen, §35c EStG, iSFP-Bonus, WPB-Bonus – die Förderlandschaft für DG-Ausbau in Hamburg ist umfangreich. Dieser Ratgeber erklärt alle Optionen für Hamburger Eigentümer, mit welchen Summen Sie rechnen können und wie Sie die Anträge richtig stellen.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-text-secondary">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">KfW 261</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">BAFA</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">§35c EStG</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">iSFP-Bonus</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">WPB-Bonus</span>
+              </div>
+              <div class="mt-6 flex items-center gap-2 text-primary font-semibold text-sm group-hover:underline">
+                <span>Artikel lesen</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </div>
+            </div>
+            <div class="md:col-span-2 bg-primary/5 flex items-center justify-center p-8">
+              <div class="text-center">
+                <div class="text-5xl font-bold text-primary mb-2">2.000+</div>
+                <div class="text-sm text-text-secondary">Wörter Deep-Content</div>
+                <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs">
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">KfW</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">BAFA</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Steuern</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Karte 3: Kosten optimieren (Stub) -->
+        <a href="/kosten" class="group block bg-surface rounded-2xl border border-border hover:border-primary transition-all overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+            <div class="md:col-span-3 p-8 lg:p-10">
+              <span class="inline-block text-sm font-medium text-secondary mb-4">Kosten</span>
+              <h2 class="text-2xl lg:text-3xl font-bold text-text-primary mb-4 group-hover:text-primary transition-colors">
+                Kosten optimieren &amp; sparen beim DG-Ausbau
+              </h2>
+              <p class="text-text-secondary leading-relaxed mb-6">
+                800–2.500 €/m², Gauben 8.000–25.000 €: Die Kosten für einen DG-Ausbau in Hamburg variieren stark je nach Zustand des Dachstuhls, gewünschtem Ausbauumfang und gewählter Gaubenform. Dieser Ratgeber zeigt, wie Sie Kosten reduzieren ohne Qualitätsverlust – mit einer Schritt-für-Schritt-Anleitung zur Kostenoptimierung.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-text-secondary">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">800–2.500 €/m²</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">Gauben 8.000–25.000 €</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full">Kostenfallen vermeiden</span>
+              </div>
+              <div class="mt-6 flex items-center gap-2 text-primary font-semibold text-sm group-hover:underline">
+                <span>Zur Kostenübersicht</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </div>
+            </div>
+            <div class="md:col-span-2 bg-primary/5 flex items-center justify-center p-8">
+              <div class="text-center">
+                <div class="text-5xl font-bold text-primary mb-2">Kosten</div>
+                <div class="text-sm text-text-secondary">Tabellen + Erklärungen</div>
+                <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs">
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">€/m²</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Gauben</span>
+                  <span class="bg-white/10 text-white px-2 py-1 rounded">Förderung</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       ZUSÄTZLICHE RESSOURCEN
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Weiterführende Informationen"
+        heading="Alle wichtigen Themen rund um den DG-Ausbau"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="/kosten" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Kostenübersicht DG-Ausbau</h3>
+            <p class="text-xs text-text-secondary">800–2.500 €/m², Gauben 8.000–25.000 €, Dämmung 60–180 €/m².</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Genehmigung in Hamburg</h3>
+            <p class="text-xs text-text-secondary">§62 HBauO 2026, Genehmigungsfreistellung, Erhaltungssatzung, Denkmalschutz.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Dachgauben – Übersicht</h3>
+            <p class="text-xs text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Formen, Kosten, Genehmigung.</p>
+          </a>
+
+          <a href="/standorte/eppendorf" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Eppendorf</h3>
+            <p class="text-xs text-text-secondary">Erhaltungssatzung, Denkmalschutz, 5.000–8.000 €/m² Kaufpreis, Gaubenform bevorzugt.</p>
+          </a>
+
+          <a href="/standorte/altona" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Altonaer Elbvororte</h3>
+            <p class="text-xs text-text-secondary">Denkmalschutz oft, BG Altona, 4–8 Wochen Bearbeitungszeit, Fledermausgaube kritisch.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-5 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">Dämmung im DG</h3>
+            <p class="text-xs text-text-secondary">Aufsparren, Zwischensparren, U-Werte, KfW 261, BAFA, Denkmalschutz-Auflagen.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Kostenlose Beratung zum DG-Ausbau in Hamburg
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Sie haben ein konkretes Projekt oder Fragen zu Fördermitteln, Genehmigung oder Denkmalschutz? Wir beraten Sie unverbindlich und erstellen eine erste Kostenabschätzung.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

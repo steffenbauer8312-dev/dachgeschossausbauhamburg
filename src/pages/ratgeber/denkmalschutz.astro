@@ -1,0 +1,628 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+
+const currentPath = '/ratgeber/denkmalschutz/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Denkmalschutz & Dachgeschossausbau', href: '/ratgeber/denkmalschutz/' },
+];
+
+const faqs = [
+  {
+    question: 'Gilt das Hamburger Denkmalschutzgesetz auch für meine Altbauwohnung?',
+    answer: 'Das Hamburger Denkmalschutzgesetz (HDSchG) unterscheidet zwischen Baudenkmalen (einzelne Gebäude) und Erhaltungssatzungsgebieten. Beide unterliegen unterschiedlichen Regelungen. Baudenkmäler sind im Denkmalverzeichnis eingetragen und unterliegen §§6ff. HDSchG. Erhaltungssatzungsgebiete werden von den Bezirksämtern festgelegt und betreffen das äußere Erscheinungsbild ganzer Straßenzüge. Ob Ihre Immobilie betroffen ist, prüfen Sie beim Denkmalschutzamt Hamburg (Große Bleichen 30) oder im Grundbuch.',
+  },
+  {
+    question: 'Wie lange dauert die denkmalrechtliche Genehmigung in Hamburg?',
+    answer: 'Die Bearbeitungsfrist für denkmalrechtliche Genehmigungen beträgt nach §6 HDSchG bis zu zwei Monate. Tatsächlich liegen die Bearbeitungszeiten bei komplexen Fällen (Gauben, Aufsparrendämmung) oft bei 6–8 Wochen. Die Praxishilfe Denkmalpflege Hamburg unterscheidet zwischen Regelfällen und komplexen Fällen – bei Gauben-DG in Regelfällen kann die Prüfung beschleunigt werden. Kombinierte Anträge (Denkmalschutzamt + Bezirksamt gleichzeitig) verkürzen das Gesamtverfahren.',
+  },
+  {
+    question: 'Was kostet eine denkmalrechtliche Genehmigung in Hamburg?',
+    answer: 'Die Gebühren für eine denkmalrechtliche Genehmigung nach §6 HDSchG liegen zwischen 80 und 500 Euro, je nach Umfang des Eingriffs. Hinzu kommen Planungskosten für einen denkmalerfahrenen Architekten (2.000–5.000 Euro). Für Gauben-Genehmigungen inklusive Bezirksamt kommen 200–800 Euro hinzu. Insgesamt sollten Sie mit 3.000–7.000 Euro Zusatzkosten gegenüber einem Nicht-Denkmalschutz-Objekt rechnen.',
+  },
+];
+---
+
+<BaseLayout
+  title="Denkmalschutz & Dachgeschossausbau Hamburg – Was ist erlaubt, was nicht?"
+  description="Denkmalschutz & DG-Ausbau in Hamburg: §6 HDSchG, Genehmigungsverfahren, Denkmalschutzamt Hamburg (Große Bleichen 30), 2-Monats-Frist, Gebühren 80–500€. Alles erklärt."
+  canonical="/ratgeber/denkmalschutz/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Denkmalschutz & Dachgeschossausbau Hamburg', url: 'https://dachgeschossausbauhamburg.de/ratgeber/denkmalschutz/' },
+  ]))} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Denkmalschutz & Dachgeschossausbau in Hamburg – Was ist erlaubt, was nicht?',
+    description: 'Der Ratgeber erklärt das Genehmigungsverfahren nach §6 HDSchG, was in denkmalgeschützten Gebäuden genehmigt wird, welche Kosten anfallen und welche Förderungen es gibt.',
+    datePublished: '2026-01-15',
+    dateModified: '2026-05-13',
+    author: 'Dachgeschossausbau Hamburg',
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HDSchG · §6 Denkmalschutz
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Denkmalschutz &amp; Dachgeschossausbau in Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Denkmalgeschützte Altbauten in Hamburg bieten enormes Wohnpotenzial – doch die Hürden sind hoch. Dieser Ratgeber erklärt das Genehmigungsverfahren nach §6 HDSchG, was erlaubt ist und welche Kosten auf Sie zukommen.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>§6 HDSchG: denkmalrechtliche Genehmigung erforderlich</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Denkmalschutzamt Hamburg, Große Bleichen 30</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Gauben in Erhaltungssatzungsgebieten: Sonderregelungen</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>2-Monats-Frist nach §6 HDSchG</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Gebühren: 80–500 € für die denkmalrechtliche Genehmigung</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">2 Monate</div>
+              <div class="text-xs text-white/60 mt-1">max. Bearbeitung</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">80–500 €</div>
+              <div class="text-xs text-white/60 mt-1">Gebührenbescheid</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">3.000–7.000 €</div>
+              <div class="text-xs text-white/60 mt-1">Zusatzkosten gesamt</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WAS bedeuted Denkmalschutz?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Grundlagen"
+          heading="Was bedeutet Denkmalschutz für Ihr DG-Projekt?"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Denkmalschutz in Hamburg ist kein pauschales Verbot – sondern ein geregeltes Verfahren, das das äußere Erscheinungsbild von Gebäuden schützt, die hamburgische Baukultur dokumentieren. Für Eigentümer eines denkmalgeschützten Hauses bedeutet das: Jede bauliche Veränderung am Dach, an der Fassade oder an der Grundrissstruktur braucht die Zustimmung des Denkmalschutzamts.
+          </p>
+          <p>
+            Hamburg listet aktuell rund 1.650 Baudenkmäler im Verzeichnis des Denkmalschutzgesetzes. Besonders betroffen vom Denkmalschutz sind die inneren Stadtteile: Eppendorf, Teile von Winterhude, die Altonaer Elbvororte (Ottensen, Altona-Altstadt, Bahrenfeld bis Blankenese), das Grindelviertel sowie Teile von Harvestehude und der Hamburger Innenstadt. Wer ein Dachgeschoss in diesen Vierteln ausbauen möchte, sollte frühzeitig klären, ob sein Gebäude als Baudenkmal eingetragen ist.
+          </p>
+          <p>
+            Das <strong>Hamburger Denkmalschutzgesetz (HDSchG)</strong> regelt in §6 die Pflicht zur denkmalrechtlichen Genehmigung. Diese ist unabhängig von der bauordnungsrechtlichen Baugenehmigung einzuholen – beide Anträge werden jedoch oft parallel beim Denkmalschutzamt (für das Denkmal) und beim zuständigen Bezirksamt (für das Bauwerk) gestellt.
+          </p>
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Baudenkmal vs. Erhaltungssatzungsgebiet</h3>
+          <p>
+            Der Unterschied ist wesentlich: Ein <strong>Baudenkmal</strong> ist ein einzelnes Gebäude, das im Denkmalverzeichnis eingetragen ist. Eigentümer können beim Denkmalschutzamt Hamburg (Große Bleichen 30, 20354 Hamburg) Einsicht in das Verzeichnis beantragen. Eine <strong>Erhaltungssatzung</strong> hingegen schützt das Erscheinungsbild eines ganzen Gebiets – sie betrifft also nicht nur einzelne Baudenkmäler, sondern alle Gebäude in einem festgelegten Bereich.
+          </p>
+          <p>
+            In Eppendorf und großen Teilen von Eimsbüttel dominieren Erhaltungssatzungen. In den Altonaer Elbvororten gibt es hingegen zahlreiche einzeln eingetragene Baudenkmäler. Die Genehmigungsanforderungen sind in beiden Fällen ähnlich, aber die Entscheidungshoheit liegt unterschiedlich: Beim Baudenkmal das Denkmalschutzamt, bei der Erhaltungssatzung das Bezirksamt (mit Denkmalschutzamt als Beteiligte).
+          </p>
+          <p>
+            <strong>Entscheidend:</strong> Ein Antrag auf denkmalrechtliche Genehmigung ist immer dann erforderlich, wenn Ihr Gebäude als Baudenkmal im Denkmalverzeichnis eingetragen ist – unabhängig davon, ob die Bauarbeiten im Dachgeschoss stattfinden. Auch für sichtbare Veränderungen an Gauben, Dachflächenfenstern und Dacheindeckungen ist die Genehmigung Pflicht.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: Genehmigungsverfahren Schritt für Schritt
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Verfahren"
+          heading="Das Genehmigungsverfahren Schritt für Schritt"
+          subheading="Von der Prüfung bis zum Gebührenbescheid: So läuft die denkmalrechtliche Genehmigung in Hamburg ab."
+          headingLevel="h2"
+        />
+        <div class="space-y-8">
+          <!-- Schritt 1 -->
+          <div class="flex gap-6 p-6 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">1</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">Prüfen, ob Denkmalschutz besteht</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Bevor Sie planen, sollten Sie klären, ob Ihr Gebäude als Baudenkmal eingetragen ist. Beim Denkmalschutzamt Hamburg (Große Bleichen 30, 20354 Hamburg) können Sie telefonisch (040-428 41-0) oder per E-Mail (denkmalschutzamt@hamburg.de) eine Auskunft beantragen. Auch im Grundbuchamt werden Baudenkmäler vermerkt – ein Auszug gibt Gewissheit. In Eppendorf, Winterhude und den Altonaer Elbvororten ist die Wahrscheinlichkeit hoch, dass zumindest eine Erhaltungssatzung gilt.
+              </p>
+            </div>
+          </div>
+
+          <!-- Schritt 2 -->
+          <div class="flex gap-6 p-6 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">2</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">Antrag beim Denkmalschutzamt – parallel Baugenehmigung</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Die denkmalrechtliche Genehmigung nach §6 HDSchG wird beim Denkmalschutzamt Hamburg beantragt. Zeitgleich muss beim zuständigen Bezirksamt die bauordnungsrechtliche Genehmigung (bzw. der Antrag auf Genehmigungsfreistellung nach §62 HBauO 2026) eingereicht werden. In der Praxis empfiehlt es sich, beide Anträge parallel zu stellen und den denkmalrechtlichen Antrag als Erstes zu beginnen, da die Bearbeitungsfrist hier länger sein kann. Für Eppendorf ist das Bezirksamt Eimsbüttel zuständig, für Altona das Bezirksamt Altona.
+              </p>
+            </div>
+          </div>
+
+          <!-- Schritt 3 -->
+          <div class="flex gap-6 p-6 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">3</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">Erforderliche Unterlagen zusammenstellen</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Das Denkmalschutzamt Hamburg verlangt für die Prüfung eines DG-Ausbaus folgende Unterlagen: Bestandspläne im Maßstab 1:100 (Grundrisse, Schnitte, Ansichten), aktuelle Fotos des Gebäudes (Innen und Außen, auch vom Dachstuhl), Umbaupläne im Maßstab 1:100 mit geplanten Eingriffen in die Bausubstanz, eine Beschreibung der geplanten Maßnahmen inklusive Materialangaben. Bei Gauben zusätzlich: Form und Position der Gaube im Dachflächenplan, Materialwahl (vorzugsweise Ziegel oder Schiefer, keine Blechverkleidung in Ensemble-Schutzzonen). Ein denkmalerfahrener Architekt kann die Unterlagen vollständig und denkmalgerecht aufbereiten.
+              </p>
+            </div>
+          </div>
+
+          <!-- Schritt 4 -->
+          <div class="flex gap-6 p-6 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">4</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">Bearbeitungsfrist abwarten – bis zu 2 Monate</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Nach §6 Abs. 3 HDSchG muss das Denkmalschutzamt den Antrag innerhalb von zwei Monaten bescheiden. Wird nicht innerhalb dieser Frist entschieden, gilt die Genehmigung als erteilt (Genehmigungsfiktion). In der Praxis sind die Bearbeitungszeiten im Denkmalschutzamt Hamburg je nach Bezirk unterschiedlich: In Eppendorf und Eimsbüttel (Bezirksamt Eimsbüttel als审批behörde für Erhaltungssatzungen) liegen sie bei 4–8 Wochen. In den Altonaer Elbvororten kann es durch die höhere Baudichte an Denkmälern 6–12 Wochen dauern. Die Praxishilfe Denkmalpflege Hamburg unterscheidet Regelfälle (z.B. Zwischensparrendämmung, Fensteraustausch) von komplexen Fällen – Regelfälle werden bevorzugt und oft schneller bearbeitet.
+              </p>
+            </div>
+          </div>
+
+          <!-- Schritt 5 -->
+          <div class="flex gap-6 p-6 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">5</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">Gebührenbescheid und Auflagen</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Nach positiver Prüfung erlässt das Denkmalschutzamt einen Gebührenbescheid. Die Kosten für eine denkmalrechtliche Genehmigung liegen je nach Umfang des Eingriffs zwischen 80 und 500 Euro. Bei einfachen Maßnahmen wie Fensteraustausch auf gleiche Größe fallen Gebühren am unteren Rand an (80–150 €). Bei Gauben oder umfangreichen Dachveränderungen liegen die Kosten bei 200–500 €. In manchen Fällen werden Nebenbestimmungen festgelegt – etwa die Verwendung bestimmter Materialien (Ziegel statt Betonsteine) oder Auflagen zur Lichtzufuhr. Diese Auflagen sind zu beachten und einzuhalten.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: Was wird genehmigt – was nicht?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Praxisfälle"
+          heading="Was wird genehmigt – was nicht?"
+          subheading="Klare Guidance für Eigentümer denkmalgeschützter Hamburger Altbauten."
+          headingLevel="h2"
+        />
+        <div class="space-y-8">
+          <!-- Erlaubt -->
+          <div>
+            <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+              <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Genehmigungsfähig in der Regel
+            </h3>
+            <div class="space-y-3">
+              <div class="p-4 bg-surface rounded-xl border border-border">
+                <h4 class="font-semibold text-text-primary mb-1">Zwischensparrendämmung von innen</h4>
+                <p class="text-sm text-text-secondary">Die Zwischensparrendämmung verändert das äußere Erscheinungsbild des Daches nicht und gilt beim Denkmalschutzamt Hamburg in den meisten Fällen als unproblematisch. Sie muss jedoch denkmalgerecht ausgeführt werden – auf Dampfbremse und Innenausbau achten. Förderbar über KfW 261 und BAFA auch für Denkmäler.</p>
+              </div>
+              <div class="p-4 bg-surface rounded-xl border border-border">
+                <h4 class="font-semibold text-text-primary mb-1">Gauben in zurückgesetzter Form</h4>
+                <p class="text-sm text-text-secondary">Wenn das Dachbild nicht wesentlich verändert wird, genehmigt das Denkmalschutzamt Hamburg Gauben in zurückgesetzter Form. In Eppendorf ist die Schleppgaube die bevorzugte Variante, die in der Regel auf Zustimmung stßt. Die Praxishilfe Denkmalpflege Hamburg ordnet Gauben-DG oft als Regelfall ein – das beschleunigt die Prüfung erheblich.</p>
+              </div>
+              <div class="p-4 bg-surface rounded-xl border border-border">
+                <h4 class="font-semibold text-text-primary mb-1">Fenster austauschen auf gleiche Größe</h4>
+                <p class="text-sm text-text-secondary">Der Austausch von Dachflächenfenstern auf gleiche Größe und Position ist in der Regel genehmigungsfähig, sofern das Material (Holzfenster, keine Kunststoff-Rahmen in Ensemble-Schutzzonen) denkmalgerecht gewählt wird. Bei farbigen oder historisch besonders wertvollen Fensterprofilen empfiehlt sich eine Abstimmung mit dem Denkmalschutzamt vorab.</p>
+              </div>
+              <div class="p-4 bg-surface rounded-xl border border-border">
+                <h4 class="font-semibold text-text-primary mb-1">Dachflächenrenovierung mit Originalmaterial</h4>
+                <p class="text-sm text-text-secondary">Die Erneuerung der Dacheindeckung mit dem Originalmaterial (z.B. Pfannenziegel, Naturschiefer) gilt als Unterhaltung und ist in der Regel genehmigungsfrei, sofern keine Veränderung der Dachform erfolgt. Bei Baudenkmälern mit besonders erhaltener Originalsubstanz kann eine Abstimmung mit dem Denkmalschutzamt dennoch empfehlenswert sein.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nicht erlaubt -->
+          <div>
+            <h3 class="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
+              <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Nicht genehmigungsfähig oder stark eingeschränkt
+            </h3>
+            <div class="space-y-3">
+              <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                <h4 class="font-semibold text-text-primary mb-1">Aufsparrendämmung, die Dachrandprofile verändert</h4>
+                <p class="text-sm text-text-secondary">Die Aufsparrendämmung verändert die Dachneigung und die sichtbaren Profile am Dachrand. In Erhaltungssatzungsgebieten und bei Baudenkmälern wird dies in der Regel abgelehnt, weil das äußere Erscheinungsbild wesentlich verändert wird. Alternativ: Aufsparrendämmung mit minimaler Aufbauhöhe und gleissender Dachrandprofilierung – hier entscheidet das Denkmalschutzamt im Einzelfall.</p>
+              </div>
+              <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                <h4 class="font-semibold text-text-primary mb-1">Fledermausgauben in Ensemble-Schutzzonen</h4>
+                <p class="text-sm text-text-secondary">Das Verwaltungsgericht Hamburg hat in einem Urteil 2024 klargestellt, dass Fledermausgauben in Ensemble-Schutzzonen (z.B. Eppendorf, Altonaer Elbvororte) das Stadtbild wesentlich verändern und daher nicht genehmigungsfähig sind. Die Schleppgaube bleibt die bevorzugte und in der Regel genehmigungsfähige Alternative. Auch in Bezirksämtern außerhalb Hamburgs (VG Ansbach, VG München) wurde diese Rechtsprechung bestätigt.</p>
+              </div>
+              <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                <h4 class="font-semibold text-text-primary mb-1">Loggien-Einschnitte in Dachflächen</h4>
+                <p class="text-sm text-text-secondary">Loggien-Einschnitte verändern die Dachfläche grundlegend und sind bei Baudenkmälern und in Erhaltungssatzungsgebieten nicht genehmigungsfähig. Die Urteile des VG Ansbach und VG München bestätigen diese Einschätzung auch für Hamburger Verhältnisse. Als Alternative kommt eine Gaube in Betracht, die einen vergleichbaren Lichteinfall bietet, ohne die Dachfläche als solche zu verändern.</p>
+              </div>
+              <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                <h4 class="font-semibold text-text-primary mb-1">PV-Anlagen auf denkmalgeschützten Dächern</h4>
+                <p class="text-sm text-text-secondary">PV-Anlagen auf denkmalgeschützten Dächern sind im Regelfall nicht genehmigungsfähig, da sie das äußere Erscheinungsbild des Baudenkmals verändern. Das Denkmalschutzamt Hamburg lehnt Aufdach-PV auf sichtbaren Dachflächen in der Regel ab. Als Ausnahme kommen Indach-PV-Systeme in Betracht, die bündig mit der Dacheindeckung abschließen und keine sichtbaren Aufbauten erzeugen – hier ist jedoch eine Einzelfallprüfung erforderlich.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: Praxishilfe Denkmalpflege Hamburg
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Praxishilfe"
+          heading="Die Praxishilfe Denkmalpflege Hamburg"
+          subheading="Ein offizielles Dokument des Denkmalschutzamts Hamburg, das Genehmigungsverfahren beschleunigt."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Das Denkmalschutzamt Hamburg hat eine Praxishilfe veröffentlicht (erhältlich unter hamburg.de/praxishilfe-denkmalpflege), die zwischen <strong>Regelfällen</strong> und <strong>komplexen Fällen</strong> unterscheidet. Diese Unterscheidung ist für Eigentümer eines denkmalgeschützten Hauses besonders relevant, wenn sie ein DG-Projekt planen.
+          </p>
+          <p>
+            <strong>Regelfälle</strong> sind Maßnahmen, die nach Einschätzung des Denkmalschutzamts das Baudenkmal nicht wesentlich beeinträchtigen und bei denen ein standardisiertes Genehmigungsverfahren ausreicht. Dazu zählen: Zwischensparrendämmung von innen, Fensteraustausch auf gleiche Größe und Position, Dachflächenrenovierung mit Originalmaterial, einfache Schleppgauben bei zurückgesetztem Einbau. Diese Maßnahmen können beschleunigt geprüft werden – die Bearbeitungszeit sinkt oft auf 3–4 Wochen.
+          </p>
+          <p>
+            <strong>Komplexe Fälle</strong> erfordern eine detaillierte Einzelprüfung. Dazu gehören: Aufsparrendämmung, Fledermausgauben, Loggien-Einschnitte, Grundrissveränderungen im DG, Ausbau von Gauben in第一次 Reihen, Veränderung der Firstlinie. Bei diesen Maßnahmen ist mit der vollen 2-Monats-Frist zu rechnen, und das Ergebnis ist weniger vorhersehbar.
+          </p>
+          <p>
+            <strong>Praktischer Tipp:</strong> Wenn Ihre geplante Maßnahme in die Regelfall-Kategorie fällt, weisen Sie in Ihrem Antrag darauf hin und verweisen Sie auf die Praxishilfe Denkmalpflege Hamburg. Das beschleunigt die Bearbeitung und erhöht die Vorhersehbarkeit des Ergebnisses. Die Praxishilfe ist kein Gesetz, aber sie gibt die Verwaltungspraxis des Denkmalschutzamts verbindlich wider – und wird von den Sachbearbeitern als Orientierungshilfe genutzt.
+          </p>
+          <div class="p-5 bg-primary/5 border border-primary/20 rounded-xl my-6">
+            <p class="text-sm text-text-primary font-medium">
+              <strong>Hinweis:</strong> Die Praxishilfe Denkmalpflege Hamburg finden Sie auf der offiziellen Website des Denkmalschutzamts unter hamburg.de/praxishilfe-denkmalpflege. Wir empfehlen, vor Antragstellung einen Blick in das Dokument zu werfen und zu prüfen, ob Ihre geplante Maßnahme als Regelfall eingestuft ist.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 5: Kosten und Zeit
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Kosten"
+          heading="Kosten und Zeit für denkmalgeschützte DG-Projekte"
+          subheading="Was kostet die Genehmigung, was kostet die Planung, was kostet der Ausbau?"
+          headingLevel="h2"
+        />
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Denkmalrechtliche Genehmigung (§6 HDSchG)</td>
+                <td class="px-6 py-4 text-right font-mono">80 €</td>
+                <td class="px-6 py-4 text-right font-mono">500 €</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Zusätzliche Planungskosten (denkmalerfahrener Architekt)</td>
+                <td class="px-6 py-4 text-right font-mono">2.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">5.000 €</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Gauben-Genehmigung (Denkmalschutzamt + Bezirksamt)</td>
+                <td class="px-6 py-4 text-right font-mono">200 €</td>
+                <td class="px-6 py-4 text-right font-mono">800 €</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Bearbeitungszeit (Denkmalschutzamt)</td>
+                <td class="px-6 py-4 text-right font-mono" colspan="2">bis zu 2 Monate (Regelfall: 3–4 Wochen)</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Gesamtzusatzkosten ggü. Nicht-Denkmalschutz</td>
+                <td class="px-6 py-4 text-right font-mono">3.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">7.000 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Zusatzkosten für ein denkmalgeschütztes DG-Projekt in Hamburg summieren sich auf 3.000–7.000 Euro gegenüber einem vergleichbaren Ausbau ohne Denkmalschutz. Der größte Posten ist die Planung: Wer einen Architekten einschaltet, der Erfahrung mit dem Denkmalschutzamt Hamburg hat, zahlt 2.000–5.000 Euro extra – aber diese Kosten lohnen sich, weil Anträge vollständiger eingereicht werden und die Genehmigungsquote höher ist.
+          </p>
+          <p>
+            Die Gebühren für die denkmalrechtliche Genehmigung (80–500 €) sind im Vergleich zu den Planungskosten moderat. Sie richten sich nach dem Umfang des Eingriffs und werden nach der Hamburger Verwaltungsgebührenordnung berechnet. Der Gebührenbescheid wird Ihnen nach positiver Prüfung zugestellt.
+          </p>
+          <p>
+            <strong>Zeitersparnis-Tipp:</strong> Der größte Zeitfaktor ist die Planungsphase. Wenn Sie vorab einen denkmalerfahrenen Architekten einschalten und die Unterlagen vollständig vorbereiten, verkürzt sich die Bearbeitungszeit erheblich. Das Denkmalschutzamt Hamburg bearbeitet vollständige Anträge in der Regel schneller als Anträge, die nachgebessert werden müssen.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 6: Förderung für Denkmalschutz-Objekte
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Förderung"
+          heading="Förderung für Denkmalschutz-Objekte in Hamburg"
+          subheading="KfW, BAFA, Hamburgisches Denkmalschutzgesetz – diese Förderoptionen gibt es."
+          headingLevel="h2"
+        />
+        <div class="space-y-6">
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3">KfW Effizienzhaus Denkmal</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <span class="text-text-secondary">Tilgungszuschuss</span>
+                <div class="text-xl font-bold text-primary">5 % auf EH Denkmal</div>
+              </div>
+              <div>
+                <span class="text-text-secondary">Max. Förderung</span>
+                <div class="text-xl font-bold text-primary">bis 15.000 € mit EE-Klasse</div>
+              </div>
+            </div>
+            <p class="text-text-secondary text-sm mt-3">Das KfW-Programm 261 (Wohngebäude – Kredit) bietet für Effizienzhaus Denkmal einen 5%-igen Tilgungszuschuss. Voraussetzung ist ein entsprechendes Gutachten eines Sachverständigen. Auch für Denkmäler geeignet, wenn ein Energiegutachten erstellt wird.</p>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3">Hamburgisches Denkmalschutzgesetz – Steuervergünstigungen</h3>
+            <p class="text-text-secondary text-sm mb-3">Nach §§8, 9 HDSchG können Eigentümer von Baudenkmälern Steuervergünstigungen in Anspruch nehmen. Diese gelten für Aufwendungen zur Erhaltung und Instandsetzung des Baudenkmals. Zuständig ist das Finanzamt. Ein Antrag auf Steuervergünstigung ist beim Finanzamt zu stellen und erfordert Nachweise über die denkmalrechtliche Genehmigung sowie Rechnungen über die durchgeführten Maßnahmen.</p>
+            <div class="p-3 bg-primary/5 rounded-lg">
+              <span class="text-sm font-medium text-text-primary">Tipp: Lassen Sie sich von einem Steuerberater mit Denkmalschutz-Erfahrung beraten – die steuerliche Absetzbarkeit kann mehrere zehntausend Euro über die Nutzungsdauer betragen.</span>
+            </div>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3">BAFA Einzelmaßnahmen</h3>
+            <p class="text-text-secondary text-sm mb-3">Das BAFA fördert Einzelmaßnahmen an der Gebäudehülle auch für Baudenkmäler und Gebäude in Erhaltungssatzungsgebieten. Allerdings gelten für Denkmäler reduzierte U-Wert-Anforderungen – die Förderfähigkeit ist daher leichter zu erreichen als bei Neubauten. Gefördert werden Dämmmaßnahmen (Zwischensparren-, Aufsparren-, Untersparren-Dämmung), der Austausch von Fenstern und Außentüren. Anträge sind vor Maßnahmenbeginn beim BAFA zu stellen.</p>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3">iSFP-Bonus für Denkmäler</h3>
+            <p class="text-text-secondary text-sm">Der Individuelle Sanierungsfahrplan (iSFP) bietet einen zusätzlichen 5%-igen Bonus bei der KfW-Förderung. Für Denkmäler ist ein iSFP ebenfalls möglich – er muss von einem zertifizierten Energieberater erstellt werden. Der iSFP-Bonus kann mit dem KfW-Effizienzhaus-Denkmal kombiniert werden und erhöht die Gesamtförderung um bis zu 5 % des Kreditbetrags. Auch wenn das Denkmal selbst keine hohen Energieeinsparungen zulässt (z.B. wegen Denkmalschutzauflagen bei der Dämmung), kann der iSFP-Bonus für andere Maßnahmen im Haus in Anspruch genommen werden.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 7: Hamburger Bezirks-spezifisch
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Bezirke"
+          heading="Hamburger Bezirke im Vergleich"
+          subheading="Je nach Stadtteil gelten unterschiedliche Regelungen und Bearbeitungszeiten."
+          headingLevel="h2"
+        />
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Stadtteil</th>
+                <th class="px-6 py-4 font-semibold">Schwerpunkt</th>
+                <th class="px-6 py-4 font-semibold">Bearbeitungszeit</th>
+                <th class="px-6 py-4 font-semibold">Besonderheit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-semibold text-text-primary">Eppendorf</td>
+                <td class="px-6 py-4">Erhaltungssatzung + Denkmäler</td>
+                <td class="px-6 py-4">4–8 Wochen</td>
+                <td class="px-6 py-4">BG Eimsbüttel; Schleppgaube bevorzugt; Gauben oft als Regelfall</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-semibold text-text-primary">Altonaer Elbvororte<br><span class="text-xs text-text-secondary">(Ottensen, Altona-Altstadt, Bahrenfeld, Blankenese)</span></td>
+                <td class="px-6 py-4">Denkmalschutz oft</td>
+                <td class="px-6 py-4">4–8 Wochen</td>
+                <td class="px-6 py-4">BG Altona; hohe Baudichte an Denkmälern; Fledermausgaube kritisch</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-semibold text-text-primary">Eimsbüttel-Altstadt</td>
+                <td class="px-6 py-4">Erhaltungssatzung dominant</td>
+                <td class="px-6 py-4">3–6 Wochen</td>
+                <td class="px-6 py-4">BG Eimsbüttel; Denkmäler seltener; Anträge meist unkompliziert</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-semibold text-text-primary">Winterhude<br><span class="text-xs text-text-secondary">(teilweise)</span></td>
+                <td class="px-6 py-4">Erhaltungssatzung + Denkmäler</td>
+                <td class="px-6 py-4">4–8 Wochen</td>
+                <td class="px-6 py-4">BG Hamburg-Nord; gemischte Bausubstanz; Gaubenform variiert</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-semibold text-text-primary">Harvestehude / Rotherbaum</td>
+                <td class="px-6 py-4">Denkmalschutz häufig</td>
+                <td class="px-6 py-4">4–10 Wochen</td>
+                <td class="px-6 py-4">BG Eimsbüttel; großes Interesse an DG-Ausbau; anspruchsvolle Verfahren</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-semibold text-text-primary">Bergedorf / Harburg</td>
+                <td class="px-6 py-4">Kaum Denkmalschutz</td>
+                <td class="px-6 py-4">2–4 Wochen</td>
+                <td class="px-6 py-4">BG Bergedorf / Harburg; einfacheres Verfahren; Denkmäler selten</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-text-secondary text-sm">
+          <strong>Abkürzungen:</strong> BG = Bezirksamt. Bearbeitungszeiten sind Richtwerte und können je nach Auslastung des Bezirksamts und Komplexität des Falls abweichen.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 8: Interne Verlinkung
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Hamburger Richtwerte für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel im Überblick.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">DG-Genehmigung in Hamburg – §62 HBauO 2026</h3>
+            <p class="text-sm text-text-secondary">Genehmigungsfreistellung, vereinfachtes Verfahren, Erhaltungssatzung und Denkmalschutz im Detail.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten, Kosten und Genehmigung in Hamburg.</p>
+          </a>
+
+          <a href="/standorte/eppendorf" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Eppendorf – Erhaltungssatzung und DG-Potenzial</h3>
+            <p class="text-sm text-text-secondary">Warum Eppendorf ein hotspot für DG-Ausbau ist und wie die Erhaltungssatzung das Verfahren prägt.</p>
+          </a>
+
+          <a href="/standorte/altona" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Altonaer Elbvororte – Denkmalschutz und Gauben</h3>
+            <p class="text-sm text-text-secondary">Wie das Bezirksamt Altona mit denkmalgeschützten Gebäuden umgeht und welche Gaubenform bevorzugt wird.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dämmung – Aufsparren, Zwischensparren, Untersparren</h3>
+            <p class="text-sm text-text-secondary">U-Werte, Förderfähigkeit, KfW 261 und BAFA: Alle Dämmarten für denkmalgeschützte Dächer.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       FAQ SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Fragen & Antworten"
+          heading="Häufig gestellte Fragen zum Denkmalschutz"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-surface rounded-xl border border-border overflow-hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-5 text-text-primary font-semibold text-base hover:bg-primary/5 transition-colors list-none">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-text-secondary flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-5 pb-5 text-text-secondary text-sm leading-relaxed border-t border-border">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Denkmalgeschütztes Haus in Hamburg? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie unverbindlich zu Ihrem DG-Projekt im denkmalgeschützten Altbau – inklusive denkmalrechtlicher Prüfung, Kostenabschätzung und Fördermittelberatung.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
