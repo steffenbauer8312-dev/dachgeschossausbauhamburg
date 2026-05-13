@@ -115,12 +115,12 @@
 - Denkmalschutz-Ratgeber: `/ratgeber/denkmalschutz/` (2026-05)
 - Fördermittel-Ratgeber: `/ratgeber/foerdermittel/` (2026-05)
 - Kosten-Ratgeber (Stub): `/kosten` → verlinkt auf Hauptseite
+- DG-Ausbau Schritt für Schritt: `/ratgeber/prozess/` (2026-05) — Entscheidungsguide, 6-Phasen-Prozess, typische Fehler
+- Gauben-Welcher-Guide: `/ratgeber/gauben/` (2026-05) — Schleppgaube vs. Fledermausgaube vs. Trapezgaube, Kostenvergleich, Genehmigung
+- Winterhude Standortpage: `/standorte/winterhude/` (2026-05) — Teilgebiete, Erhaltungssatzungen, Kostenübersicht, Fallbeispiele
+- DG-Ausbau für Vermieter: `/ratgeber/vermieter/` (2026-05) — Rendite, §35c EStG, Mieterhöhung, Fördermittel
 
 ### 🔲 Pending – Reihenfolge nach Priorität
-1. **DG-Ausbau Schritt für Schritt** → `/ratgeber/prozess/` — Entscheidungsguide für early-stage Interessenten. Keywords: `wie funktioniert dachgeschossausbau`, `dauer dachgeschossausbau hamburg`, `prozess dachausbau`
-2. **Gauben-Welcher-Guide** → `/ratgeber/gauben/` — Entscheidungshilfe Gaubenform (Schleppgaube vs. Fledermausgaube vs. Trapezgaube). Keywords: `gaubenform hamburg`, `schleppgaube vs fledermausgaube`, `welche dachgaube hamburg`
-3. **Winterhude Standortpage** → `/standorte/winterhude/` — vierte große Standort-Lücke (nach Eppendorf, Altona, Eimsbüttel). Keywords: `dachgeschossausbau winterhude`, `winterhude erhaltungssatzung`
-4. **DG-Ausbau für Vermieter** → `/ratgeber/vermieter/` — Investoren-Segment: Rendite, Mietrecht DG, Steuervorteil. Keywords: `dachgeschossausbau vermietung`, `rendite dachgeschossausbau hamburg`
 5. **Bezirksvergleich** → `/ratgeber/bezirke/` — Ranking-Vorteil: kein Wettbewerber hat bezirksübergreifenden Vergleich. Keywords: `bester stadtteil dachgeschossausbau hamburg`
 6. **DG-Ausbau ohne Genehmigung** → `/ratgeber/genehmigungsfrei/` — §62 HBauO First-Mover. Keywords: `dachausbau hamburg ohne genehmigung`, `hbauo 2026 dachgeschoss`
 7. **Altbau vs. Neubau** → `/ratgeber/altbau-oder-neubau/` — Entscheidungsguide. Keywords: `altbau ausbauen oder neu bauen`
