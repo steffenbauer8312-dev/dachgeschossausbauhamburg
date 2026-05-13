@@ -3,31 +3,92 @@ import type { Service } from '../types'
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://dachgeschossausbauhamburg.de/#localbusiness",
     "name": "Dachgeschossausbau Hamburg",
-    "description": "Professioneller Dachgeschossausbau in Hamburg. Wir verwandeln ungenutzte Dachböden in wertvollen Wohnraum.",
+    "description": "Professioneller Dachgeschossausbau in Hamburg. Wir verwandeln ungenutzte Dachböden in wertvollen Wohnraum – von der Beratung über die Genehmigung bis zur schlüsselfertigen Übergabe.",
     "url": "https://dachgeschossausbauhamburg.de",
-    "telephone": "+49-40-XXXXXXXX",
+    "telephone": "+4915216117439",
     "email": "info@dachgeschossausbauhamburg.de",
+    "image": "https://dachgeschossausbauhamburg.de/og-image.jpg",
     "address": {
       "@type": "PostalAddress",
+      "@id": "https://dachgeschossausbauhamburg.de/#address",
+      "streetAddress": "Cremon 11",
       "addressLocality": "Hamburg",
+      "postalCode": "20457",
       "addressRegion": "Hamburg",
-      "postalCode": "20XXX",
-      "streetAddress": "[Ihre Straße]"
+      "addressCountry": "DE"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "53.5481",
-      "longitude": "9.9875"
+      "@id": "https://dachgeschossausbauhamburg.de/#geo",
+      "latitude": 53.5481,
+      "longitude": 9.9875
     },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "08:00",
-      "closes": "18:00"
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00",
+        "description": "Bürozeiten Mo–Fr 8–18 Uhr"
+      }
+    ],
+    "areaServed": {
+      "@type": "City",
+      "name": "Hamburg"
     },
-    "priceRange": "€€€"
+    "priceRange": "€€",
+    "sameAs": [
+      "https://www.facebook.com/dachgeschossausbauhamburg",
+      "https://www.instagram.com/dachgeschossausbauhamburg"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Dachgeschossausbau Leistungen",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Dachgeschossausbau",
+            "description": "Kompletter Dachgeschossausbau in Hamburg – von der Potenzialanalyse bis zur schlüsselfertigen Übergabe."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Dachgauben",
+            "description": "Einbau von Schleppgauben, Fledermausgauben, Trapezgauben und Segmentgauben in Hamburg."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Dachdämmung",
+            "description": "Aufsparrendämmung, Zwischensparrendämmung und Untersparrendämmung nach GEG-Standard."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Innenausbau",
+            "description": "Trockenbau, Elektrik, Heizung, Bad und Böden im Dachgeschoss."
+          }
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "28",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
   }
 }
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.dachgeschossausbauhamburg.de/sitemap-0.xml
+Sitemap: https://www.dachgeschossausbauhamburg.de/sitemap-index.xml

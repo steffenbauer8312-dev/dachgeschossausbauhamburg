@@ -19,7 +19,7 @@
   </url>
   <url>
     <loc>https://www.dachgeschossausbauhamburg.de/faq/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -42,6 +42,48 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- FAQ Einzelseiten (40 Fragen) -->
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-kostet-ein-dachgeschossausbau-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/brauche-ich-fr-einen-dachgeschossausbau-in-hamburg-eine-genehmigung/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/welche-gauben-eignen-sich-fr-hamburger-dcher/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-lange-dauert-ein-dachgeschossausbau-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/welche-dmmung-ist-im-hamburger-dachgeschoss-pflicht/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/fllt-die-stellplatzpflicht-in-hamburg-beim-dg-ausbau-weg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/muss-ich-einen-aufzug-einbauen-wenn-ich-mein-dachgeschoss-ausbaue/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/welche-frdermittel-gibt-es-fr-dachgeschossausbau-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-passiert-wenn-mein-dachgeschoss-den-brandschutz-anforderungen-nicht-gengt/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/kann-ich-mein-dachgeschoss-als-vermieter-ausbauen-und-die-miete-erhhen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wann-ist-eine-dachgaube-in-hamburg-genehmigungspflichtig/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-ist-die-digitale-baugenehmigung-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-hoch-muss-die-raumhhe-im-dachgeschoss-sein/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-kostet-eine-fledermausgaube-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/kann-ich-ein-dachgeschoss-ohne-statiker-ausbauen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-ist-besser-aufsparren-oder-zwischensparrendmmung/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-finde-ich-einen-guten-dachgeschoss-ausbauer-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/welche-hamburger-stadtteile-sind-besonders-beliebt-fr-dg-ausbau/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/bringt-ein-dg-ausbau-wirklich-etwas-fr-den-immobilienwert/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-ist-der-unterschied-zwischen-dg-ausbau-und-aufstockung/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/kann-ich-ein-dg-im-mehrfamilienhaus-ausbauen-lassen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-wird-die-feuchtigkeit-im-dachgeschoss-vermieden/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/darf-ich-als-mieter-ein-dachgeschoss-ausbauen-lassen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-versteht-man-unter-dem-abweichungstatbestand-69-hbauo/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-unterscheidet-sich-die-hbauo-2026-von-der-alten-fassung/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/sind-dachgeschossfenster-von-velux-oder-roto-besser/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-kostet-ein-dachfenster-einbau-in-hamburg/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/kann-ich-ein-dachgeschoss-selbst-ausbauen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-wirkt-sich-ein-dg-ausbau-auf-meine-nebenkosten-aus/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-ist-ein-kniestock-und-spielt-er-beim-dg-ausbau-eine-rolle/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/gibt-es-in-hamburg-besondere-regelungen-fr-den-denkmalschutz/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-funktioniert-die-digitale-baugenehmigung-in-der-praxis/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/warum-ist-hamburg-besonders-geeignet-fr-dg-ausbau/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-passiert-wenn-die-statik-meines-daches-nicht-ausreicht/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/kann-ich-frdermittel-und-steuerabzug-gleichzeitig-nutzen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-kostet-ein-bad-im-dachgeschoss/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wann-lohnt-sich-ein-dg-ausbau-finanziell/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/wie-schtzt-eine-dg-dmmung-vor-sommerlicher-hitze/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/brauche-ich-eine-neue-heizung-fr-mein-dachgeschoss/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dachgeschossausbauhamburg.de/faq/was-ist-der-vorteil-eines-generalunternehmers-beim-dg-ausbau/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <!-- Leistungen -->
   <url>
@@ -96,28 +138,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Rechtliches (low priority, still indexed) -->
   <url>
-    <loc>https://www.dachgeschossausbauhamburg.de/impressum/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.dachgeschossausbauhamburg.de/datenschutz/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.dachgeschossausbauhamburg.de/sitemap/</loc>
+    <loc>https://www.dachgeschossausbauhamburg.de/standorte/winterhude/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.7</priority>
   </url>
 
   <!-- Ratgeber -->
   <url>
     <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -145,9 +175,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Rechtliches -->
   <url>
-    <loc>https://www.dachgeschossausbauhamburg.de/standorte/winterhude/</loc>
+    <loc>https://www.dachgeschossausbauhamburg.de/impressum/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/datenschutz/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/sitemap/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.4</priority>
   </url>
 </urlset>
