@@ -4,37 +4,27 @@ import Container from '@/components/ui/Container.astro';
 import FaqAccordion from '@/components/content/FaqAccordion.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { serviceSchema, faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateServiceSchema, generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Dachgeschossausbau als Investment in München – Rendite, Genehmigung, Steueroptimierung 2026';
 const pageDescription = 'Dachgeschossausbau als renditestarke Kapitalanlage in München: ROI-Analyse, Genehmigungsstrategie, steuerliche Abschreibung und Finanzierung.';
 
-const serviceSchemaStr = serviceSchema({
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
   name: 'Dachgeschossausbau für Investoren – München',
   description: pageDescription,
-  provider: 'Dachgeschossausbau München',
-  areaServed: 'München',
-  url: 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-investoren/',
-});
-
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-investoren/',
-});
+  slug: '/leistungen/dachgeschossausbau-investoren/',
+}));
 
 const faqs = [
-  { question: 'Wie hoch ist die Rendite beim Dachgeschossausbau in München?', answer: 'Die Rendite hängt von Ausbaukosten und Mietpotenzial ab. Bei Ausbaukosten von 800–1.500 €/m² und Münchner Mietpreisen von 18–30 €/m² (je nach Lage) liegt die Bruttorendite nach Fertigstellung typischerweise bei 4–7%. Mit steuerlicher Abschreibung (Denkmalschutz-AfA oder Sanierungs-AfA) verbessert sich die Nettorendite deutlich.' },
+  { question: 'Wie hoch ist die Rendite beim Dachgeschossausbau in München?', answer: 'Die Rendite hängt von Ausbaukosten und Mietpotenzial ab. Bei Ausbaukosten von 800–1.500 €/m² und Münchner Mietpreisen von 18–30 €/m² (je nach Lage) liegt die Bruttorendite nach Fertigstellung bei 4–7%. Mit steuerlicher Abschreibung (Denkmalschutz-AfA oder Sanierungs-AfA) verbessert sich die Nettorendite deutlich.' },
   { question: 'Was kostet ein Dachgeschossausbau für Investoren?', answer: 'Für Investoren, die eine vollständige Wohnung schaffen (inkl. Bad, Küchenanschluss, Heizung), liegen die Kosten bei 1.200–1.800 €/m² Nutzfläche. Bei einer 60-m²-Wohnung sind 72.000–108.000 € realistisch. Dazu kommen Genehmigungskosten (0,5% der Bausumme) und Baubegleitung.' },
   { question: 'Brauche ich eine Baugenehmigung für die Umwandlung zur Mietwohnung?', answer: 'Ja, in der Regel ist eine Baugenehmigung nötig, da die Umwandlung von Dachgeschoss-Nutzfläche zu Wohnraum eine Nutzungsänderung darstellt. Die Bayerische Bauordnung 2025 hat bestimmte Ausbauten erleichtert, aber die Genehmigungspflicht für Nutzungsänderungen bleibt bestehen.' },
   { question: 'Welche steuerlichen Vorteile gibt es für Investoren?', answer: 'Bei denkmalgeschützten Gebäuden greift die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA): 100% der Herstellungskosten können über 12 Jahre abgeschrieben werden (9 Jahre je 9%, 3 Jahre je 7%). Bei nicht denkmalgeschützten Gebäuden greift die normale lineare Abschreibung sowie die beschleunigte Abschreibung nach §7c EStG.' },
   { question: 'Kann ich KfW-Förderung für Investitionsobjekte nutzen?', answer: 'Ja, KfW-Programme wie KfW 261 sind auch für Vermietungsobjekte nutzbar, sofern die energetischen Anforderungen erfüllt werden. Für Investoren, die mehrere Objekte entwickeln, können auch gewerbliche KfW-Kredite (KfW 290, KfW 300) relevant sein.' },
-  { question: 'Welche Münchner Stadtteile bieten das beste Renditepotenzial?', answer: 'Besonders attraktiv sind Stadtteile mit hoher Nachfrage und moderaten Kaufpreisen: Sendling, Giesing, Neuhausen, Schwabing-West, Moosach und Pasing bieten eine gute Kombination aus Ausbaukosten und Mietpotenzial.' },
+  { question: 'Welche Münchner Stadtteile bieten das beste Renditepotenzial?', answer: 'Stadtteile mit hoher Nachfrage und moderaten Kaufpreisen bieten gute Renditen: Sendling, Giesing, Neuhausen, Schwabing-West, Moosach und Pasing haben eine gute Kombination aus Ausbaukosten und Mietpotenzial.' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-investoren/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 ---
 
 <BaseLayout
@@ -44,7 +34,6 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
   currentPath="/leistungen/dachgeschossausbau-investoren/"
 >
   <JsonLdSchema schema={serviceSchemaStr} />
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Leistungen', href: '/leistungen' }, { label: 'Dachgeschossausbau für Investoren' }]} />
 
@@ -56,8 +45,8 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
           Dachgeschossausbau als Investment in München
         </h1>
         <p class="text-xl text-text-secondary leading-relaxed mb-6">
-          Münchner Dachgeschosse bieten eine der attraktivsten Renditen im deutschen
-          Immobilienmarkt. Mit den richtigen Partnern, der correcten Genehmigungsstrategie
+          Münchner Dachgeschosse bieten gute Renditen im deutschen
+          Immobilienmarkt. Mit den richtigen Partnern, der richtigen Genehmigungsstrategie
           und optimaler steuerlicher Struktur wird Ihr Dachgeschossausbau zum
           renditestarken Vermögensaufbau.
         </p>
@@ -129,7 +118,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Steuerliche Optimierung</h2>
           <p class="text-text-secondary leading-relaxed">
-            Für Investoren ist die steuerliche Strukturierung entscheidend für die Nettorendite. Bei denkmalgeschützten Gebäuden bietet die Denkmalschutz-AfA nach §7i EStG besonders attraktive Abschreibungsmöglichkeiten.
+            Die steuerliche Strukturierung beeinflusst die Nettorendite direkt. Bei denkmalgeschützten Gebäuden nutzen wir die Denkmalschutz-AfA nach §7i EStG.
           </p>
           <div class="bg-surface border border-border rounded-xl p-6 mt-4">
             <p class="text-sm font-semibold text-text-primary mb-2">Beispiel: Denkmalschutz-AfA (§7i EStG)</p>

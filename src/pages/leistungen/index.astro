@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { serviceSchema } from '@/lib/schema';
+import { generateServiceSchema } from '@/lib/schema';
 
 const pageTitle = 'Leistungen – Dachgeschossausbau München';
 const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung – wir begleiten Sie durch alle Phasen Ihres Projekts in München.';
@@ -14,13 +14,11 @@ const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung �
   canonical="/leistungen/"
   currentPath="/leistungen/"
 >
-  <JsonLdSchema schema={serviceSchema({
+  <JsonLdSchema schema={JSON.stringify(generateServiceSchema({
     name: 'Dachgeschossausbau München – Leistungen',
     description: pageDescription,
-    provider: 'Dachgeschossausbau München',
-    areaServed: 'München',
-    url: 'https://dachgeschossausbau-muenchen.de/leistungen/',
-  })} />
+    slug: '/leistungen/',
+  }))} />
 
   <section class="bg-bg py-20">
     <Container>
@@ -45,7 +43,8 @@ const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung �
             <h3 class="text-xl font-bold">Dachgeschossausbau für Eigentümer</h3>
           </div>
           <p class="text-text-secondary mb-6">
-            Ihr Dachboden wird zum neuen Wohnraum – Schlafzimmer, Homeoffice, Kinderzimmer oder Einliegerwohnung. Wir begleiten Sie von der Idee bis zur Schlüsselübergabe.
+            Münchner Dachböden werden zu neuem Wohnraum. Schlafzimmer, Homeoffice oder Einliegerwohnung.
+            Von der Idee bis zur Schlüsselübergabe.
           </p>
           <span class="text-primary font-semibold text-sm group-hover:underline">Mehr erfahren →</span>
         </a>

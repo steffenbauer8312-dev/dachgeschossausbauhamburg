@@ -7,39 +7,29 @@ import CostTable from '@/components/content/CostTable.astro';
 import StepsOverview from '@/components/content/StepsOverview.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { serviceSchema, faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateServiceSchema, generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Dachgeschossausbau für Eigentümer in München – Kosten, Genehmigung, Förderung 2026';
 const pageDescription = 'Ihr Dachgeschoss ausbauen als Eigentümer in München? Kosten, Genehmigung (Bayern 2025), Förderungen (KfW/BAFA), Dämmung und Denkmalschutz – alles erklärt.';
 
-const serviceSchemaStr = serviceSchema({
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
   name: 'Dachgeschossausbau für Eigentümer – München',
   description: pageDescription,
-  provider: 'Dachgeschossausbau München',
-  areaServed: 'München',
-  url: 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-eigentuemer/',
-});
-
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-eigentuemer/',
-});
+  slug: '/leistungen/dachgeschossausbau-eigentuemer/',
+}));
 
 const faqs = [
   { question: 'Was kostet ein Dachgeschossausbau für Eigentümer in München?', answer: 'Die Kosten liegen je nach Zustand des Dachgeschosses und gewünschtem Ausstattungsstandard zwischen 500 und 1.800 €/m² Nutzfläche. Einfache Ausbauten starten ab ca. 500 €/m². Komplette Sanierungen mit Bad, Elektrik und Heizung liegen bei 1.200–1.800 €/m². Für ein 50-m²-Dachgeschoss sind 40.000–90.000 € realistisch.' },
   { question: 'Welche Genehmigung brauche ich für den Dachgeschossausbau in Bayern?', answer: 'Seit der Bayerischen Bauordnung 2025 sind Ausbauten verfahrensfrei, wenn die Dachkonstruktion und die äußere Gestalt nicht verändert werden. Für Gauben, Aufstockungen oder Nutzungsänderungen ist ein Bauantrag bei der Lokalbaukommission München nötig.' },
   { question: 'Welche Förderungen kann ich als Eigentümer nutzen?', answer: 'KfW 261 fördert energetische Sanierungen mit bis zu 20% Zuschuss. BAFA-Zuschüsse gibt es für Dämmung, Fenster und Heizung. Auch steuerliche Abschreibung (Sanierungs-AfA) ist möglich. Bei denkmalgeschützten Gebäuden greift die Denkmalschutz-AfA.' },
   { question: 'Wie lange dauert ein Dachgeschossausbau in München?', answer: 'Die reine Bauzeit beträgt 6–16 Wochen je nach Umfang. Hinzu kommen 4–12 Wochen für Planung und Genehmigung. Verfahrensfreie Ausbauten sind in 8–16 Wochen Gesamtdauer machbar.' },
-  { question: 'Lohnt sich der Dachgeschossausbau auch bei einem Denkmal?', answer: 'Ja, besonders bei denkmalgeschützten Gebäuden. Die Kombination aus Wertsteigerung und steuerlicher Abschreibung (Denkmalschutz-AfA) macht den Ausbau oft wirtschaftlicher als bei nicht geschützten Gebäuden.' },
+  { question: 'Lohnt sich der Dachgeschossausbau auch bei einem Denkmal?', answer: 'Ja, bei denkmalgeschützten Gebäuden. Die Kombination aus Wertsteigerung und steuerlicher Abschreibung (Denkmalschutz-AfA) macht den Ausbau oft wirtschaftlicher als bei nicht geschützten Gebäuden.' },
   { question: 'Brauche ich einen Architekten für den Dachgeschossausbau?', answer: 'Bei verfahrensfreien Ausbauten ist kein Architekt zwingend nötig. Bei Gauben, Aufstockungen, Nutzungsänderungen oder denkmalgeschützten Gebäuden ist ein Architekt oder Bauvorlageberechtigter erforderlich.' },
   { question: 'Welche Dämmung ist für ein Dachgeschoss in München vorgeschrieben?', answer: 'Das GEG fordert für ausgebaute Dachgeschosse eine Dämmung, die den aktuellen U-Wert-Anforderungen entspricht. Zwischensparrendämmung (60–100 €/m²), Untersparrendämmung (30–95 €/m²) oder Aufsparrendämmung (100–250 €/m² inkl. Neueindeckung) kommen zum Einsatz.' },
   { question: 'Was passiert mit Fledermäusen im Dach?', answer: 'In München muss vor jedem Dachgeschossausbau geprüft werden, ob das Dach als Lebensraum für Fledermäuse dient. Ist das der Fall, muss das Referat für Klima und Umweltschutz kontaktiert werden (naturschutz.rku@muenchen.de).' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/leistungen/dachgeschossausbau-eigentuemer/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 
 const costRows = [
   { position: 'Rückbau & Entsorgung', einheit: 'm²', vonPreis: 30, bisPreis: 65 },
@@ -68,7 +58,6 @@ const steps = [
   currentPath="/leistungen/dachgeschossausbau-eigentuemer/"
 >
   <JsonLdSchema schema={serviceSchemaStr} />
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Leistungen', href: '/leistungen' }, { label: 'Dachgeschossausbau für Eigentümer' }]} />
 
@@ -96,16 +85,16 @@ const steps = [
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Was ist ein Dachgeschossausbau?</h2>
           <p class="text-text-secondary leading-relaxed">
-            Der Dachgeschossausbau bezeichnet die Umwandlung eines unbewohnten Dachgeschosses – typischerweise ein Speicher oder Bodenraum – in vollwertigen Wohnraum. Anders als ein einfacher Dachausbau, bei dem lediglich die Dachhülle erneuert wird, umfasst der Dachgeschossausbau die komplette Innengestaltung: Dämmung, Wände, Böden, Elektrik, Heizung und sanitäre Installationen.
+            Der Dachgeschossausbau bezeichnet die Umwandlung eines unbewohnten Dachgeschosses – meist ein Speicher oder Bodenraum – in vollwertigen Wohnraum. Anders als ein einfacher Dachausbau, bei dem lediglich die Dachhülle erneuert wird, umfasst der Dachgeschossausbau die komplette Innengestaltung: Dämmung, Wände, Böden, Elektrik, Heizung und sanitäre Installationen.
           </p>
           <p class="text-text-secondary leading-relaxed mt-4">
-            In München, wo der Quadratmeterpreis für Wohnraum regelmäßig 5.000–10.000 € übersteigt, ist der Ausbau des eigenen Dachgeschosses eine der wirtschaftlich attraktivsten Maßnahmen für Immobilieneigentümer. Mit Kosten von 500–1.800 €/m² schaffen Sie Wohnraum zu einem Bruchteil des Neubaupreises.
+            In München, wo der Quadratmeterpreis für Wohnraum 5.000 bis 10.000 € übersteigt, ist der Ausbau des eigenen Dachgeschosses für Immobilieneigentümer oft wirtschaftlich sinnvoll. Mit Kosten von 500–1.800 €/m² schaffen Sie Wohnraum zu einem Bruchteil des Neubaupreises.
           </p>
         </div>
 
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Wann lohnt sich der Dachgeschossausbau?</h2>
-          <p class="text-text-secondary leading-relaxed mb-4">Ein Dachgeschossausbau lohnt sich besonders, wenn folgende Bedingungen erfüllt sind:</p>
+          <p class="text-text-secondary leading-relaxed mb-4">Ein Dachgeschossausbau lohnt sich, wenn folgende Bedingungen erfüllt sind:</p>
           <ul class="space-y-2 text-text-secondary">
             <li class="flex items-start gap-3"><span class="text-primary font-bold mt-1">→</span><span><strong>Dachneigung ab 25°</strong> – ausreichend Stehhöhe im Kniestock und First</span></li>
             <li class="flex items-start gap-3"><span class="text-primary font-bold mt-1">→</span><span><strong>Statisch tragfähig</strong> – die bestehende Deckenkonstruktion kann das zusätzliche Gewicht aufnehmen</span></li>
@@ -122,7 +111,9 @@ const steps = [
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Dachgeschossausbau Kosten in München 2026</h2>
           <p class="text-text-secondary leading-relaxed mb-6">
-            Die folgenden Richtwerte gelten für den Großraum München. Die tatsächlichen Kosten hängen stark vom Zustand der Bausubstanz, der gewünschten Ausstattung und ob ein Bad integriert werden soll, ab.
+            Die Richtwerte gelten für den Großraum München. Die tatsächlichen Kosten hängen
+            vom Zustand der Bausubstanz ab, von der gewünschten Ausstattung und davon,
+            ob ein Bad integriert werden soll.
           </p>
           <CostTable rows={costRows} />
           <p class="text-sm text-text-secondary mt-4">
@@ -134,7 +125,7 @@ const steps = [
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Genehmigung in Bayern – Was hat sich 2025 geändert?</h2>
           <p class="text-text-secondary leading-relaxed">
-            Die neue Bayerische Bauordnung, die im Januar 2025 in Kraft getreten ist, erleichtert den Dachgeschossausbau erheblich. Verfahrensfrei sind nun Ausbauten zu Wohnzwecken, einschließlich der Errichtung von Dachgauben, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes im Übrigen nicht verändert werden.
+            Die neue Bayerische Bauordnung, die im Januar 2025 in Kraft getreten ist, hat den Dachgeschossausbau vereinfacht. Verfahrensfrei sind nun Ausbauten zu Wohnzwecken, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes nicht verändert werden.
           </p>
           <h3 class="text-lg font-semibold mt-6 mb-3 text-text-primary">Wann brauchen Sie einen Bauantrag?</h3>
           <ul class="space-y-2 text-text-secondary">
@@ -152,7 +143,7 @@ const steps = [
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Förderungen für Eigentümer in München</h2>
           <p class="text-text-secondary leading-relaxed">
-            Staatliche Fördermittel senken die effektiven Kosten Ihres Dachgeschossausbaus erheblich. Bei einem 50.000-€-Projekt können Sie mit 5.000–10.000 € an Zuschüssen rechnen.
+            Staatliche Fördermittel senken die Kosten Ihres Dachgeschossausbaus deutlich. Bei einem 50.000-€-Projekt können Sie mit 5.000 bis 10.000 € an Zuschüssen rechnen.
           </p>
           <ul class="space-y-3 mt-4 text-text-secondary">
             <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>KfW 261:</strong> Bis zu 20% Zuschuss für energetische Sanierung, inkl. Dämmung und Fenster</span></li>

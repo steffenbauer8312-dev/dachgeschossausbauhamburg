@@ -11,12 +11,20 @@ interface Props {
   canonical?: string;
   currentPath?: string;
 }
-const { title, description, ogImage, canonical, currentPath = '/' } = Astro.props;
+const { title, description, ogImage, canonical, currentPath = '/', noindex = false } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <BaseHead {title} {description} {ogImage} {canonical} />
+  <BaseHead {title} {description} {ogImage} {canonical} {noindex} />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q530EV35P7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q530EV35P7');
+  </script>
 </head>
 <body class="flex flex-col min-h-screen">
   <Header currentPath={currentPath} />

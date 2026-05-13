@@ -4,18 +4,10 @@ import Container from '@/components/ui/Container.astro';
 import FaqAccordion from '@/components/content/FaqAccordion.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Förderung Dachgeschossausbau 2026: KfW, BAFA, Bayern – Alle Möglichkeiten';
 const pageDescription = 'KfW 261, BAFA, Landesförderung Bayern, Denkmalschutz-AfA: Alle Fördermittel für Ihren Dachgeschossausbau in München – inklusive Antragstipps und Kombinationsstrategien.';
-
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/wissen/foerderung/',
-});
 
 const faqs = [
   { question: 'Welche KfW-Förderung gibt es für den Dachgeschossausbau?', answer: 'KfW 261 (Wohneigentumsprogramm) fördert energetische Sanierungen mit Tilgungszuschüssen bis zu 20% der Kosten. Bis zu 150.000 € pro Vorhaben. Auch für Vermietungsobjekte nutzbar, sofern die energetischen Anforderungen erfüllt werden.' },
@@ -24,10 +16,10 @@ const faqs = [
   { question: 'Was ist die Denkmalschutz-AfA und wie nutze ich sie?', answer: 'Die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) erlaubt bei denkmalgeschützten Gebäuden eine Abschreibung von 100% der Herstellungskosten über 12 Jahre (9 Jahre je 9%, 3 Jahre je 7%). Für ein 80.000-€-Projekt ergibt das eine Steuerersparnis von ca. 40.000 € (bei 42% Steuersatz).' },
   { question: 'Gibt es bayerische Landesförderung für den Dachgeschossausbau?', answer: 'Ja, die Bayerische Landesförderbank (LfA) bietet ergänzende Programme. Auch das bayerische Wohnraumförderungsprogramm kann für Mietwohnungsbau im Dachgeschoss genutzt werden. Wir beraten Sie zu allen Landesprogrammen.' },
   { question: 'Wie stelle ich den Förderantrag?', answer: 'KfW-Anträge werden vor Beginn der Maßnahme über die KfW-Website oder über Hausbanken gestellt. BAFA-Anträge können für viele Maßnahmen auch nachträglich eingereicht werden. Für Denkmalschutz-AfA ist ein Bescheid der Denkmalschutzbehörde nötig. Wir begleiten Sie durch den gesamten Antragsprozess.' },
-  { question: 'Wie viel Förderung ist bei einem typischen Projekt realistisch?', answer: 'Bei einem 50.000-€-Projekt: KfW 261 (bis zu 10.000 € Zuschuss) + BAFA (bis zu 7.500 €) + ggf. Denkmalschutz-AfA (10.000–40.000 € Steuerersparnis über 12 Jahre) = effektiv 17.500–57.500 € Entlastung.' },
+  { question: 'Wie viel Förderung ist bei einem durchschnittlichen Projekt realistisch?', answer: 'Bei einem 50.000-€-Projekt kommen zusammen: KfW 261 (bis zu 10.000 € Zuschuss), BAFA (bis zu 7.500 €) und falls relevant die Denkmalschutz-AfA. Macht effektiv 17.500 bis 57.500 € Entlastung.' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/foerderung/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 ---
 
 <BaseLayout
@@ -36,7 +28,6 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
   canonical="/wissen/foerderung/"
   currentPath="/wissen/foerderung/"
 >
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Förderung' }]} />
 
@@ -48,9 +39,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
           Förderung Dachgeschossausbau 2026
         </h1>
         <p class="text-xl text-text-secondary leading-relaxed mb-6">
-          KfW, BAFA, Bayern, Denkmalschutz-AfA – staatliche Fördermittel können die
-          effektiven Kosten Ihres Dachgeschossausbaus um 20–50% reduzieren. Wir zeigen
-          Ihnen alle Möglichkeiten und begleiten Sie durch den Antragsprozess.
+          Staatliche Fördermittel senken die Kosten für Ihren Dachgeschossausbau teilweise deutlich. Wir zeigen alle Möglichkeiten und begleiten Sie durch den Antragsprozess.
         </p>
         <a href="/kontakt" class="cta-primary">Förderung analysieren lassen</a>
       </div>
@@ -102,7 +91,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Denkmalschutz-AfA: Steuerersparnis nutzen</h2>
           <p class="text-text-secondary leading-relaxed">
-            Bei denkmalgeschützten Gebäuden können Sie die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) nutzen. Das ist die attraktivste Förderung für historische Bausubstanz in München.
+            Bei denkmalgeschützten Gebäuden können Sie die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) nutzen. Das ist die größte steuerliche Förderung für historische Bausubstanz in München.
           </p>
           <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mt-4">
             <p class="text-sm font-semibold text-primary mb-3">Abschreibungsschema (§7i EStG)</p>
@@ -119,7 +108,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Förderung clever kombinieren</h2>
           <p class="text-text-secondary leading-relaxed">
-            Die maximale Förderung ergibt sich aus der Kombination mehrerer Programme. Für ein typisches 50.000-€-Projekt in München sieht die Kombination so aus:
+            Die maximale Förderung ergibt sich aus der Kombination mehrerer Programme. Für ein 50.000-€-Projekt in München sieht die Kombination so aus:
           </p>
           <div class="bg-surface border border-border rounded-xl p-6 mt-4">
             <table class="w-full text-sm">

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateServiceSchema } from '@/lib/schema';
+
+const pageTitle = 'Ratgeber Dachgeschossausbau München – Wissen, Kosten, Genehmigung, Förderung';
+const pageDescription = 'Alles über Dachgeschossausbau in München: Kosten, Genehmigung Bayern 2025, KfW/BAFA Förderung, Denkmalschutz und mehr – Ratgeber vom Experten.';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachgeschossausbau München – Ratgeber',
+  description: pageDescription,
+  slug: '/wissen/',
+}));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/wissen/"
+  currentPath="/wissen/"
+>
+  <JsonLdSchema schema={serviceSchemaStr} />
+
+  <!-- Hero -->
+  <section class="bg-bg py-20">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-medium text-secondary mb-4">Ratgeber</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+          Wissen zum<br />Dachgeschossausbau
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed mb-8">
+          Wir arbeiten an neuen Ratgeber-Artikeln. Schreiben Sie uns für eine individuelle
+          Beratung zu Ihrem Projekt – kostenlos und unverbindlich.
+        </p>
+        <a href="/kontakt" class="cta-primary">
+          Kostenlose Beratung anfragen
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold mb-6">
+            Sie haben Fragen zu Ihrem Projekt?
+          </h2>
+          <p class="text-white/70 leading-relaxed mb-8">
+            Jedes Dachgeschoss ist anders. Schreiben Sie uns – wir melden uns
+            innerhalb von 24 Stunden mit einer konkreten Einschätzung.
+          </p>
+          <a href="/kontakt" class="cta-primary">
+            Kostenlose Beratung anfragen
+          </a>
+          <p class="text-white/50 text-sm mt-8">
+            Für Eigentümer und Investoren kostenfrei. Keine versteckten Gebühren.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

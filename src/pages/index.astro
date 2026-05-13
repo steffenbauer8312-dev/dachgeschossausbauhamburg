@@ -8,38 +8,23 @@ import StepsOverview from '@/components/content/StepsOverview.astro';
 import TrustSignals from '@/components/content/TrustSignals.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { localBusinessSchema, serviceSchema, faqPageSchema } from '@/lib/schema';
+import { generateLocalBusinessSchema, generateServiceSchema, generateFaqSchema } from '@/lib/schema';
 
-const pageTitle = 'Dachgeschossausbau München – Professionell vermittelt, schlüsselfertig umgesetzt';
+const pageTitle = 'Dachgeschossausbau München – Fachbetriebe vermitteln, Projekte umsetzen';
 const pageDescription = 'Ihr Partner für Dachgeschossausbau in München: Wir vermitteln qualitätsgeprüfte Fachbetriebe – für Eigentümer kostenfrei. Beratung, Planung, Genehmigung.';
 
-const localSchema = localBusinessSchema({
-  name: 'Dachgeschossausbau München',
-  description: 'Professionelle Vermittlung von Dachgeschossausbau-Projekten in München und Umgebung.',
-  url: 'https://dachgeschossausbau-muenchen.de',
-  telephone: '+49 89 12345678',
-  email: 'info@dachgeschossausbau-muenchen.de',
-  address: {
-    streetAddress: 'Beispielstraße 1',
-    addressLocality: 'München',
-    postalCode: '80331',
-    addressCountry: 'DE',
-  },
-  priceRange: '€€',
-});
+const localSchema = JSON.stringify(generateLocalBusinessSchema());
 
-const serviceSchemaStr = serviceSchema({
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
   name: 'Dachgeschossausbau München',
   description: 'Vermittlung qualitätsgeprüfter Fachbetriebe für Dachgeschossausbau in München – von der Beratung bis zur Umsetzung.',
-  provider: 'Dachgeschossausbau München',
-  areaServed: 'München',
-  url: 'https://dachgeschossausbau-muenchen.de',
-});
+  slug: '/',
+}));
 
 const faqs = [
   {
     question: 'Was kostet ein Dachgeschossausbau in München?',
-    answer: 'Die Kosten für einen Dachgeschossausbau in München liegen je nach Zustand, Ausstattung und ob ein Bad integriert wird, zwischen 500 und 1.800 €/m² Nutzfläche. Eine komplette Sanierung eines 50-m²-Dachgeschosses bewegt sich typischerweise in einer Spanne von 40.000–90.000 €. Entscheidend für den genauen Preis ist der Zustand der Bausubstanz, die Statik und ob das Dach neu eingedeckt werden muss. Eine kostenlose Vor-Ort-Beratung gibt Ihnen eine realistische Einschätzung.',
+    answer: 'Die Kosten für einen Dachgeschossausbau in München liegen je nach Zustand, Ausstattung und ob ein Bad integriert wird, zwischen 500 und 1.800 €/m² Nutzfläche. Eine komplette Sanierung eines 50-m²-Dachgeschosses kostet 40.000 bis 90.000 €. Ausschlaggebend für den genauen Preis ist der Zustand der Bausubstanz, die Statik und ob das Dach neu eingedeckt werden muss. Eine kostenlose Vor-Ort-Beratung gibt Ihnen eine realistische Einschätzung.',
   },
   {
     question: 'Brauche ich eine Genehmigung für den Dachgeschossausbau in Bayern?',
@@ -67,11 +52,11 @@ const faqs = [
   },
   {
     question: 'Können Sie mir helfen, wenn ich ein denkmalgeschütztes Dachgeschoss ausbauen möchte?',
-    answer: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden in München. Wir kennen die typischen Auflagen (Materialien, Gaubenform, Fensterteilung) und wissen, wie die Abstimmung mit der Denkmalschutzbehörde abläuft. Steuerliche Abschreibungsmöglichkeiten über die Denkmalschutz-AfA machen solche Projekte besonders attraktiv.',
+    answer: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden in München. Wir kennen die typischen Auflagen (Materialien, Gaubenform, Fensterteilung) und wissen, wie die Abstimmung mit der Denkmalschutzbehörde abläuft. Steuerliche Abschreibungsmöglichkeiten über die Denkmalschutz-AfA machen solche Projekte besonders interessant.',
   },
   {
     question: 'Ich bin Investor – lohnen sich Dachgeschossausbauten in München?',
-    answer: 'Der Münchner Immobilienmarkt bietet eine hohe Nachfrage nach Wohnraum, insbesondere in zentralen Lagen. Die Quadratmeterpreise liegen deutlich über den Ausbaukosten, was ein erhebliches Wertsteigerungspotenzial bietet. Mit der richtigen Planung (Nutzungsänderung, Genehmigung, Steueroptimierung) ist der Dachgeschossausbau für Investoren eine der renditestärksten Immobilienstrategien in München.',
+    answer: 'Der Münchner Immobilienmarkt bietet hohen Wohnraumbedarf in zentralen Lagen. Die Quadratmeterpreise liegen deutlich über den Ausbaukosten, was deutliches Wertsteigerungspotenzial bietet. Mit der richtigen Planung (Nutzungsänderung, Genehmigung, Steueroptimierung) ist der Dachgeschossausbau für Investoren eine der renditestärksten Immobilienstrategien in München.',
   },
   {
     question: 'Wie finde ich den richtigen Fachbetrieb für meinen Dachgeschossausbau?',
@@ -79,7 +64,7 @@ const faqs = [
   },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 
 const costRows = [
   { position: 'Rückbau & Entsorgung', einheit: 'm²', vonPreis: 30, bisPreis: 65, bemerkung: 'inkl. Bauschutt-Entsorgung' },
@@ -135,9 +120,9 @@ const steps = [
             <span class="text-primary">München</span>
           </h1>
           <p class="text-lg lg:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl">
-            Sie möchten Ihren Dachboden ausbauen? Wir vermitteln Sie an
-            qualitätsgeprüfte Fachbetriebe in München – kostenfrei, transparent,
-            professionell. Von der Beratung bis zur Schlüsselübergabe.
+            Von der Genehmigung bis zur Übergabe — geprüfte Münchner Fachbetriebe für
+            Dachbodenausbau, Dachgauben, Dämmung nach GEG und kompletten Innenausbau.
+            Festpreisangebot in 48 Stunden.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
             <a href="#kontakt-formular" class="cta-primary text-center">
@@ -151,7 +136,7 @@ const steps = [
         </div>
 
         <!-- Rechte Spalte: Formular -->
-        <div class="lg:sticky lg:top-28">
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
           <LeadGenForm variant="eigentuemer" />
         </div>
       </div>
@@ -179,8 +164,8 @@ const steps = [
           </div>
           <h3 class="text-xl font-bold text-text-primary mb-3">Eigentümer</h3>
           <p class="text-text-secondary leading-relaxed mb-6">
-            Sie möchten Ihren Dachboden in Wohnraum verwandeln – als zusätzliches
-            Zimmer, Homeoffice oder Einliegerwohnung? Wir begleiten Sie von der ersten
+            Ihr Dachboden wird zum neuen Wohnraum. Schlafzimmer, Homeoffice,
+            Kinderzimmer oder Einliegerwohnung. Wir begleiten Sie von der ersten
             Idee über die Genehmigung bis zur Umsetzung.
           </p>
           <ul class="space-y-2 text-sm text-text-secondary mb-6">
@@ -215,8 +200,8 @@ const steps = [
           </div>
           <h3 class="text-xl font-bold text-text-primary mb-3">Investoren</h3>
           <p class="text-text-secondary leading-relaxed mb-6">
-            Sie sehen Potenzial in Münchner Dachgeschossen? Wir liefern Ihnen die
-            Expertise für renditestarke Dachgeschossausbau-Investments – von der
+            Sie sehen Potenzial in Münchner Dachgeschossen? Wir bringen Erfahrung
+            und Kontakte mit. Renditestarke Dachgeschossausbau-Investments, von der
             Standortanalyse bis zur steueroptimierten Umsetzung.
           </p>
           <ul class="space-y-2 text-sm text-text-secondary mb-6">
@@ -353,8 +338,8 @@ const steps = [
           Bereit für Ihren Dachgeschossausbau?
         </h2>
         <p class="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-          Lassen Sie uns gemeinsam Ihr Projekt besprechen – kostenlos,
-          unverbindlich, mit ehrlicher Expertise für den Münchner Markt.
+          Sprechen wir über Ihr Projekt. Kostenlose Erstberatung mit konkreter
+          Erfahrung für den Münchner Markt.
         </p>
         <a href="#kontakt-formular" class="cta-primary text-lg px-10 py-4 inline-block">
           Jetzt kostenlose Beratung anfragen

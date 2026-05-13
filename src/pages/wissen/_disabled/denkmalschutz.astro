@@ -4,31 +4,23 @@ import Container from '@/components/ui/Container.astro';
 import FaqAccordion from '@/components/content/FaqAccordion.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Dachgeschossausbau Denkmalschutz München: Was Eigentümer wissen müssen';
 const pageDescription = 'Denkmalschutz-AfA, typische Auflagen, Genehmigungsprozess und steuerliche Abschreibung für denkmalgeschützte Dachgeschosse in München – alles erklärt.';
 
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/wissen/denkmalschutz/',
-});
-
 const faqs = [
   { question: 'Wie erkenne ich, ob mein Gebäude denkmalgeschützt ist?', answer: 'In München sind alle Gebäude, die im Bayerischen Denkmal-Atlas als Baudenkmal eingetragen sind, denkmalgeschützt. Sie können dies kostenlos unter bayerndenkmalpflege.de oder bei der Unteren Denkmalschutzbehörde der Stadt München prüfen lassen. Auch ein Blick ins Grundbuch gibt Aufschluss.' },
   { question: 'Welche Auflagen gelten für den Dachgeschossausbau bei Denkmalschutz?', answer: 'Typische Auflagen betreffen: Materialien (Ziegel, Schiefer, historische Farben), Gaubenform und -größe, Fensterteilung und -proportionen, Firstgestaltung und Dachneigung. Jede Veränderung muss mit der Denkmalschutzbehörde abgestimmt werden.' },
-  { question: 'Lohnt sich der Dachgeschossausbau trotz Denkmalschutz?', answer: 'Ja, der Denkmalschutz macht den Ausbau oft wirtschaftlich attraktiver. Die Denkmalschutz-AfA (§7i EStG) erlaubt die Abschreibung von 100% der Herstellungskosten über 12 Jahre. Kombiniert mit der Wertsteigerung durch neuen Wohnraum ist der Netto-ROI häufig höher als bei nicht geschützten Gebäuden.' },
+  { question: 'Lohnt sich der Dachgeschossausbau trotz Denkmalschutz?', answer: 'Ja, der Denkmalschutz macht den Ausbau oft wirtschaftlich interessanter. Die Denkmalschutz-AfA (§7i EStG) erlaubt die Abschreibung von 100% der Herstellungskosten über 12 Jahre. Kombiniert mit der Wertsteigerung durch neuen Wohnraum ist der Netto-ROI häufig höher als bei nicht geschützten Gebäuden.' },
   { question: 'Was ist die Denkmalschutz-AfA (§7i EStG)?', answer: 'Die erhöhte Absetzung nach §7i EStG erlaubt bei denkmalgeschützten Gebäuden eine beschleunigte Abschreibung: 9 Jahre je 9%, 3 Jahre je 7% = 100% der Herstellungskosten über 12 Jahre. Für ein 80.000-€-Projekt ergibt das eine Steuerersparnis von ca. 40.000 € (bei 42% Steuersatz).' },
   { question: 'Wie läuft die Genehmigung beim Denkmalschutz ab?', answer: '1. Frühzeitige Abstimmung mit der Unteren Denkmalschutzbehörde München (vor Planungsbeginn). 2. Einreichung des Bauantrags mit denkmalschutzkonformer Planung. 3. Zustimmung des BLfD (Bayerisches Landesamt für Denkmalpflege). 4. Genehmigung. Wir begleiten Sie durch den gesamten Prozess.' },
   { question: 'Kann ich KfW/BAFA zusätzlich zur Denkmalschutz-AfA nutzen?', answer: 'Ja, KfW und BAFA lassen sich mit der Denkmalschutz-AfA kombinieren. Die steuerliche Abschreibung (§7i) und die staatlichen Zuschüsse (KfW/BAFA) schließen sich nicht gegenseitig aus. In der Praxis ergibt sich daraus die höchste Gesamtförderung.' },
   { question: 'Was kosten Gutachten und Abstimmung beim Denkmalschutz?', answer: 'Die denkmalschutzkonforme Planung erfordert erfahrene Architekten und ggf. denkmalpflegerische Gutachten. Kosten hierfür: 2.000–5.000 € je nach Aufwand. Diese Kosten sind Teil der Herstellungskosten und fließen in die Denkmalschutz-AfA ein.' },
-  { question: 'Gibt es in München besonders viele denkmalgeschützte Dachgeschosse?', answer: 'Ja, München hat einen außergewöhnlich hohen Bestand an denkmalgeschützten Altbauten, insbesondere in den Stadtvierteln Maxvorstadt, Schwabing, Ludwigsvorstadt-Isarvorstadt und im Lehel. Die Kombination aus Denkmalschutz und Wohnraumbedarf macht diese Dachgeschosse zu besonders attraktiven Projekten.' },
+  { question: 'Gibt es in München besonders viele denkmalgeschützte Dachgeschosse?', answer: 'Ja, München hat einen hohen Bestand an denkmalgeschützten Altbauten, vor allem in Maxvorstadt, Schwabing, Ludwigsvorstadt-Isarvorstadt und im Lehel. In diesen Vierteln kommen Dachgeschossausbauten häufig vor.' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/denkmalschutz/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 ---
 
 <BaseLayout
@@ -37,7 +29,6 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
   canonical="/wissen/denkmalschutz/"
   currentPath="/wissen/denkmalschutz/"
 >
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Denkmalschutz München' }]} />
 
@@ -67,7 +58,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
             Baudenkmäler stehen unter besonderem Schutz des Bayerischen Denkmalschutzgesetzes. Jede bauliche Veränderung – auch im Inneren – muss mit der zuständigen Denkmalschutzbehörde abgestimmt werden. Das betrifft insbesondere die äußere Erscheinung des Gebäudes: Dachform, Gauben, Fenster, Materialien.
           </p>
           <p class="text-text-secondary leading-relaxed mt-4">
-            München hat einen besonders hohen Bestand an denkmalgeschützten Altbauten, vor allem in den inneren Stadtvierteln (Maxvorstadt, Schwabing, Ludwigsvorstadt-Isarvorstadt, Lehel). Der Ausbau dieser Dachgeschosse erfordert erfahrene Partner, die sowohl die denkmalpflegerischen Anforderungen als auch die wirtschaftlichen Vorteile kennen.
+            München hat einen hohen Bestand an denkmalgeschützten Altbauten, vor allem in den inneren Stadtvierteln. Der Ausbau dieser Dachgeschosse erfordert Partner, die sowohl die denkmalpflegerischen Anforderungen als auch die wirtschaftlichen Vorteile kennen.
           </p>
         </div>
 

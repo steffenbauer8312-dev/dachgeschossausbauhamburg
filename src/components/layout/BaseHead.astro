@@ -4,9 +4,10 @@ interface Props {
   description: string;
   ogImage?: string;
   canonical?: string;
+  noindex?: boolean;
 }
-const { title, description, ogImage = '/og-image.jpg', canonical } = Astro.props;
-const siteUrl = 'https://dachgeschossausbau-muenchen.de';
+const { title, description, ogImage = '/og-image.jpg', canonical, noindex = false } = Astro.props;
+const siteUrl = 'https://www.dachgeschossausbaumuenchen.de';
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,3 +29,7 @@ const siteUrl = 'https://dachgeschossausbau-muenchen.de';
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />

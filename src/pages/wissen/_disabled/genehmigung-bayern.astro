@@ -4,18 +4,10 @@ import Container from '@/components/ui/Container.astro';
 import FaqAccordion from '@/components/content/FaqAccordion.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Dachgeschossausbau Genehmigung Bayern 2025: Was ist verfahrensfrei?';
 const pageDescription = 'Bayerische Bauordnung 2025 für Dachgeschossausbau: Verfahrensfreie Ausbauten, Bauantrag, Lokalbaukommission München, Denkmalschutz, Fledermausschutz – alles erklärt.';
-
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/wissen/genehmigung-bayern/',
-});
 
 const faqs = [
   { question: 'Welche Dachgeschossausbauten sind in Bayern 2025 verfahrensfrei?', answer: 'Seit der Bayerischen Bauordnung 2025 sind Ausbauten zu Wohnzwecken verfahrensfrei, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes nicht verändert werden. Das betrifft Dämmung, Innenausbau, Bodenbelag und die Nutzungsänderung von Speicher zu Wohnraum. Gauben, Aufstockungen und Veränderungen der Gebäudesilhouette sind weiterhin genehmigungspflichtig.' },
@@ -27,7 +19,7 @@ const faqs = [
   { question: 'Brauche ich einen Architekten für den Bauantrag?', answer: 'Für verfahrensfreie Ausbauten ist kein Architekt nötig. Für Bauanträge mit Gauben, Nutzungsänderungen oder bei denkmalgeschützten Gebäuden ist ein bauvorlageberechtigter Architekt oder Ingenieur erforderlich. Wir vermitteln Ihnen qualitätsgeprüfte Architekten aus unserem Netzwerk.' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/genehmigung-bayern/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 ---
 
 <BaseLayout
@@ -36,7 +28,6 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
   canonical="/wissen/genehmigung-bayern/"
   currentPath="/wissen/genehmigung-bayern/"
 >
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Genehmigung Bayern' }]} />
 
@@ -63,7 +54,7 @@ const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de
         <div>
           <h2 class="text-2xl font-bold mb-4 text-text-primary">Bayerische Bauordnung 2025: Was hat sich geändert?</h2>
           <p class="text-text-secondary leading-relaxed">
-            Die Novelle der Bayerischen Bauordnung, die im Januar 2025 in Kraft getreten ist, hat den Dachgeschossausbau erheblich erleichtert. Das Ziel: Wohnraumschaffung im Bestand fördern und Bürokratie abbauen.
+            Die Novelle der Bayerischen Bauordnung, die im Januar 2025 in Kraft getreten ist, hat den Dachgeschossausbau vereinfacht. Das Ziel war, Wohnraumschaffung im Bestand zu fördern und Genehmigungsprozesse zu verkürzen.
           </p>
           <p class="text-text-secondary leading-relaxed mt-4">
             <strong>Die wichtigste Änderung:</strong> Ausbauten zu Wohnzwecken sind nun verfahrensfrei, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes im Übrigen nicht verändert werden. Das bedeutet: Sie können Ihr Dachgeschoss ausbauen, ohne einen Bauantrag zu stellen – vorausgesetzt, Sie verändern keine Gauben, Aufstockungen oder die Gebäudesilhouette.

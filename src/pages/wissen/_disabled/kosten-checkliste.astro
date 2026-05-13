@@ -6,22 +6,14 @@ import CostTable from '@/components/content/CostTable.astro';
 import FaqAccordion from '@/components/content/FaqAccordion.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { faqPageSchema, articleSchema } from '@/lib/schema';
+import { generateFaqSchema } from '@/lib/schema';
 
 const pageTitle = 'Dachgeschossausbau Kosten 2026: Was kostet was? – Komplette Checkliste für München';
 const pageDescription = 'Detaillierte Kostenübersicht für Dachgeschossausbau in München: Rückbau, Dämmung, Trockenbau, Elektrik, Heizung, Bodenbelag – inklusive Spartipps und Förderung.';
 
-const articleSchemaStr = articleSchema({
-  headline: pageTitle,
-  description: pageDescription,
-  datePublished: '2026-05-13',
-  author: 'Dachgeschossausbau München',
-  url: 'https://dachgeschossausbau-muenchen.de/wissen/kosten-checkliste/',
-});
-
 const faqs = [
   { question: 'Was kostet ein Dachgeschossausbau in München pro m²?', answer: 'Die Kosten liegen je nach Zustand und Ausstattung zwischen 500 und 1.800 €/m² Nutzfläche. Einfache Ausbauten (Dämmung, Trockenbau, Boden) starten ab 500 €/m². Komplette Sanierungen mit Bad, Elektrik und Heizung liegen bei 1.200–1.800 €/m².' },
-  { question: 'Welcher Kostenblock ist beim Dachgeschossausbau am größten?', answer: 'Die Dämmung (inkl. Trockenbau der Dachschrägen) ist typischerweise der größte Einzelposten: je nach Dämmvariante 6.000–25.000 € für ein durchschnittliches Dachgeschoss. Danach folgen Bodenaufbau und Elektrik.' },
+  { question: 'Welcher Kostenblock ist beim Dachgeschossausbau am größten?', answer: 'Die Dämmung (inkl. Trockenbau der Dachschrägen) ist meist der größte Einzelposten: je nach Dämmvariante 6.000 bis 25.000 € für ein durchschnittliches Dachgeschoss. Danach folgen Bodenaufbau und Elektrik.' },
   { question: 'Kann ich beim Dachgeschossausbau sparen, ohne die Qualität zu gefährden?', answer: 'Ja. Sparen Sie bei den Bodenbelägen (Vinyl statt Parkett), verzichten Sie auf eine Fußbodenheizung wenn die bestehende Heizung ausreicht, und kombinieren Sie Dämmung mit einer Neueindeckung, um Kosten zu reduzieren. Nicht sparen sollten Sie bei Statik, Dämmung und Elektrik.' },
   { question: 'Wie viel kostet ein Bad im Dachgeschoss?', answer: 'Ein vollwertiges Bad (Dusche, WC, Waschbecken, Fliesen, Sanitär) kostet im Dachgeschoss 8.000–20.000 € je nach Standard. Einfache Gäste-WCs liegen bei 4.000–8.000 €.' },
   { question: 'Gibt es versteckte Kosten beim Dachgeschossausbau?', answer: 'Ja, häufige versteckte Kosten sind: Statik-Nachrüstung (3.000–10.000 €), Asbest-Entsorgung bei Altbauten vor 1990 (2.000–15.000 €), Fledermaus-Prüfung (500–1.500 €), Denkmalschutz-Auflagen und Nachrüstung der Elektro-Unterverteilung. Eine gründliche Voruntersuchung deckt diese Kosten frühzeitig auf.' },
@@ -29,7 +21,7 @@ const faqs = [
   { question: 'Was kostet eine Dachgaube?', answer: 'Eine Standard-Schleppdachgaube kostet ab 6.500 € (Fertiggaube), aufwändigere Gauben (Fledermausgaube, Sattelgaube) liegen bei 10.000–25.000 € inkl. Einbau. Hinzu kommen eventuelle Genehmigungskosten und Statik-Anpassungen.' },
 ];
 
-const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/kosten-checkliste/');
+const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
 
 const costRows = [
   { position: 'Rückbau & Entsorgung (Verkleidung, alte Dämmung)', einheit: 'm²', vonPreis: 20, bisPreis: 40, bemerkung: 'inkl. Bauschutt-Entsorgung' },
@@ -60,7 +52,6 @@ const costRows = [
   canonical="/wissen/kosten-checkliste/"
   currentPath="/wissen/kosten-checkliste/"
 >
-  <JsonLdSchema schema={articleSchemaStr} />
   <JsonLdSchema schema={faqSchemaStr} />
   <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Kosten-Checkliste' }]} />
 

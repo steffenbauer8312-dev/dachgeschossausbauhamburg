@@ -3,25 +3,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { localBusinessSchema } from '@/lib/schema';
+import { generateLocalBusinessSchema } from '@/lib/schema';
 
 const pageTitle = 'Kontakt – Dachgeschossausbau München';
 const pageDescription = 'Kostenlose Erstberatung für Ihren Dachgeschossausbau in München. Kontaktieren Sie uns unverbindlich – wir melden uns innerhalb von 24 Stunden.';
 
-const schema = localBusinessSchema({
-  name: 'Dachgeschossausbau München',
-  description: pageDescription,
-  url: 'https://dachgeschossausbau-muenchen.de/kontakt',
-  telephone: '+49 89 12345678',
-  email: 'info@dachgeschossausbau-muenchen.de',
-  address: {
-    streetAddress: 'Beispielstraße 1',
-    addressLocality: 'München',
-    postalCode: '80331',
-    addressCountry: 'DE',
-  },
-  priceRange: '€€',
-});
+const schema = JSON.stringify(generateLocalBusinessSchema());
 ---
 
 <BaseLayout
