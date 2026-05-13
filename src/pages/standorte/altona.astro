@@ -1,0 +1,282 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title="Dachgeschossausbau Altona Hamburg – Gauben, Kosten, Genehmigung"
+  description="Dachgeschossausbau in Hamburg Altona: 1.800–2.500 €/m², Erhaltungssatzungsgebiet in Altstadt und Nord, Denkmalschutz in den Elbvororten. HBauO 2026 §62 prüfen."
+  canonical="/standorte/altona/"
+  currentPath="/standorte/altona/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateServiceSchema({ name: 'Dachgeschossausbau Altona Hamburg', description: 'Dachgeschossausbau, Gauben und Dämmung in Altona – alle Gewerke aus einer Hand.', slug: '/standorte/altona/' }))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Standorte', url: 'https://dachgeschossausbauhamburg.de/standorte/' },
+    { name: 'Altona', url: 'https://dachgeschossausbauhamburg.de/standorte/altona/' },
+  ]))} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Altona
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau Altona Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Altona ist ein Mix aus alt und neu: Altstadt und Nord mit Erhaltungssatzung, die Elbvororte (Othmarschen, Blankenese) mit Villen und Denkmalschutz. Jeder Teil von Altona hat eigene Regeln – wir kennen sie alle.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Erhaltungssatzungsgebiet in Altstadt und Nord</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Denkmalschutz in den Elbvororten – separate Genehmigung</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Bezirksamt Altona ist erfahren bei Altbau-DG-Projekten</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">Altstadt + Nord</div>
+              <div class="text-xs text-white/60 mt-1">Erhaltungssatzung</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">1.800–2.500</div>
+              <div class="text-xs text-white/60 mt-1">DG-Ausbau €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">4–8</div>
+              <div class="text-xs text-white/60 mt-1">Wochen Genehmigung</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM ALTONA?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktanalyse"
+          heading="Warum Altona?"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Altona ist einer der vielfältigsten Bezirke Hamburgs – architektonisch wie infrastrukturell. Das macht DG-Projekte hier besonders interessant, aber auch komplex.
+          </p>
+          <p>
+            Die Altona-Altstadt und Teile von Altona-Nord gehören zum Erhaltungssatzungsgebiet. Das bedeutet strenge Auflagen für jede äußere Veränderung – auch für Gauben. Gleichzeitig ist das Bezirksamt Altona besonders erfahren im Umgang mit Altbau-DG-Projekten. Die Bearbeitungszeiten sind vergleichsweise kurz und die Genehmigungschancen für gut geplante Projekte gut.
+          </p>
+          <p>
+            In den Elbvororten (Othmarschen, Blankenese, Nienstedten) sieht die Situation anders aus. Hier dominieren Villen aus der Jahrhundertwende, viele davon unter Denkmalschutz. Ein DG-Ausbau in diesen Gebieten erfordert eine separate denkmalschutzrechtliche Genehmigung und oft aufwändigere Planungen. Dafür sind die Grundstücke größer und die finanziellen Spielräume größer.
+          </p>
+          <p>
+            Altona hat eine exzellente Infrastruktur: S-Bahn, Regionalbahn und diverse U-Bahn-Linien machen den Bezirk zu einem der am besten angebundenen Hamburgs. Die Nähe zur Elbe und zum Stadtpark machen ihn gleichzeitig zu einem der beliebtesten Wohnviertel. Ein DG-Ausbau in Altona bedeutet daher immer auch eine Wertsteigerung der Immobilie.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: KOSTEN FÜR ALTONA
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Richtwerte"
+        heading="Kosten für Dachgeschossausbau in Altona"
+        subheading="Hamburger Richtwerte mit bezirksspezifischer Einordnung. Alle Preise inkl. Handwerker und Material."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Einfacher DG-Ausbau</td>
+                <td class="px-6 py-4 text-right font-mono">900 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">1.400 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Komplettausbau</td>
+                <td class="px-6 py-4 text-right font-mono">1.400 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">2.000 €/m²</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Premium-Ausbau (mit Gaube)</td>
+                <td class="px-6 py-4 text-right font-mono">2.000 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">2.800 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Schleppgaube</td>
+                <td class="px-6 py-4 text-right font-mono">9.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">20.000 €</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Fledermausgaube</td>
+                <td class="px-6 py-4 text-right font-mono">16.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">28.000 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p>
+            In Altona-Altstadt und Altona-Nord liegen die Handwerkerpreise 5–10% über dem Hamburger Durchschnitt. In den Elbvororten kann der Aufschlag 10–15% betragen – dort sind die Qualitätsanforderungen an Handwerker besonders hoch.
+          </p>
+          <p>
+            Für Denkmalschutz-Objekte in den Elbvororten kommen zusätzliche Kosten hinzu: Ein Statik-Gutachten, spezielle Materialien (oft historische Ziegel oder Schiefer) und die Abstimmung mit dem Denkmalschutzamt. Diese Projekte erfordern einen erfahrenen Architekten und kalkulieren sich anders als Standard-DG-Ausbaue.
+          </p>
+          <p>
+            Alle Hamburger Richtwerte und eine detaillierte Kostenaufstellung finden Sie auf unserer <a href="/kosten" class="text-primary font-semibold hover:underline">Kostenübersicht für Dachgeschossausbau in Hamburg</a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: GENEHMIGUNG IN ALTONA
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburger Recht"
+          heading="Genehmigung in Altona – Erhaltungssatzung und Denkmalschutz"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Altona verlangt differenzierte Genehmigungsstrategien je nach Stadtteil – vom unkomplizierten Altbau-DG bis zum denkmalgeschützten Villen-DG.
+          </p>
+          <p>
+            In der Altona-Altstadt und in Altona-Nord gilt die Erhaltungssatzungsverordnung. Jede äußere Veränderung – insbesondere der Einbau einer Gaube – erfordert eine separate Zustimmung des Bezirksamts. Das betrifft nicht nur die Baugenehmigung, sondern auch die gestalterische Abstimmung: Gaubenform, Material und Farbe müssen zum historischen Bestand passen.
+          </p>
+          <p>
+            Die gute Nachricht: Das Bezirksamt Altona ist bei Altbau-DG-Projekten besonders erfahren. Die Bearbeitungszeit für eine Gauben-Genehmigung liegt bei 4–8 Wochen – schneller als in vielen anderen Hamburger Bezirken. Mit der richtigen Planung (Schleppgaube als bevorzugte Form, Abstimmung der Materialen) sind die Genehmigungschancen gut.
+          </p>
+          <p>
+            In den Elbvororten (Othmarschen, Blankenese, Nienstedten) gelten zusätzlich denkmalschutzrechtliche Auflagen. Viele Villen stehen unter Denkmalschutz (§6 HDSchG). Hier ist eine separate denkmalschutzrechtliche Genehmigung erforderlich – zusätzlich zur Baugenehmigung. Die Kosten und der Aufwand sind höher, aber nicht unüberwindbar.
+          </p>
+          <p>
+            Mehr Informationen zur <a href="/genehmigung" class="text-primary font-semibold hover:underline">Genehmigungsfreistellung nach HBauO 2026</a> finden Sie auf unserer Übersichtsseite.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: INTERNE VERLINKUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Hamburger Richtwerte für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026 – Genehmigung leicht gemacht</h3>
+            <p class="text-sm text-text-secondary">§62 Freistellung, §61 vereinfachtes Verfahren, Erhaltungssatzung, Denkmalschutz.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten im Detail.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dämmung – Aufsparren, Zwischensparren</h3>
+            <p class="text-sm text-text-secondary">U-Werte, Förderfähigkeit, KfW 261 und BAFA: Alle Dämmarten erklärt.</p>
+          </a>
+
+          <a href="/faq" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">FAQ – 40+ Fragen und Antworten</h3>
+            <p class="text-sm text-text-secondary">Von Kosten über Genehmigung bis Förderung: Alle wichtigen Fragen beantwortet.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Dachgeschossausbau in Altona? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie unverbindlich zu Ihrem DG-Projekt in Altona – ob Altstadt, Nord oder Elbvororte. Wir kennen die Anforderungen Ihres Stadtteils.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

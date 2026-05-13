@@ -1,0 +1,282 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title="Dachgeschossausbau Eimsbüttel Hamburg – Gauben, Kosten, Genehmigung"
+  description="Dachgeschossausbau in Hamburg Eimsbüttel: 1.800–2.500 €/m², Stellplatzpflicht streng, Ablöse hoch. Dicht bebaut – DG ist die einzige Option. HBauO 2026 §62 prüfen."
+  canonical="/standorte/eimsbuettel/"
+  currentPath="/standorte/eimsbuettel/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateServiceSchema({ name: 'Dachgeschossausbau Eimsbüttel Hamburg', description: 'Dachgeschossausbau, Gauben und Dämmung in Eimsbüttel – alle Gewerke aus einer Hand.', slug: '/standorte/eimsbuettel/' }))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Standorte', url: 'https://dachgeschossausbauhamburg.de/standorte/' },
+    { name: 'Eimsbüttel', url: 'https://dachgeschossausbauhamburg.de/standorte/eimsbuettel/' },
+  ]))} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Eimsbüttel
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau Eimsbüttel Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Eimsbüttel ist einer der dichtesten Bezirke Hamburgs – kaum Neubau, steigende Mieten (12–16 €/m²). Der DG-Ausbau ist hier die einzige Möglichkeit, neuen Wohnraum zu schaffen. Nutzen Sie Ihr Dachpotenzial.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Dicht bebaut – kaum Neubau, DG ist die einzige Option</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Stellplatzpflicht streng – Ablöse hoch, vorab prüfen</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Bebauungspläne großteils qualifiziert – §62 oft möglich</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">12–16</div>
+              <div class="text-xs text-white/60 mt-1">Miete €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">1.800–2.500</div>
+              <div class="text-xs text-white/60 mt-1">DG-Ausbau €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">10–15%</div>
+              <div class="text-xs text-white/60 mt-1">über Ø Hamburg</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM EIMSBÜTTEL?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktanalyse"
+          heading="Warum Eimsbüttel?"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Eimsbüttel gehrt zu den beliebtesten und am dichtesten bebauten Stadtteilen Hamburgs. Die Nachfrage nach Wohnraum bersteigt das Angebot bei weitem – und Neubau findet kaum statt.
+          </p>
+          <p>
+            Mit Mieten von 12–16 €/m² (laut Hamburger Mietenspiegel 2025) und einer Vollversorgung durch U- und S-Bahn ist Eimsbüttel besonders bei jungen Familien und Berufstätigen beliebt. Das Problem: Der Bezirk ist praktisch voll bebaut. Frei fliegende Grundstücke gibt es nicht mehr. Dachgeschossausbau ist daher die einzige Möglichkeit, neuen Wohnraum zu schaffen – und das macht DG-Projekte hier besonders wertsteigernd.
+          </p>
+          <p>
+            Eimsbüttel-Altstadt gehört zum Erhaltungssatzungsgebiet. Jede äußere Veränderung – also auch der Einbau einer Gaube – muss vom Bezirksamt genehmigt werden. Die gute Nachricht: Eimsbüttel ist einer der Bezirke mit der meisten DG-Erfahrung in Hamburg. Das Bezirksamt ist routiniert im Umgang mit Gauben und Aufstockungen. Mit der richtigen Planung steht Ihrem Projekt nichts im Wege.
+          </p>
+          <p>
+            Die Kehrseite: Die Stellplatzpflicht in Eimsbüttel ist besonders streng. Wer ein neues Dachgeschoss als Wohnraum nutzen will, muss unter Umständen einen Stellplatz nachweisen – oder eine hohe Ablöse an die Stadt zahlen. Wir raten dazu, diese Frage vor Beginn der Planung zu klären.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: KOSTEN FÜR EIMSBÜTTEL
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Richtwerte"
+        heading="Kosten für Dachgeschossausbau in Eimsbüttel"
+        subheading="Hamburger Richtwerte mit Eimsbüttel-Aufschlag. Alle Preise inkl. Handwerker und Material."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Einfacher DG-Ausbau</td>
+                <td class="px-6 py-4 text-right font-mono">900 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">1.400 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Komplettausbau</td>
+                <td class="px-6 py-4 text-right font-mono">1.400 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">2.000 €/m²</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Premium-Ausbau (mit Gaube)</td>
+                <td class="px-6 py-4 text-right font-mono">2.000 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">2.800 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Schleppgaube</td>
+                <td class="px-6 py-4 text-right font-mono">9.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">20.000 €</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Fledermausgaube</td>
+                <td class="px-6 py-4 text-right font-mono">16.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">28.000 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p>
+            In Eimsbüttel liegen die Handwerkerpreise 10–15% über dem Hamburger Durchschnitt. Das liegt an der hohen Nachfrage und der dichten Bebauung, die den Zugang erschwert. Dazu kommen oft enge Straßen ohne Kranstellplatz – das treibt die Logistikkosten.
+          </p>
+          <p>
+            Ein wichtiger Kostenfaktor in Eimsbüttel ist die Stellplatzpflicht. Wenn für das Dachgeschoss ein Stellplatz nachgewiesen werden muss und auf dem Grundstück kein Platz ist, kann eine Ablöse an die Stadt fällig werden. Die Höhe variiert, liegt aber typischerweise bei 10.000–25.000 €. Diese Kosten sollten von Anfang an in die Kalkulation einfließen.
+          </p>
+          <p>
+            Alle Hamburger Richtwerte und eine detaillierte Kostenaufstellung finden Sie auf unserer <a href="/kosten" class="text-primary font-semibold hover:underline">Kostenübersicht für Dachgeschossausbau in Hamburg</a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: GENEHMIGUNG IN EIMSBÜTTEL
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburger Recht"
+          heading="Genehmigung in Eimsbüttel – Stellplatzpflicht und §62"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Eimsbüttel ist bei DG-Projekten erfahren – aber die Stellplatzpflicht ist einer der strengsten Faktoren in diesem Bezirk.
+          </p>
+          <p>
+            Die gute Nachricht: Die Hamburger Bauordnung 2026 (HBauO 2026) bietet mit §62 die Möglichkeit einer Genehmigungsfreistellung. Viele DG-Ausbaumaßnahmen – insbesondere Dämmung, Innenausbau und der Einbau von Dachflächenfenstern – können angezeigt werden und gelten nach vier Wochen als genehmigt. Die Kosten liegen bei 0–100 €.
+          </p>
+          <p>
+            Sobald eine Gaube geplant ist, wird ein vereinfachtes Verfahren nach §61 HBauO fällig. In Eimsbüttel-Altstadt kommt hinzu, dass das Erhaltungssatzungsgebiet eine separate Abstimmung erfordert. Die gute Nachricht: Das Bezirksamt Eimsbüttel ist bei Gauben in der Altstadt erfahren – die Bearbeitungszeit liegt bei 4–8 Wochen.
+          </p>
+          <p>
+            Die Stellplatzpflicht ist der kritischste Punkt. Wenn das Dachgeschoss als eigenständige Wohnung genutzt werden soll und kein Stellplatz auf dem Grundstück vorhanden ist, muss entweder ein neuer Stellplatz nachgewiesen werden (was in Eimsbüttel oft unmöglich ist) oder eine Ablöse an die Stadt gezahlt werden. Wir empfehlen, diese Frage vor Beginn der Planung mit dem Bezirksamt zu klären.
+          </p>
+          <p>
+            Mehr Informationen zur <a href="/genehmigung" class="text-primary font-semibold hover:underline">Genehmigungsfreistellung nach HBauO 2026</a> finden Sie auf unserer Übersichtsseite.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: INTERNE VERLINKUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Hamburger Richtwerte für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026 – Genehmigung leicht gemacht</h3>
+            <p class="text-sm text-text-secondary">§62 Freistellung, §61 vereinfachtes Verfahren, Stellplatzpflicht, Erhaltungssatzung.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten im Detail.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dämmung – Aufsparren, Zwischensparren</h3>
+            <p class="text-sm text-text-secondary">U-Werte, Förderfähigkeit, KfW 261 und BAFA: Alle Dämmarten erklärt.</p>
+          </a>
+
+          <a href="/faq" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">FAQ – 40+ Fragen und Antworten</h3>
+            <p class="text-sm text-text-secondary">Von Kosten über Genehmigung bis Förderung: Alle wichtigen Fragen beantwortet.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Dachgeschossausbau in Eimsbüttel? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie unverbindlich zu Ihrem DG-Projekt in Eimsbüttel – inklusive Stellplatzprüfung und Genehmigungsstrategie nach HBauO 2026.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

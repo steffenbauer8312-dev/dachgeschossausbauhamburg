@@ -1,0 +1,282 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title="Dachgeschossausbau Harburg Hamburg – Gauben, Kosten, Genehmigung"
+  description="Dachgeschossausbau in Hamburg Harburg: 800–2.500 €/m², günstigere Handwerkerpreise (5–10% unter Durchschnitt), Bezirksamt Harburg aufgeschlossen. HBauO 2026 §62 oft möglich."
+  canonical="/standorte/harburg/"
+  currentPath="/standorte/harburg/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateServiceSchema({ name: 'Dachgeschossausbau Harburg Hamburg', description: 'Dachgeschossausbau, Gauben und Dämmung in Harburg – alle Gewerke aus einer Hand.', slug: '/standorte/harburg/' }))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Standorte', url: 'https://dachgeschossausbauhamburg.de/standorte/' },
+    { name: 'Harburg', url: 'https://dachgeschossausbauhamburg.de/standorte/harburg/' },
+  ]))} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Harburg
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau Harburg Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Harburg ist der aufstrebende Süden Hamburgs: Eigenständiges Zentrum, gute Anbindung, günstigere Handwerkerpreise (5–10% unter dem Durchschnitt) und ein Bezirksamt, das bei DG-Projekten aufgeschlossen ist.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Handwerkerpreise 5–10% unter Hamburger Durchschnitt</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Bezirksamt Harburg aufgeschlossen bei DG-Projekten</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>§62 HBauO oft möglich – Aufwand geringer als in Innenstadt</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">5–10%</div>
+              <div class="text-xs text-white/60 mt-1">günstiger als Ø</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">800–2.500</div>
+              <div class="text-xs text-white/60 mt-1">DG-Ausbau €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">S-Bahn</div>
+              <div class="text-xs text-white/60 mt-1">gute Anbindung</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM HARBURG?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktanalyse"
+          heading="Warum Harburg?"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Harburg ist der größte und grünste Bezirk Hamburgs – und einer der aufstrebendsten. Für DG-Projekte bietet das gleich mehrere Vorteile.
+          </p>
+          <p>
+            Harburg ist ein eigenständiges Zentrum im Süden Hamburgs mit voll ausgebauter Infrastruktur: S-Bahn, Regionalbahn und Autobahnanschluss machen den Bezirk unabhängig von der Innenstadt. Das bedeutet für Bewohner: kurze Wege, gute Lebensqualität und – für unsere Zwecke – deutlich günstigere Handwerkerpreise. In Harburg liegen die Kosten für Bauleistungen 5–10% unter dem Hamburger Durchschnitt.
+          </p>
+          <p>
+            Das Bezirksamt Harburg ist bei DG-Projekten aufgeschlossen und erfahren. Im Vergleich zu den Innenstadt-Bezirken sind die Genehmigungsverfahren hier schneller und unkomplizierter. Die Stellplatzpflicht ist großzügiger gehandhabt als in Eimsbüttel oder Altona. Das macht Harburg zu einem der handlungsfreundlichsten Bezirke für Dachgeschossausbau.
+          </p>
+          <p>
+            Die Nachfrage nach Wohnraum in Harburg steigt – bedingt durch die gute Anbindung und die günstigeren Mieten im Vergleich zur Innenstadt. Ein DG-Ausbau in Harburg ist daher nicht nur kostengünstiger in der Umsetzung, sondern auch wertsteigernd für die Immobilie. Die Mieten in Harburg liegen bei 9–12 €/m² – noch unter dem Hamburger Durchschnitt, aber mit steigender Tendenz.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: KOSTEN FÜR HARBURG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Richtwerte"
+        heading="Kosten für Dachgeschossausbau in Harburg"
+        subheading="Hamburger Richtwerte mit Harburg-Abschlag. 5–10% günstiger als im Durchschnitt."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Einfacher DG-Ausbau</td>
+                <td class="px-6 py-4 text-right font-mono">800 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">1.200 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Komplettausbau</td>
+                <td class="px-6 py-4 text-right font-mono">1.200 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">1.800 €/m²</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Premium-Ausbau (mit Gaube)</td>
+                <td class="px-6 py-4 text-right font-mono">1.800 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">2.500 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Schleppgaube</td>
+                <td class="px-6 py-4 text-right font-mono">8.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">18.000 €</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Fledermausgaube</td>
+                <td class="px-6 py-4 text-right font-mono">14.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">25.000 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p>
+            In Harburg liegen die Handwerkerpreise 5–10% unter dem Hamburger Durchschnitt. Das betrifft alle Gewerke – vom Dachdecker bis zum Elektriker. Die Gründe: geringere Mieten für Betriebsstätten, kürzere Anfahrtswege und weniger Stau als in der Innenstadt.
+          </p>
+          <p>
+            Dazu kommt: Das Bezirksamt Harburg ist bei DG-Projekten aufgeschlossen. Die Bearbeitungszeiten sind kürzer als in den Innenstadt-Bezirken. Das spart nicht nur Zeit, sondern auch Geld – jede Woche Bauzeit kostet 500–1.500 € an zusätzlichen Baustellenkosten.
+          </p>
+          <p>
+            Alle Hamburger Richtwerte und eine detaillierte Kostenaufstellung finden Sie auf unserer <a href="/kosten" class="text-primary font-semibold hover:underline">Kostenübersicht für Dachgeschossausbau in Hamburg</a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: GENEHMIGUNG IN HARBURG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburger Recht"
+          heading="Genehmigung in Harburg – Aufgeschlossen und erfahren"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Harburg ist einer der handlungsfreundlichsten Bezirke für DG-Projekte in ganz Hamburg. Das Bezirksamt ist erfahren und aufgeschlossen.
+          </p>
+          <p>
+            Die Hamburger Bauordnung 2026 (HBauO 2026) bietet mit §62 die Möglichkeit einer Genehmigungsfreistellung. In Harburg ist diese Variante für viele DG-Projekterealisierbar – besonders für Ausbauten ohne Gauben. Die Kosten liegen bei 0–100 €, und nach vier Wochen gilt das Vorhaben als genehmigt.
+          </p>
+          <p>
+            Auch für Gaubenprojekte ist Harburg ein günstiger Bezirk. Das Bezirksamt ist bei der Prüfung von Gauben in der Regel großzügiger als die Innenstadt-Bezirke. Die Bearbeitungszeit beträgt 4–8 Wochen – kürzer als in Eimsbüttel oder Altona. Die Voraussetzung: Die Gaube muss zum Gebäude passen und den Bebauungsplan einhalten.
+          </p>
+          <p>
+            Ein weiterer Vorteil: Die Stellplatzpflicht ist in Harburg weniger streng gehandhabt als in den dicht besiedelten Innenstadt-Bezirken. In vielen Fällen kann die Pflicht durch eine Erklärung des Grundstückseigentümers erfüllt werden – ohne teure Ablösezahlungen.
+          </p>
+          <p>
+            Mehr Informationen zur <a href="/genehmigung" class="text-primary font-semibold hover:underline">Genehmigungsfreistellung nach HBauO 2026</a> finden Sie auf unserer Übersichtsseite.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: INTERNE VERLINKUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Hamburger Richtwerte für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026 – Genehmigung leicht gemacht</h3>
+            <p class="text-sm text-text-secondary">§62 Freistellung, §61 vereinfachtes Verfahren – Harburg ist besonders aufgeschlossen.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten im Detail.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dämmung – Aufsparren, Zwischensparren</h3>
+            <p class="text-sm text-text-secondary">U-Werte, Förderfähigkeit, KfW 261 und BAFA: Alle Dämmarten erklärt.</p>
+          </a>
+
+          <a href="/faq" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">FAQ – 40+ Fragen und Antworten</h3>
+            <p class="text-sm text-text-secondary">Von Kosten über Genehmigung bis Förderung: Alle wichtigen Fragen beantwortet.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Dachgeschossausbau in Harburg? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie unverbindlich zu Ihrem DG-Projekt in Harburg – mit günstigeren Preisen und kürzeren Genehmigungszeiten als in der Hamburger Innenstadt.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
