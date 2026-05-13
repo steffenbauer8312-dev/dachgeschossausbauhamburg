@@ -4,12 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Hamburg "Backstein & Wasser"
-        primary:   '#8B3A3A',    // Rotklinker dunkel
-        'primary-dark': '#6B2A2A', // Rotklinker sehr dunkel
+        // Hamburg "Dunkelgrau & Wasser" — Ersatz für Backstein-Rot
+        primary:   '#3D3D3D',    // Dunkelgrau (ersetzt Rotklinker #8B3A3A)
+        'primary-dark': '#2A2A2A', // Dunkelgrau dunkel
         secondary: '#C9A96E',     // Verblichenes Gold (bleached wood)
         accent:    '#2C5F7D',    // Wasser-Blau (nordisch)
-        'accent-light': '#4A7D9B', // Wasser-Blau hell
         bg:        '#FAF8F5',     // Warmes Creme
         surface:   '#FFFFFF',
         border:    '#E5E0D8',     // Warmes Grau
