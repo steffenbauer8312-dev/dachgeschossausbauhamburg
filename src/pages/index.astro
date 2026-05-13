@@ -9,89 +9,48 @@ import TrustSignals from '@/components/content/TrustSignals.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import { generateLocalBusinessSchema, generateServiceSchema, generateFaqSchema } from '@/lib/schema';
+import { FAQ_DATA } from '@/data/faqData';
 
-const pageTitle = 'Dachgeschossausbau München – Fachbetriebe vermitteln, Projekte umsetzen';
-const pageDescription = 'Ihr Partner für Dachgeschossausbau in München: Wir vermitteln qualitätsgeprüfte Fachbetriebe – für Eigentümer kostenfrei. Beratung, Planung, Genehmigung.';
+const pageTitle = 'Dachgeschossausbau Hamburg – Mehr Raum ohne Umzug';
+const pageDescription = 'Professioneller Dachgeschossausbau in Hamburg. Wir koordinieren alle Gewerke – von der Dämmung bis zum schlüsselfertigen Ausbau. Kostenlose Beratung!';
 
 const localSchema = JSON.stringify(generateLocalBusinessSchema());
 
 const serviceSchemaStr = JSON.stringify(generateServiceSchema({
-  name: 'Dachgeschossausbau München',
-  description: 'Vermittlung qualitätsgeprüfter Fachbetriebe für Dachgeschossausbau in München – von der Beratung bis zur Umsetzung.',
+  name: 'Dachgeschossausbau Hamburg',
+  description: 'Professioneller Dachgeschossausbau in Hamburg – alle Gewerke aus einer Hand, von der Beratung bis zur schlüsselfertigen Übergabe.',
   slug: '/',
 }));
 
-const faqs = [
-  {
-    question: 'Was kostet ein Dachgeschossausbau in München?',
-    answer: 'Die Kosten für einen Dachgeschossausbau in München liegen je nach Zustand, Ausstattung und ob ein Bad integriert wird, zwischen 500 und 1.800 €/m² Nutzfläche. Eine komplette Sanierung eines 50-m²-Dachgeschosses kostet 40.000 bis 90.000 €. Ausschlaggebend für den genauen Preis ist der Zustand der Bausubstanz, die Statik und ob das Dach neu eingedeckt werden muss. Eine kostenlose Vor-Ort-Beratung gibt Ihnen eine realistische Einschätzung.',
-  },
-  {
-    question: 'Brauche ich eine Genehmigung für den Dachgeschossausbau in Bayern?',
-    answer: 'Seit der Bayerischen Bauordnung 2025 sind bestimmte Dachgeschossausbauten verfahrensfrei – vorausgesetzt, die Dachkonstruktion und die äußere Gestalt des Gebäudes werden nicht verändert. Wenn Gauben, Aufstockungen oder Nutzungsänderungen geplant sind, ist in der Regel ein Bauantrag bei der Lokalbaukommission München nötig. Wir begleiten Sie durch den gesamten Genehmigungsprozess.',
-  },
-  {
-    question: 'Welche Förderungen gibt es für den Dachgeschossausbau in München?',
-    answer: 'Für energetische Maßnahmen beim Dachgeschossausbau gibt es KfW-Zuschüsse (bis zu 20% der Kosten), BAFA-Einzelmaßnahmen-Zuschüsse sowie Landesförderung Bayern. Auch steuerliche Abschreibungsmöglichkeiten (Denkmalschutz-AfA, Sanierungs-AfA) können genutzt werden. Wir beraten Sie kostenlos zu allen Förderoptionen.',
-  },
-  {
-    question: 'Ist die Vermittlung für mich als Eigentümer wirklich kostenfrei?',
-    answer: 'Ja. Die Vermittlungsleistung wird von den vermittelten Fachbetrieben getragen – für Sie als Eigentümer oder Investor entstehen keine zusätzlichen Kosten. Sie zahlen ausschließlich direkt an den ausführenden Betrieb. Transparenz und keine versteckten Gebühren sind unser Grundsatz.',
-  },
-  {
-    question: 'Wie lange dauert ein Dachgeschossausbau in München?',
-    answer: 'Die reine Bauzeit beträgt je nach Umfang 6–16 Wochen. Hinzu kommt die Planungs- und Genehmigungsphase (4–12 Wochen), abhängig davon, ob ein Bauantrag nötig ist. Bei verfahrensfreien Ausbauten kann das Gesamtprojekt in 8–16 Wochen abgeschlossen sein.',
-  },
-  {
-    question: 'Was passiert mit Fledermäusen oder Denkmalschutz im Dachgeschoss?',
-    answer: 'In München ist vor jedem Dachgeschossausbau zu prüfen, ob das Dach als Lebensraum für Fledermäuse dient. Ist das der Fall, muss das Referat für Klima und Umweltschutz kontaktiert werden. Bei denkmalgeschützten Gebäuden ist eine frühzeitige Abstimmung mit der Unteren Denkmalschutzbehörde und dem Bayerischen Landesamt für Denkmalpflege nötig – wir begleiten Sie dabei.',
-  },
-  {
-    question: 'Welche Dämmung ist für ein Dachgeschoss in München vorgeschrieben?',
-    answer: 'Das Gebäudeenergiegesetz (GEG) schreibt für ausgebaute Wohnräume im Dachgeschoss eine Dämmung vor, die den aktuellen Anforderungen entspricht. Je nach Dachkonstruktion kommen Zwischensparrendämmung (ab ca. 60–100 €/m² Dachfläche), Untersparrendämmung (ab ca. 30–95 €/m²) oder Aufsparrendämmung (ab ca. 100–250 €/m² inkl. Neueindeckung) infrage.',
-  },
-  {
-    question: 'Können Sie mir helfen, wenn ich ein denkmalgeschütztes Dachgeschoss ausbauen möchte?',
-    answer: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden in München. Wir kennen die typischen Auflagen (Materialien, Gaubenform, Fensterteilung) und wissen, wie die Abstimmung mit der Denkmalschutzbehörde abläuft. Steuerliche Abschreibungsmöglichkeiten über die Denkmalschutz-AfA machen solche Projekte besonders interessant.',
-  },
-  {
-    question: 'Ich bin Investor – lohnen sich Dachgeschossausbauten in München?',
-    answer: 'Der Münchner Immobilienmarkt bietet hohen Wohnraumbedarf in zentralen Lagen. Die Quadratmeterpreise liegen deutlich über den Ausbaukosten, was deutliches Wertsteigerungspotenzial bietet. Mit der richtigen Planung (Nutzungsänderung, Genehmigung, Steueroptimierung) ist der Dachgeschossausbau für Investoren eine der renditestärksten Immobilienstrategien in München.',
-  },
-  {
-    question: 'Wie finde ich den richtigen Fachbetrieb für meinen Dachgeschossausbau?',
-    answer: 'Wir haben ein Netzwerk aus qualitätsgeprüften Fachbetrieben, die nachweislich Erfahrung im Dachgeschossausbau in München haben – von Architekten über Dachdecker bis zu Trockenbauern. Sie erhalten 1–3 passende Angebote statt 10-fach-Spam. So finden Sie schnell den richtigen Partner für Ihr Projekt.',
-  },
-];
+const faqSchemaStr = JSON.stringify(generateFaqSchema(FAQ_DATA.slice(0, 10)));
 
-const faqSchemaStr = JSON.stringify(generateFaqSchema(faqs));
-
+// Hamburger Richtwerte direkt eingebettet für die Kurzübersicht auf der Startseite
 const costRows = [
-  { position: 'Rückbau & Entsorgung', einheit: 'm²', vonPreis: 30, bisPreis: 65, bemerkung: 'inkl. Bauschutt-Entsorgung' },
-  { position: 'Dämmung (Zwischensparren)', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 100 },
-  { position: 'Trockenbau Dachschrägen', einheit: 'm²', vonPreis: 40, bisPreis: 70 },
-  { position: 'Innenwände (Trockenbau)', einheit: 'm² Wand', vonPreis: 80, bisPreis: 130 },
-  { position: 'Bodenaufbau (Estrich + Belag)', einheit: 'm²', vonPreis: 70, bisPreis: 140 },
+  { position: 'Dämmung (Zwischensparren)', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 120 },
+  { position: 'Trockenbau Dachschrägen', einheit: 'm²', vonPreis: 50, bisPreis: 90 },
+  { position: 'Innenwände (Trockenbau)', einheit: 'm² Wand', vonPreis: 50, bisPreis: 90 },
+  { position: 'Bodenaufbau (Estrich + Belag)', einheit: 'm²', vonPreis: 30, bisPreis: 140 },
   { position: 'Elektro komplett neu', einheit: 'm² Nutzfläche', vonPreis: 80, bisPreis: 150 },
   { position: 'Heizung (Anschluss + Heizkörper)', einheit: 'pauschal', vonPreis: 2000, bisPreis: 5000, bemerkung: 'ohne Fußbodenheizung' },
   { position: 'Malerarbeiten', einheit: 'm² Wandfläche', vonPreis: 12, bisPreis: 25 },
+  { position: 'Dachgaube (Schleppgaube)', einheit: 'Stück', vonPreis: 8000, bisPreis: 18000 },
 ];
 
 const steps = [
   {
     number: 1,
     title: 'Kostenlose Erstberatung',
-    description: 'Im unverbindlichen Gespräch klären wir Ihr Projekt: Potenzial, Kostenrahmen, Genehmigungsfragen. Vor Ort oder per Videocall.',
+    description: 'Wir besichtigen Ihr Dachgeschoss vor Ort, klären die baulichen Voraussetzungen und beantworten alle Fragen zu Genehmigung, Kosten und Zeitplan.',
   },
   {
     number: 2,
-    title: 'Passende Fachbetriebe',
-    description: 'Basierend auf Ihrem Projekt – ob Altbau, Denkmal oder Neubau – wählen wir 1–3 qualitätsgeprüfte Betriebe aus unserem Netzwerk aus.',
+    title: 'Transparentes Angebot',
+    description: 'Sie erhalten ein detailliertes Angebot mit allen Positionen – ohne versteckte Kosten. Darin: Zeitplan, Kostenaufstellung, Fördermittel-Check.',
   },
   {
     number: 3,
-    title: 'Angebot & Umsetzung',
-    description: 'Sie erhalten transparente Angebote direkt von den Betrieben. Wir begleiten die Umsetzung und stehen als Ansprechpartner zur Seite.',
+    title: 'Schlüsselfertige Umsetzung',
+    description: 'Wir koordinieren alle Gewerke und sind Ihr fester Ansprechpartner von Anfang bis Ende. Saubere Arbeit, pünktlich, wie versprochen.',
   },
 ];
 ---
@@ -112,24 +71,24 @@ const steps = [
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <!-- Linke Spalte: Text -->
         <div>
-          <span class="inline-block text-sm font-medium text-secondary mb-6">
-            München · Bayern · 2026
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Seit 2026 freigestellt
           </span>
           <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight mb-6">
             Dachgeschossausbau<br />
-            <span class="text-primary">München</span>
+            <span class="text-primary">Hamburg</span>
           </h1>
           <p class="text-lg lg:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl">
-            Von der Genehmigung bis zur Übergabe — geprüfte Münchner Fachbetriebe für
-            Dachbodenausbau, Dachgauben, Dämmung nach GEG und kompletten Innenausbau.
-            Festpreisangebot in 48 Stunden.
+            Mehr Wohnraum, ohne umzuziehen. Wir bauen Ihr Dachgeschoss in Hamburg
+            schlüsselfertig aus – mit allen Gewerken aus einer Hand. Ohne
+            Genehmigungsstress, ohne Koordinationsaufwand.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
             <a href="#kontakt-formular" class="cta-primary text-center">
               Kostenlose Beratung anfragen
             </a>
-            <a href="/leistungen/dachgeschossausbau-eigentuemer" class="btn-ghost text-center">
-              Mehr erfahren
+            <a href="/kosten" class="btn-ghost text-center">
+              Kosten prüfen
             </a>
           </div>
           <TrustSignals compact={true} />
@@ -137,7 +96,7 @@ const steps = [
 
         <!-- Rechte Spalte: Formular -->
         <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
-          <LeadGenForm variant="eigentuemer" />
+          <LeadGenForm />
         </div>
       </div>
     </Container>
@@ -152,7 +111,7 @@ const steps = [
       <SectionHeader
         badge="Zielgruppen"
         heading="Für wen wir da sind"
-        subheading="Egal ob Eigenheim oder Investment – wir haben den passenden Ansprechpartner und das passende Fachbetriebs-Netzwerk."
+        subheading="Egal ob Eigenheim oder Investment – wir haben die Erfahrung und das Netzwerk für Ihr Hamburger Dachgeschossprojekt."
       />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Eigentümer -->
@@ -166,27 +125,27 @@ const steps = [
           <p class="text-text-secondary leading-relaxed mb-6">
             Ihr Dachboden wird zum neuen Wohnraum. Schlafzimmer, Homeoffice,
             Kinderzimmer oder Einliegerwohnung. Wir begleiten Sie von der ersten
-            Idee über die Genehmigung bis zur Umsetzung.
+            Idee über die Genehmigung nach HBauO 2026 bis zur Umsetzung.
           </p>
           <ul class="space-y-2 text-sm text-text-secondary mb-6">
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              Kostenlose Erstberatung
+              Kostenlose Vor-Ort-Beratung
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              Bayern 2025 Genehmigungsberatung
+              HBauO 2026 Genehmigungsberatung
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              KfW/BAFA Förderberatung
+              KfW 261 / BAFA / §35c EStG Förderberatung
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              Denkmalschutz-Kompetenz
+              Alle Hamburger Bezirke
             </li>
           </ul>
-          <a href="/leistungen/dachgeschossausbau-eigentuemer" class="text-primary font-semibold text-sm hover:underline inline-flex items-center gap-1">
+          <a href="/leistungen" class="text-primary font-semibold text-sm hover:underline inline-flex items-center gap-1">
             Mehr erfahren →
           </a>
         </div>
@@ -200,14 +159,14 @@ const steps = [
           </div>
           <h3 class="text-xl font-bold text-text-primary mb-3">Investoren</h3>
           <p class="text-text-secondary leading-relaxed mb-6">
-            Sie sehen Potenzial in Münchner Dachgeschossen? Wir bringen Erfahrung
-            und Kontakte mit. Renditestarke Dachgeschossausbau-Investments, von der
-            Standortanalyse bis zur steueroptimierten Umsetzung.
+            Der Hamburger Mietmarkt zeigt steigende Tendenz – Median 15,12 Euro/m² für
+            Dachgeschossflächen 2026. Wir bringen Renditeprojekte von der Standortanalyse
+            bis zur steueroptimierten Umsetzung.
           </p>
           <ul class="space-y-2 text-sm text-text-secondary mb-6">
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              Standort- und Marktanalyse München
+              Standort- und Mietpreisanalyse Hamburg
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
@@ -215,15 +174,15 @@ const steps = [
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              Steuerliche Abschreibung (Denkmalschutz-AfA)
+              KfW 261 Finanzierungsberatung
             </li>
             <li class="flex items-center gap-2">
               <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              KfW/BAFA Finanzierungsberatung
+              Mietrechtliche Beratung (Hamburger Mietenspiegel)
             </li>
           </ul>
-          <a href="/leistungen/dachgeschossausbau-investoren" class="text-secondary font-semibold text-sm hover:underline inline-flex items-center gap-1">
-            Mehr erfahren →
+          <a href="/kontakt" class="text-secondary font-semibold text-sm hover:underline inline-flex items-center gap-1">
+            Investment-Anfrage →
           </a>
         </div>
       </div>
@@ -235,14 +194,14 @@ const steps = [
     <Container>
       <SectionHeader
         badge="Kosten"
-        heading="Was kostet ein Dachgeschossausbau in München?"
-        subheading="Richtwerte für den Großraum München. Der genaue Preis hängt von Zustand, Statik und gewünschtem Ausstattungsstandard ab."
+        heading="Was kostet ein Dachgeschossausbau in Hamburg?"
+        subheading="Hamburger Richtwerte 2025/2026. Der genaue Preis hängt von Zustand, Statik und Ausstattungsstandard ab."
       />
       <div class="max-w-4xl mx-auto">
         <CostTable rows={costRows} />
       </div>
       <p class="text-center text-sm text-text-secondary mt-6">
-        Sie möchten eine detaillierte Kostenanalyse für Ihr Projekt?
+        Sie möchten eine belastbare Kostenanalyse für Ihr Projekt?
         <a href="#kontakt-formular" class="text-primary font-semibold hover:underline">Kostenlose Beratung anfragen →</a>
       </p>
     </Container>
@@ -254,7 +213,7 @@ const steps = [
       <SectionHeader
         badge="Leistungen"
         heading="Was wir für Sie tun"
-        subheading="Von der Beratung bis zur Vermittlung – wir begleiten Ihr Projekt durch alle Phasen."
+        subheading="Von der Beratung bis zur schlüsselfertigen Übergabe – wir begleiten Ihr Projekt durch alle Phasen."
       />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="service-card">
@@ -264,7 +223,7 @@ const steps = [
             </svg>
           </div>
           <h3 class="text-lg font-semibold mb-2">Beratung & Planung</h3>
-          <p class="text-sm text-text-secondary">Potenzialanalyse, Kostenrahmen, Genehmigungsprüfung und Förderberatung – alles aus einer Hand.</p>
+          <p class="text-sm text-text-secondary">Potenzialanalyse, Kostenrahmen, HBauO 2026 Prüfung und Förderberatung – alles aus einer Hand.</p>
         </div>
         <div class="service-card">
           <div class="mb-4">
@@ -272,8 +231,8 @@ const steps = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m10 0v-2a3 3 0 00-5.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold mb-2">Fachbetriebs-Vermittlung</h3>
-          <p class="text-sm text-text-secondary">1–3 passende Angebote von qualitätsgeprüften Betrieben. Kein Spam, kein Portal – ein persönlicher Ansprechpartner.</p>
+          <h3 class="text-lg font-semibold mb-2">Alle Gewerke koordiniert</h3>
+          <p class="text-sm text-text-secondary">Ein fester Ansprechpartner. Wir koordinieren alle Handwerker – von Dachdecker bis Elektriker.</p>
         </div>
         <div class="service-card">
           <div class="mb-4">
@@ -282,7 +241,7 @@ const steps = [
             </svg>
           </div>
           <h3 class="text-lg font-semibold mb-2">Qualitätssicherung</h3>
-          <p class="text-sm text-text-secondary">Wir stehen als neutraler Ansprechpartner zur Seite – bei Fragen, Problemen oder der Abnahme.</p>
+          <p class="text-sm text-text-secondary">Saubere Ausführung, Einhaltung des Zeitplans. Wir stehen bei der Abnahme an Ihrer Seite.</p>
         </div>
         <div class="service-card">
           <div class="mb-4">
@@ -291,7 +250,7 @@ const steps = [
             </svg>
           </div>
           <h3 class="text-lg font-semibold mb-2">Genehmigungsmanagement</h3>
-          <p class="text-sm text-text-secondary">Bauantrag, Lokalbaukommission, Denkmalschutz – wir kümmern uns um die Genehmigungsphase.</p>
+          <p class="text-sm text-text-secondary">§62 HBauO 2026 Freistellung, §61 Vereinfachtes Verfahren – wir kümmern uns um die Genehmigungsphase.</p>
         </div>
         <div class="service-card">
           <div class="mb-4">
@@ -300,7 +259,7 @@ const steps = [
             </svg>
           </div>
           <h3 class="text-lg font-semibold mb-2">Förderberatung</h3>
-          <p class="text-sm text-text-secondary">KfW, BAFA, Landesförderung Bayern, Denkmalschutz-AfA – wir zeigen Ihnen alle Möglichkeiten.</p>
+          <p class="text-sm text-text-secondary">KfW 261, BAFA-Einzelmaßnahmen, §35c EStG – wir zeigen Ihnen alle Hamburger Fördermöglichkeiten.</p>
         </div>
         <div class="service-card">
           <div class="mb-4">
@@ -309,8 +268,8 @@ const steps = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold mb-2">München-Expertise</h3>
-          <p class="text-sm text-text-secondary">Spezialwissen über Münchner Stadtteile, Denkmalschutz, Lokalbaukommission und regionale Handwerkstarife.</p>
+          <h3 class="text-lg font-semibold mb-2">Hamburg-Expertise</h3>
+          <p class="text-sm text-text-secondary">Spezialwissen über Hamburger Bezirke, HBauO 2026, Denkmalschutz und regionale Handwerkstarife.</p>
         </div>
       </div>
     </Container>
@@ -325,7 +284,10 @@ const steps = [
           heading="Häufig gestellte Fragen"
           align="left"
         />
-        <FaqAccordion faqs={faqs} />
+        <FaqAccordion faqs={FAQ_DATA.slice(0, 8)} />
+        <p class="text-center mt-8">
+          <a href="/faq" class="text-primary font-semibold hover:underline">Alle 40+ Fragen zum Dachgeschossausbau in Hamburg →</a>
+        </p>
       </div>
     </Container>
   </section>
@@ -339,7 +301,7 @@ const steps = [
         </h2>
         <p class="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
           Sprechen wir über Ihr Projekt. Kostenlose Erstberatung mit konkreter
-          Erfahrung für den Münchner Markt.
+          Erfahrung für den Hamburger Markt.
         </p>
         <a href="#kontakt-formular" class="cta-primary text-lg px-10 py-4 inline-block">
           Jetzt kostenlose Beratung anfragen

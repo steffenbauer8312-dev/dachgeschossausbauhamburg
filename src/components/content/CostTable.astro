@@ -10,7 +10,7 @@ interface Props {
   rows: CostRow[];
   title?: string;
 }
-const { rows, title = 'Kostenübersicht Dachgeschossausbau München' } = Astro.props;
+const { rows, title = 'Kostenübersicht Dachgeschossausbau Hamburg' } = Astro.props;
 const formatPrice = (n: number) => `${n.toLocaleString('de-DE')} €`;
 ---
 <section class="overflow-x-auto rounded-xl border border-border">
@@ -40,6 +40,6 @@ const formatPrice = (n: number) => `${n.toLocaleString('de-DE')} €`;
     </tbody>
   </table>
   <div class="px-6 py-3 bg-bg text-xs text-text-secondary border-t border-border">
-    * Preise verstehen sich als Richtwerte für den Großraum München. Endpreis abhängig von Zustand, Statik und Ausstattung.
+    * Preise verstehen sich als Richtwerte für den Großraum Hamburg. Endpreis abhängig von Zustand, Statik und Ausstattung.
   </div>
 </section>

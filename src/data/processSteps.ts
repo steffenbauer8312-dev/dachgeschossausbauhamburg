@@ -16,7 +16,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     step: 3,
     title: 'Genehmigungsprüfung',
-    description: 'Wir prüfen, ob Ihr Vorhaben verfahrensfrei ist oder ob eine Genehmigung benötigt wird. Bei verfahrensfreien Projekten kümmern wir uns um die Anzeige an die Stadt München. Bei genehmigungspflichtigen Vorhaben bereiten wir alle Unterlagen vor.',
+    description: 'Wir prüfen, ob Ihr Vorhaben verfahrensfrei ist oder ob eine Genehmigung benötigt wird. Bei verfahrensfreien Projekten kümmern wir uns um die Anzeige an die Stadt Hamburg. Bei genehmigungspflichtigen Vorhaben bereiten wir alle Unterlagen vor.',
     duration: '2-8 Wochen (je nach Fall)',
   },
   {

@@ -4,10 +4,12 @@ import Container from '@/components/ui/Container.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import { generateServiceSchema } from '@/lib/schema';
+import { SERVICES } from '@/data/services';
 
-const pageTitle = 'Leistungen – Dachgeschossausbau München';
-const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung – wir begleiten Sie durch alle Phasen Ihres Projekts in München.';
+const pageTitle = 'Leistungen – Dachgeschossausbau Hamburg';
+const pageDescription = 'Dachgeschossausbau, Dämmung, Gauben, Innenausbau – wir begleiten Sie durch alle Phasen Ihres Projekts in Hamburg.';
 ---
+
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
@@ -15,7 +17,7 @@ const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung �
   currentPath="/leistungen/"
 >
   <JsonLdSchema schema={JSON.stringify(generateServiceSchema({
-    name: 'Dachgeschossausbau München – Leistungen',
+    name: 'Dachgeschossausbau Hamburg – Leistungen',
     description: pageDescription,
     slug: '/leistungen/',
   }))} />
@@ -25,7 +27,7 @@ const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung �
       <SectionHeader
         badge="Leistungen"
         heading="Alles aus einer Hand"
-        subheading="Von der Beratung bis zur Vermittlung – wir begleiten Sie durch alle Phasen Ihres Dachgeschossausbaus in München und Umgebung."
+        subheading="Vom ersten Gespräch bis zur schlüsselfertigen Übergabe – wir begleiten Ihr Dachgeschossprojekt in Hamburg durch alle Phasen."
       />
     </Container>
   </section>
@@ -33,65 +35,127 @@ const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung �
   <section class="py-16">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <a href="/leistungen/dachgeschossausbau-eigentuemer" class="service-card group">
+        <!-- Dachgeschossausbau -->
+        <a href="/leistungen/dachgeschossausbau" class="service-card group">
           <div class="flex items-center gap-4 mb-4">
             <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold">Dachgeschossausbau für Eigentümer</h3>
-          </div>
-          <p class="text-text-secondary mb-6">
-            Münchner Dachböden werden zu neuem Wohnraum. Schlafzimmer, Homeoffice oder Einliegerwohnung.
-            Von der Idee bis zur Schlüsselübergabe.
-          </p>
-          <span class="text-primary font-semibold text-sm group-hover:underline">Mehr erfahren →</span>
-        </a>
-
-        <a href="/leistungen/dachgeschossausbau-investoren" class="service-card group">
-          <div class="flex items-center gap-4 mb-4">
-            <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
-              <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Dachgeschossausbau</h3>
+              <p class="text-sm text-text-secondary">Komplettausbau von der Beratung bis zur Übergabe</p>
             </div>
-            <h3 class="text-xl font-bold">Dachgeschossausbau für Investoren</h3>
           </div>
-          <p class="text-text-secondary mb-6">
-            Renditestarke Investments in Münchner Dachgeschosse – von der Standortanalyse über Genehmigung bis zur steueroptimierten Umsetzung.
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Ungenutzte Dachböden werden zu vollwertigem Wohnraum. Wir koordinieren alle
+            Gewerke – Dämmung, Trockenbau, Haustechnik, Böden. Preiswerte: 800–2.500 €/m².
           </p>
-          <span class="text-secondary font-semibold text-sm group-hover:underline">Mehr erfahren →</span>
+          <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-4 group-hover:underline">
+            Mehr erfahren →
+          </span>
         </a>
 
-        <a href="/wissen/kosten-checkliste" class="service-card group">
+        <!-- Dachgauben -->
+        <a href="/leistungen/dachgauben" class="service-card group">
           <div class="flex items-center gap-4 mb-4">
             <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0L7 8l3-3m4 4l4 4M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 4h4" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold">Kosten-Checkliste</h3>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Dachgauben</h3>
+              <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube</p>
+            </div>
           </div>
-          <p class="text-text-secondary mb-6">
-            Transparente Kostenübersicht für Ihren Dachgeschossausbau in München – von Dämmung bis Malerarbeiten, inklusive Spartipps.
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Gauben bringen Licht und Stehhöhe ins Dachgeschoss. Für Hamburger Satteldächer
+            ist die Schleppgaube die erste Wahl. 8.000–25.000 € je nach Typ und Größe.
           </p>
-          <span class="text-primary font-semibold text-sm group-hover:underline">Zum Ratgeber →</span>
+          <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-4 group-hover:underline">
+            Mehr erfahren →
+          </span>
         </a>
 
-        <a href="/wissen/genehmigung-bayern" class="service-card group">
+        <!-- Dämmung -->
+        <a href="/leistungen/daemmung" class="service-card group">
           <div class="flex items-center gap-4 mb-4">
-            <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
-              <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold">Genehmigung Bayern 2025</h3>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Dachdämmung</h3>
+              <p class="text-sm text-text-secondary">GEG-konform, förderfähig durch KfW 261</p>
+            </div>
           </div>
-          <p class="text-text-secondary mb-6">
-            Bayerische Bauordnung, Lokalbaukommission, Denkmalschutz, Fledermausschutz – alle Anforderungen erklärt.
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Zwischensparren- oder Aufsparrendämmung – mit Dampfbremse und Feuchteschutz,
+            wie in Hamburg vorgeschrieben. Förderfähig nach KfW 261, BAFA und §35c EStG.
           </p>
-          <span class="text-secondary font-semibold text-sm group-hover:underline">Zum Ratgeber →</span>
+          <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-4 group-hover:underline">
+            Mehr erfahren →
+          </span>
+        </a>
+
+        <!-- Innenausbau -->
+        <a href="/leistungen/innenausbau" class="service-card group">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Innenausbau</h3>
+              <p class="text-sm text-text-secondary">Trockenbau, Elektrik, Heizung, Böden</p>
+            </div>
+          </div>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Vom Trockenbau bis zum fertigen Bad – wir bauen Ihr Dachgeschoss bezugsfertig aus.
+            Alles aus einer Hand, koordiniert von einem festen Ansprechpartner.
+          </p>
+          <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-4 group-hover:underline">
+            Mehr erfahren →
+          </span>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Prozess-Teaser -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Ablauf"
+        heading="So läuft Ihr Projekt ab"
+        subheading="Vom ersten Gespräch bis zur Schlüsselübergabe – transparent und strukturiert."
+      />
+      <div class="max-w-3xl mx-auto">
+        <a href="/prozess" class="block bg-surface rounded-2xl p-8 border border-border hover:border-primary transition-colors">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div>
+              <span class="text-3xl font-bold text-primary/20 block mb-2">01</span>
+              <p class="font-semibold text-text-primary text-sm">Kostenlose Beratung</p>
+              <p class="text-xs text-text-secondary mt-1">Vor-Ort-Termin, HBauO-Check, Kostenrahmen</p>
+            </div>
+            <div>
+              <span class="text-3xl font-bold text-primary/20 block mb-2">02</span>
+              <p class="font-semibold text-text-primary text-sm">Transparentes Angebot</p>
+              <p class="text-xs text-text-secondary mt-1">Alle Positionen aufgeschlüsselt, Zeitplan</p>
+            </div>
+            <div>
+              <span class="text-3xl font-bold text-primary/20 block mb-2">03</span>
+              <p class="font-semibold text-text-primary text-sm">Schlüsselfertig</p>
+              <p class="text-xs text-text-secondary mt-1">Alle Gewerke koordiniert, Abnahme</p>
+            </div>
+          </div>
+          <p class="text-center text-sm text-primary font-semibold mt-6 hover:underline">
+            Zum kompletten Ablauf →
+          </p>
         </a>
       </div>
     </Container>

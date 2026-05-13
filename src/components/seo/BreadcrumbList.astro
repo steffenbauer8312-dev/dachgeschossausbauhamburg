@@ -7,7 +7,7 @@ interface Props {
   items: BreadcrumbItem[];
 }
 const { items } = Astro.props;
-const schemaItems = items.map(item => ({ name: item.label, url: `https://dachgeschossausbaumuenchen.de${item.href}` }));
+const schemaItems = items.map(item => ({ name: item.label, url: `https://www.dachgeschossausbauhamburg.de${item.href}` }));
 const schemaStr = JSON.stringify(generateBreadcrumbSchema(schemaItems));
 ---
 <nav aria-label="Breadcrumb" class="mb-6">
