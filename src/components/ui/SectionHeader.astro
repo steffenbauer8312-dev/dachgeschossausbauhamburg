@@ -1,0 +1,17 @@
+---
+interface Props {
+  badge?: string;
+  heading: string;
+  subheading?: string;
+  align?: 'left' | 'center';
+  headingLevel?: 'h1' | 'h2' | 'h3';
+}
+const { badge, heading, subheading, align = 'center', headingLevel = 'h2' } = Astro.props;
+const Tag = headingLevel;
+const alignClass = align === 'center' ? 'text-center' : 'text-left';
+---
+<div class={`${alignClass} mb-12`}>
+  {badge && <span class="inline-block text-sm font-medium text-secondary mb-4">{badge}</span>}
+  <Tag class="text-3xl lg:text-4xl font-bold text-text-primary mb-4">{heading}</Tag>
+  {subheading && <p class="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">{subheading}</p>}
+</div>

@@ -1,0 +1,28 @@
+---
+interface Step {
+  number: number;
+  title: string;
+  description: string;
+}
+interface Props {
+  steps: Step[];
+  heading?: string;
+}
+const { steps, heading = 'So funktioniert es' } = Astro.props;
+---
+<section class="py-16 bg-bg">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-12 text-text-primary">{heading}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {steps.map(step => (
+        <div class="relative text-center">
+          <div class="w-14 h-14 rounded-full bg-primary text-white font-bold text-xl flex items-center justify-center mx-auto mb-6">
+            {step.number}
+          </div>
+          <h3 class="text-lg font-semibold mb-3 text-text-primary">{step.title}</h3>
+          <p class="text-text-secondary leading-relaxed">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

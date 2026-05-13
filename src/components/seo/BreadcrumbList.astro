@@ -1,0 +1,30 @@
+---
+import JsonLdSchema from './JsonLdSchema.astro';
+import type { BreadcrumbItem } from '@/lib/schema';
+import { breadcrumbSchema } from '@/lib/schema';
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+const { items } = Astro.props;
+const siteUrl = 'https://dachgeschossausbau-muenchen.de';
+const schemaStr = breadcrumbSchema(items, siteUrl);
+---
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex items-center gap-2 text-sm text-text-secondary flex-wrap">
+    <li>
+      <a href="/" class="hover:text-primary transition-colors">Startseite</a>
+    </li>
+    {items.map((item, index) => (
+      <li class="flex items-center gap-2">
+        <span class="text-border">/</span>
+        {index === items.length - 1 ? (
+          <span class="text-text-primary font-medium">{item.label}</span>
+        ) : (
+          <a href={item.href} class="hover:text-primary transition-colors">{item.label}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<JsonLdSchema schema={schemaStr} />

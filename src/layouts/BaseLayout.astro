@@ -1,0 +1,28 @@
+---
+import BaseHead from '@/components/layout/BaseHead.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  currentPath?: string;
+}
+const { title, description, ogImage, canonical, currentPath = '/' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <BaseHead {title} {description} {ogImage} {canonical} />
+</head>
+<body class="flex flex-col min-h-screen">
+  <Header currentPath={currentPath} />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

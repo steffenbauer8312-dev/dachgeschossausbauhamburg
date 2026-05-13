@@ -1,0 +1,144 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import CostTable from '@/components/content/CostTable.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { faqPageSchema, articleSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau Kosten 2026: Was kostet was? – Komplette Checkliste für München';
+const pageDescription = 'Detaillierte Kostenübersicht für Dachgeschossausbau in München: Rückbau, Dämmung, Trockenbau, Elektrik, Heizung, Bodenbelag – inklusive Spartipps und Förderung.';
+
+const articleSchemaStr = articleSchema({
+  headline: pageTitle,
+  description: pageDescription,
+  datePublished: '2026-05-13',
+  author: 'Dachgeschossausbau München',
+  url: 'https://dachgeschossausbau-muenchen.de/wissen/kosten-checkliste/',
+});
+
+const faqs = [
+  { question: 'Was kostet ein Dachgeschossausbau in München pro m²?', answer: 'Die Kosten liegen je nach Zustand und Ausstattung zwischen 500 und 1.800 €/m² Nutzfläche. Einfache Ausbauten (Dämmung, Trockenbau, Boden) starten ab 500 €/m². Komplette Sanierungen mit Bad, Elektrik und Heizung liegen bei 1.200–1.800 €/m².' },
+  { question: 'Welcher Kostenblock ist beim Dachgeschossausbau am größten?', answer: 'Die Dämmung (inkl. Trockenbau der Dachschrägen) ist typischerweise der größte Einzelposten: je nach Dämmvariante 6.000–25.000 € für ein durchschnittliches Dachgeschoss. Danach folgen Bodenaufbau und Elektrik.' },
+  { question: 'Kann ich beim Dachgeschossausbau sparen, ohne die Qualität zu gefährden?', answer: 'Ja. Sparen Sie bei den Bodenbelägen (Vinyl statt Parkett), verzichten Sie auf eine Fußbodenheizung wenn die bestehende Heizung ausreicht, und kombinieren Sie Dämmung mit einer Neueindeckung, um Kosten zu reduzieren. Nicht sparen sollten Sie bei Statik, Dämmung und Elektrik.' },
+  { question: 'Wie viel kostet ein Bad im Dachgeschoss?', answer: 'Ein vollwertiges Bad (Dusche, WC, Waschbecken, Fliesen, Sanitär) kostet im Dachgeschoss 8.000–20.000 € je nach Standard. Einfache Gäste-WCs liegen bei 4.000–8.000 €.' },
+  { question: 'Gibt es versteckte Kosten beim Dachgeschossausbau?', answer: 'Ja, häufige versteckte Kosten sind: Statik-Nachrüstung (3.000–10.000 €), Asbest-Entsorgung bei Altbauten vor 1990 (2.000–15.000 €), Fledermaus-Prüfung (500–1.500 €), Denkmalschutz-Auflagen und Nachrüstung der Elektro-Unterverteilung. Eine gründliche Voruntersuchung deckt diese Kosten frühzeitig auf.' },
+  { question: 'Wie viel Förderung kann ich für den Dachgeschossausbau erhalten?', answer: 'KfW 261 bietet bis zu 20% Zuschuss, BAFA fördert Dämmung mit 40–65 €/m² Dachfläche. Bei einem 50.000-€-Projekt sind 5.000–12.000 € an Zuschüssen realistisch. Zusätzlich ist steuerliche Abschreibung (Sanierungs-AfA oder Denkmalschutz-AfA) möglich.' },
+  { question: 'Was kostet eine Dachgaube?', answer: 'Eine Standard-Schleppdachgaube kostet ab 6.500 € (Fertiggaube), aufwändigere Gauben (Fledermausgaube, Sattelgaube) liegen bei 10.000–25.000 € inkl. Einbau. Hinzu kommen eventuelle Genehmigungskosten und Statik-Anpassungen.' },
+];
+
+const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/kosten-checkliste/');
+
+const costRows = [
+  { position: 'Rückbau & Entsorgung (Verkleidung, alte Dämmung)', einheit: 'm²', vonPreis: 20, bisPreis: 40, bemerkung: 'inkl. Bauschutt-Entsorgung' },
+  { position: 'Zwischensparrendämmung (Mineralwolle, inkl. Dampfsperre)', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 100 },
+  { position: 'Untersparrendämmung (Holzfaser, inkl. Beplankung)', einheit: 'm²', vonPreis: 30, bisPreis: 95 },
+  { position: 'Aufsparrendämmung (inkl. Neueindeckung)', einheit: 'm²', vonPreis: 100, bisPreis: 250 },
+  { position: 'Trockenbau Dachschrägen (Gipskarton, Spachteln)', einheit: 'm²', vonPreis: 40, bisPreis: 70 },
+  { position: 'Innenwände (leichte Trockenbauwand, beidseitig)', einheit: 'm² Wand', vonPreis: 80, bisPreis: 130 },
+  { position: 'Abgehängte Decke (inkl. Spots)', einheit: 'm²', vonPreis: 70, bisPreis: 120 },
+  { position: 'Bodenaufbau (Ausgleich, Trittschalldämmung, Estrich)', einheit: 'm²', vonPreis: 70, bisPreis: 140 },
+  { position: 'Bodenbelag Vinyl / Laminat (inkl. Verlegung)', einheit: 'm²', vonPreis: 40, bisPreis: 80 },
+  { position: 'Bodenbelag Parkett (inkl. Verlegung)', einheit: 'm²', vonPreis: 80, bisPreis: 120 },
+  { position: 'Elektro komplett neu (Unterverteilung, Leitungen, Dosen)', einheit: 'm² Nutzfläche', vonPreis: 80, bisPreis: 150 },
+  { position: 'Heizungsanschluss (bestehend, neue Heizkörper)', einheit: 'pauschal', vonPreis: 2000, bisPreis: 5000 },
+  { position: 'Fußbodenheizung im Estrich', einheit: 'm²', vonPreis: 70, bisPreis: 120 },
+  { position: 'Split-Klimagerät (optional)', einheit: 'pauschal', vonPreis: 3000, bisPreis: 6000 },
+  { position: 'Malerarbeiten (Grundierung, Spachteln, Streichen)', einheit: 'm² Wandfläche', vonPreis: 12, bisPreis: 25 },
+  { position: 'Fliesenarbeiten (kleines Bad / Gäste-WC)', einheit: 'm² Fläche', vonPreis: 120, bisPreis: 250 },
+  { position: 'Dachfenster manuell (Normgröße 55×78 cm)', einheit: 'Stück', vonPreis: 370, bisPreis: 450 },
+  { position: 'Dachfenster elektrisch (inkl. Montage)', einheit: 'Stück', vonPreis: 700, bisPreis: 1200 },
+  { position: 'Schleppdachgaube (Standard, mittelgroß)', einheit: 'pauschal', vonPreis: 6500, bisPreis: 12000 },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/wissen/kosten-checkliste/"
+  currentPath="/wissen/kosten-checkliste/"
+>
+  <JsonLdSchema schema={articleSchemaStr} />
+  <JsonLdSchema schema={faqSchemaStr} />
+  <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Kosten-Checkliste' }]} />
+
+  <section class="bg-bg py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-medium text-secondary mb-4">Ratgeber</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+          Dachgeschossausbau Kosten 2026:<br />Was kostet was?
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed mb-6">
+          Transparente Kostenübersicht für Ihren Dachgeschossausbau in München –
+          von der Dämmung über den Trockenbau bis zum Bodenbelag. Mit Spartipps,
+          Förderungshinweisen und realistischen Richtwerten für den Großraum München.
+        </p>
+        <a href="/kontakt" class="cta-primary">Kostenlose Beratung anfragen</a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16">
+    <Container>
+      <div class="max-w-4xl mx-auto space-y-12">
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Kostenübersicht: Alle Positionen im Detail</h2>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Die folgenden Richtwerte gelten für den Großraum München und basieren auf aktuellen Handwerkstarifen (2026). Die Preise verstehen sich inklusive Material und Arbeitsleistung – je nach gewähltem Standard und Zustand des Dachgeschosses können sie variieren.
+          </p>
+          <CostTable rows={costRows} />
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Beispiel-Kosten für ein 50-m²-Dachgeschoss</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border border-border rounded-xl overflow-hidden">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th class="px-4 py-3 text-left font-semibold">Position</th>
+                  <th class="px-4 py-3 text-right font-semibold">Kosten</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface"><td class="px-4 py-3">Rückbau & Entsorgung</td><td class="px-4 py-3 text-right">1.500–3.000 €</td></tr>
+                <tr class="bg-bg"><td class="px-4 py-3">Dämmung & Trockenbau Dachschrägen</td><td class="px-4 py-3 text-right">9.000–15.000 €</td></tr>
+                <tr class="bg-surface"><td class="px-4 py-3">Innenwände & Abhangdecke</td><td class="px-4 py-3 text-right">4.000–8.000 €</td></tr>
+                <tr class="bg-bg"><td class="px-4 py-3">Bodenaufbau & Bodenbelag</td><td class="px-4 py-3 text-right">5.000–10.000 €</td></tr>
+                <tr class="bg-surface"><td class="px-4 py-3">Elektro komplett neu</td><td class="px-4 py-3 text-right">4.000–7.500 €</td></tr>
+                <tr class="bg-bg"><td class="px-4 py-3">Heizung (Anschluss + Heizkörper)</td><td class="px-4 py-3 text-right">2.000–5.000 €</td></tr>
+                <tr class="bg-surface"><td class="px-4 py-3">Malerarbeiten</td><td class="px-4 py-3 text-right">2.000–4.000 €</td></tr>
+                <tr class="bg-bg font-semibold"><td class="px-4 py-3">Gesamt (ohne Bad)</td><td class="px-4 py-3 text-right text-primary">27.500–52.500 €</td></tr>
+                <tr class="bg-surface font-semibold"><td class="px-4 py-3">Zusätzlich: Vollbad</td><td class="px-4 py-3 text-right">15.000–30.000 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-text-secondary mt-4">
+            Mit KfW/BAFA-Förderung reduieren sich die effektiven Kosten um 5.000–12.000 €. Eine kostenlose Vor-Ort-Beratung gibt Ihnen eine exakte Einschätzung für Ihr Projekt.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Spartipps: Wo Sie Kosten reduzieren können</h2>
+          <ul class="space-y-4 text-text-secondary">
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">→</span><span><strong>Bodenbelag:</strong> Vinyl oder Laminat statt Parkett spart 40–80 €/m². Hochwertiges Vinyl ist heute kaum noch von Echtholz zu unterscheiden.</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">→</span><span><strong>Dämmung kombiniert mit Neueindeckung:</strong> Wenn das Dach ohnehin neu eingedeckt wird, ist Aufsparrendämmung die beste Option – die Kosten für Gerüst und Eindeckung fallen ohnehin an.</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">→</span><span><strong>Heizung:</strong> Wenn die bestehende Heizung ausreichend dimensioniert ist, reichen neue Heizkörper. Eine Fußbodenheizung kostet 4.000–8.000 € extra.</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">→</span><span><strong>Genehmigungsplanung:</strong> Verfahrensfreie Ausbauten (Bayern 2025) sparen Genehmigungskosten. Unsere Beratung zeigt Ihnen, welche Optionen verfahrensfrei sind.</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">→</span><span><strong>Förderung maximieren:</strong> KfW 261 + BAFA + Denkmalschutz-AfA können kombiniert werden. Nutzen Sie alle Programme – die Antragstellung ist oft einfacher als gedacht.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-primary rounded-2xl p-8 text-white text-center">
+          <h2 class="text-2xl font-bold mb-4">Kostenanalyse für Ihr Projekt</h2>
+          <p class="text-white/70 mb-6">Kostenlose Erstberatung mit realistischer Kostenschätzung – vor Ort oder per Videocall.</p>
+          <a href="/kontakt" class="cta-primary text-base">Beratung anfragen</a>
+        </div>
+
+        <FaqAccordion faqs={faqs} headingLevel="h2" />
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

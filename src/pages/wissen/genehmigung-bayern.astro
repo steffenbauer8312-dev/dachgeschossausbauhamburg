@@ -1,0 +1,137 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { faqPageSchema, articleSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau Genehmigung Bayern 2025: Was ist verfahrensfrei?';
+const pageDescription = 'Bayerische Bauordnung 2025 für Dachgeschossausbau: Verfahrensfreie Ausbauten, Bauantrag, Lokalbaukommission München, Denkmalschutz, Fledermausschutz – alles erklärt.';
+
+const articleSchemaStr = articleSchema({
+  headline: pageTitle,
+  description: pageDescription,
+  datePublished: '2026-05-13',
+  author: 'Dachgeschossausbau München',
+  url: 'https://dachgeschossausbau-muenchen.de/wissen/genehmigung-bayern/',
+});
+
+const faqs = [
+  { question: 'Welche Dachgeschossausbauten sind in Bayern 2025 verfahrensfrei?', answer: 'Seit der Bayerischen Bauordnung 2025 sind Ausbauten zu Wohnzwecken verfahrensfrei, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes nicht verändert werden. Das betrifft Dämmung, Innenausbau, Bodenbelag und die Nutzungsänderung von Speicher zu Wohnraum. Gauben, Aufstockungen und Veränderungen der Gebäudesilhouette sind weiterhin genehmigungspflichtig.' },
+  { question: 'Wann brauche ich einen Bauantrag für den Dachgeschossausbau?', answer: 'Ein Bauantrag ist nötig bei: Einbau von Dachgauben, Aufstockungen, Erweiterung der Dachfläche, Nutzungsänderungen, Eingriffen in die Tragwerkskonstruktion und bei denkmalgeschützten Gebäuden. Der Antrag wird bei der Lokalbaukommission München (LBK) eingereicht.' },
+  { question: 'Muss ich die Lokalbaukommission informieren, auch wenn der Ausbau verfahrensfrei ist?', answer: 'Ja. Verfahrensfreie Dachgeschossausbauten sind der Lokalbaukommission München (LBK) zwei Wochen vor Baubeginn in Textform anzuzeigen. Dies gilt als Formalie und ist in der Regel unkompliziert.' },
+  { question: 'Was ist die Fledermaus-Prüfung und muss ich sie machen?', answer: 'In München ist vor jedem Dachgeschossausbau zu prüfen, ob das Dach als Lebensraum für Fledermäuse dient. Das Referat für Klima und Umweltschutz (RKU) muss kontaktiert werden (naturschutz.rku@muenchen.de), wenn Fledermaus-Nachweis vorliegt. Dies ist eine gesetzliche Pflicht und kann den Zeitplan beeinflussen.' },
+  { question: 'Welche Rolle spielt der Denkmalschutz bei der Genehmigung?', answer: 'Bei denkmalgeschützten Gebäuden ist die Untere Denkmalschutzbehörde in den Genehmigungsprozess einzubeziehen. Auflagen können Materialien, Farben, Gaubenform und Fensterteilung betreffen. Die Abstimmung sollte frühzeitig erfolgen, um Verzögerungen zu vermeiden.' },
+  { question: 'Wie lange dauert die Genehmigung bei der Lokalbaukommission München?', answer: 'Die Bearbeitungszeit variiert je nach Komplexität. Einfache Anträge (verfahrensfreie Anzeige) sind in 2–4 Wochen abgeschlossen. Bauanträge für Gauben oder Nutzungsänderungen können 8–16 Wochen Bearbeitungszeit haben. Bei denkmalgeschützten Gebäuden kann es länger dauern.' },
+  { question: 'Brauche ich einen Architekten für den Bauantrag?', answer: 'Für verfahrensfreie Ausbauten ist kein Architekt nötig. Für Bauanträge mit Gauben, Nutzungsänderungen oder bei denkmalgeschützten Gebäuden ist ein bauvorlageberechtigter Architekt oder Ingenieur erforderlich. Wir vermitteln Ihnen qualitätsgeprüfte Architekten aus unserem Netzwerk.' },
+];
+
+const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/genehmigung-bayern/');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/wissen/genehmigung-bayern/"
+  currentPath="/wissen/genehmigung-bayern/"
+>
+  <JsonLdSchema schema={articleSchemaStr} />
+  <JsonLdSchema schema={faqSchemaStr} />
+  <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Genehmigung Bayern' }]} />
+
+  <section class="bg-bg py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-medium text-secondary mb-4">Ratgeber</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+          Dachgeschossausbau Genehmigung Bayern 2025
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed mb-6">
+          Die neue Bayerische Bauordnung hat den Dachgeschossausbau in Bayern vereinfacht.
+          Doch welche Ausbauten sind tatsächlich verfahrensfrei, wann brauchen Sie einen
+          Bauantrag, und was müssen Sie bei Denkmalschutz und Fledermausschutz beachten?
+        </p>
+        <a href="/kontakt" class="cta-primary">Genehmigung prüfen lassen</a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl space-y-12">
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Bayerische Bauordnung 2025: Was hat sich geändert?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Die Novelle der Bayerischen Bauordnung, die im Januar 2025 in Kraft getreten ist, hat den Dachgeschossausbau erheblich erleichtert. Das Ziel: Wohnraumschaffung im Bestand fördern und Bürokratie abbauen.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong>Die wichtigste Änderung:</strong> Ausbauten zu Wohnzwecken sind nun verfahrensfrei, wenn die Dachkonstruktion und die äußere Gestalt des Gebäudes im Übrigen nicht verändert werden. Das bedeutet: Sie können Ihr Dachgeschoss ausbauen, ohne einen Bauantrag zu stellen – vorausgesetzt, Sie verändern keine Gauben, Aufstockungen oder die Gebäudesilhouette.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Verfahrensfrei oder genehmigungspflichtig?</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface border border-border rounded-xl p-6">
+              <h3 class="font-semibold text-primary mb-3">✓ Verfahrensfrei (kein Bauantrag)</h3>
+              <ul class="space-y-2 text-sm text-text-secondary">
+                <li>• Dämmung und Innenausbau ohne Außenveränderung</li>
+                <li>• Einbau von Trockenbauwänden und Böden</li>
+                <li>• Elektrik, Heizung, Sanitär im Innenbereich</li>
+                <li>• Nutzungsänderung Speicher zu Wohnraum (ohne Außenveränderung)</li>
+                <li>• Fenstereinbau in bestehende Dachflächen</li>
+              </ul>
+              <p class="text-xs text-text-secondary mt-4">Meldepflicht: 2 Wochen vor Baubeginn bei der LBK</p>
+            </div>
+            <div class="bg-surface border border-border rounded-xl p-6">
+              <h3 class="font-semibold text-secondary mb-3">✗ Genehmigungspflichtig (Bauantrag)</h3>
+              <ul class="space-y-2 text-sm text-text-secondary">
+                <li>• Einbau von Dachgauben (jede Form)</li>
+                <li>• Aufstockung oder Erweiterung der Dachfläche</li>
+                <li>• Veränderung der Gebäudesilhouette</li>
+                <li>• Eingriff in die Tragwerkskonstruktion (Statik)</li>
+                <li>• Veränderungen an denkmalgeschützten Gebäuden</li>
+              </ul>
+              <p class="text-xs text-text-secondary mt-4">Bauantrag bei der Lokalbaukommission München</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Besonderheit München: Fledermausschutz</h2>
+          <p class="text-text-secondary leading-relaxed">
+            München ist die einzige deutsche Großstadt mit einem relevanten Fledermausvorkommen in innerstädtischen Gebäuden. Das Referat für Klima und Umweltschutz (RKU) muss vor jedem Dachgeschossausbau kontaktiert werden, wenn das Dach als Lebensraum für Fledermäuse genutzt wird.
+          </p>
+          <div class="bg-accent/10 border border-accent/20 rounded-xl p-6 mt-4">
+            <p class="text-sm font-semibold text-accent mb-2">Pflicht vor jedem Ausbau</p>
+            <p class="text-sm text-text-secondary">
+              Kontakt: <a href="mailto:naturschutz.rku@muenchen.de" class="underline">naturschutz.rku@muenchen.de</a><br />
+              Frühzeitige Prüfung vermeidet Baustopp während der Bauphase.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Denkmalschutz in München</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Für denkmalgeschützte Gebäude gelten zusätzliche Auflagen. Die Untere Denkmalschutzbehörde und das Bayerische Landesamt für Denkmalpflege (BLfD) müssen in den Genehmigungsprozess eingebunden werden.
+          </p>
+          <ul class="space-y-3 mt-4 text-text-secondary">
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Typische Auflagen:</strong> Materialien (Ziegel, Schiefer), Farben, Gaubenform, Fensterteilung, Firstgestaltung</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Vorteil:</strong> Denkmalschutz-AfA (§7i EStG) – steuerliche Abschreibung über 12 Jahre</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Frühzeitige Abstimmung:</strong> Planung mit Denkmalschutz-Abstimmung beginnen, um Verzögerungen zu vermeiden</span></li>
+          </ul>
+        </div>
+
+        <FaqAccordion faqs={faqs} headingLevel="h2" />
+
+        <div class="bg-primary rounded-2xl p-8 text-center text-white">
+          <h2 class="text-2xl font-bold mb-4">Genehmigung für Ihr Projekt prüfen</h2>
+          <p class="text-white/70 mb-6">Kostenlose Ersteinschätzung: Verfahrensfrei oder Bauantrag nötig?</p>
+          <a href="/kontakt" class="cta-primary text-base">Beratung anfragen</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

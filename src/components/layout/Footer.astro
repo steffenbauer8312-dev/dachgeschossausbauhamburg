@@ -1,0 +1,45 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer class="bg-primary text-white/80 mt-24">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Brand -->
+      <div>
+        <p class="text-white font-bold text-lg mb-4">Dachgeschossausbau München</p>
+        <p class="text-sm leading-relaxed">
+          Professionelle Vermittlung von Dachgeschossausbau-Projekten in München
+          und Umgebung. Für Eigentümer kostenfrei.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <p class="text-white font-semibold mb-4">Navigation</p>
+        <ul class="space-y-3 text-sm">
+          <li><a href="/" class="hover:text-white transition-colors">Startseite</a></li>
+          <li><a href="/leistungen" class="hover:text-white transition-colors">Leistungen</a></li>
+          <li><a href="/wissen" class="hover:text-white transition-colors">Ratgeber</a></li>
+          <li><a href="/kontakt" class="hover:text-white transition-colors">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <p class="text-white font-semibold mb-4">Rechtliches</p>
+        <ul class="space-y-3 text-sm">
+          <li><a href="/impressum" class="hover:text-white transition-colors">Impressum</a></li>
+          <li><a href="/datenschutz" class="hover:text-white transition-colors">Datenschutz</a></li>
+        </ul>
+        <p class="text-xs mt-6 text-white/60 leading-relaxed">
+          Wir vermitteln Projekte an qualitätsgeprüfte Fachbetriebe im Raum München.
+          Für Eigentümer und Investoren entstehen keine zusätzlichen Kosten.
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/20 mt-12 pt-8 text-center text-sm text-white/50">
+      © {currentYear} Dachgeschossausbau München – Alle Rechte vorbehalten
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,365 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import CostTable from '@/components/content/CostTable.astro';
+import StepsOverview from '@/components/content/StepsOverview.astro';
+import TrustSignals from '@/components/content/TrustSignals.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { localBusinessSchema, serviceSchema, faqPageSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau München – Professionell vermittelt, schlüsselfertig umgesetzt';
+const pageDescription = 'Ihr Partner für Dachgeschossausbau in München: Wir vermitteln qualitätsgeprüfte Fachbetriebe – für Eigentümer kostenfrei. Beratung, Planung, Genehmigung.';
+
+const localSchema = localBusinessSchema({
+  name: 'Dachgeschossausbau München',
+  description: 'Professionelle Vermittlung von Dachgeschossausbau-Projekten in München und Umgebung.',
+  url: 'https://dachgeschossausbau-muenchen.de',
+  telephone: '+49 89 12345678',
+  email: 'info@dachgeschossausbau-muenchen.de',
+  address: {
+    streetAddress: 'Beispielstraße 1',
+    addressLocality: 'München',
+    postalCode: '80331',
+    addressCountry: 'DE',
+  },
+  priceRange: '€€',
+});
+
+const serviceSchemaStr = serviceSchema({
+  name: 'Dachgeschossausbau München',
+  description: 'Vermittlung qualitätsgeprüfter Fachbetriebe für Dachgeschossausbau in München – von der Beratung bis zur Umsetzung.',
+  provider: 'Dachgeschossausbau München',
+  areaServed: 'München',
+  url: 'https://dachgeschossausbau-muenchen.de',
+});
+
+const faqs = [
+  {
+    question: 'Was kostet ein Dachgeschossausbau in München?',
+    answer: 'Die Kosten für einen Dachgeschossausbau in München liegen je nach Zustand, Ausstattung und ob ein Bad integriert wird, zwischen 500 und 1.800 €/m² Nutzfläche. Eine komplette Sanierung eines 50-m²-Dachgeschosses bewegt sich typischerweise in einer Spanne von 40.000–90.000 €. Entscheidend für den genauen Preis ist der Zustand der Bausubstanz, die Statik und ob das Dach neu eingedeckt werden muss. Eine kostenlose Vor-Ort-Beratung gibt Ihnen eine realistische Einschätzung.',
+  },
+  {
+    question: 'Brauche ich eine Genehmigung für den Dachgeschossausbau in Bayern?',
+    answer: 'Seit der Bayerischen Bauordnung 2025 sind bestimmte Dachgeschossausbauten verfahrensfrei – vorausgesetzt, die Dachkonstruktion und die äußere Gestalt des Gebäudes werden nicht verändert. Wenn Gauben, Aufstockungen oder Nutzungsänderungen geplant sind, ist in der Regel ein Bauantrag bei der Lokalbaukommission München nötig. Wir begleiten Sie durch den gesamten Genehmigungsprozess.',
+  },
+  {
+    question: 'Welche Förderungen gibt es für den Dachgeschossausbau in München?',
+    answer: 'Für energetische Maßnahmen beim Dachgeschossausbau gibt es KfW-Zuschüsse (bis zu 20% der Kosten), BAFA-Einzelmaßnahmen-Zuschüsse sowie Landesförderung Bayern. Auch steuerliche Abschreibungsmöglichkeiten (Denkmalschutz-AfA, Sanierungs-AfA) können genutzt werden. Wir beraten Sie kostenlos zu allen Förderoptionen.',
+  },
+  {
+    question: 'Ist die Vermittlung für mich als Eigentümer wirklich kostenfrei?',
+    answer: 'Ja. Die Vermittlungsleistung wird von den vermittelten Fachbetrieben getragen – für Sie als Eigentümer oder Investor entstehen keine zusätzlichen Kosten. Sie zahlen ausschließlich direkt an den ausführenden Betrieb. Transparenz und keine versteckten Gebühren sind unser Grundsatz.',
+  },
+  {
+    question: 'Wie lange dauert ein Dachgeschossausbau in München?',
+    answer: 'Die reine Bauzeit beträgt je nach Umfang 6–16 Wochen. Hinzu kommt die Planungs- und Genehmigungsphase (4–12 Wochen), abhängig davon, ob ein Bauantrag nötig ist. Bei verfahrensfreien Ausbauten kann das Gesamtprojekt in 8–16 Wochen abgeschlossen sein.',
+  },
+  {
+    question: 'Was passiert mit Fledermäusen oder Denkmalschutz im Dachgeschoss?',
+    answer: 'In München ist vor jedem Dachgeschossausbau zu prüfen, ob das Dach als Lebensraum für Fledermäuse dient. Ist das der Fall, muss das Referat für Klima und Umweltschutz kontaktiert werden. Bei denkmalgeschützten Gebäuden ist eine frühzeitige Abstimmung mit der Unteren Denkmalschutzbehörde und dem Bayerischen Landesamt für Denkmalpflege nötig – wir begleiten Sie dabei.',
+  },
+  {
+    question: 'Welche Dämmung ist für ein Dachgeschoss in München vorgeschrieben?',
+    answer: 'Das Gebäudeenergiegesetz (GEG) schreibt für ausgebaute Wohnräume im Dachgeschoss eine Dämmung vor, die den aktuellen Anforderungen entspricht. Je nach Dachkonstruktion kommen Zwischensparrendämmung (ab ca. 60–100 €/m² Dachfläche), Untersparrendämmung (ab ca. 30–95 €/m²) oder Aufsparrendämmung (ab ca. 100–250 €/m² inkl. Neueindeckung) infrage.',
+  },
+  {
+    question: 'Können Sie mir helfen, wenn ich ein denkmalgeschütztes Dachgeschoss ausbauen möchte?',
+    answer: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden in München. Wir kennen die typischen Auflagen (Materialien, Gaubenform, Fensterteilung) und wissen, wie die Abstimmung mit der Denkmalschutzbehörde abläuft. Steuerliche Abschreibungsmöglichkeiten über die Denkmalschutz-AfA machen solche Projekte besonders attraktiv.',
+  },
+  {
+    question: 'Ich bin Investor – lohnen sich Dachgeschossausbauten in München?',
+    answer: 'Der Münchner Immobilienmarkt bietet eine hohe Nachfrage nach Wohnraum, insbesondere in zentralen Lagen. Die Quadratmeterpreise liegen deutlich über den Ausbaukosten, was ein erhebliches Wertsteigerungspotenzial bietet. Mit der richtigen Planung (Nutzungsänderung, Genehmigung, Steueroptimierung) ist der Dachgeschossausbau für Investoren eine der renditestärksten Immobilienstrategien in München.',
+  },
+  {
+    question: 'Wie finde ich den richtigen Fachbetrieb für meinen Dachgeschossausbau?',
+    answer: 'Wir haben ein Netzwerk aus qualitätsgeprüften Fachbetrieben, die nachweislich Erfahrung im Dachgeschossausbau in München haben – von Architekten über Dachdecker bis zu Trockenbauern. Sie erhalten 1–3 passende Angebote statt 10-fach-Spam. So finden Sie schnell den richtigen Partner für Ihr Projekt.',
+  },
+];
+
+const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de');
+
+const costRows = [
+  { position: 'Rückbau & Entsorgung', einheit: 'm²', vonPreis: 30, bisPreis: 65, bemerkung: 'inkl. Bauschutt-Entsorgung' },
+  { position: 'Dämmung (Zwischensparren)', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 100 },
+  { position: 'Trockenbau Dachschrägen', einheit: 'm²', vonPreis: 40, bisPreis: 70 },
+  { position: 'Innenwände (Trockenbau)', einheit: 'm² Wand', vonPreis: 80, bisPreis: 130 },
+  { position: 'Bodenaufbau (Estrich + Belag)', einheit: 'm²', vonPreis: 70, bisPreis: 140 },
+  { position: 'Elektro komplett neu', einheit: 'm² Nutzfläche', vonPreis: 80, bisPreis: 150 },
+  { position: 'Heizung (Anschluss + Heizkörper)', einheit: 'pauschal', vonPreis: 2000, bisPreis: 5000, bemerkung: 'ohne Fußbodenheizung' },
+  { position: 'Malerarbeiten', einheit: 'm² Wandfläche', vonPreis: 12, bisPreis: 25 },
+];
+
+const steps = [
+  {
+    number: 1,
+    title: 'Kostenlose Erstberatung',
+    description: 'Im unverbindlichen Gespräch klären wir Ihr Projekt: Potenzial, Kostenrahmen, Genehmigungsfragen. Vor Ort oder per Videocall.',
+  },
+  {
+    number: 2,
+    title: 'Passende Fachbetriebe',
+    description: 'Basierend auf Ihrem Projekt – ob Altbau, Denkmal oder Neubau – wählen wir 1–3 qualitätsgeprüfte Betriebe aus unserem Netzwerk aus.',
+  },
+  {
+    number: 3,
+    title: 'Angebot & Umsetzung',
+    description: 'Sie erhalten transparente Angebote direkt von den Betrieben. Wir begleiten die Umsetzung und stehen als Ansprechpartner zur Seite.',
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/"
+  currentPath="/"
+>
+  <JsonLdSchema schema={localSchema} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={faqSchemaStr} />
+
+  <!-- Hero -->
+  <section class="bg-bg py-20 lg:py-32">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-medium text-secondary mb-6">
+            München · Bayern · 2026
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight mb-6">
+            Dachgeschossausbau<br />
+            <span class="text-primary">München</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl">
+            Sie möchten Ihren Dachboden ausbauen? Wir vermitteln Sie an
+            qualitätsgeprüfte Fachbetriebe in München – kostenfrei, transparent,
+            professionell. Von der Beratung bis zur Schlüsselübergabe.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a href="#kontakt-formular" class="cta-primary text-center">
+              Kostenlose Beratung anfragen
+            </a>
+            <a href="/leistungen/dachgeschossausbau-eigentuemer" class="btn-ghost text-center">
+              Mehr erfahren
+            </a>
+          </div>
+          <TrustSignals compact={true} />
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28">
+          <LeadGenForm variant="eigentuemer" />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- So funktioniert's -->
+  <StepsOverview steps={steps} />
+
+  <!-- Für wen wir da sind -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Zielgruppen"
+        heading="Für wen wir da sind"
+        subheading="Egal ob Eigenheim oder Investment – wir haben den passenden Ansprechpartner und das passende Fachbetriebs-Netzwerk."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Eigentümer -->
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Eigentümer</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Sie möchten Ihren Dachboden in Wohnraum verwandeln – als zusätzliches
+            Zimmer, Homeoffice oder Einliegerwohnung? Wir begleiten Sie von der ersten
+            Idee über die Genehmigung bis zur Umsetzung.
+          </p>
+          <ul class="space-y-2 text-sm text-text-secondary mb-6">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Kostenlose Erstberatung
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Bayern 2025 Genehmigungsberatung
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              KfW/BAFA Förderberatung
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Denkmalschutz-Kompetenz
+            </li>
+          </ul>
+          <a href="/leistungen/dachgeschossausbau-eigentuemer" class="text-primary font-semibold text-sm hover:underline inline-flex items-center gap-1">
+            Mehr erfahren →
+          </a>
+        </div>
+
+        <!-- Investoren -->
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Investoren</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Sie sehen Potenzial in Münchner Dachgeschossen? Wir liefern Ihnen die
+            Expertise für renditestarke Dachgeschossausbau-Investments – von der
+            Standortanalyse bis zur steueroptimierten Umsetzung.
+          </p>
+          <ul class="space-y-2 text-sm text-text-secondary mb-6">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Standort- und Marktanalyse München
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Genehmigungsstrategie Nutzungsänderung
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Steuerliche Abschreibung (Denkmalschutz-AfA)
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              KfW/BAFA Finanzierungsberatung
+            </li>
+          </ul>
+          <a href="/leistungen/dachgeschossausbau-investoren" class="text-secondary font-semibold text-sm hover:underline inline-flex items-center gap-1">
+            Mehr erfahren →
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Kosten-Überblick -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Kosten"
+        heading="Was kostet ein Dachgeschossausbau in München?"
+        subheading="Richtwerte für den Großraum München. Der genaue Preis hängt von Zustand, Statik und gewünschtem Ausstattungsstandard ab."
+      />
+      <div class="max-w-4xl mx-auto">
+        <CostTable rows={costRows} />
+      </div>
+      <p class="text-center text-sm text-text-secondary mt-6">
+        Sie möchten eine detaillierte Kostenanalyse für Ihr Projekt?
+        <a href="#kontakt-formular" class="text-primary font-semibold hover:underline">Kostenlose Beratung anfragen →</a>
+      </p>
+    </Container>
+  </section>
+
+  <!-- Leistungen Überblick -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Leistungen"
+        heading="Was wir für Sie tun"
+        subheading="Von der Beratung bis zur Vermittlung – wir begleiten Ihr Projekt durch alle Phasen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Beratung & Planung</h3>
+          <p class="text-sm text-text-secondary">Potenzialanalyse, Kostenrahmen, Genehmigungsprüfung und Förderberatung – alles aus einer Hand.</p>
+        </div>
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m10 0v-2a3 3 0 00-5.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Fachbetriebs-Vermittlung</h3>
+          <p class="text-sm text-text-secondary">1–3 passende Angebote von qualitätsgeprüften Betrieben. Kein Spam, kein Portal – ein persönlicher Ansprechpartner.</p>
+        </div>
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Qualitätssicherung</h3>
+          <p class="text-sm text-text-secondary">Wir stehen als neutraler Ansprechpartner zur Seite – bei Fragen, Problemen oder der Abnahme.</p>
+        </div>
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Genehmigungsmanagement</h3>
+          <p class="text-sm text-text-secondary">Bauantrag, Lokalbaukommission, Denkmalschutz – wir kümmern uns um die Genehmigungsphase.</p>
+        </div>
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Förderberatung</h3>
+          <p class="text-sm text-text-secondary">KfW, BAFA, Landesförderung Bayern, Denkmalschutz-AfA – wir zeigen Ihnen alle Möglichkeiten.</p>
+        </div>
+        <div class="service-card">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">München-Expertise</h3>
+          <p class="text-sm text-text-secondary">Spezialwissen über Münchner Stadtteile, Denkmalschutz, Lokalbaukommission und regionale Handwerkstarife.</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Fragen & Antworten"
+          heading="Häufig gestellte Fragen"
+          align="left"
+        />
+        <FaqAccordion faqs={faqs} />
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20">
+    <Container>
+      <div class="bg-primary rounded-2xl p-12 lg:p-16 text-center text-white">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+          Bereit für Ihren Dachgeschossausbau?
+        </h2>
+        <p class="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          Lassen Sie uns gemeinsam Ihr Projekt besprechen – kostenlos,
+          unverbindlich, mit ehrlicher Expertise für den Münchner Markt.
+        </p>
+        <a href="#kontakt-formular" class="cta-primary text-lg px-10 py-4 inline-block">
+          Jetzt kostenlose Beratung anfragen
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

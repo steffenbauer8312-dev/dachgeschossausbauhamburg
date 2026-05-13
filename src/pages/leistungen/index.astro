@@ -1,0 +1,100 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { serviceSchema } from '@/lib/schema';
+
+const pageTitle = 'Leistungen – Dachgeschossausbau München';
+const pageDescription = 'Dachgeschossausbau, Dämmung, Genehmigung, Förderung – wir begleiten Sie durch alle Phasen Ihres Projekts in München.';
+---
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/"
+  currentPath="/leistungen/"
+>
+  <JsonLdSchema schema={serviceSchema({
+    name: 'Dachgeschossausbau München – Leistungen',
+    description: pageDescription,
+    provider: 'Dachgeschossausbau München',
+    areaServed: 'München',
+    url: 'https://dachgeschossausbau-muenchen.de/leistungen/',
+  })} />
+
+  <section class="bg-bg py-20">
+    <Container>
+      <SectionHeader
+        badge="Leistungen"
+        heading="Alles aus einer Hand"
+        subheading="Von der Beratung bis zur Vermittlung – wir begleiten Sie durch alle Phasen Ihres Dachgeschossausbaus in München und Umgebung."
+      />
+    </Container>
+  </section>
+
+  <section class="py-16">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <a href="/leistungen/dachgeschossausbau-eigentuemer" class="service-card group">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold">Dachgeschossausbau für Eigentümer</h3>
+          </div>
+          <p class="text-text-secondary mb-6">
+            Ihr Dachboden wird zum neuen Wohnraum – Schlafzimmer, Homeoffice, Kinderzimmer oder Einliegerwohnung. Wir begleiten Sie von der Idee bis zur Schlüsselübergabe.
+          </p>
+          <span class="text-primary font-semibold text-sm group-hover:underline">Mehr erfahren →</span>
+        </a>
+
+        <a href="/leistungen/dachgeschossausbau-investoren" class="service-card group">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+              <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold">Dachgeschossausbau für Investoren</h3>
+          </div>
+          <p class="text-text-secondary mb-6">
+            Renditestarke Investments in Münchner Dachgeschosse – von der Standortanalyse über Genehmigung bis zur steueroptimierten Umsetzung.
+          </p>
+          <span class="text-secondary font-semibold text-sm group-hover:underline">Mehr erfahren →</span>
+        </a>
+
+        <a href="/wissen/kosten-checkliste" class="service-card group">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold">Kosten-Checkliste</h3>
+          </div>
+          <p class="text-text-secondary mb-6">
+            Transparente Kostenübersicht für Ihren Dachgeschossausbau in München – von Dämmung bis Malerarbeiten, inklusive Spartipps.
+          </p>
+          <span class="text-primary font-semibold text-sm group-hover:underline">Zum Ratgeber →</span>
+        </a>
+
+        <a href="/wissen/genehmigung-bayern" class="service-card group">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+              <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold">Genehmigung Bayern 2025</h3>
+          </div>
+          <p class="text-text-secondary mb-6">
+            Bayerische Bauordnung, Lokalbaukommission, Denkmalschutz, Fledermausschutz – alle Anforderungen erklärt.
+          </p>
+          <span class="text-secondary font-semibold text-sm group-hover:underline">Zum Ratgeber →</span>
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

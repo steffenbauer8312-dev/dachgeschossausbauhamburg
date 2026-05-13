@@ -1,0 +1,177 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { localBusinessSchema } from '@/lib/schema';
+
+const pageTitle = 'Kontakt – Dachgeschossausbau München';
+const pageDescription = 'Kostenlose Erstberatung für Ihren Dachgeschossausbau in München. Kontaktieren Sie uns unverbindlich – wir melden uns innerhalb von 24 Stunden.';
+
+const schema = localBusinessSchema({
+  name: 'Dachgeschossausbau München',
+  description: pageDescription,
+  url: 'https://dachgeschossausbau-muenchen.de/kontakt',
+  telephone: '+49 89 12345678',
+  email: 'info@dachgeschossausbau-muenchen.de',
+  address: {
+    streetAddress: 'Beispielstraße 1',
+    addressLocality: 'München',
+    postalCode: '80331',
+    addressCountry: 'DE',
+  },
+  priceRange: '€€',
+});
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/kontakt/"
+  currentPath="/kontakt/"
+>
+  <JsonLdSchema schema={schema} />
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-xl mx-auto">
+        <SectionHeader
+          badge="Kontakt"
+          heading="Kostenlose Erstberatung anfragen"
+          subheading="Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden."
+        />
+
+        <!-- Leadgen-Formular -->
+        <div class="bg-surface rounded-2xl border border-border p-8 mb-12">
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            id="leadgen-form"
+            class="space-y-5"
+          >
+            <input type="hidden" name="access_key" value="DEIN_WEB3FORMS_KEY" />
+            <input type="hidden" name="subject" value="Kontaktanfrage – dachgeschossausbau-muenchen.de" />
+
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2 text-text-primary">Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Max Mustermann" />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2 text-text-primary">E-Mail *</label>
+              <input type="email" id="email" name="email" required placeholder="ihre@email.de" />
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium mb-2 text-text-primary">Telefon</label>
+              <input type="tel" id="phone" name="phone" placeholder="+49 89 12345678" />
+            </div>
+
+            <div>
+              <label for="project_type" class="block text-sm font-medium mb-2 text-text-primary">Projekttyp *</label>
+              <select id="project_type" name="project_type" required>
+                <option value="">Bitte wählen…</option>
+                <option value="eigentuemer-einfach">Einfacher Ausbau (Dämmung, Boden, Ausbau)</option>
+                <option value="eigentuemer-wohnung">Wohnung im Dachgeschoss (inkl. Bad, Elektrik)</option>
+                <option value="eigentuemer-aufstockung">Aufstockung oder Dachgaube</option>
+                <option value="investor-mehrfamilien">Investor: Mehrfamilienhaus-Dachgeschoss</option>
+                <option value="investor-gewerbe">Investor: Gewerbeumwandlung</option>
+                <option value="denkmal">Denkmalgeschütztes Gebäude</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2 text-text-primary">Ihre Nachricht</label>
+              <textarea id="message" name="message" rows="4" placeholder="Beschreiben Sie kurz Ihr Projekt oder Ihre Frage…" class="resize-none"></textarea>
+            </div>
+
+            <p class="text-xs text-text-secondary">
+              Mit dem Absenden stimmen Sie unserer
+              <a href="/datenschutz" class="underline hover:text-text-primary">Datenschutzerklärung</a> zu.
+            </p>
+
+            <button type="submit" class="cta-primary w-full text-base" id="form-submit">
+              <span id="btn-text">Anfrage senden</span>
+              <span id="btn-loading" class="hidden items-center gap-2">
+                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                </svg>
+                Wird gesendet…
+              </span>
+            </button>
+
+            <div id="form-success" class="hidden text-center py-6">
+              <svg class="w-12 h-12 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <p class="font-semibold text-lg text-text-primary">Danke für Ihre Anfrage!</p>
+              <p class="text-text-secondary text-sm mt-2">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+            </div>
+
+            <div id="form-error" class="hidden text-center py-4 text-sm text-red-600">
+              Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.
+            </div>
+          </form>
+        </div>
+
+        <!-- Alternativer Kontakt -->
+        <div class="text-center space-y-4">
+          <div>
+            <p class="text-sm font-semibold text-text-primary mb-1">Oder schreiben Sie uns direkt:</p>
+            <a href="mailto:info@dachgeschossausbau-muenchen.de" class="text-primary hover:underline text-lg">
+              info@dachgeschossausbau-muenchen.de
+            </a>
+          </div>
+
+          <div class="border-t border-border pt-8">
+            <p class="text-sm text-text-secondary max-w-md mx-auto leading-relaxed">
+              <strong class="text-text-primary">Transparente Vermittlung</strong><br />
+              Für Eigentümer und Investoren entstehen keine zusätzlichen Kosten.
+              Unsere Vermittlungsleistung wird von den vermittelten Fachbetrieben getragen.
+              Sie zahlen ausschließlich direkt an den ausführenden Betrieb.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('leadgen-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('form-submit') as HTMLButtonElement | null;
+  const btnText = document.getElementById('btn-text') as HTMLElement | null;
+  const btnLoading = document.getElementById('btn-loading') as HTMLElement | null;
+  const successEl = document.getElementById('form-success') as HTMLElement | null;
+  const errorEl = document.getElementById('form-error') as HTMLElement | null;
+
+  if (form && submitBtn && btnText && btnLoading && successEl && errorEl) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      btnLoading.classList.add('flex');
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.classList.add('hidden');
+          successEl.classList.remove('hidden');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        errorEl.classList.remove('hidden');
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>

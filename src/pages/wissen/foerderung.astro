@@ -1,0 +1,152 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { faqPageSchema, articleSchema } from '@/lib/schema';
+
+const pageTitle = 'Förderung Dachgeschossausbau 2026: KfW, BAFA, Bayern – Alle Möglichkeiten';
+const pageDescription = 'KfW 261, BAFA, Landesförderung Bayern, Denkmalschutz-AfA: Alle Fördermittel für Ihren Dachgeschossausbau in München – inklusive Antragstipps und Kombinationsstrategien.';
+
+const articleSchemaStr = articleSchema({
+  headline: pageTitle,
+  description: pageDescription,
+  datePublished: '2026-05-13',
+  author: 'Dachgeschossausbau München',
+  url: 'https://dachgeschossausbau-muenchen.de/wissen/foerderung/',
+});
+
+const faqs = [
+  { question: 'Welche KfW-Förderung gibt es für den Dachgeschossausbau?', answer: 'KfW 261 (Wohneigentumsprogramm) fördert energetische Sanierungen mit Tilgungszuschüssen bis zu 20% der Kosten. Bis zu 150.000 € pro Vorhaben. Auch für Vermietungsobjekte nutzbar, sofern die energetischen Anforderungen erfüllt werden.' },
+  { question: 'Was fördert das BAFA beim Dachgeschossausbau?', answer: 'Das BAFA fördert Einzelmaßnahmen zur Sanierung: Dämmung (40–65 €/m² Dachfläche), Fenster, Türen, Heizung. Die Förderung beträgt 15% der Kosten und kann mit der KfW kombiniert werden.' },
+  { question: 'Kann ich KfW und BAFA gleichzeitig nutzen?', answer: 'Ja, KfW und BAFA können kombiniert werden. Sie sind auf unterschiedliche Maßnahmen anwendbar (KfW für das Gesamtprojekt, BAFA für Einzelmaßnahmen) und addieren sich nicht auf dieselbe Position. Zusätzlich ist steuerliche Abschreibung möglich.' },
+  { question: 'Was ist die Denkmalschutz-AfA und wie nutze ich sie?', answer: 'Die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) erlaubt bei denkmalgeschützten Gebäuden eine Abschreibung von 100% der Herstellungskosten über 12 Jahre (9 Jahre je 9%, 3 Jahre je 7%). Für ein 80.000-€-Projekt ergibt das eine Steuerersparnis von ca. 40.000 € (bei 42% Steuersatz).' },
+  { question: 'Gibt es bayerische Landesförderung für den Dachgeschossausbau?', answer: 'Ja, die Bayerische Landesförderbank (LfA) bietet ergänzende Programme. Auch das bayerische Wohnraumförderungsprogramm kann für Mietwohnungsbau im Dachgeschoss genutzt werden. Wir beraten Sie zu allen Landesprogrammen.' },
+  { question: 'Wie stelle ich den Förderantrag?', answer: 'KfW-Anträge werden vor Beginn der Maßnahme über die KfW-Website oder über Hausbanken gestellt. BAFA-Anträge können für viele Maßnahmen auch nachträglich eingereicht werden. Für Denkmalschutz-AfA ist ein Bescheid der Denkmalschutzbehörde nötig. Wir begleiten Sie durch den gesamten Antragsprozess.' },
+  { question: 'Wie viel Förderung ist bei einem typischen Projekt realistisch?', answer: 'Bei einem 50.000-€-Projekt: KfW 261 (bis zu 10.000 € Zuschuss) + BAFA (bis zu 7.500 €) + ggf. Denkmalschutz-AfA (10.000–40.000 € Steuerersparnis über 12 Jahre) = effektiv 17.500–57.500 € Entlastung.' },
+];
+
+const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/foerderung/');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/wissen/foerderung/"
+  currentPath="/wissen/foerderung/"
+>
+  <JsonLdSchema schema={articleSchemaStr} />
+  <JsonLdSchema schema={faqSchemaStr} />
+  <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Förderung' }]} />
+
+  <section class="bg-bg py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-medium text-secondary mb-4">Ratgeber</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+          Förderung Dachgeschossausbau 2026
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed mb-6">
+          KfW, BAFA, Bayern, Denkmalschutz-AfA – staatliche Fördermittel können die
+          effektiven Kosten Ihres Dachgeschossausbaus um 20–50% reduzieren. Wir zeigen
+          Ihnen alle Möglichkeiten und begleiten Sie durch den Antragsprozess.
+        </p>
+        <a href="/kontakt" class="cta-primary">Förderung analysieren lassen</a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl space-y-12">
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">KfW-Förderung: Bis zu 20% Zuschuss</h2>
+          <p class="text-text-secondary leading-relaxed">
+            KfW 261 (Wohneigentumsprogramm) fördert energetische Sanierungen im Wohnungsbau. Die Förderung besteht aus einem zinsgünstigen Kredit plus Tilgungszuschuss.
+          </p>
+          <div class="bg-surface border border-border rounded-xl p-6 mt-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <div>
+                <p class="text-2xl font-bold text-primary">bis 20%</p>
+                <p class="text-sm text-text-secondary">Tilgungszuschuss</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-primary">bis 150.000 €</p>
+                <p class="text-sm text-text-secondary">pro Vorhaben</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-primary">ab 0,75%</p>
+                <p class="text-sm text-text-secondary">effektiver Zins</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-text-secondary mt-4">
+            <strong>Voraussetzung:</strong> Die Dämmung muss den GEG-Anforderungen entsprechen. Förderfähig sind Dämmung, Fenster, Heizung und die fachgerechte Planung.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">BAFA-Einzelmaßnahmen: 15% Zuschuss</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Das BAFA (Bundesamt für Wirtschaft und Ausfuhrkontrolle) fördert Einzelmaßnahmen zur energetischen Sanierung. Die Antragstellung ist einfach und für viele Maßnahmen auch rückwirkend möglich.
+          </p>
+          <ul class="space-y-3 mt-4 text-text-secondary">
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Dämmung Dach:</strong> 40–65 €/m² Dachfläche (Zwischen- und Aufsparrendämmung)</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Dachflächenfenster:</strong> Zuschuss abhängig von U-Wert und Größe</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Heizung:</strong> Wärmepumpen, Solarthermie, Biomasse</span></li>
+            <li class="flex items-start gap-3"><span class="text-secondary font-bold mt-1">•</span><span><strong>Kombination:</strong> BAFA + KfW möglich, nicht auf dieselbe Position</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Denkmalschutz-AfA: Steuerersparnis nutzen</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Bei denkmalgeschützten Gebäuden können Sie die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) nutzen. Das ist die attraktivste Förderung für historische Bausubstanz in München.
+          </p>
+          <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mt-4">
+            <p class="text-sm font-semibold text-primary mb-3">Abschreibungsschema (§7i EStG)</p>
+            <div class="grid grid-cols-4 gap-2 text-center text-sm">
+              <div><p class="font-bold text-primary">9 Jahre</p><p class="text-text-secondary">× 9%</p></div>
+              <div><p class="font-bold text-primary">3 Jahre</p><p class="text-text-secondary">× 7%</p></div>
+              <div><p class="font-bold text-primary">= 100%</p><p class="text-text-secondary">Abschreibung</p></div>
+              <div><p class="font-bold text-primary">12 Jahre</p><p class="text-text-secondary">Laufzeit</p></div>
+            </div>
+            <p class="text-sm text-text-secondary mt-3">Beispiel: 80.000 € Herstellungskosten → ca. 40.000 € Steuerersparnis (bei 42% Steuersatz)</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Förderung clever kombinieren</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Die maximale Förderung ergibt sich aus der Kombination mehrerer Programme. Für ein typisches 50.000-€-Projekt in München sieht die Kombination so aus:
+          </p>
+          <div class="bg-surface border border-border rounded-xl p-6 mt-4">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="text-left py-2 text-text-secondary">Programm</th>
+                  <th class="text-right py-2 text-text-secondary">Förderung</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr><td class="py-2">KfW 261 (Tilgungszuschuss)</td><td class="py-2 text-right font-semibold">5.000–10.000 €</td></tr>
+                <tr><td class="py-2">BAFA Einzelmaßnahmen</td><td class="py-2 text-right font-semibold">3.000–7.500 €</td></tr>
+                <tr><td class="py-2">Steuerliche Abschreibung (§7b EStG)</td><td class="py-2 text-right font-semibold">5.000–15.000 € (über 10 Jahre)</td></tr>
+                <tr class="font-bold"><td class="py-3">Gesamtförderung</td><td class="py-3 text-right text-primary">13.000–32.500 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <FaqAccordion faqs={faqs} headingLevel="h2" />
+
+        <div class="bg-primary rounded-2xl p-8 text-center text-white">
+          <h2 class="text-2xl font-bold mb-4">Förderung für Ihr Projekt berechnen</h2>
+          <p class="text-white/70 mb-6">Kostenlose Beratung zu allen Fördermitteln – inklusive Antragstellung.</p>
+          <a href="/kontakt" class="cta-primary text-base">Beratung anfragen</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

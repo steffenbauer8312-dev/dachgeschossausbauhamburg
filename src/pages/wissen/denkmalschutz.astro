@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { faqPageSchema, articleSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau Denkmalschutz München: Was Eigentümer wissen müssen';
+const pageDescription = 'Denkmalschutz-AfA, typische Auflagen, Genehmigungsprozess und steuerliche Abschreibung für denkmalgeschützte Dachgeschosse in München – alles erklärt.';
+
+const articleSchemaStr = articleSchema({
+  headline: pageTitle,
+  description: pageDescription,
+  datePublished: '2026-05-13',
+  author: 'Dachgeschossausbau München',
+  url: 'https://dachgeschossausbau-muenchen.de/wissen/denkmalschutz/',
+});
+
+const faqs = [
+  { question: 'Wie erkenne ich, ob mein Gebäude denkmalgeschützt ist?', answer: 'In München sind alle Gebäude, die im Bayerischen Denkmal-Atlas als Baudenkmal eingetragen sind, denkmalgeschützt. Sie können dies kostenlos unter bayerndenkmalpflege.de oder bei der Unteren Denkmalschutzbehörde der Stadt München prüfen lassen. Auch ein Blick ins Grundbuch gibt Aufschluss.' },
+  { question: 'Welche Auflagen gelten für den Dachgeschossausbau bei Denkmalschutz?', answer: 'Typische Auflagen betreffen: Materialien (Ziegel, Schiefer, historische Farben), Gaubenform und -größe, Fensterteilung und -proportionen, Firstgestaltung und Dachneigung. Jede Veränderung muss mit der Denkmalschutzbehörde abgestimmt werden.' },
+  { question: 'Lohnt sich der Dachgeschossausbau trotz Denkmalschutz?', answer: 'Ja, der Denkmalschutz macht den Ausbau oft wirtschaftlich attraktiver. Die Denkmalschutz-AfA (§7i EStG) erlaubt die Abschreibung von 100% der Herstellungskosten über 12 Jahre. Kombiniert mit der Wertsteigerung durch neuen Wohnraum ist der Netto-ROI häufig höher als bei nicht geschützten Gebäuden.' },
+  { question: 'Was ist die Denkmalschutz-AfA (§7i EStG)?', answer: 'Die erhöhte Absetzung nach §7i EStG erlaubt bei denkmalgeschützten Gebäuden eine beschleunigte Abschreibung: 9 Jahre je 9%, 3 Jahre je 7% = 100% der Herstellungskosten über 12 Jahre. Für ein 80.000-€-Projekt ergibt das eine Steuerersparnis von ca. 40.000 € (bei 42% Steuersatz).' },
+  { question: 'Wie läuft die Genehmigung beim Denkmalschutz ab?', answer: '1. Frühzeitige Abstimmung mit der Unteren Denkmalschutzbehörde München (vor Planungsbeginn). 2. Einreichung des Bauantrags mit denkmalschutzkonformer Planung. 3. Zustimmung des BLfD (Bayerisches Landesamt für Denkmalpflege). 4. Genehmigung. Wir begleiten Sie durch den gesamten Prozess.' },
+  { question: 'Kann ich KfW/BAFA zusätzlich zur Denkmalschutz-AfA nutzen?', answer: 'Ja, KfW und BAFA lassen sich mit der Denkmalschutz-AfA kombinieren. Die steuerliche Abschreibung (§7i) und die staatlichen Zuschüsse (KfW/BAFA) schließen sich nicht gegenseitig aus. In der Praxis ergibt sich daraus die höchste Gesamtförderung.' },
+  { question: 'Was kosten Gutachten und Abstimmung beim Denkmalschutz?', answer: 'Die denkmalschutzkonforme Planung erfordert erfahrene Architekten und ggf. denkmalpflegerische Gutachten. Kosten hierfür: 2.000–5.000 € je nach Aufwand. Diese Kosten sind Teil der Herstellungskosten und fließen in die Denkmalschutz-AfA ein.' },
+  { question: 'Gibt es in München besonders viele denkmalgeschützte Dachgeschosse?', answer: 'Ja, München hat einen außergewöhnlich hohen Bestand an denkmalgeschützten Altbauten, insbesondere in den Stadtvierteln Maxvorstadt, Schwabing, Ludwigsvorstadt-Isarvorstadt und im Lehel. Die Kombination aus Denkmalschutz und Wohnraumbedarf macht diese Dachgeschosse zu besonders attraktiven Projekten.' },
+];
+
+const faqSchemaStr = faqPageSchema(faqs, 'https://dachgeschossausbau-muenchen.de/wissen/denkmalschutz/');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/wissen/denkmalschutz/"
+  currentPath="/wissen/denkmalschutz/"
+>
+  <JsonLdSchema schema={articleSchemaStr} />
+  <JsonLdSchema schema={faqSchemaStr} />
+  <BreadcrumbList items={[{ label: 'Wissen', href: '/wissen' }, { label: 'Denkmalschutz München' }]} />
+
+  <section class="bg-bg py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-medium text-secondary mb-4">Ratgeber</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+          Dachgeschossausbau<br />Denkmalschutz München
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed mb-6">
+          Denkmalgeschützte Gebäude in München bieten eine besondere Chance: Die
+          Kombination aus Wertsteigerung und steuerlicher Abschreibung macht den
+          Dachgeschossausbau oft wirtschaftlicher als bei nicht geschützten Gebäuden.
+        </p>
+        <a href="/kontakt" class="cta-primary">Denkmalschutz-Projekt besprechen</a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl space-y-12">
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Was bedeutet Denkmalschutz beim Dachgeschossausbau?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Baudenkmäler stehen unter besonderem Schutz des Bayerischen Denkmalschutzgesetzes. Jede bauliche Veränderung – auch im Inneren – muss mit der zuständigen Denkmalschutzbehörde abgestimmt werden. Das betrifft insbesondere die äußere Erscheinung des Gebäudes: Dachform, Gauben, Fenster, Materialien.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            München hat einen besonders hohen Bestand an denkmalgeschützten Altbauten, vor allem in den inneren Stadtvierteln (Maxvorstadt, Schwabing, Ludwigsvorstadt-Isarvorstadt, Lehel). Der Ausbau dieser Dachgeschosse erfordert erfahrene Partner, die sowohl die denkmalpflegerischen Anforderungen als auch die wirtschaftlichen Vorteile kennen.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Typische Auflagen beim Denkmalschutz</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-surface border border-border rounded-xl p-5">
+              <p class="font-semibold text-text-primary mb-3">Dachform & Gauben</p>
+              <p class="text-sm text-text-secondary">Gaubenform muss zur historischen Silhouette passen. Satteldachgauben sind bevorzugt, Fledermausgauben seltener genehmigt.</p>
+            </div>
+            <div class="bg-surface border border-border rounded-xl p-5">
+              <p class="font-semibold text-text-primary mb-3">Fensterteilung</p>
+              <p class="text-sm text-text-secondary">Fenster müssen in Proportion und Teilung dem historischen Vorbild entsprechen. Sprossenfenster sind oft vorgeschrieben.</p>
+            </div>
+            <div class="bg-surface border border-border rounded-xl p-5">
+              <p class="font-semibold text-text-primary mb-3">Materialien</p>
+              <p class="text-sm text-text-secondary">Dachziegel, Schiefer, Farben – historische Materialien sind vorgeschrieben oder empfohlen. Modernere Alternativen müssen abgestimmt werden.</p>
+            </div>
+            <div class="bg-surface border border-border rounded-xl p-5">
+              <p class="font-semibold text-text-primary mb-3">Innenraum</p>
+              <p class="text-sm text-text-secondary">Auch innere Strukturveränderungen können denkmalrechtlich relevant sein. Sichtbare Balken, historische Putze können Auflagen auslösen.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Denkmalschutz-AfA: Der finanzielle Vorteil</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Der größte Vorteil des Denkmalschutzes liegt in der steuerlichen Abschreibung. Die erhöhte Absetzung nach §7i EStG (Denkmalschutz-AfA) erlaubt eine beschleunigte Abschreibung der Herstellungskosten.
+          </p>
+          <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mt-4">
+            <p class="text-sm font-semibold text-primary mb-4">Beispielrechnung: 80.000 € Herstellungskosten</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-primary/20">
+                    <th class="text-left py-2 text-text-secondary">Jahr</th>
+                    <th class="text-right py-2 text-text-secondary">Abschreibung</th>
+                    <th class="text-right py-2 text-text-secondary">Steuerersparnis (42%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="py-2">Jahre 1–9 (je 9%)</td><td class="py-2 text-right">7.200 €/Jahr</td><td class="py-2 text-right">3.024 €/Jahr</td></tr>
+                  <tr><td class="py-2">Jahre 10–12 (je 7%)</td><td class="py-2 text-right">5.600 €/Jahr</td><td class="py-2 text-right">2.352 €/Jahr</td></tr>
+                  <tr class="font-bold border-t border-primary/20"><td class="py-3">Gesamt (12 Jahre)</td><td class="py-3 text-right">80.000 €</td><td class="py-3 text-right text-primary">33.600 €</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4 text-text-primary">Genehmigungsprozess in München</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Der Denkmalschutz erhöht den Planungsaufwand, sollte aber kein Hindernis sein. Wir begleiten Sie durch den gesamten Prozess:
+          </p>
+          <ol class="space-y-4 mt-4">
+            <li class="flex items-start gap-4"><span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold flex-shrink-0">1</span><span class="text-text-secondary"><strong>Bestandsanalyse:</strong> Denkmalschutz-Status prüfen, Auflagen identifizieren</span></li>
+            <li class="flex items-start gap-4"><span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold flex-shrink-0">2</span><span class="text-text-secondary"><strong>Abstimmung Denkmalschutzbehörde:</strong> Frühzeitige Vorabstimmung vor Planungsbeginn</span></li>
+            <li class="flex items-start gap-4"><span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold flex-shrink-0">3</span><span class="text-text-secondary"><strong>Bauantrag mit Denkmalschutzgutachten:</strong> Einreichung bei LBK + BLfD</span></li>
+            <li class="flex items-start gap-4"><span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold flex-shrink-0">4</span><span class="text-text-secondary"><strong>Genehmigung:</strong> Abstimmung mit Denkmalschutzbehörde abschließen</span></li>
+          </ol>
+        </div>
+
+        <FaqAccordion faqs={faqs} headingLevel="h2" />
+
+        <div class="bg-primary rounded-2xl p-8 text-center text-white">
+          <h2 class="text-2xl font-bold mb-4">Denkmalschutz-Projekt besprechen</h2>
+          <p class="text-white/70 mb-6">Erzählen Sie uns von Ihrem denkmalgeschützten Gebäude – wir beraten kostenlos.</p>
+          <a href="/kontakt" class="cta-primary text-base">Beratung anfragen</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

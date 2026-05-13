@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-text-primary font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-text-primary font-semibold;
+  }
+
+  /* Smooth details/summary animation */
+  details {
+    @apply border-b border-border overflow-hidden;
+  }
+  details > summary {
+    @apply cursor-pointer list-none;
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] summary ~ * {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  /* Form elements */
+  input, textarea, select {
+    @apply w-full border border-border rounded-lg px-4 py-3
+           bg-surface text-text-primary placeholder-text-secondary
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           transition-colors duration-200;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+}
+
+@layer components {
+  /* FAQ Accordion */
+  .faq-item summary {
+    @apply flex items-center justify-between gap-4 py-5 text-lg font-medium
+           text-text-primary hover:text-primary transition-colors;
+  }
+  .faq-item summary::after {
+    content: '+';
+    @apply text-2xl font-light text-secondary transition-transform duration-200;
+    flex-shrink: 0;
+  }
+  details[open] .faq-item summary::after {
+    transform: rotate(45deg);
+  }
+
+  /* Cards hover */
+  .card-link {
+    @apply block transition-transform duration-200 hover:-translate-y-1;
+  }
+
+  /* CTA Button */
+  .cta-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-accent text-white font-semibold px-8 py-4 rounded-lg
+           hover:bg-accent/90 active:scale-[0.98]
+           transition-all duration-200 shadow-lg shadow-accent/20;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           border-2 border-primary text-primary font-semibold px-8 py-4 rounded-lg
+           hover:bg-primary hover:text-white
+           transition-all duration-200;
+  }
+
+  /* Service Card */
+  .service-card {
+    @apply bg-surface rounded-2xl p-8 border border-border
+           hover:border-primary/30 hover:shadow-lg transition-all duration-200;
+  }
+}

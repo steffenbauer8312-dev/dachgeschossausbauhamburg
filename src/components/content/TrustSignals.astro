@@ -1,0 +1,32 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+<div class={`flex flex-wrap gap-4 sm:gap-6 ${compact ? 'text-sm' : 'text-base'}`}>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span>Für Eigentümer kostenfrei</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span>Qualitätsgeprüfte Fachbetriebe</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span>München-Spezialisten</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span>Transparente Vermittlung</span>
+  </div>
+</div>

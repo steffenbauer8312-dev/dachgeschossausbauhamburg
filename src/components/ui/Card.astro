@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href?: string;
+  icon?: string;
+  class?: string;
+}
+const { title, description, href, icon, class: className } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const wrapperClass = href ? 'card-link' : '';
+---
+<Tag href={href} class={`service-card ${wrapperClass} ${className || ''}`}>
+  {icon && <div class="mb-4 text-primary" set:html={icon} />}
+  <h3 class="text-lg font-semibold text-text-primary mb-2">{title}</h3>
+  {description && <p class="text-text-secondary text-sm leading-relaxed">{description}</p>}
+</Tag>

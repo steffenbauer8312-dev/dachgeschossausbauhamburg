@@ -1,0 +1,45 @@
+---
+interface CostRow {
+  position: string;
+  einheit: string;
+  vonPreis: number;
+  bisPreis: number;
+  bemerkung?: string;
+}
+interface Props {
+  rows: CostRow[];
+  title?: string;
+}
+const { rows, title = 'Kostenübersicht Dachgeschossausbau München' } = Astro.props;
+const formatPrice = (n: number) => `${n.toLocaleString('de-DE')} €`;
+---
+<section class="overflow-x-auto rounded-xl border border-border">
+  {title && <div class="bg-primary text-white px-6 py-4 font-semibold">{title}</div>}
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="bg-bg text-left">
+        <th class="px-6 py-3 font-semibold text-text-secondary">Position</th>
+        <th class="px-6 py-3 font-semibold text-text-secondary text-center">Einheit</th>
+        <th class="px-6 py-3 font-semibold text-text-secondary text-right">von</th>
+        <th class="px-6 py-3 font-semibold text-text-secondary text-right">bis</th>
+        {rows.some(r => r.bemerkung) && (
+          <th class="px-6 py-3 font-semibold text-text-secondary">Hinweis</th>
+        )}
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-border">
+      {rows.map((row, i) => (
+        <tr class={i % 2 === 0 ? 'bg-surface' : 'bg-bg'}>
+          <td class="px-6 py-4 font-medium text-text-primary">{row.position}</td>
+          <td class="px-6 py-4 text-center text-text-secondary">{row.einheit}</td>
+          <td class="px-6 py-4 text-right font-mono">{formatPrice(row.vonPreis)}</td>
+          <td class="px-6 py-4 text-right font-mono">{formatPrice(row.bisPreis)}</td>
+          {row.bemerkung && <td class="px-6 py-4 text-text-secondary text-sm">{row.bemerkung}</td>}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <div class="px-6 py-3 bg-bg text-xs text-text-secondary border-t border-border">
+    * Preise verstehen sich als Richtwerte für den Großraum München. Endpreis abhängig von Zustand, Statik und Ausstattung.
+  </div>
+</section>

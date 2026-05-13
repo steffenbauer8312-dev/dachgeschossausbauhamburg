@@ -1,0 +1,15 @@
+---
+interface Props {
+  text: string;
+  variant?: 'default' | 'primary' | 'accent';
+}
+const { text, variant = 'default' } = Astro.props;
+const variants = {
+  default: 'bg-bg text-text-secondary border border-border',
+  primary: 'bg-primary/10 text-primary border border-primary/20',
+  accent:  'bg-accent/10 text-accent border border-accent/20',
+};
+---
+<span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${variants[variant]}`}>
+  {text}
+</span>
