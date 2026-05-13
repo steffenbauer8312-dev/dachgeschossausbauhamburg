@@ -1,0 +1,277 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateServiceSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const pageTitle = 'Innenausbau Hamburg – Trockenbau, Elektrik, Heizung, Böden';
+const pageDescription = 'Innenausbau für Dachgeschosse in Hamburg: Trockenbau, Elektro, Heizung, Böden – alles aus einer Hand, koordiniert von einem Ansprechpartner.';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Innenausbau Hamburg',
+  description: pageDescription,
+  slug: '/leistungen/innenausbau/',
+}));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/innenausbau/"
+  currentPath="/leistungen/innenausbau/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Leistungen', url: 'https://dachgeschossausbauhamburg.de/leistungen/' },
+    { name: 'Innenausbau', url: 'https://dachgeschossausbauhamburg.de/leistungen/innenausbau/' },
+  ]))} />
+
+  <!-- HERO -->
+  <section class="bg-primary py-16 lg:py-20">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-sm font-medium text-white/60 mb-4">Leistungen</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Innenausbau Hamburg – Vom Rohbau zum bezugsfertigen Dachgeschoss.
+          </h1>
+          <p class="text-xl text-white/70 mb-8 leading-relaxed">
+            Die Dämmung sitzt, das Dach ist dicht – jetzt kommt der Innenausbau.
+            Trockenbau, Elektrik, Heizung, Böden: Wir bauen Ihr Dachgeschoss so aus,
+            dass Sie am Ende einziehen können. Ein Ansprechpartner von der ersten
+            Wand bis zur letzten Steckdose.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/60">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              Trockenbau ab 45 €/m²
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              Elektro ab 80 €/m²
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              2–6 Wochen Bauzeit
+            </span>
+          </div>
+        </div>
+        <div>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WAS MACHEN WIR? -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Leistungsumfang"
+          heading="Was machen wir im Innenausbau?"
+          subheading="Vom ersten Gipskarton bis zum bezugsfertigen Raum – alle Gewerke aus einer Hand."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div class="flex gap-3 items-start">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Trockenbau</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Dachschrägen-Verkleidung, Innenwände, Raumtrennung – mit Gipskartonplatten und Metallständerprofilen. Sauber, schnell, flexibel. Inklusive Fugenverspachtelung und Q2-Qualität für nachfolgende Malerarbeiten.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Elektrik</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Komplette Neuverlegung der Elektroinstallation: Starkstromanschlüsse, Schalter, Steckdosen, LAN-Dosen, Beleuchtungskonzepte. 2.000–5.000 € je nach Größe des Dachgeschosses und Umfang der Installation.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Heizung</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Heizkörperanschluss oder Vorbereitung für Fußbodenheizung. In vielen Hamburger Altbauten ist ein separater Heizkreis fürs DG nötig – wir koordinieren mit dem Heizungsbauer und verlegen die Leitungen sauber im Trockenbau.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2 2m-10 0l2-2m14 14l2 2m-10 0l2-2"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Böden</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Estrich mit Trittschalldämmung als Basis, darauf Bodenbelag Ihrer Wahl: Vinyl (robust, günstig), Parkett (wertig, Hamburger Altbau-Tradition) oder Fliesen (im Bad). Wir beraten Sie zur richtigen Wahl fürs DG.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Malerarbeiten</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Wände und Decken spachteln, grundieren, streichen. Auf Wunsch übernehmen wir auch die Endgestaltung mit Tapezierarbeiten oder Farbkonzepten für den Neubau-Look.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- BAD IM DG -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="DG-Bad"
+          heading="Bad im Dachgeschoss – Was ist zu beachten?"
+          subheading="Ein vollständiges Bad im DG ist möglich, aber mit besonderen Herausforderungen."
+        />
+        <div class="mt-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">Standard-Bad</h3>
+              <p class="text-sm text-text-secondary leading-relaxed mb-3">Dusche, WC, Waschbecken, Handtuchheizkörper. Komplettanschluss an Abwasser und Frischwasser, Fliesenarbeiten. Funktionell und alltagstauglich.</p>
+              <span class="text-lg font-bold text-primary">10.000–18.000 €</span>
+            </div>
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">Premium-Bad</h3>
+              <p class="text-sm text-text-secondary leading-relaxed mb-3">Bodengleiche Dusche, Doppelwaschbecken, hochwertige Fliesen, Wandablauf, ggf. Ablauftrockentrennung. Gehobene Ausstattung für Vermietung oder Eigennutzung.</p>
+              <span class="text-lg font-bold text-primary">18.000–25.000 €</span>
+            </div>
+          </div>
+          <div class="bg-primary/5 border border-primary/20 rounded-xl p-5">
+            <p class="text-sm text-text-secondary leading-relaxed">
+              <strong class="text-text-primary">Hamburger Besonderheit:</strong> Viele Hamburger Altbauten haben
+              kein Fallrohr im DG-Bereich. Die Ableitung des Abwassers muss über lange Strecken
+              verlegt werden – ggfs. mit Hebeanlage. Wir prüfen die Anschlusssituation vorab
+              und kalkulieren alle Mehrkosten transparent ins Angebot.
+            </p>
+          </div>
+          <div class="flex gap-3 items-start mt-6">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed">
+              <strong class="text-text-primary">Drucklose Installation:</strong> Im DG funktioniert ein herkömmliches WC nur mit Hebeanlage oder wenn das DG über dem höchsten Punkt des Abwasserrohrs liegt. Wir zeigen Ihnen die realistischen Optionen für Ihr Objekt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- EIN ANSPRECHPARTNER -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Unsere Leistung"
+          heading="Ein Ansprechpartner – alle Gewerke koordiniert"
+          subheading="Warum das bei DG-Projekten entscheidend ist."
+        />
+        <div class="mt-8">
+          <p class="text-text-secondary leading-relaxed mb-4">
+            Ein Dachgeschoss-Ausbau bedeutet: Trockenbauer, Elektriker, Heizungsbauer, Fliesenleger,
+            Maler – oft fünf oder mehr Gewerke auf engstem Raum hintereinander und nebeneinander.
+            Ohne Koordination entsteht Chaos, Verzögerungen und Kostentreiberei.
+          </p>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            Wir übernehmen diese Koordination: Ein fester Ansprechpartner plant die Gewerkereihenfolge,
+            steuert die Zeitpläne und sorgt dafür, dass die Elektrik fertig ist, bevor der Trockenbauer
+            die Wände schließt. Sie haben eine Nummer – wir kümmern uns um den Rest.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div class="bg-surface rounded-xl p-4 border border-border text-center">
+              <p class="text-2xl font-bold text-primary mb-1">1</p>
+              <p class="text-sm text-text-secondary">Eine Nummer für alle Gewerke</p>
+            </div>
+            <div class="bg-surface rounded-xl p-4 border border-border text-center">
+              <p class="text-2xl font-bold text-primary mb-1">2–6</p>
+              <p class="text-sm text-text-secondary">Wochen Bauzeit je nach Umfang</p>
+            </div>
+            <div class="bg-surface rounded-xl p-4 border border-border text-center">
+              <p class="text-2xl font-bold text-primary mb-1">100%</p>
+              <p class="text-sm text-text-secondary">Gewerke aus einer Hand</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ZEITPLAN -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Zeitplan"
+          heading="Zeitplan Innenausbau"
+          subheading="2 bis 6 Wochen je nach Umfang – parallel zur Dämmung."
+        />
+        <div class="mt-8 space-y-4">
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">1</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Vorarlbeiten Dämmung</h3>
+              <p class="text-sm text-text-secondary">Die Dämmung (Zwischensparren oder Untersparren) wird fertiggestellt. Die Dampfbremse ist verlegt. Erst dann startet der Innenausbau.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Zeitbedarf: 1–3 Wochen</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">2</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Trockenbau</h3>
+              <p class="text-sm text-text-secondary">Dachschrägen-Verkleidung, Innenwände, Raumstrukturen. Die Gipskartonplatten werden verschraubt und verspachtelt.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Zeitbedarf: 3–10 Tage</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">3</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Haustechnik</h3>
+              <p class="text-sm text-text-secondary">Elektrik und Heizung werden installiert – bevor die Wände geschlossen werden. Leitungen werden gelegt, Verteiler gesetzt, Anschlüsse vorbereitet.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Zeitbedarf: 2–5 Tage</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">4</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Böden</h3>
+              <p class="text-sm text-text-secondary">Estrich wird eingebracht (bei Neubodenniveau über dem Estrich). Alternativ: Trockenestrichplatten. Danach Bodenbelag nach Wahl.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Zeitbedarf: 3–7 Tage</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">5</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Malerarbeiten & Feinschliff</h3>
+              <p class="text-sm text-text-secondary">Spachteln, Schleifen, Streichen. Endkontrolle aller Installationen. Übergabe: bezugsfertig.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Zeitbedarf: 2–5 Tage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-8 lg:p-10 text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Innenausbau planen – alles aus einer Hand</h2>
+          <p class="text-white/70 mb-8">Beschreiben Sie uns Ihr Projekt – wir kalkulieren den Innenausbau, koordinieren alle Gewerke und liefern Ihnen ein Festpreisangebot.</p>
+          <a href="#kontakt-formular" class="cta-primary text-base bg-secondary text-primary hover:bg-secondary/90">Zum Kontaktformular</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

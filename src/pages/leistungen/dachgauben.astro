@@ -1,0 +1,303 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateServiceSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgauben Hamburg – Schleppgaube, Fledermausgaube, Trapezgaube';
+const pageDescription = 'Dachgauben für Hamburger Dächer: Schleppgaube, Fledermausgaube, Trapezgaube. 8.000–25.000 € je nach Typ. §62 HBauO 2026 Genehmigungsfreistellung.';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachgauben Hamburg',
+  description: pageDescription,
+  slug: '/leistungen/dachgauben/',
+}));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/dachgauben/"
+  currentPath="/leistungen/dachgauben/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Leistungen', url: 'https://dachgeschossausbauhamburg.de/leistungen/' },
+    { name: 'Dachgauben', url: 'https://dachgeschossausbauhamburg.de/leistungen/dachgauben/' },
+  ]))} />
+
+  <!-- HERO -->
+  <section class="bg-primary py-16 lg:py-20">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-sm font-medium text-white/60 mb-4">Leistungen</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Dachgauben in Hamburg – Mehr Licht, mehr Raum, mehr Wert.
+          </h1>
+          <p class="text-xl text-white/70 mb-8 leading-relaxed">
+            Eine Gaube verwandelt Ihr dunkles Dachgeschoss in einen hellen Wohnraum mit Stehhöhe.
+            Für Hamburger Satteldächer in Eppendorf, Eimsbüttel oder Harvestehude ist die
+            Schleppgaube der Klassiker. Wir planen, genehmigen und bauen Ihre Gaube – alles aus einer Hand.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/60">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              8.000–25.000 €
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              HBauO §62
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              4–10 Wochen Bauzeit
+            </span>
+          </div>
+        </div>
+        <div>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WARUM GAUBEN? -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Vorteile"
+          heading="Warum eine Gaube?"
+          subheading="Drei Gründe, die für eine Dachgaube sprechen."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Mehr Tageslicht</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Schräge Fenster lassen oft nur ein Minimum an Licht ins Dachgeschoss. Eine Gaube bringt bis zu dreimal so viel Tageslicht und macht den Raum erst bewohnbar.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Stehhöhe</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Der Bereich direkt unter dem First ist bei vielen Hamburger Altbauten nur 1,20–1,50 m hoch. Eine Gaube schafft Stehhöhe über einen Großteil der Fläche und macht aus dem Speicher einen echten Wohnraum.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Wertsteigerung</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Eine Gaube erhöht die Nutzfläche des Dachgeschosses und verbessert die Vermietbarkeit erheblich. In Eppendorf, Eimsbüttel oder Harvestehude ist die Wertsteigerung besonders ausgeprägt.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- GAUBEN-TYPEN -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Gauben-Typen"
+          heading="Gauben-Typen für Hamburger Dächer"
+          subheading="Jeder Typ hat eigene Vorteile – wir beraten Sie, welche Gaube zu Ihrem Dach passt."
+        />
+
+        <div class="mt-8 space-y-6">
+          <!-- Schleppgaube -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Schleppgaube</h3>
+                  <span class="text-sm text-primary font-semibold">8.000–18.000 €</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Hamburger Klassiker</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Die Schleppgaube ist die mit Abstand häufigste Gaube auf Hamburger Satteldächern.
+                Sie „schleppt" sich hangabwärts am Dach und nimmt die Neigung des Dachs auf.
+                Besonders gut eignen sich Satteldächer in Eppendorf, Eimsbüttel, Harvestehude und
+                Rotherbaum – dort prägen Schleppgauben das Straßenbild seit Jahrzehnten.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Neigung: 30–55°</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Lichtwirkung: sehr gut</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stehhöhe: großzügig</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stadtbild: bewährt</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fledermausgaube -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Fledermausgaube</h3>
+                  <span class="text-sm text-primary font-semibold">15.000–25.000 €</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Nord-Hamburg Spezialist</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Die Fledermausgaube folgt der Dachneigung mit einem gerundeten First, der an eine Fledermaus erinnert.
+                Sie ist besonders geeignet für flachgeneigte Dächer im Hamburger Norden – in Langenhorn,
+                Fuhlsbüttel, Ohlsdorf und Barmbek finden sich viele Dächer mit niedrigen Neigungen,
+                für die eine Fledermausgaube die optimale Lösung ist.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Neigung: 15–35°</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Lichtwirkung: ausgezeichnet</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stehhöhe: maximal</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Architektur: elegant</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trapezgaube -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Trapezgaube</h3>
+                  <span class="text-sm text-primary font-semibold">10.000–18.000 €</span>
+                </div>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Die Trapezgaube hat einen trapezförmigen Querschnitt mit senkrechten Wangen.
+                Sie wirkt moderner als die Schleppgaube und fügt sich besonders gut in
+                neuere Bebauungen im Stadtkern sowie bei Sanierungen ein, bei denen ein
+                современный Look gewünscht wird.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Neigung: 25–50°</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Lichtwirkung: gut</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stehhöhe: gut</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stil: modern</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segmentgaube -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Segmentgaube</h3>
+                  <span class="text-sm text-primary font-semibold">12.000–20.000 €</span>
+                </div>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Die Segmentgaube verfügt über einen rundbogenförmigen Abschluss –
+                eine elegante Lösung, die an klassische Architekturformen anknüpft.
+                Sie ist seltener als die anderen Typen, findet sich aber gelegentlich
+                bei denkmalgeschützten Gebäuden in Harvestehude oder dem Grindelviertel.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Neigung: 20–45°</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Lichtwirkung: sehr gut</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stehhöhe: gut bis großzügig</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stil: historisierend</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- GENEHMIGUNG -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Genehmigung Hamburg"
+          heading="Genehmigung: §61 HBauO – vereinfachtes Verfahren"
+          subheading="Bei Gauben verändert sich das äußere Erscheinungsbild des Dachs – was Sie wissen müssen."
+        />
+        <div class="mt-8 space-y-4">
+          <p class="text-text-secondary leading-relaxed">
+            Anders als ein reiner DG-Innenausbau verändert der Einbau einer Gaube die äußere Erscheinung
+            des Gebäudes. Nach <strong class="text-text-primary">§61 Absatz 1 HBauO</strong> ist daher bei Gauben
+            in der Regel ein vereinfachtes Baugenehmigungsverfahren erforderlich – kein vollständiger
+            Bauantrag mit Architekt, aber eine formale Genehmigung.
+          </p>
+          <div class="bg-primary/5 border border-primary/20 rounded-xl p-5">
+            <p class="text-sm text-text-secondary leading-relaxed">
+              <strong class="text-text-primary">Gut zu wissen:</strong> Für Gauben mit einer Grundfläche
+              von max. 10 m² und einer Breite von max. 3 Metern gibt es in Hamburg keine besonderen
+              Erleichterungen – die Genehmigungspflicht bleibt bestehen. Wir kümmern uns um alle
+              Unterlagen und führen das Verfahren für Sie.
+            </p>
+          </div>
+          <p class="text-text-secondary leading-relaxed">
+            Die Baubehörde prüft bei Gauben vor allem die Einhaltung des Bebauungsplans (Grenzabstände,
+            Firsthöhe, Gestaltungsregeln) und das Stadtbild. In Eppendorf, Harvestehude oder dem
+            Grindelviertel kann es Historicenschutzauflagen geben – wir prüfen das vorab.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WANN LOHNT SICH EINE GAUBE? -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Potenzial-Check"
+          heading="Wann lohnt sich eine Gaube?"
+          subheading="Nicht jedes Dachgeschoss braucht eine Gaube – aber unter diesen Bedingungen lohnt sie sich besonders."
+        />
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Firsthöhe unter 1,80 m:</strong> Wenn Ihr Dachboden nur als Stauraum nutzbar ist, weil die Firsthöhe zu gering ist, schafft eine Gaube Stehhöhe und macht den Raum bewohnbar.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Starke Schrägen:</strong> Wenn mehr als die Hälfte der Grundfläche durch Schrägen unter 1,50 m unnutzbar ist, schafft die Gaube neue nutzbare Fläche.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Wenig Tageslicht:</strong> Wenn Velux-Fenster nicht ausreichen, um den Raum hell genug zu machen, ist die Gaube die nächste Stufe.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Vermietung geplant:</strong> Ein DG mit Gaube und Stehhöhe erzielt deutlich höhere Mieten als eines mit nur Schrägenfenstern.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Bebauungsplan erlaubt:</strong> In einigen Hamburger Quartieren schränken B-Pläne Gauben ein – wir prüfen die Zulässigkeit vorab kostenlos.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Satteldach vorhanden:</strong> Schleppgauben funktionieren besonders gut auf Satteldächern mit 30–55° Neigung – dem häufigsten Dachform in Hamburgs Altbauquartieren.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- END CTA -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-8 lg:p-10 text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Gaube planen – kostenlos beraten lassen</h2>
+          <p class="text-white/70 mb-8">Beschreiben Sie uns Ihr Dach – wir prüfen die Machbarkeit, den Gaubentyp und die Genehmigungschancen für Ihr Hamburger Projekt.</p>
+          <a href="#kontakt-formular" class="cta-primary text-base bg-secondary text-primary hover:bg-secondary/90">Zum Kontaktformular</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

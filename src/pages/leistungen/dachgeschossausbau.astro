@@ -1,0 +1,295 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import CostTable from '@/components/content/CostTable.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateServiceSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau Hamburg – Komplettausbau von A bis Z';
+const pageDescription = 'Vollständiger Dachgeschossausbau in Hamburg: Dämmung, Trockenbau, Haustechnik, Böden – alles aus einer Hand, 800–2.500 €/m².';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachgeschossausbau Hamburg',
+  description: pageDescription,
+  slug: '/leistungen/dachgeschossausbau/',
+}));
+
+const costRows = [
+  { position: 'Dachhaut-Überprüfung u. Reparatur', einheit: 'pauschal', vonPreis: 800, bisPreis: 2500 },
+  { position: 'Aufsparrendämmung (inkl. Neueindeckung)', einheit: 'm² Dachfläche', vonPreis: 100, bisPreis: 250 },
+  { position: 'Zwischensparrendämmung (Mineralwolle, Dampfbremse)', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 120 },
+  { position: 'Trockenbau Dachschrägen u. Innenwände', einheit: 'm²', vonPreis: 45, bisPreis: 85 },
+  { position: 'Bodenaufbau (Estrich + Trittschalldämmung)', einheit: 'm²', vonPreis: 70, bisPreis: 130 },
+  { position: 'Bodenbelag (Vinyl, Laminat, Parkett)', einheit: 'm²', vonPreis: 40, bisPreis: 120 },
+  { position: 'Elektro komplett neu', einheit: 'm² Nutzfläche', vonPreis: 80, bisPreis: 150 },
+  { position: 'Heizung (Anschluss, Heizkörper oder FBH)', einheit: 'pauschal', vonPreis: 2000, bisPreis: 6000 },
+  { position: 'Malerarbeiten', einheit: 'm² Wandfläche', vonPreis: 12, bisPreis: 28 },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/dachgeschossausbau/"
+  currentPath="/leistungen/dachgeschossausbau/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Leistungen', url: 'https://dachgeschossausbauhamburg.de/leistungen/' },
+    { name: 'Dachgeschossausbau', url: 'https://dachgeschossausbauhamburg.de/leistungen/dachgeschossausbau/' },
+  ]))} />
+
+  <!-- HERO -->
+  <section class="bg-primary py-16 lg:py-20">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-sm font-medium text-white/60 mb-4">Leistungen</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Dachgeschossausbau Hamburg – Mehr Raum, ohne umzuziehen.
+          </h1>
+          <p class="text-xl text-white/70 mb-8 leading-relaxed">
+            Sie haben ungenutzten Stauraum unter dem Dach und möchten daraus Wohnraum schaffen?
+            Wir koordinieren alle Gewerke – vom Gerüst bis zur letzte Steckdose. Preiswert,
+            durchdacht, aus einer Hand.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/60">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              Festpreisgarantie
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              HBauO-geprüft
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              800–2.500 €/m²
+            </span>
+          </div>
+        </div>
+        <div>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WAS UMFASST DER KOMPLETTAUSBAU -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Leistungsumfang"
+          heading="Was umfasst der Komplettausbau?"
+          subheading="Alle Gewerke, die aus Ihrem Dachboden einen bewohnbaren Raum machen – koordiniert von einem Ansprechpartner."
+        />
+        <div class="space-y-6 mt-8">
+          <div class="flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 4h4"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Dachhaut und Statik</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Bevor der Innenausbau startet, prüfen wir die Dachhaut auf Undichtigkeiten und die Tragfähigkeit der Decken. Gegebenenfalls muss die Dachkonstruktion ertüchtigt werden – wir holen dazu einen Tragwerksplaner ins Boot.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Dämmung – GEG-konform, förderfähig</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Die Dämmung ist das Herzstück des DG-Ausbaus. In Hamburgs feuchtem Klima setzen wir konsequent auf eine regelgerechte Dampfbremse. Je nach Dämmart (Aufsparren-, Zwischen- oder Untersparrendämmung) liegen die Kosten zwischen 60 und 250 €/m² – förderfähig durch KfW 261.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Trockenbau – Räume definieren</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Mit Gipskartonplatten und Metallständerprofilen bauen wir Dachschrägen optisch auf, setzen Innenwände und schaffen Raumstrukturen. Der Trockenbau im DG ist schnell, sauber und bietet Platz für Leitungen und Dämmung.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Elektrik und Haustechnik</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Neue Elektroleitungen, LAN-Dosen, Beleuchtungskonzepte, Heizkörper oder Fußbodenheizung – wir verlegen alle haustechnischen Installationen neu. Beim DG-Ausbau ist das fast immer nötig, da die Altinstallation für modernen Wohnkomfort nicht ausreicht.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2 2m-10 0l2-2m14 14l2 2m-10 0l2-2"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Böden – vom Estrich bis zum Belag</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Fußbodenaufbau mit Trittschalldämmung und Estrich schafft die Basis. Der Bodenbelag (Vinyl, Parkett oder Fliesen) ist Ihre Entscheidung – wir beraten Sie gerne zu Vor- und Nachteilen der verschiedenen Beläge im DG.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FÜR WEN? -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Zielgruppen"
+          heading="Für wen ist der Komplettausbau?"
+          subheading="Drei typische Situationen, in denen sich ein DG-Komplettausbau besonders lohnt."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <span class="text-3xl font-bold text-primary/20 block mb-3">01</span>
+            <h3 class="font-bold text-text-primary mb-2">Eigenheimbesitzer</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Sie leben in Ihrem Haus und möchten ohne Umzug mehr Wohnraum schaffen? Der DG-Ausbau ist die clevere Alternative zum Anbau – günstiger, schneller, ohne Gartenverlust.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <span class="text-3xl font-bold text-primary/20 block mb-3">02</span>
+            <h3 class="font-bold text-text-primary mb-2">Mehrfamilienhaus-Besitzer</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Sie haben ein Zwei- oder Dreifamilienhaus mit unausgebautem Dachboden? Der DG-Ausbau schafft eine weitere Mietwohnung – in Hamburgs angespanntem Mietmarkt eine renditestarke Investition.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <span class="text-3xl font-bold text-primary/20 block mb-3">03</span>
+            <h3 class="font-bold text-text-primary mb-2">Investoren</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Sie kaufen eine Immobilie mit DG-Potenzial, um sie auszubauen und zu vermieten oder zu veräußern? Wir begleiten Sie von der Standortanalyse bis zur schlüsselfertigen Übergabe.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- KOSTEN HAMBURG 2025/2026 -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Kosten Hamburg 2025/2026"
+          heading="Was kostet der Dachgeschossausbau in Hamburg?"
+          subheading="Richtwerte für den Großraum Hamburg. Die tatsächlichen Kosten hängen von Zustand, Statik und Ausstattungswunsch ab."
+        />
+        <div class="mt-8">
+          <CostTable rows={costRows} title="Kostenübersicht Dachgeschossausbau Hamburg" />
+        </div>
+        <p class="text-sm text-text-secondary mt-4">
+          Sie möchten eine detaillierte Kostenanalyse für Ihr Projekt?
+          <a href="#kontakt-formular" class="text-primary font-semibold hover:underline ml-2">Kostenlose Beratung anfragen →</a>
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ZEITPLAN -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Zeitplan"
+          heading="Wie lange dauert ein DG-Ausbau in Hamburg?"
+          subheading="Vier bis zwölf Wochen Bauzeit – plus Genehmigungszeit nach HBauO."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">Bauzeit: 4–12 Wochen</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Die reine Bauzeit hängt vom Umfang ab. Ein einfacher Ausbau mit Dämmung, Trockenbau und Böden ist in 4–6 Wochen machbar. Wenn ein komplettes Bad, eine Fußbodenheizung und aufwendige Elektrik dazukommen, planen wir 8–12 Wochen.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">Genehmigung: 2–8 Wochen</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Nach §62 HBauO sind DG-Ausbauten ohne äußere Veränderung verfahrensfrei – lediglich eine Anzeige bei der Baubehörde genügt. Das Genehmigungsverfahren entfällt in diesem Fall. Bei genehmigungspflichtigen Vorhaben (Gauben, Nutzungsänderung) rechnen wir 2–8 Wochen ein.</p>
+          </div>
+        </div>
+        <div class="mt-6 p-6 bg-primary/5 rounded-xl border border-primary/20">
+          <p class="text-sm text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">Tipp:</strong> Die Zeit für Genehmigungsprüfung und Statik (2–8 Wochen) läuft parallel zur Vorplanung. In vielen Fällen können wir also bereits 2–3 Wochen nach der Beratung mit dem Angebot starten, während die Genehmigungsfrage geklärt wird.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- UNSER VORGEHEN -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Ablauf"
+          heading="Unser Vorgehen – von der Beratung bis zur Übergabe"
+          subheading="Sechs Schritte, transparent und strukturiert."
+        />
+        <div class="mt-8 space-y-4">
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">01</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Erstberatung & Vor-Ort-Termin</h3>
+              <p class="text-sm text-text-secondary">Wir kommen zu Ihnen nach Hause und begutachten den Dachboden. Dabei besprechen wir Ihre Wünsche, prüfen die baulichen Voraussetzungen und beantworten alle Ihre Fragen. Die Beratung ist kostenlos und unverbindlich.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 1–2 Stunden</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">02</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Individuelle Planung & Angebot</h3>
+              <p class="text-sm text-text-secondary">Auf Basis unserer Vor-Ort-Beratung erstellen wir eine detaillierte Planung mit Kostenaufstellung. Sie erhalten ein transparentes Angebot, das alle Leistungen klar aufschlüsselt. Es gibt keine versteckten Kosten.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 1–2 Wochen</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">03</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Genehmigungsprüfung</h3>
+              <p class="text-sm text-text-secondary">Wir prüfen, ob Ihr Vorhaben nach §62 HBauO verfahrensfrei ist oder ob eine Genehmigung benötigt wird. Bei verfahrensfreien Projekten kümmern wir uns um die Anzeige an die Stadt Hamburg. Bei genehmigungspflichtigen Vorhaben bereiten wir alle Unterlagen vor.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 2–8 Wochen</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">04</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Statik & Detailplanung</h3>
+              <p class="text-sm text-text-secondary">Ein Tragwerksplaner berechnet die notwendigen statischen Maßnahmen. Wir erstellen die Detailplanung für alle Gewerke und koordinieren die beteiligten Handwerker. Hierdurch stellen wir sicher, dass alles aus einem Guss funktioniert.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 1–2 Wochen</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">05</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Bauphase</h3>
+              <p class="text-sm text-text-secondary">Wir beginnen mit den Arbeiten – typischerweise mit dem Gerüstbau und der Dachhaut. Anschließend folgen Dämmung, Innenausbau, Haustechnik und Feinausbau. Wir arbeiten sauber und halten Sie über den Fortschritt auf dem Laufenden.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 4–12 Wochen</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start bg-surface rounded-xl p-5 border border-border">
+            <span class="text-2xl font-bold text-primary/30 flex-shrink-0 w-10">06</span>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Abnahme & Übergabe</h3>
+              <p class="text-sm text-text-secondary">Nach Abschluss aller Arbeiten erfolgt die gemeinsame Abnahme mit Ihnen. Wir zeigen Ihnen alle Funktionen und Details und übergeben die Schlüssel. Eventuelle Mängel werden schnellstmöglich behoben.</p>
+              <span class="text-xs text-text-secondary mt-2 block">Dauer: 1 Tag</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-8 lg:p-10 text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Jetzt unverbindliches Angebot anfordern</h2>
+          <p class="text-white/70 mb-8">Erzählen Sie uns von Ihrem Dachgeschoss – wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag.</p>
+          <a href="#kontakt-formular" class="cta-primary text-base bg-secondary text-primary hover:bg-secondary/90">Zum Kontaktformular</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

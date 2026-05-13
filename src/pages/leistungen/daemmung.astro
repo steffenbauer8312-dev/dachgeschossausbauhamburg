@@ -1,0 +1,290 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateServiceSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachdämmung Hamburg – GEG-konform, förderfähig durch KfW 261';
+const pageDescription = 'Dachdämmung in Hamburg: Aufsparrendämmung, Zwischensparrendämmung, Untersparrendämmung – 40–250 €/m². GEG-konform und förderfähig durch KfW 261.';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachdämmung Hamburg',
+  description: pageDescription,
+  slug: '/leistungen/daemmung/',
+}));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/daemmung/"
+  currentPath="/leistungen/daemmung/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Leistungen', url: 'https://dachgeschossausbauhamburg.de/leistungen/' },
+    { name: 'Dachdämmung', url: 'https://dachgeschossausbauhamburg.de/leistungen/daemmung/' },
+  ]))} />
+
+  <!-- HERO -->
+  <section class="bg-primary py-16 lg:py-20">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-sm font-medium text-white/60 mb-4">Leistungen</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Dachdämmung Hamburg – Optimal gedämmt, optimal gefördert.
+          </h1>
+          <p class="text-xl text-white/70 mb-8 leading-relaxed">
+            Die Dämmung ist das Herzstück jedes DG-Ausbaus. In Hamburgs feuchtem Seeklima
+            ist sie nicht nur energetisch sinnvoll, sondern vorgeschrieben. Wir zeigen
+            Ihnen, welche Dämmart für Ihr Dach die richtige ist – und wie Sie bis zu 25%
+            der Kosten über Fördermittel zurückholen.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/60">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              GEG-konform
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              KfW 261 förderfähig
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              40–250 €/m²
+            </span>
+          </div>
+        </div>
+        <div>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WARUM DÄMMUNG? -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Warum Dämmung?"
+          heading="Drei Gründe für die Dachdämmung"
+          subheading="Energetisch, rechtlich und wirtschaftlich – die Dämmung ist das Fundament jedes DG-Ausbaus."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="text-3xl font-bold text-primary/20 mb-3">01</div>
+            <h3 class="font-bold text-text-primary mb-2">GEG-Pflicht</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Das Gebäudeenergiegesetz (GEG) schreibt bei einem DG-Ausbau eine Dämmung vor, die den Mindestwärmeschutz gewährleistet. Die Dämmwerte orientieren sich an aktuellen U-Wert-Anforderungen – wir stellen sicher, dass Ihr Ausbau der Hamburger Klimazone gerecht wird.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="text-3xl font-bold text-primary/20 mb-3">02</div>
+            <h3 class="font-bold text-text-primary mb-2">Energiekosten senken</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Eine gute Dachdämmung reduziert den Heizwärmebedarf um bis zu 30%. In einem durchschnittlichen Hamburger Einfamilienhaus spart das 800–1.200 € Heizkosten pro Jahr – bei steigenden Energiepreisen ein deutlich spürbarer Effekt.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="text-3xl font-bold text-primary/20 mb-3">03</div>
+            <h3 class="font-bold text-text-primary mb-2">Fördermittel</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">KfW 261 (bis zu 20% Zuschuss), BAFA-Einzelmaßnahmen, §35c EStG – die Dämmung gehört zu den am besten geförderten Maßnahmen im Gebäudebestand. Wir berechnen Ihre Förderung und integrieren sie in unser Angebot.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- DÄMMARTEN IM DETAIL -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Dämmarten"
+          heading="Dämmarten im Detail"
+          subheading="Aufsparren, Zwischensparren oder Untersparren – jede Methode hat ihre Stärken."
+        />
+
+        <div class="mt-8 space-y-6">
+          <!-- Aufsparrendämmung -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-text-primary mb-1">Aufsparrendämmung</h3>
+                <span class="text-sm text-primary font-semibold">100–250 €/m²</span>
+              </div>
+              <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Höchste Dämmleistung</span>
+            </div>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Die Aufsparrendämmung ist diePremiumlösung: Die Dämmplatten werden oberhalb der Sparren
+              verlegt, die Dachhaut wird komplett erneuert. Das Ergebnis ist eine lückenlose Dämmung
+              ohne Wärmebrücken – optimal für Neubau oder Vollsanierung.
+            </p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              In Hamburg empfehlen wir die Aufsparrendämmung, wenn ohnehin eine Neueindeckung ansteht
+              (z.B. weil die Dachziegel am Ende ihrer Lebensdauer sind). Die Mehrkosten gegenüber
+              einer Innendämmung machen sich über die Förderung und die Heizkostenersparnis schnell bezahlt.
+            </p>
+            <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Dämmleistung: ★★★★★</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Wärmebrücken: keine</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">KfW 261: förderfähig</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Neueindeckung: ja</span>
+            </div>
+          </div>
+
+          <!-- Zwischensparrendämmung -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-text-primary mb-1">Zwischensparrendämmung</h3>
+                <span class="text-sm text-primary font-semibold">60–120 €/m²</span>
+              </div>
+              <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Hamburger Standard</span>
+            </div>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Die Zwischensparrendämmung ist das, was wir in neun von zehn Hamburger DG-Ausbauten
+              einbauen: Mineralwolle oder Zellulose wird zwischen den Sparren verlegt.
+              Von innen kommt die Dampfbremse dazu, von außen die Unterspannbahn.
+            </p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              <strong class="text-text-primary">In Hamburgs feuchtem Seeklima ist die Dampfbremse Pflicht.</strong>
+              Die maritime Luftfeuchtigkeit führt ohne regelgerechte Dampfsperre zu Kondensfeuchtigkeit
+              in der Dämmung – im schlimmsten Fall Schimmelbildung. Wir setzen ausschließlich
+              geprüfte Dampfbremssysteme ein.
+            </p>
+            <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Dämmleistung: ★★★★☆</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Wärmebrücken: minimal</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Dampfbremse: Pflicht in Hamburg</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">KfW 261: förderfähig</span>
+            </div>
+          </div>
+
+          <!-- Untersparrendämmung -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-text-primary mb-1">Untersparrendämmung</h3>
+                <span class="text-sm text-primary font-semibold">40–80 €/m²</span>
+              </div>
+              <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Innenmontage</span>
+            </div>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Wenn die Außenhaut des Dachs erhalten bleiben soll – etwa bei einem denkmalgeschützten
+              Gebäude oder wenn das Dach äußerlich nicht verändert werden darf – ist die Untersparrendämmung
+              die einzige Option: Dämmmatten werden von innen unter die Sparren geklemmt.
+            </p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Nachteil: Die Untersparrendämmung reduziert den Raum nicht nur thermisch, sondern auch
+              räumlich – typically 6–10 cm pro Wandseite. Zudem entstehen mehr Wärmebrücken an den Sparren.
+              Wir setzen sie ein, wenn sie die einzige Möglichkeit ist.
+            </p>
+            <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Dämmleistung: ★★★☆☆</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Raumverlust: 6–10 cm/Wand</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">Dachhaut: unberührt</span>
+              <span class="bg-bg px-3 py-1 rounded-full border border-border">KfW 261: förderfähig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- DAMPFBREMS -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Hamburg-Spezifik"
+          heading="Dampfbremse – In Hamburg kein Optional"
+          subheading="Warum die Dampfbremse bei Hamburger DG-Ausbauten unverzichtbar ist."
+        />
+        <div class="mt-8 space-y-4">
+          <p class="text-text-secondary leading-relaxed">
+            Hamburg ist eine der feuchtesten Großstädte Deutschlands. Die durchschnittliche
+            relative Luftfeuchtigkeit liegt bei 78%, im Winter oft über 85%. Diese Feuchtigkeit
+            wandert als Wasserdampf aus den beheizten Innenräumen nach oben – und würde sich in
+            einer ungeschützten Dämmung als Tauwasser niederschlagen.
+          </p>
+          <p class="text-text-secondary leading-relaxed">
+            Die Dampfbremse (auch Dampfsperre oder Dampfbremsfolie) verhindert genau das:
+            Sie wird auf der warmen Seite der Dämmung verlegt und lässt nur kontrolliert
+            minimale Wasserdampfmengen durch. Das ist in ganz Deutschland Standard –
+            in Hamburgs Seeklima ist die regelgerechte Ausführung aber besonders kritisch,
+            weil die Feuchtigkeitsbelastung dauerhaft hoch ist.
+          </p>
+          <div class="bg-primary/5 border border-primary/20 rounded-xl p-5">
+            <p class="text-sm text-text-secondary leading-relaxed">
+              <strong class="text-text-primary">Was passiert ohne Dampfbremse?</strong><br/>
+              In einer ungeschützten Zwischensparrendämmung kann sich über die Heizperiode
+              soviel Kondenswasser sammeln, dass die Dämmung durchnässt – die Dämmwirkung
+              sinkt auf null, im schlimmsten Fall entstehen Schimmelpilze in der Konstruktion.
+              Eine Sanierung in diesem Zustand ist erheblich teurer als die proper ausgeführte Dampfbremse.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FÖRDERUNG -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Förderung 2025/2026"
+          heading="Förderung für Ihre Dachdämmung"
+          subheading="Bis zu 25% der Kosten über staatliche Programme – wir kümmern uns um die Anträge."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">KfW 261</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Bis zu 20% Zuschuss für die Dachdämmung im Rahmen des KfW-Programms „Energieeffizient Sanieren". Förderfähig bei allen drei Dämmarten. Antragstellung vor Vorhabensbeginn erforderlich.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">BAFA-Einzelmaßnahmen</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Zuschüsse für Dämmung der Dach- und Obergeschossdecke: 40–65 €/m². Das BAFA zahlt für Material und Einbau – auch bei Eigenleistung (Handwerkerkosten sind hier nicht förderfähig).</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">§35c EStG</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Steuerliche Abschreibung: 20% der Dämmkosten über 3 Jahre (7% / 7% / 6%). Gilt für alle Eigentümer, die selbst nutzen oder vermieten – auch für Bestandsbauten ohne KfW/BAFA kombinierbar.</p>
+          </div>
+        </div>
+        <div class="mt-6 p-6 bg-primary/5 rounded-xl border border-primary/20">
+          <p class="text-sm text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">Kombinieren Sie die Programme:</strong> KfW 261 und BAFA können
+            kombiniert werden (bis zu 25% Zuschuss gemeinsam). §35c EStG lässt sich zusätzlich ansetzen,
+            wenn Sie selbst nutzen oder vermieten. Wir berechnen Ihre individuelle Förderung und
+            integrieren sie von Anfang an in das Angebot.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-8 lg:p-10 text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Dämmung planen – Förderung sichern</h2>
+          <p class="text-white/70 mb-8">Beschreiben Sie uns Ihr Dach – wir prüfen die Dämmart, die Förderfähigkeit und erstellen Ihnen ein Angebot mit allen Fördermitteln abgezogen.</p>
+          <a href="#kontakt-formular" class="cta-primary text-base bg-secondary text-primary hover:bg-secondary/90">Zum Kontaktformular</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
