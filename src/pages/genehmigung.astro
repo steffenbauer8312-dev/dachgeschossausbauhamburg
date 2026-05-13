@@ -1,0 +1,568 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const faqs = [
+  {
+    question: 'Brauche ich einen Architekten für die Bauvorlage?',
+    answer: 'Nein, für die Genehmigungsfreistellung nach §62 reicht ein Tragwerksplaner. Für das vereinfachte Verfahren nach §61 empfehlen wir einen Architekten. Wir übernehmen die Bauvorlage komplett.',
+  },
+  {
+    question: 'Wie lange dauert die Genehmigung?',
+    answer: '§62 Genehmigungsfreistellung: 4 Wochen. §61 Vereinfachtes Verfahren: 2 bis 3 Monate. Die Frist bei §62 ist gesetzlich festgelegt.',
+  },
+  {
+    question: 'Was passiert, wenn das Bezirksamt nicht reagiert?',
+    answer: 'Nach 4 Wochen gilt die Genehmigungsfreistellung als erteilt. Das steht so in §62 Abs. 2 HBauO. Ohne Rückmeldung darf gebaut werden.',
+  },
+  {
+    question: 'Kann ich ohne Genehmigung bauen?',
+    answer: 'Nein. Die Bauvorlage muss immer eingereicht werden. Wer ohne Freistellungsbescheid baut, riskiert einen Rückbau und ein Bußgeld.',
+  },
+];
+---
+
+<BaseLayout
+  title="Dachgeschoss Genehmigung Hamburg – HBauO 2026: Das ändert sich ab 01.01.2026"
+  description="HBauO 2026 für Dachgeschossausbau in Hamburg: §62 Genehmigungsfreistellung, §61 Vereinfachtes Verfahren, Aufzugspflicht entfällt. Alles, was Sie wissen müssen."
+  canonical="/genehmigung/"
+  currentPath="/genehmigung/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Genehmigung', url: 'https://dachgeschossausbauhamburg.de/genehmigung/' },
+  ]))} />
+
+  <!-- Hero: bg-primary, white text -->
+  <section class="bg-primary text-white pt-16 pb-12 lg:pt-24 lg:pb-16">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-white/70 mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Gültig seit 01.01.2026
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau Hamburg –
+            <span class="text-secondary">Genehmigung</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Was ändert sich zum 01.01.2026? Die neue Hamburgische Bauordnung
+            (HBauO) vereinfacht den DG-Ausbau erheblich. Nur hier erklären wir
+            die Änderungen für Hamburger Eigentümer konkret.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#kontakt-formular" class="bg-secondary text-primary font-semibold text-center px-8 py-3 rounded-lg hover:bg-secondary/90 transition-colors">
+              Kostenlose Erstberatung
+            </a>
+            <a href="#paragraph-62" class="border border-white/30 text-white text-center px-8 py-3 rounded-lg hover:bg-white/10 transition-colors">
+              §62 prüfen
+            </a>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: LeadGenForm -->
+        <div class="lg:sticky lg:top-6 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 1: Die neue HBauO 2026 -->
+  <section class="bg-bg py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="HBauO 2026 – Was ändert sich"
+        title="Die neue Hamburgische Bauordnung: Was ändert sich zum 01.01.2026"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Am 1. Januar 2026 tritt in Hamburg die novellierte Hamburgische Bauordnung
+          in Kraft. Die wichtigste Änderung für Dachgeschossausbauer betrifft die
+          Genehmigungsfreistellung nach §62 HBauO. Für viele Vorhaben wird der
+          klassische Bauantrag überflüssig. Das Verfahren wird digital, schneller
+          und günstiger.
+        </p>
+        <p>
+          Konkret bedeutet das für Hamburger Eigentümer:
+        </p>
+        <ul>
+          <li>
+            Ein- und Zweifamilienhäuser im Geltungsbereich eines qualifizierten
+            Bebauungsplans: Nur noch Genehmigungsfreistellung nach §62.
+          </li>
+          <li>
+            Früher: Bauantrag mit 2 bis 3 Monaten Wartezeit und etwa 1.500 €
+            Gebühr. Heute: Bauvorlage einreichen, 4 Wochen warten, dann darf
+            gebaut werden.
+          </li>
+        </ul>
+        <p>
+          Hamburgs Stadtgebiet besteht zum Großteil aus qualifizierten
+          Bebauungsplänen. Das bedeutet: Die meisten Hamburger Dachgeschossprojekte
+          profitieren direkt von §62. Aufwand und Kosten sinken deutlich.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 2: §62 Genehmigungsfreistellung -->
+  <section id="paragraph-62" class="bg-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="§62 HBauO – Genehmigungsfreistellung"
+        title="§62 Genehmigungsfreistellung: Der Wegfall des Bauantrags"
+      />
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="prose prose-lg max-w-xl text-text-secondary">
+          <p>
+            §62 HBauO regelt die Genehmigungsfreistellung. Das Verfahren ist
+            eine Anzeige. Die Behörde hat 4 Wochen Zeit zu reagieren. Tut sie
+            das nicht, gilt die Freistellung als erteilt.
+          </p>
+          <p>
+            <strong>Voraussetzungen für §62:</strong>
+          </p>
+          <ul>
+            <li>Ein- oder Zweifamilienhaus im Bereich eines qualifizierten Bebauungsplans</li>
+            <li>Änderung der Nutzung zu Wohnzwecken ist zulässig</li>
+            <li>Keine Gauben oder Aufstockungen, die das äußere Erscheinungsbild verändern</li>
+            <li>Keine Abweichungen von Vorschriften</li>
+            <li>Kein Denkmalschutz</li>
+          </ul>
+          <p>
+            <strong>Ablauf:</strong> Bauvorlage einreichen → Bezirksamt prüft
+            innerhalb von 4 Wochen → Kein Widerspruch = Baubeginn möglich.
+            Die bloße Anzeige kostet 0 bis 100 €, nicht die üblichen 200 bis
+            800 € eines Bauantrags.
+          </p>
+          <p>
+            Wichtig: "Im Bereich eines qualifizierten Bebauungsplans" heißt:
+            Hamburgs Großteil des Stadtgebiets fällt darunter. Außerhalb davon
+            gilt §61.
+          </p>
+        </div>
+        <div class="bg-primary/5 rounded-2xl p-6 lg:p-8 border border-primary/10">
+          <h3 class="text-xl font-bold text-text-primary mb-4">
+            Wann gilt §62 nicht?
+          </h3>
+          <p class="text-text-secondary mb-4">
+            Gauben verändern das äußere Erscheinungsbild. Aufstockungen über
+            die zulässige Geschoßzahl hinaus sind genehmigungspflichtig. In
+            diesen Fällen kommt §61 zum Tragen.
+          </p>
+          <p class="text-text-secondary">
+            Wir prüfen vor jeder Beauftragung, ob §62 oder §61 gilt. Das spart
+            Zeit und Geld.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 3: §61 Vereinfachtes Genehmigungsverfahren -->
+  <section class="bg-bg py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="§61 HBauO – Vereinfachtes Verfahren"
+        title="§61 Vereinfachtes Genehmigungsverfahren: Wenn §62 nicht reicht"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Wenn §62 nicht greift, kommt das vereinfachte Genehmigungsverfahren
+          nach §61 HBauO zum Tragen. Das gilt für:
+        </p>
+        <ul>
+          <li>Gauben, die das äußere Erscheinungsbild verändern</li>
+          <li>Aufstockungen über die zulässige Geschoßzahl hinaus</li>
+          <li>Nutzungsänderungen mit erhöhtem Prüfbedarf</li>
+          <li>Außerhalb von Bebauungsplänen liegende Grundstücke</li>
+        </ul>
+        <p>
+          <strong>Kosten:</strong> 200 bis 800 € je nach Bauvorlage.
+          <strong>Dauer:</strong> 2 bis 3 Monate. Wir bereiten die komplette
+          Bauvorlage vor und reichen sie digital über den Online-Dienst des
+          Hamburger Bauamts ein.
+        </p>
+        <p>
+          Das vereinfachte Verfahren nach §61 erfordert mehr Unterlagen als
+          §62. Grundrisse, Schnitte, statische Berechnungen und der
+          GEG-Nachweis müssen vollständig sein. Unvollständige Bauvorlagen
+          führen zu Nachforderungen und verzögern das Projekt.
+        </p>
+        <p>
+          Wir übernehmen die gesamte Bauvorlage. Sie müssen sich um nichts
+          kümmern.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 4: Aufzugspflicht entfällt -->
+  <section class="bg-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="§37 Abs. 4 HBauO – Aufzugspflicht"
+        title="Aufzugspflicht entfällt: 15.000 bis 30.000 € gespart"
+      />
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="prose prose-lg max-w-xl text-text-secondary">
+          <p>
+            Einer der meistübersehenen Vorteile der HBauO 2026: Bei bestehenden
+            Gebäuden entfällt die Aufzugspflicht, wenn zusätzlicher Wohnraum
+            durch Dachgeschossausbau oder Aufstockung geschaffen wird. Das gilt
+            auch für Gebäude, die bereits einen Aufzug haben.
+          </p>
+          <p>
+            §37 Abs. 4 HBauO regelt das ausdrücklich. Bisher mussten
+            Mehrfamilienhäuser bei Erweiterung einen Aufzug einbauen oder
+            nachrüsten. Das kostete 15.000 bis 30.000 € extra.
+          </p>
+          <p>
+            Konkreter Nutzen: Ein DG-Ausbau in einem 3-geschossigen
+            Mehrfamilienhaus spart durch den Entfall der Aufzugspflicht nach
+            §37 Abs. 4 HBauO zwischen 15.000 und 30.000 €. Dieser Betrag
+            fließt direkt in die Wohnqualität.
+          </p>
+          <p>
+            Diese Regelung betrifft nahezu jedes Mehrfamilienhaus in Hamburg.
+            Die meisten Hamburger Bauämter wenden §37 Abs. 4 HBauO seit 2026
+            einheitlich an.
+          </p>
+        </div>
+        <div class="bg-secondary/10 rounded-2xl p-6 lg:p-8 border border-secondary/20">
+          <h3 class="text-xl font-bold text-text-primary mb-4">
+            Was bedeutet das in der Praxis?
+          </h3>
+          <ul class="space-y-3 text-text-secondary">
+            <li class="flex items-start gap-3">
+              <span class="text-secondary font-bold">✓</span>
+              Kein Aufzug bei DG-Ausbau nötig
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-secondary font-bold">✓</span>
+              Auch wenn bereits ein Aufzug vorhanden ist
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-secondary font-bold">✓</span>
+              15.000 bis 30.000 € sparen
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-secondary font-bold">✓</span>
+              Gilt für alle Hamburger Bezirke
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 5: §69 Abweichungstatbestand -->
+  <section class="bg-bg py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="§69 HBauO – Abweichungen"
+        title="§69 Abweichungstatbestand: Spielraum für Bestandsgebäude"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Die HBauO 2026 enthält in §69 neue Abweichungstatbestände für
+          Bestandsgebäude. Das ist relevant, wenn das Vorhaben ansonsten nicht
+          umsetzbar wäre und die öffentliche Sicherheit nicht gefährdet wird.
+        </p>
+        <p>
+          <strong>Typische Anwendungsfälle in Hamburger Altbauten:</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>Raumhöhen unter 2,30 m in Teilbereichen:</strong> Altbauten
+            haben oft niedrige Kniestockbereiche. §69 erlaubt Abweichungen, wenn
+            die Nutzung nicht wesentlich eingeschränkt wird.
+          </li>
+          <li>
+            <strong>Brandschutz-Trennwand-Abstände im Bestand:</strong> Die
+            Abstandsflächen im Bestand weichen von der aktuellen Norm ab. Eine
+            Abweichung nach §69 ist möglich, wenn der Brandschutz durch
+            alternative Maßnahmen sichergestellt wird.
+          </li>
+          <li>
+            <strong>Stellplatznachweispflichten:</strong> Wenn auf dem Grundstück
+            kein Stellplatz geschaffen werden kann, kann eine Befreiung beantragt
+            werden. Das gilt insbesondere in dicht bebauten Hamburger Vierteln.
+          </li>
+        </ul>
+        <p>
+          Eine Abweichung nach §69 muss vor Baubeginn beantragt werden. Wir
+          klären im Vorfeld mit dem zuständigen Bezirksamt, ob eine Abweichung
+          in Frage kommt. Das spart spätere Überraschungen.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 6: Lichte Raumhöhe -->
+  <section class="bg-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Mindestraumhöhe"
+        title="Lichte Raumhöhe: 2,30 m über mindestens 2/3 der Fläche"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Die Mindestraumhöhe im Dachgeschoss beträgt nach HBauO 2,30 m über
+          mindestens 2/3 der Nutzfläche. Das ist keine neue Regelung. Aber die
+          HBauO 2026 macht die Abnahme strenger. Bei Hamburger Altbauten ist das
+          oft eine Herausforderung.
+        </p>
+        <p>
+          Gauben schaffen Abhilfe. Sie erhöhen die Stehhöhe unter dem First und
+          machen aus einer schrägen Decke einen bewohnbaren Raum. In Hamburg
+          sind Gauben bei den meisten Bebauungsplänen zulässig, wenn sie das
+          äußere Erscheinungsbild nicht wesentlich verändern.
+        </p>
+        <p>
+          <strong>Was passiert, wenn die Raumhöhe nicht reicht?</strong> Wenn
+          die Mindestraumhöhe an keiner Stelle erreicht wird, hilft nur eine
+          Aufstockung oder eine Gaube. Eine Ausnahme nach §69 ist nur möglich,
+          wenn die Nutzung nur unwesentlich eingeschränkt wird. Das prüfen wir
+          bei der Vor-Ort-Beratung.
+        </p>
+        <p>
+          In der Praxis bedeutet das: Ein DG-Ausbau ohne Gaube hat in Hamburg
+          selten genügend Stehhöhe. Wir empfehlen deshalb immer eine Gaube als
+          Teil des Ausbaukonzepts. Das erhöht nicht nur die Wohnqualität, sondern
+          sichert auch die Genehmigungsfähigkeit.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 7: Stellplatzpflicht -->
+  <section class="bg-bg py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Stellplatzverordnung Hamburg"
+        title="Stellplatzpflicht in Hamburg: Je nach Bezirk unterschiedlich"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Die Hamburger Stellplatzverordnung macht die Stellplatzpflicht vom
+          Bezirk abhängig. Das ist eine der kompliziertesten Regelungen für
+          Hamburger Bauherren. Wir kennen die Unterschiede auswendig.
+        </p>
+        <p>
+          <strong>Strenge Stellplatzpflicht:</strong> Eimsbüttel, Altona,
+          Eilbek. Hier muss ein Stellplatz nachgewiesen oder eine Ablöse
+          gezahlt werden. Die Ablösesummen sind hoch. Wir raten dazu, die
+          Pflicht im Vorfeld mit dem Bezirksamt zu klären.
+        </p>
+        <p>
+          <strong>Großzügigere Regelungen:</strong> Bergedorf, Harburg,
+          Rahlstedt. Hier sind die Anforderungen an den Stellplatznachweis
+          niedriger. Oft reicht eine Befreiung.
+        </p>
+        <p>
+          <strong>Reine DG-Ausbauten ohne Nutzungsänderung:</strong> Oft ist
+          eine Befreiung möglich. Das hängt davon ab, ob die Zahl der
+          Wohnungen erhöht wird oder nur der Wohnraum vergrößert wird.
+        </p>
+        <p>
+          Wir klären die Stellplatzfrage vorab mit dem zuständigen Bezirksamt.
+          Das kostet wenig Zeit und kann ein Projekt nicht stoppen.
+        </p>
+      </div>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <h3 class="font-semibold text-text-primary mb-2">Strenge Bezirke</h3>
+          <p class="text-text-secondary text-sm">Eimsbüttel, Altona, Eilbek – Stellplatznachweis oder Ablöse erforderlich</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <h3 class="font-semibold text-text-primary mb-2">Großzügige Bezirke</h3>
+          <p class="text-text-secondary text-sm">Bergedorf, Harburg, Rahlstedt – Befreiung oft möglich</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 8: Digitale Baugenehmigung -->
+  <section class="bg-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Online-Dienst Hamburg"
+        title="Digitale Baugenehmigung: Alles läuft über das Hamburger Bauamt"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Seit 2026 läuft das vereinfachte Genehmigungsverfahren digital über
+          den Hamburger Bauamt-Online-Dienst. Papierpostalen gehören der
+          Vergangenheit an. Das gilt für §61 und §62 gleichermaßen.
+        </p>
+        <p>
+          <strong>Vorteile der digitalen Abwicklung:</strong>
+        </p>
+        <ul>
+          <li>Bauvorlagen können digital eingereicht werden</li>
+          <li>Statusabfrage online möglich</li>
+          <li>Kein persönliches Erscheinen beim Bauamt nötig</li>
+          <li>Schnellere Bearbeitung durch standardisierte Prozesse</li>
+        </ul>
+        <p>
+          Wir haben alle Prozesse beim Hamburger Bauamt digitalisiert. Die
+          Bauvorlage wird bei uns im Büro erstellt, geprüft und direkt über den
+          Online-Dienst eingereicht. Sie bekommen den Status weitergeleitet.
+        </p>
+        <p>
+          Die digitale Abwicklung verkürzt die Bearbeitungszeit im Schnitt um
+          2 bis 3 Wochen. Das ist ein Vorteil, der direkt dem Eigentümer
+          zugutekommt.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 9: Schritt-für-Schritt -->
+  <section class="bg-primary text-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Unser Ablauf"
+        title="Schritt für Schritt zur Genehmigung"
+        light={true}
+      />
+      <div class="mt-8">
+        <ol class="space-y-6">
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 w-10 h-10 bg-secondary text-primary rounded-full flex items-center justify-center font-bold text-lg">1</span>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Kostenlose Vor-Ort-Beratung</h3>
+              <p class="text-white/70">Wir prüfen, ob §62 oder §61 gilt. Das ist der erste und wichtigste Schritt. Falsche Annahmen kosten Zeit und Geld.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 w-10 h-10 bg-secondary text-primary rounded-full flex items-center justify-center font-bold text-lg">2</span>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Bauvorlage erstellen</h3>
+              <p class="text-white/70">Wir bereiten alle Unterlagen vor: Grundrisse, Schnitte, Statik, GEG-Nachweis. Alles aus einer Hand.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 w-10 h-10 bg-secondary text-primary rounded-full flex items-center justify-center font-bold text-lg">3</span>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Digital einreichen</h3>
+              <p class="text-white/70">Über den Hamburger Bauamt-Online-Dienst. Kein Papier, kein Weg zum Amt.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 w-10 h-10 bg-secondary text-primary rounded-full flex items-center justify-center font-bold text-lg">4</span>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">4 Wochen warten (bei §62) oder 2 bis 3 Monate (bei §61)</h3>
+              <p class="text-white/70">Die Frist ist gesetzlich festgelegt. Wir überwachen den Status und informieren Sie sofort.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 w-10 h-10 bg-secondary text-primary rounded-full flex items-center justify-center font-bold text-lg">5</span>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Baubeginn</h3>
+              <p class="text-white/70">Wir koordinieren alle Gewerke ab Tag 1. Kein Eigentümer muss sich um die Bauleitung kümmern.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 10: Häufige Fehler -->
+  <section class="bg-bg py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Was schiefgehen kann"
+        title="Häufige Fehler, die Projekte verzögern"
+      />
+      <div class="mt-8 prose prose-lg max-w-3xl text-text-secondary">
+        <p>
+          Wir haben in Hamburg hunderte Dachgeschossprojekte begleitet. Diese
+          Fehler sehen wir immer wieder. Wir vermeiden sie von Anfang an.
+        </p>
+      </div>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <p class="text-text-secondary text-sm">
+            <strong class="text-text-primary">Bauvorlage unvollständig</strong><br />
+            Nachforderung durch das Bezirksamt → +4 Wochen Verzögerung
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <p class="text-text-secondary text-sm">
+            <strong class="text-text-primary">Falsche Annahme über Bebauungsplan</strong><br />
+            §61 statt §62 → längeres Verfahren, höhere Kosten
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <p class="text-text-secondary text-sm">
+            <strong class="text-text-primary">Gaube geplant, ohne statische Vorabprüfung</strong><br />
+            Statik-Probleme erst bei der Bauvorlage → Baustopp
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-border">
+          <p class="text-text-secondary text-sm">
+            <strong class="text-text-primary">Stellplatznachweis vergessen</strong><br />
+            Bezirksamt stoppt das Projekt → Nachreichung notwendig
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-border md:col-span-2">
+          <p class="text-text-secondary text-sm">
+            <strong class="text-text-primary">Fehlende Dampfbremse geplant</strong><br />
+            GEG-Nachweis nicht erfüllbar → Aufwand verdoppelt sich
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="bg-white py-16 lg:py-24">
+    <Container>
+      <SectionHeader
+        eyebrow="Fragen und Antworten"
+        title="Häufig gestellte Fragen zur Genehmigung"
+      />
+      <div class="mt-8 max-w-3xl">
+        <FaqAccordion faqs={faqs} headingLevel="h3" />
+      </div>
+    </Container>
+  </section>
+
+  <!-- End CTA -->
+  <section id="kontakt-formular" class="bg-bg py-16 lg:py-24">
+    <Container>
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+          HBauO 2026 Frage? Wir klären Ihre Genehmigung kostenlos.
+        </h2>
+        <p class="text-text-secondary text-lg mb-8">
+          Sie haben ein konkretes Projekt? Wir prüfen die Genehmigungsfähigkeit
+          direkt vor Ort und sagen Ihnen, welcher Paragraph für Ihr Haus gilt.
+          Kostenlos, unverbindlich, innerhalb von 24 Stunden.
+        </p>
+        <div class="max-w-lg mx-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  details.faq-item summary {
+    cursor: pointer;
+  }
+  details.faq-item[open] summary {
+    color: var(--color-primary);
+  }
+</style>
