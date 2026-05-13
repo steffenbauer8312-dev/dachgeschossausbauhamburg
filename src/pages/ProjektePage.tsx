@@ -17,7 +17,7 @@ const PROJECTS: Project[] = [
     location: 'Schwabing',
     area: '65 m²',
     description: 'Kompletter Ausbau eines Satteldachgeschosses in einem Altbau von 1928. Zwei Fledermausgauben schaffen stehende Raumhöhe im gesamten Bereich.',
-    scope: ['Fledermausgauben', 'Dämmung', 'Bad', ' Elektrik', 'Heizung'],
+    scope: ['Fledermausgauben', 'Dämmung', 'Bad', 'Elektrik', 'Heizung'],
   },
   {
     id: 2,
