@@ -1,0 +1,333 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateHowToSchema } from '@/lib/schema';
+
+const howToSchema = JSON.stringify(generateHowToSchema([
+  { name: 'Kostenlose Erstberatung', text: 'Wir kommen zu Ihnen und schauen uns das Dachgeschoss an. Dabei klären wir: Ist §62 HBauO anwendbar? Wie ist der statische Zustand? Welche Gauben wären möglich? Die Beratung ist kostenlos und unverbindlich.' },
+  { name: 'Individuelle Planung & Angebot', text: 'Auf Basis der Vor-Ort-Beratung erstellen wir eine detaillierte Planung mit Kostenaufstellung. Das Angebot ist transparent – alle Positionen aufgeschlüsselt. Darin: Zeitplan, Kosten nach Hamburger Richtwerten, Fördermittel-Check.' },
+  { name: 'Genehmigungsprüfung', text: 'Wir prüfen, ob die Genehmigungsfreistellung nach §62 HBauO greift oder ob ein vereinfachtes Verfahren nach §61 nötig ist. Bei §62 reichen wir die Bauvorlage digital ein. Nach 4 Wochen darf gebaut werden.' },
+  { name: 'Statik & Detailplanung', text: 'Ein Tragwerksplaner berechnet die notwendigen statischen Maßnahmen. Für Hamburger Altbauten (bis 1948) ist das besonders wichtig – oft ist die Dachkonstruktion nicht für DG-Lasten ausgelegt. Die Detailplanung für alle Gewerke wird abgeschlossen.' },
+  { name: 'Bauphase', text: 'Gerüstbau und Dachhaut → Dämmung (GEG-konform, mit Dampfbremse) → Innenausbau (Trockenbau, Elektrik, Heizung) → Böden und Malerarbeiten → Bad-Einbau. Wir arbeiten sauber und halten Sie über den Fortschritt auf dem Laufenden.' },
+  { name: 'Abnahme & Übergabe', text: 'Gemeinsame Abnahme mit Ihnen. Wir zeigen alle Funktionen und Details. Eventuelle Mängel werden schnellstmöglich behoben. Sie haben ein einziehbar fertiges Dachgeschoss.' },
+]));
+
+const localSchema = JSON.stringify(generateLocalBusinessSchema());
+const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+  { name: 'Ablauf', url: 'https://dachgeschossausbauhamburg.de/prozess/' },
+]));
+---
+
+<BaseLayout
+  title="Ablauf – Dachgeschossausbau Hamburg in 6 Schritten"
+  description="So läuft Ihr Dachgeschossausbau in Hamburg ab: Von der kostenlosen Beratung bis zur schlüsselfertigen Übergabe – transparent und strukturiert."
+  canonical="/prozess/"
+  currentPath="/prozess/"
+>
+  <JsonLdSchema schema={localSchema} />
+  <JsonLdSchema schema={breadcrumbSchema} />
+  <JsonLdSchema schema={howToSchema} />
+
+  <!-- Hero -->
+  <section class="bg-primary py-20 lg:py-28">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <span class="inline-block text-sm font-semibold text-white/60 mb-6 uppercase tracking-wider">
+            Der Weg zum fertigen Dachgeschoss
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
+            Ihr Dachgeschossausbau<br />
+            <span class="text-white/80">in Hamburg</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-white/70 leading-relaxed mb-8 max-w-xl">
+            Von der kostenlosen Beratung bis zur schlüsselfertigen Übergabe – transparent,
+            strukturiert und ohne Überraschungen. Sechs Schritte, ein Team, eine Nummer.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <a href="#kontakt-formular" class="cta-primary bg-white text-primary hover:bg-white/90 text-center">
+              Kostenlose Beratung anfragen
+            </a>
+            <a href="/leistungen" class="border border-white/30 text-white text-center px-6 py-3 rounded-lg hover:bg-white/10 transition-colors font-semibold">
+              Unsere Leistungen
+            </a>
+          </div>
+        </div>
+        <div class="lg:sticky lg:top-28">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 1: Die 6 Phasen -->
+  <section class="py-20 lg:py-28">
+    <Container>
+      <SectionHeader
+        badge="Übersicht"
+        heading="Die 6 Phasen im Überblick"
+        subheading="Jeder Schritt ist klar definiert. So wissen Sie immer, wo Ihr Projekt gerade steht."
+      />
+
+      <!-- Timeline Steps -->
+      <div class="space-y-8 max-w-4xl mx-auto">
+
+        <!-- Step 1 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">1</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Kostenlose Erstberatung & Vor-Ort-Termin</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">1–2 Stunden</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Wir kommen zu Ihnen und schauen uns das Dachgeschoss an. Dabei klären wir direkt vor Ort:
+              Ist §62 HBauO anwendbar? Wie ist der statische Zustand? Welche Gauben wären möglich?
+              Was kalkuliert der Tragwerksplaner? Die Beratung ist kostenlos und unverbindlich –
+              und Sie wissen hinterher, ob ein Ausbau für Ihr Haus in Frage kommt.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">2</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Individuelle Planung & Angebot</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">1–2 Wochen</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Auf Basis der Vor-Ort-Beratung erstellen wir eine detaillierte Planung mit Kostenaufstellung.
+              Das Angebot ist transparent – alle Positionen aufgeschlüsselt. Darin: Zeitplan,
+              Kosten nach Hamburger Richtwerten, Fördermittel-Check. Keine versteckten Kosten,
+              keine Nachträge. Sie wissen genau, was auf Sie zukommt, bevor wir starten.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">3</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Genehmigungsprüfung</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">2–8 Wochen</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Wir prüfen, ob die Genehmigungsfreistellung nach §62 HBauO greift oder ob ein
+              vereinfachtes Verfahren nach §61 nötig ist. Bei §62 reichen wir die Bauvorlage
+              digital ein. Nach 4 Wochen gilt die Genehmigung als erteilt – gebaut werden darf.
+              Bei §61 bereiten wir alle Unterlagen vor und reichen sie ein. Wir begleiten das
+              Verfahren aktiv bis zur Freigabe. Welcher Paragraph für Ihr Projekt gilt, hängt
+              von der Art der Maßnahme und dem Hamburger Bezirk ab.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">4</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Statik & Detailplanung</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">1–2 Wochen</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Ein Tragwerksplaner berechnet die notwendigen statischen Maßnahmen. Für Hamburger
+              Altbauten – besonders solche bis 1948 – ist das besonders wichtig: Oft ist die
+              Dachkonstruktion nicht für DG-Lasten ausgelegt. In diesem Schritt wird die
+              Detailplanung für alle Gewerke abgeschlossen: Dämmung, Elektrik, Heizung,
+              Trockenbau, Bad. Alles ist durchgeplant, bevor die Bauphase beginnt.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">5</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Bauphase</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">6–12 Wochen</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Gerüstbau und Dachhaut → Dämmung (GEG-konform, mit Dampfbremse) →
+              Innenausbau (Trockenbau, Elektrik, Heizung) → Böden und Malerarbeiten →
+              Bad-Einbau (falls gewünscht). Wir arbeiten sauber und halten Sie über den
+              Fortschritt auf dem Laufenden. Ein fester Ansprechpartner bei jedem Schritt –
+              keine Weiterleitung an Callcenter, keine anonymen Handwerker.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+            <span class="text-primary font-bold text-xl">6</span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+              <h3 class="text-xl font-bold text-text-primary">Abnahme & Übergabe</h3>
+              <span class="text-sm text-text-secondary bg-surface px-3 py-1 rounded-full border border-border w-fit">1 Tag + Nacharbeit</span>
+            </div>
+            <p class="text-text-secondary leading-relaxed">
+              Gemeinsame Abnahme mit Ihnen. Wir zeigen alle Funktionen, alle Schalter,
+              alle Details. Eventuelle Mängel werden schnellstmöglich behoben – versprochen.
+              Sie haben ein einziehbar fertiges Dachgeschoss. Die Schlüsselübergabe ist
+              der letzte Schritt eines Projekts, das Sie von Anfang an begleitet haben.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 2: Zeitplan -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Zeitplan"
+        heading="Realistischer Zeitplan für Hamburg"
+        subheading="So lange dauert Ihr Projekt – je nach Umfang und Genehmigungsweg."
+      />
+      <div class="max-w-3xl mx-auto space-y-4">
+
+        <div class="bg-surface rounded-xl p-6 border border-border">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-text-primary">Reiner Innenausbau</h3>
+            <span class="text-sm text-text-secondary bg-primary/10 px-3 py-1 rounded-full">6–12 Wochen</span>
+          </div>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            4–8 Wochen Bauzeit + 2–4 Wochen Genehmigungsprüfung = 6–12 Wochen Gesamtprojekt.
+            Gilt für Projekte ohne Gauben oder wesentliche Strukturänderungen.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-xl p-6 border border-border">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-text-primary">Komplettausbau mit Gaube</h3>
+            <span class="text-sm text-text-secondary bg-primary/10 px-3 py-1 rounded-full">3–6 Monate</span>
+          </div>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            8–16 Wochen Bauzeit + 4–8 Wochen Genehmigung + Statik = 3 bis 6 Monate.
+            Gauben erfordern in den meisten Hamburger Bezirken ein vollständiges
+            Genehmigungsverfahren nach §61 HBauO.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-xl p-6 border border-border">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-text-primary">Komplexe Projekte</h3>
+            <span class="text-sm text-text-secondary bg-secondary/20 px-3 py-1 rounded-full">6–12 Monate</span>
+          </div>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            Denkmalschutz, Nutzungsänderung, mehrere Wohneinheiten. Frühzeitige Abstimmung
+            mit dem Denkmalschutzamt Hamburg, extended Genehmigungsphase, eventuell wasserrechtliche
+            Verfahren. §35c EStG ist hier besonders interessant – fragen Sie uns.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 3: Was passiert, wenn... -->
+  <section class="py-20 lg:py-28">
+    <Container>
+      <SectionHeader
+        badge="Sonderfälle"
+        heading="Was passiert, wenn..."
+        subheading="Jedes Hamburger Dachgeschoss ist anders. Hier erfahren Sie, wie wir mit besonderen Situationen umgehen."
+        align="left"
+      />
+      <div class="max-w-3xl space-y-6">
+
+        <div class="bg-bg rounded-xl p-6 border border-border">
+          <h3 class="text-lg font-bold text-text-primary mb-2">
+            "...das Dach denkmalgeschützt ist?"
+          </h3>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            Frühe Abstimmung mit dem Denkmalschutzamt Hamburg ist entscheidend. Materialien und
+            Gaubenform müssen genehmigt werden. §35c EStG ist hier besonders interessant –
+            Denkmalschutz-Objekte bieten erhebliche steuerliche Vorteile. Wir kennen die
+            Anforderungen der Hamburger Behörden und planen von Anfang an darauf hin.
+          </p>
+        </div>
+
+        <div class="bg-bg rounded-xl p-6 border border-border">
+          <h3 class="text-lg font-bold text-text-primary mb-2">
+            "...die Statik nicht ausreicht?"
+          </h3>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            Kein Problem – wir haben dafür Erfahrung. Verstärkung der Sparren oder Einbau von
+            Unterzügen sind bewährte Maßnahmen. Kosten: 2.000–8.000 € je nach Maßnahme,
+            abhängig von Dachform und Zustand. Der Tragwerksplaner kalkuliert das präzise
+            im Vorfeld, damit Sie Planungssicherheit haben.
+          </p>
+        </div>
+
+        <div class="bg-bg rounded-xl p-6 border border-border">
+          <h3 class="text-lg font-bold text-text-primary mb-2">
+            "...§61 statt §62 gilt?"
+          </h3>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            Wir passen die Bauvorlage an und reichen alle Unterlagen vollständig ein.
+            Das verlängert das Genehmigungsverfahren um ca. 2 Monate und erfordert
+            zusätzliche Gebühren (ca. 200–600 €, je nach Bezirk und Umfang). In vielen
+            Hamburger Bezirken ist §61 trotzdem der richtige Weg – wir kennen die Details.
+          </p>
+        </div>
+
+        <div class="bg-bg rounded-xl p-6 border border-border">
+          <h3 class="text-lg font-bold text-text-primary mb-2">
+            "...im Winter gebaut wird?"
+          </h3>
+          <p class="text-text-secondary text-sm leading-relaxed">
+            Kein Problem. Innenausbau funktioniert ganzjährig – Dämmung, Trockenbau, Elektrik,
+            Heizung, Malerarbeiten. Die Baustelle ist witterungsunabhängig abgedichtet.
+            Gaubenmontage bei Minusgraden ist nicht möglich – das planen wir ein und
+            ordnen die Gewerke entsprechend.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- End CTA -->
+  <section class="py-20 bg-primary" id="kontakt-formular">
+    <Container>
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+          Zeitplan für Ihr Projekt?
+        </h2>
+        <p class="text-white/70 text-lg mb-8 max-w-lg mx-auto">
+          Wir kalkulieren kostenlos. Sprechen wir über Ihr Dachgeschoss –
+          und finden Sie heraus, was möglich ist.
+        </p>
+        <div class="bg-white rounded-2xl p-6">
+          <LeadGenForm />
+        </div>
+        <p class="text-white/50 text-sm mt-6">
+          Wir melden uns innerhalb von 24 Stunden. Keine Verpflichtung, kein Verkaufsdruck.
+        </p>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

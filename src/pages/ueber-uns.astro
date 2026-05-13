@@ -1,0 +1,373 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const localSchema = JSON.stringify(generateLocalBusinessSchema());
+const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+  { name: 'Über uns', url: 'https://dachgeschossausbauhamburg.de/ueber-uns/' },
+]));
+---
+
+<BaseLayout
+  title="Über uns – Dachgeschossausbau Hamburg"
+  description="Wir bauen seit Jahren Dachgeschosse in Hamburg aus – mit eigenem Team, festen Ansprechpartnern und klarer Abrechnung."
+  canonical="/ueber-uns/"
+  currentPath="/ueber-uns/"
+>
+  <JsonLdSchema schema={localSchema} />
+  <JsonLdSchema schema={breadcrumbSchema} />
+
+  <!-- Hero -->
+  <section class="bg-primary py-20 lg:py-28">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-block text-sm font-semibold text-white/60 mb-6 uppercase tracking-wider">
+          Hamburger Unternehmen, lokale Expertise
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
+          Wir bauen Dachgeschosse<br />
+          <span class="text-white/80">in Hamburg aus – seit Jahren.</span>
+        </h1>
+        <p class="text-lg lg:text-xl text-white/70 leading-relaxed max-w-2xl">
+          Mit eigenem Team, festen Ansprechpartnern und klarer Abrechnung.
+          Ohne Vermittlung, ohne Provision. Wir setzen selbst um.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 1: Unsere Geschichte -->
+  <section class="py-20 lg:py-28">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-4 uppercase tracking-wider">Unsere Geschichte</span>
+          <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
+            Hamburger Boden, Hamburger Regeln
+          </h2>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            Wir sind ein Hamburger Team mit Erfahrung im Dachgeschossausbau. Wir kennen
+            die HBauO, die Hamburger Bezirke und die lokalen Handwerkstarife. Anders als
+            große Franchises sind wir nah dran – am Bezirksamt, an den Bezirken, an den Menschen.
+          </p>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            Unser Vorteil: Wir haben langjährige Beziehungen zu Hamburger Ämtern, Tragwerksplanern
+            und Dachdeckerbetrieben. Das beschleunigt Genehmigungen und sorgt dafür, dass
+            Bauphasen nicht ins Stocken geraten. Wenn wir etwas versprechen, meinen wir es –
+            und unser Netzwerk in Hamburg macht es möglich.
+          </p>
+          <p class="text-text-secondary leading-relaxed">
+            Die HBauO 2026 mit §62 Freistellung und §61 vereinfachtem Verfahren
+            haben wir von Anfang an in unsere Arbeit integriert. Das ist unser Spezialgebiet –
+            und Ihr Vorteil.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Alle Hamburger Bezirke</h3>
+                <p class="text-sm text-text-secondary">Eimsbüttel, Nord, Mitte, Altona, Harburg, Bergedorf, Wandsbek – und jede Adresse dazwischen.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">HBauO 2026 Spezialisierung</h3>
+                <p class="text-sm text-text-secondary">§62 Freistellung, §61 Vereinfachtes Verfahren – wir kennen die Paragraphen auswendig.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Hamburger Richtwerte</h3>
+                <p class="text-sm text-text-secondary">Kalkulation nach regionalen Handwerkstarifen – keine überhöhten Festpreise, keine versteckten Kosten.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 2: Was uns unterscheidet -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Unterschied"
+        heading="Was uns von großen Anbietern unterscheidet"
+        subheading="Keine Vermittlung, keine Provision. Ein Team, eine Nummer – von der Beratung bis zur Abnahme."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m10 0v-2a3 3 0 00-5.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Eigenes Team, keine Vermittlung</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Wir setzen selbst um. Keine Vermittlung, keine Provision, keine anonymen Subunternehmer.
+            Von der Beratung über die Genehmigung bis zur Bauphase arbeiten Sie mit einem
+            festen Team – und einer festen Nummer.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Hamburg-Expertise</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Wir wissen, welche Bezirke Denkmalschutz haben, wo die Stellplatzpflicht streng ist,
+            wo Gauben möglich sind. Diese Kenntnisse kommen aus Jahren Arbeit in Hamburg –
+            nicht aus allgemeinen Branchenratgebern.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Fördermittel-Kompetenz</h3>
+          <p class="text-text-secondary leading-relaxed">
+            KfW 261, BAFA-Einzelmaßnahmen, §35c EStG – wir kennen die Förderlandschaft
+            und kombinieren sie für Sie. Steuerbonus, Kredit, Zuschuss: Was für Ihr
+            Projekt sinnvoll ist, rechnen wir gemeinsam durch.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">HBauO 2026 Spezialisierung</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Wir haben uns auf die neue Hamburger Bauordnung spezialisiert und nutzen §62
+            für unsere Kunden. Wo andere noch nach alter Methode genehmigen lassen,
+            haben wir das Verfahren für Ihr Projekt bereits durchdacht.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 3: Unser Team -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Team"
+        heading="Feste Ansprechpartner – vom Anfang bis zum Ende"
+        subheading="Bei uns gibt es kein Callcenter. Sie sprechen direkt mit den Menschen, die Ihr Projekt umsetzen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-1">Tragwerksplaner / Bauleiter</h3>
+          <p class="text-sm text-text-secondary mb-4">Erfahrung: X Jahre Dachgeschossausbau in Hamburg.</p>
+          <p class="text-sm text-text-secondary">
+            Zuständig für Statik, Detailplanung und die technische Umsetzung. Ständig in Kontakt
+            mit den ausführenden Handwerkern vor Ort.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m10 0v-2a3 3 0 00-5.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-1">Projektkoordination</h3>
+          <p class="text-sm text-text-secondary mb-4">Ihr fester Ansprechpartner von Anfang bis Ende.</p>
+          <p class="text-sm text-text-secondary">
+            Koordiniert alle Gewerke, hält Sie auf dem Laufenden und ist bei Fragen
+            direkt erreichbar. Ein Team, eine Nummer – das gilt hier.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-1">Vor-Ort-Beratung</h3>
+          <p class="text-sm text-text-secondary mb-4">Wir kommen zu Ihnen und schauen uns das Dachgeschoss an.</p>
+          <p class="text-sm text-text-secondary">
+            Beim Vor-Ort-Termin klären wir die baulichen Voraussetzungen, die Genehmigungsfrage
+            und die ersten Kostenrahmen. Unverbindlich und kostenlos.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 4: Für wen wir da sind -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Zielgruppen"
+        heading="Für wen wir da sind"
+        subheading="Drei Gruppen, bei denen wir besonders viel Erfahrung haben."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Eigenheimbesitzer</h3>
+          <p class="text-text-secondary leading-relaxed">
+            In Hamburg, die Wohnraum schaffen wollen. Ob für die Familie, als Homeoffice
+            oder zur Vermietung – wir begleiten Ihr Projekt von der Idee bis zur Übergabe.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Investoren</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Die den Hamburger Mietmarkt nutzen wollen. Wir liefern renditeoptimierte
+            DG-Projekte: schnelle Umsetzung, steuerliche Vorteile, geringe Leerstandszeit.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">Architekten</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Die einen zuverlässigen Generalunternehmer für ihre DG-Projekte suchen.
+            Wir arbeiten prompt, sauber und nach Architekten-Vorgaben – als verlässlicher
+            Partner hinter dem Entwurf.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 5: Qualitätsversprechen -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Versprechen"
+          heading="Was Sie von uns erwarten können"
+          align="left"
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Festpreisangebot</h3>
+              <p class="text-sm text-text-secondary">Keine Nachträge, keine Überraschungen. Was im Angebot steht, gilt.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Fester Ansprechpartner</h3>
+              <p class="text-sm text-text-secondary">Eine Nummer, ein Team, von der Beratung bis zur Abnahme.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Saubere Arbeit</h3>
+              <p class="text-sm text-text-secondary">Wir hinterlassen das Haus besenrein. Jeden Abend aufgeräumt.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Zeitplan einhalten</h3>
+              <p class="text-sm text-text-secondary">Wir halten, was wir versprechen. Wenn sich etwas ändert, sprechen wir es rechtzeitig an.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- End CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+          Kennenlernen?
+        </h2>
+        <p class="text-text-secondary text-lg mb-8 max-w-lg mx-auto">
+          Sprechen wir über Ihr Projekt. Kostenlose Erstberatung, unverbindlich,
+          direkt mit einem Menschen von hier.
+        </p>
+        <a href="/kontakt" class="cta-primary text-lg px-10 py-4 inline-block">
+          Zum Kontakt
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
