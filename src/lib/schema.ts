@@ -1,3 +1,5 @@
+import type { Service } from '../types'
+
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
@@ -34,6 +36,24 @@ export function generateServiceSchema(service: { name: string; description: stri
     "@context": "https://schema.org",
     "@type": "Service",
     "name": service.name,
+    "description": service.description,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Dachgeschossausbau München"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "München"
+    },
+    "url": `https://dachgeschossausbaumuenchen.de/leistungen/${service.slug}`
+  }
+}
+
+export function generateServiceSchemaFromService(service: Service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
     "description": service.description,
     "provider": {
       "@type": "LocalBusiness",
