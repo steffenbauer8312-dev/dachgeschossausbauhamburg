@@ -7,6 +7,7 @@ import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateFaqSchema } from '@/lib/schema';
 import { FAQ_DATA } from '@/data/faqData';
+import { generateFaqSlug } from '@/lib/faq';
 
 const pageTitle = 'FAQ Dachgeschossausbau Hamburg – 40+ Fragen & Antworten';
 const pageDescription = 'Die häufigsten Fragen zum Dachgeschossausbau in Hamburg beantwortet: Kosten, HBauO 2026 Genehmigung, Fördermittel KfW 261, Gauben, Dämmung.';
@@ -48,6 +49,9 @@ const faqSchema = JSON.stringify(generateFaqSchema(FAQ_DATA));
     <Container>
       <div class="max-w-3xl mx-auto">
         <FaqAccordion faqs={FAQ_DATA} />
+        <p class="text-center text-xs text-text-secondary mt-6">
+          Jede Frage hat eine eigene URL, z.B. <a href={`/faq/${generateFaqSlug(FAQ_DATA[0].question)}/`} class="underline hover:text-primary">dachgeschossausbauhamburg.de/faq/was-kostet-ein-dachgeschossausbau-hamburg/</a>
+        </p>
       </div>
     </Container>
   </section>

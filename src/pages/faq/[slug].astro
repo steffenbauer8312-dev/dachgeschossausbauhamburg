@@ -1,0 +1,147 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateFaqSchema } from '@/lib/schema';
+import { FAQ_DATA } from '@/data/faqData';
+import { generateFaqSlug } from '@/lib/faq';
+
+export async function getStaticPaths() {
+  return FAQ_DATA.map((faq) => ({
+    params: { slug: generateFaqSlug(faq.question) },
+    props: { faq },
+  }));
+}
+
+const { faq } = Astro.props;
+const slug = generateFaqSlug(faq.question);
+
+// Canonical – points to itself
+const canonicalUrl = `/faq/${slug}/`;
+
+// SEO meta
+const pageTitle = `${faq.question} – FAQ Dachgeschossausbau Hamburg`;
+const pageDescription = faq.answer.length > 155
+  ? faq.answer.slice(0, 155) + '…'
+  : faq.answer;
+
+// Schema: standalone Question + FAQPage (the FAQPage references all Qs, question points to this page)
+const faqPageSchema = JSON.stringify(generateFaqSchema([faq]));
+const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
+  { label: 'Startseite', href: '/' },
+  { label: 'FAQ', href: '/faq/' },
+  { label: faq.question, href: canonicalUrl },
+]));
+
+// Other related FAQs (for "Mehr Fragen" section)
+const allSlugs = FAQ_DATA.map((f) => generateFaqSlug(f.question));
+const currentIndex = allSlugs.indexOf(slug);
+const relatedFaqs = [
+  ...FAQ_DATA.slice(currentIndex + 1, currentIndex + 4),
+  ...FAQ_DATA.slice(Math.max(0, currentIndex - 3), currentIndex),
+].filter((f) => generateFaqSlug(f.question) !== slug).slice(0, 3);
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'FAQ', href: '/faq/' },
+  { label: faq.question, href: canonicalUrl },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalUrl}
+  currentPath={canonicalUrl}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={breadcrumbSchema} />
+  <JsonLdSchema schema={faqPageSchema} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-bg py-12 lg:py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-4 uppercase tracking-wider">
+          Frage aus dem FAQ
+        </span>
+        <h1 class="text-3xl lg:text-4xl font-bold text-text-primary leading-tight mb-6">
+          {faq.question}
+        </h1>
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <p class="text-lg leading-relaxed">{faq.answer}</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Lead Gen -->
+  <section class="py-12">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-surface rounded-2xl border border-border p-6 lg:p-8">
+          <p class="text-sm font-semibold text-text-secondary mb-4">
+            Haben Sie weitere Fragen zu Ihrem Projekt?
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Related FAQs -->
+  {relatedFaqs.length > 0 && (
+    <section class="py-12 bg-bg">
+      <Container>
+        <div class="max-w-3xl mx-auto">
+          <SectionHeader
+            badge="Mehr Fragen"
+            heading="Weitere Antworten"
+            headingLevel="h2"
+            align="left"
+          />
+          <div class="space-y-3">
+            {relatedFaqs.map((related) => {
+              const relatedSlug = generateFaqSlug(related.question);
+              return (
+                <a
+                  href={`/faq/${relatedSlug}/`}
+                  class="flex items-start gap-3 p-4 bg-surface rounded-xl border border-border hover:border-primary transition-colors group"
+                >
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.986.295-.986.83v.35c0 .408-.11.809-.305 1.162-.175.317-.44.552-.74.552h-.03c-.622 0-1.15-.25-1.47-.674a1.45 1.45 0 01-.01-1.97l.36-.36c.195-.195.195-.512 0-.707-.195-.195-.512-.195-.707 0l-.36.36a1.45 1.45 0 01-1.97-.01l-.36-.36c-.195-.195-.512-.195-.707 0-.195.195-.195.512 0 .707l.36.36a1.45 1.45 0 01.01 1.97l-.36.36c-.195.195-.195.512 0 .707.195.195.512.195.707 0l.36-.36c.317.32.848.674 1.47.674h.03c.602 0 1.13-.486 1.25-1.12v-.35c0-.536.444-.728.986-.83 1.728-.332 3.006-1.507 3.006-2.907 0-1.657-1.79-3-4-3-1.742 0-3.223 1.07-3.772 2" />
+                  </svg>
+                  <span class="text-text-primary font-medium group-hover:text-primary transition-colors">
+                    {related.question}
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+          <p class="text-center mt-6">
+            <a href="/faq/" class="text-primary font-semibold hover:underline">
+              Alle {FAQ_DATA.length} Fragen ansehen →
+            </a>
+          </p>
+        </div>
+      </Container>
+    </section>
+  )
+  }
+
+  <!-- Back link -->
+  <section class="pb-16">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <a href="/faq/" class="text-sm text-text-secondary hover:text-primary transition-colors inline-flex items-center gap-2">
+          ← Zur FAQ-Übersicht
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
