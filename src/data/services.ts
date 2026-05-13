@@ -30,7 +30,7 @@ export const SERVICES: Service[] = [
     benefits: [
       'Erhebliche Verbesserung der Lichtverhältnisse',
       'Mehr nutzbare Raumhöhe',
-      ' Individuelle Anpassung an Ihre Dachform',
+      'Individuelle Anpassung an Ihre Dachform',
       'Seit 2025 in Bayern genehmigungsfrei möglich',
     ],
     useCases: [

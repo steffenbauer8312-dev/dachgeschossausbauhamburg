@@ -1,9 +1,11 @@
 import { Helmet } from 'react-helmet-async'
 import { CtABlock } from '../components/sections/CtABlock'
 import { FAQ_DATA } from '../data/faqData'
+import { generateFaqSchema } from '../lib/schema'
 
 export default function GenehmigungPage() {
   const genehmigungFaqs = FAQ_DATA.filter(faq => faq.category === 'Genehmigung')
+  const faqSchema = generateFaqSchema(genehmigungFaqs.map(faq => ({ question: faq.question, answer: faq.answer })))
 
   return (
     <>
@@ -11,6 +13,7 @@ export default function GenehmigungPage() {
         <title>Dachgeschossausbau Genehmigung in München – BayBO 2025 | Dachgeschossausbau München</title>
         <meta name="description" content="BayBO 2025: Was ist verfahrensfrei beim Dachgeschossausbau in München? Alle Regeln zu Genehmigung, Stellplatzpflicht und Anzeigepflicht. Jetzt Beratung anfordern." />
         <link rel="canonical" href="https://dachgeschossausbaumuenchen.de/genehmigung" />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       {/* Hero */}
