@@ -108,8 +108,25 @@
 - Fokus auf Entity-Cluster-Aufbau
 - AI-Footprint-freier Content mit humanizer skill prüfen
 
-## Geplanter Content (Backlog)
-- **Ratgeber-Long-Form**: Deep-Authority-Artikel geplant als separate Ratgeber-Texte (nicht FAQ-Format). Themen: Kostenoptimierung, Denkmalschutz, Fördermittel-Strategie, Bezirks-spezifische Deep-Dives. Zeitpunkt: nach Launch.
+## Content-Backlog (nach Launch umzusetzen)
+
+### ✅ Already implemented
+- Ratgeber-Hub: `/ratgeber/` (2026-05)
+- Denkmalschutz-Ratgeber: `/ratgeber/denkmalschutz/` (2026-05)
+- Fördermittel-Ratgeber: `/ratgeber/foerdermittel/` (2026-05)
+- Kosten-Ratgeber (Stub): `/kosten` → verlinkt auf Hauptseite
+
+### 🔲 Pending – Reihenfolge nach Priorität
+1. **DG-Ausbau Schritt für Schritt** → `/ratgeber/prozess/` — Entscheidungsguide für early-stage Interessenten. Keywords: `wie funktioniert dachgeschossausbau`, `dauer dachgeschossausbau hamburg`, `prozess dachausbau`
+2. **Gauben-Welcher-Guide** → `/ratgeber/gauben/` — Entscheidungshilfe Gaubenform (Schleppgaube vs. Fledermausgaube vs. Trapezgaube). Keywords: `gaubenform hamburg`, `schleppgaube vs fledermausgaube`, `welche dachgaube hamburg`
+3. **Winterhude Standortpage** → `/standorte/winterhude/` — vierte große Standort-Lücke (nach Eppendorf, Altona, Eimsbüttel). Keywords: `dachgeschossausbau winterhude`, `winterhude erhaltungssatzung`
+4. **DG-Ausbau für Vermieter** → `/ratgeber/vermieter/` — Investoren-Segment: Rendite, Mietrecht DG, Steuervorteil. Keywords: `dachgeschossausbau vermietung`, `rendite dachgeschossausbau hamburg`
+5. **Bezirksvergleich** → `/ratgeber/bezirke/` — Ranking-Vorteil: kein Wettbewerber hat bezirksübergreifenden Vergleich. Keywords: `bester stadtteil dachgeschossausbau hamburg`
+6. **DG-Ausbau ohne Genehmigung** → `/ratgeber/genehmigungsfrei/` — §62 HBauO First-Mover. Keywords: `dachausbau hamburg ohne genehmigung`, `hbauo 2026 dachgeschoss`
+7. **Altbau vs. Neubau** → `/ratgeber/altbau-oder-neubau/` — Entscheidungsguide. Keywords: `altbau ausbauen oder neu bauen`
+8. **Dachgaube Kosten Hamburg** → `/ratgeber/gauben-kosten/` — explizites Keyword `was kostet dachgaube hamburg`
+9. **KfW 261 Lohnt sich das?** → `/ratgeber/kfw-261/` — Fokus auf Finanzierung, Conversion-orientiert
+10. **Quick Wins** (kleine Artikelseiten): Lichte Raumhöhe, Architekt-Pflicht, Stellplatzpflicht
 
 ## Design-Referenz
 - Quelle: C:\Users\steff\dachgeschossausbau-muenchen

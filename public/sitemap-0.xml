@@ -113,4 +113,41 @@
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
+
+  <!-- Ratgeber -->
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/denkmalschutz/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/foerdermittel/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/prozess/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/gauben/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/ratgeber/vermieter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.dachgeschossausbauhamburg.de/standorte/winterhude/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
