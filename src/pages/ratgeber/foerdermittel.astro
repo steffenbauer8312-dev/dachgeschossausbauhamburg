@@ -1,0 +1,946 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+
+const faqs = [
+  {
+    question: "Kann ich BAFA und KfW 261 kombinieren?",
+    answer: "BAFA und KfW 261 sind nicht direkt kombinierbar, da beide aus dem gleichen Topf (BEG) kommen. Sie müssen sich für einen Weg entscheiden: Entweder KfW 261 (Kredit + Tilgungszuschuss für Komplettsanierung auf Effizienzhaus-Standard) oder BAFA (Zuschuss für Einzelmaßnahmen). §35c EStG ist eine Alternative zu BAFA, nicht kumulierbar – aber BAFA und §35c schließen sich gegenseitig aus. Wer die KfW 261 nutzt, kann §35c ebenfalls nicht nutzen."
+  },
+  {
+    question: "Was wenn ich schon mit der Planung angefangen habe?",
+    answer: "Fördermittel dürfen NICHT für Maßnahmen beantragt werden, die vor der Antragstellung bereits begonnen oder beauftragt wurden. Das gilt für alle drei Programme (KfW 261, BAFA, §35c). Wenn Sie bereits mit einem Architekten oder Handwerker gesprochen haben, ist das noch kein Problem – solange noch keine Aufträge erteilt wurden. Sobald ein Auftrag unterschrieben ist, verfällt der Anspruch auf Förderung. Informieren Sie uns frühzeitig – wir helfen Ihnen, die richtige Reihenfolge einzuhalten."
+  },
+  {
+    question: "Gilt §35c EStG auch für Vermieter?",
+    answer: "Ja. §35c EStG ist auch für Vermieter nutzbar, die das Dachgeschoss vermieten. Die Steuerermäßigung kann über Werbungskosten geltend gemacht werden – als Nachtrag in der Einkommensteuererklärung über drei Jahre verteilt. Voraussetzung: Die Handwerkerrechnung muss auf Sie als Eigentümer ausgestellt sein, und nur die Arbeitskosten (nicht Material) zählen. Bei Vermietung werden die Kosten als Werbungskosten abgesetzt, was den Steuervorteil in der Praxis sogar erhöhen kann."
+  }
+];
+
+const articleSchema = generateArticleSchema({
+  headline: "Fördermittel für Dachgeschossausbau in Hamburg 2026 – KfW 261, BAFA, §35c EStG",
+  description: "Umfassender Ratgeber zu Fördermitteln für Dachgeschossausbau in Hamburg: KfW 261 Wohngebäude-Kredit, BAFA BEG EM Einzelmaßnahmen und §35c EStG. Bis zu 45% Tilgungszuschuss sichern.",
+  datePublished: "2026-01-15",
+  dateModified: "2026-05-13",
+  url: "https://dachgeschossausbauhamburg.de/ratgeber/foerdermittel/"
+});
+---
+
+<BaseLayout
+  title="Fördermittel für Dachgeschossausbau Hamburg 2026 – KfW 261, BAFA, §35c"
+  description="Hamburg 2026: Förderkulisse besser als je zuvor. KfW bis 150.000 €/Wohneinheit, BAFA bis 12.000 €, §35c EStG bis 40.000 €. Jetzt Förderung sichern!"
+  canonical="/ratgeber/foerdermittel/"
+  currentPath="/ratgeber/foerdermittel/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(articleSchema)} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Fördermittel', url: 'https://dachgeschossausbauhamburg.de/ratgeber/foerdermittel/' },
+  ]))} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · Förderung 2026 · KfW · BAFA · §35c
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Fördermittel für Dachgeschossausbau in Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Hamburg 2026: Die Förderkulisse für Dachgeschossausbau ist besser als je zuvor. Wir zeigen Ihnen, wie Sie bis zu 45% Tilgungszuschuss sichern und Ihre Baukosten deutlich senken.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">KfW 261:</strong> bis 150.000 € je Wohneinheit, 5–45% Tilgungszuschuss</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">BAFA:</strong> bis 12.000 € Zuschuss pro Wohneinheit (15–20%)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">§35c EStG:</strong> bis 40.000 € Steuervorteil über 3 Jahre (20%)</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">150.000 €</div>
+              <div class="text-xs text-white/60 mt-1">KfW 261 max./WE</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">45%</div>
+              <div class="text-xs text-white/60 mt-1">Tilgungszuschuss</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">40.000 €</div>
+              <div class="text-xs text-white/60 mt-1">§35c Steuervorteil</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM FÖRDERMITTEL JETZT BESONDERS RELEVANT SIND
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktentwicklung"
+          heading="Warum Fördermittel jetzt besonders relevant sind"
+          subheading="Hamburg 2026: Vier Faktoren machen den DG-Ausbau jetzt so attraktiv wie nie."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Hamburger Förderlandschaft hat sich in den letzten Jahren grundlegend verändert. Wer jetzt plant, profitiert von einer Kombination aus günstigen Krediten, hohen Zuschüssen und steuerlichen Vorteilen – und das bei einem Hamburger Mietmarkt, der eine Value-Add-Strategie beim DG-Ausbau besonders rentabel macht.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-lg">1</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">CO₂-Preis 2026: 65 €/Tonne</h3>
+                <p class="text-sm text-text-secondary">
+                  Mit dem CO₂-Preis von 65 Euro pro Tonne (ab 2026) steigen die Betriebskosten für unsanierte Altbauten deutlich. Eine energieeffiziente Sanierung beim DG-Ausbau amortisiert sich dadurch schneller denn je. Der CO₂-Preis ist ein permanenter Preisanstieg – jede Kilowattstunde Heizenergie, die Sie durch Dämmung einsparen, spart Ihnen direkt Geld.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-lg">2</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">HBauO 2026 macht DG-Ausbau einfacher</h3>
+                <p class="text-sm text-text-secondary">
+                  Die neue Hamburger Bauordnung (HBauO) reduziert die Genehmigungshürden erheblich. Die Genehmigungsfreistellung nach §62 HBauO für Ein- und Zweifamilienhäuser im Bereich eines qualifizierten Bebauungsplans bedeutet: Bauvorlage einreichen, einen Monat warten, loslegen. Das erhöht die Zahl der Anträge – und erhöht den Wettbewerb um Handwerker. Jetzt sichern Sie sich die besten Betriebe, bevor der Ansturm kommt.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-lg">3</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Hamburger Mietmarkt: DG-Mieten Median 15,12 €/m²</h3>
+                <p class="text-sm text-text-secondary">
+                  Der Hamburger Mietmarkt ist angespannt. Der Median für Dachgeschosswohnungen liegt bei 15,12 Euro pro Quadratmeter – und steigt. In Stadtteilen wie Eppendorf, Harvestehude, Eimsbüttel und den Elbvororten werden Spitzenmieten von 20 bis 28 Euro/m² erzielt. Ein DG-Ausbau schafft nicht nur Wohnraum, sondern eine Value-Add-Opportunity mit erheblichem Mietertrag und Wertsteigerung nach Sanierung.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-lg">4</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Handwerkerpreise Hamburg: 10–15% über Bundesdurchschnitt</h3>
+                <p class="text-sm text-text-secondary">
+                  Hamburg ist einer der teuersten Handwerkermärkte Deutschlands. Die Löhne und Materialpreise liegen 10 bis 15 Prozent über dem Bundesdurchschnitt. Das macht den DG-Ausbau hier teurer als in anderen Großstädten – aber genau deshalb sind die Fördermittel hier umso wichtiger. Ein Tilgungszuschuss von 15 oder 20 Prozent auf eine 120.000-Euro-Maßnahme kann den Unterschied machen zwischen einem Loch in der Kasse und einem profitablen Projekt.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: DIE DREI SÄULEN DER HAMBURGER FÖRDERUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Förderübersicht"
+        heading="Die drei Säulen der Hamburger Förderung"
+        subheading="KfW 261, BAFA BEG EM und §35c EStG – so funktioniert die Hamburger Förderarchitektur 2026."
+      />
+      <div class="max-w-4xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Programm</th>
+                <th class="px-6 py-4 font-semibold text-right">Max. Betrag</th>
+                <th class="px-6 py-4 font-semibold text-right">Zuschuss</th>
+                <th class="px-6 py-4 font-semibold">Für wen</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium text-text-primary">
+                  <span class="font-bold">KfW 261</span><br />
+                  <span class="text-xs text-text-secondary">Wohngebäude-Kredit</span>
+                </td>
+                <td class="px-6 py-4 text-right font-mono text-text-primary">150.000 €/WE</td>
+                <td class="px-6 py-4 text-right font-mono text-secondary font-bold">5–45% Tilgungszuschuss</td>
+                <td class="px-6 py-4 text-xs text-text-secondary">Komplettsanierung auf Effizienzhaus-Standard</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium text-text-primary">
+                  <span class="font-bold">BAFA BEG EM</span><br />
+                  <span class="text-xs text-text-secondary">Einzelmaßnahmen</span>
+                </td>
+                <td class="px-6 py-4 text-right font-mono text-text-primary">60.000 €/WE</td>
+                <td class="px-6 py-4 text-right font-mono text-secondary font-bold">15% (mit iSFP 20%)</td>
+                <td class="px-6 py-4 text-xs text-text-secondary">Einzelmaßnahmen: Dämmung, Gaube, Fenster, Elektrik, Heizung</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium text-text-primary">
+                  <span class="font-bold">§35c EStG</span><br />
+                  <span class="text-xs text-text-secondary">Steuerliche Absetzung</span>
+                </td>
+                <td class="px-6 py-4 text-right font-mono text-text-primary">40.000 € / 3 Jahre</td>
+                <td class="px-6 py-4 text-right font-mono text-secondary font-bold">20% der Arbeitskosten</td>
+                <td class="px-6 py-4 text-xs text-text-secondary">Eigentümer für Handwerkerrechnungen (Steuerzahler)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-bg border border-border rounded-xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <p class="text-sm text-text-secondary">
+                <strong class="text-text-primary">Wichtig:</strong> Alle drei Programme sind untereinander eingeschränkt kombinierbar. BAFA und §35c EStG schließen sich gegenseitig aus – Sie müssen sich für eines entscheiden. KfW 261 und BAFA sind ebenfalls nicht kombinierbar, da beide aus dem gleichen Fördertopf (BEG) stammen. KfW 261 und §35c schließen sich ebenfalls aus. Die Wahl des richtigen Programms hängt von Ihrem Projekt und Ihrer Steuersituation ab.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: KFW 261 – DETAIL
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="KfW Programm 261"
+          heading="KfW 261 – Der Wohngebäude-Kredit"
+          subheading="Der komplexeste, aber auch attraktivste Förderbaustein – ideal für Investoren und Eigentümer mit Sanierungsambitionen."
+          headingLevel="h2"
+          align="left"
+        />
+
+        <div class="space-y-8">
+          <!-- Wie es funktioniert -->
+          <div class="prose prose-lg max-w-none text-text-secondary">
+            <h3 class="text-xl font-bold text-text-primary mb-3">Wie es funktioniert</h3>
+            <p>
+              Der KfW 261 ist ein Kredit, der mit einem Tilgungszuschuss kombiniert wird. Der Tilgungszuschuss ist ein nicht zurückzahlbarer Zuschuss – er wird auf Ihren Kredit angerechnet und reduziert Ihre Gesamtschuld. Sie erhalten ihn, wenn Sie den Effizienzhaus-Standard erreichen.
+            </p>
+          </div>
+
+          <!-- Kredithöhe -->
+          <div class="bg-primary rounded-2xl p-8 text-white">
+            <h3 class="text-xl font-bold mb-4">Kredithöhe und Tilgungszuschuss</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-white/20 text-left">
+                    <th class="pb-3 font-semibold">Effizienzhaus-Stufe</th>
+                    <th class="pb-3 font-semibold text-right">Tilgungszuschuss</th>
+                    <th class="pb-3 font-semibold text-right">Max. Zuschuss</th>
+                    <th class="pb-3 font-semibold text-right">+ EE-Klasse</th>
+                    <th class="pb-3 font-semibold text-right">Max. mit EE</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/10">
+                  <tr>
+                    <td class="py-3 font-medium">EH 85</td>
+                    <td class="py-3 text-right font-mono">5%</td>
+                    <td class="py-3 text-right font-mono text-secondary">6.000 €</td>
+                    <td class="py-3 text-right font-mono">+5% = 10%</td>
+                    <td class="py-3 text-right font-mono text-secondary">15.000 €</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-medium">EH 70</td>
+                    <td class="py-3 text-right font-mono">10%</td>
+                    <td class="py-3 text-right font-mono text-secondary">12.000 €</td>
+                    <td class="py-3 text-right font-mono">+5% = 15%</td>
+                    <td class="py-3 text-right font-mono text-secondary">22.500 €</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-medium">EH 55</td>
+                    <td class="py-3 text-right font-mono">15%</td>
+                    <td class="py-3 text-right font-mono text-secondary">18.000 €</td>
+                    <td class="py-3 text-right font-mono">+5% = 20%</td>
+                    <td class="py-3 text-right font-mono text-secondary">30.000 €</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-medium">EH 40</td>
+                    <td class="py-3 text-right font-mono">20%</td>
+                    <td class="py-3 text-right font-mono text-secondary">24.000 €</td>
+                    <td class="py-3 text-right font-mono">+5% = 25%</td>
+                    <td class="py-3 text-right font-mono text-secondary">37.500 €</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-medium">EH Denkmal</td>
+                    <td class="py-3 text-right font-mono">5%</td>
+                    <td class="py-3 text-right font-mono text-secondary">6.000 €</td>
+                    <td class="py-3 text-right font-mono">+5% = 10%</td>
+                    <td class="py-3 text-right font-mono text-secondary">15.000 €</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Boni -->
+          <div class="prose prose-lg max-w-none text-text-secondary">
+            <h3 class="text-xl font-bold text-text-primary mb-3">Boni – kumulierbar!</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-surface rounded-xl p-5 border border-border">
+                <div class="text-lg font-bold text-primary mb-1">+5% EE-Klasse</div>
+                <p class="text-sm text-text-secondary">Heizung mit mind. 65% erneuerbare Energien (Wärmepumpe, Solar, Biomasse). Wird auf den Tilgungszuschuss oben draufgerechnet.</p>
+              </div>
+              <div class="bg-surface rounded-xl p-5 border border-border">
+                <div class="text-lg font-bold text-primary mb-1">+10% WPB-Bonus</div>
+                <p class="text-sm text-text-secondary">Worst Performing Building: Gebäude mit einem Energiebedarf von mindestens 160 kWh/(m²a). Gilt für Altbauten vor 1977 besonders häufig.</p>
+              </div>
+              <div class="bg-surface rounded-xl p-5 border border-border">
+                <div class="text-lg font-bold text-primary mb-1">+15% Serielle Sanierung</div>
+                <p class="text-sm text-text-secondary">Komplette vorgefertigte Dachelemente, montagefertig angeliefert. Reduziert die Baustellenzeit und erhöht die Förderung deutlich.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Praxisbeispiel -->
+          <div class="bg-surface rounded-2xl p-8 border border-border">
+            <h3 class="text-xl font-bold text-text-primary mb-4">Praxisbeispiel: DG-Ausbau in Eimsbüttel</h3>
+            <div class="prose prose-lg max-w-none text-text-secondary">
+              <p>
+                <strong class="text-text-primary">Szenario:</strong> Altbau in Eimsbüttel (Baujahr 1975), Dachgeschoss-Ausbau mit Wärmepumpe. Die Zielklasse ist EH 70 mit EE-Klasse.
+              </p>
+              <ul class="space-y-2 my-4">
+                <li>Kredithöhe: 120.000 € (volle Auslastung)</li>
+                <li>Tilgungszuschuss: 15% (EH 70) + 5% (EE-Klasse) = 20%</li>
+                <li>Tilgungszuschuss: 24.000 € – nicht zurückzahlbar!</li>
+                <li>Tatsächliche Kreditbelastung: 96.000 €</li>
+              </ul>
+              <p class="bg-primary/10 rounded-lg p-4 font-semibold text-text-primary">
+                Ergebnis: 24.000 € geschenkt. Sie zahlen nur 96.000 € zurück, nicht 120.000 €.
+              </p>
+            </div>
+          </div>
+
+          <!-- Voraussetzungen -->
+          <div class="prose prose-lg max-w-none text-text-secondary">
+            <h3 class="text-xl font-bold text-text-primary mb-3">Voraussetzungen</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span><strong class="text-text-primary">Energieeffizienz-Experte:</strong> Sie benötigen einen zertifizierten Energieberater aus der dena-Liste. Die Kosten für die Baubegleitung sind selbst förderfähig (50%, max. 5.000 €).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span><strong class="text-text-primary">Antrag VOR Auftragserteilung:</strong> Sie müssen den KfW 261-Antrag stellen, bevor Sie Aufträge erteilen. Der Antrag wird über Ihre Hausbank eingereicht – nicht direkt bei der KfW.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span><strong class="text-text-primary">Laufzeit:</strong> 4–30 Jahre, 1–5 tilgungsfreie Anlaufjahre. Zinssatz aktuell ab ca. 2,24% effektiv (Stand 2026).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: BAFA BEG EM – DETAIL
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="BAFA BEG EM"
+          heading="BAFA BEG EM – Einzelmaßnahmen"
+          subheading="Wenn Sie keinen Effizienzhaus-Standard erreichen wollen oder können: der direkte Zuschuss für Einzelmaßnahmen."
+          headingLevel="h2"
+          align="left"
+        />
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Das BAFA-Programm „BEG EM" (Bundesförderung für effiziente Gebäude – Einzelmaßnahmen) ist die einfachere Variante für Eigentümer, die einzelne Maßnahmen fördern lassen möchten – etwa die Dämmung, eine neue Heizung oder den Einbau einer Gaube. Es erfordert keinen EH-Standard, sondern fördert jede einzelne Maßnahme direkt.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">Förderhöhe</h3>
+              <ul class="text-sm space-y-1">
+                <li>15% Zuschuss auf förderfähige Kosten</li>
+                <li>Mit iSFP: 20% (individueller Sanierungsfahrplan)</li>
+                <li>Förderfähige Kosten: bis 60.000 € pro WE und Jahr</li>
+                <li>Max. BAFA-Zuschuss: 12.000 € pro WE</li>
+              </ul>
+            </div>
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">iSFP-Bonus</h3>
+              <ul class="text-sm space-y-1">
+                <li>Individueller Sanierungsfahrplan (500–2.000 €)</li>
+                <li>Der iSFP ist selbst förderfähig (bis 80%)</li>
+                <li>Er erhöht den BAFA-Zuschuss von 15% auf 20%</li>
+                <li>Lohnt sich ab ca. 40.000 € Gesamtbudget</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary">Was gefördert wird</h3>
+          <p>
+            Beim DG-Ausbau zählen folgende Maßnahmen als förderfähig:
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-text-primary">Dämmung:</strong> Pflicht nach GEG §47, U-Wert Dach ≤0,14 W/(m²K). Aufsparren- oder Zwischensparrendämmung.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-text-primary">Gauben-Einbau:</strong> Der结构 itself ist förderfähig als Einzelmaßnahme. Kein EH-Standard nötig.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-text-primary">Fenster:</strong> Austausch gegen Wärmeschutzverglasung, U-Wert ≤0,8 W/(m²K).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-text-primary">Elektrik und Heizung:</strong> Neue Verkabelung, Wärmepumpe, Solarthermie.</span>
+            </li>
+          </ul>
+
+          <!-- Hamburger Besonderheit -->
+          <div class="bg-primary rounded-2xl p-8 text-white">
+            <h3 class="text-xl font-bold mb-3">Hamburger Besonderheit: Aufzugspflicht entfällt</h3>
+            <p class="text-white/80">
+              Nach §37 Absatz 4 HBauO entfällt die Aufzugspflicht bei DG-Ausbau in bestehenden Gebäuden. Das spart Ihnen bis zu 30.000 Euro – Geld, das Sie stattdessen in förderfähige Maßnahmen investieren können. Dieser Hamburger Vorteil macht den DG-Ausbau hier besonders wirtschaftlich.
+            </p>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              <div>
+                <p class="text-sm text-text-secondary">
+                  <strong class="text-text-primary">Wichtig:</strong> Antrag vor Auftragserteilung! BAFA-Anträge können online über das Antragsportal gestellt werden. Ein Energieberater ist auch hier notwendig, um die technische Projektauslegung zu erstellen und die BnD (Bestätigung nach Durchführung) auszustellen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 5: §35c EStG – STEUERLICHE ABSETZUNG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="§35c EStG"
+          heading="§35c EStG – Steuerliche Absetzung"
+          subheading="20% der Handwerkerkosten über 3 Jahre absetzen – eine Option speziell für Steuerzahler."
+          headingLevel="h2"
+          align="left"
+        />
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            §35c EStG (Einkommensteuergesetz) ist die steuerliche Variante der Förderung. Anders als KfW 261 oder BAFA geht es hier nicht um einen Zuschuss oder Kredit, sondern um eine Steuerermäßigung auf Ihre Einkommensteuer. Sie setzen 20 Prozent Ihrer Handwerkerrechnungen über einen Zeitraum von 3 Jahren von der Steuer ab.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">So funktioniert es</h3>
+              <ul class="text-sm space-y-2">
+                <li>20% der Handwerkerrechnungen absetzbar</li>
+                <li>Maximal 40.000 € über 3 Jahre (also 13.333 €/Jahr)</li>
+                <li>Bei 40% Grenzsteuersatz: bis zu 8.000 € Steuervorteil</li>
+                <li>Nur Arbeitskosten (nicht Material)</li>
+                <li>Nachweis durch Handwerkerrechnung</li>
+              </ul>
+            </div>
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">Einschränkungen</h3>
+              <ul class="text-sm space-y-2">
+                <li>Nur für Eigentümer, die Steuern zahlen</li>
+                <li>Alternativ zu BAFA – nicht kumulierbar!</li>
+                <li>Materialkosten ausgeschlossen</li>
+                <li>Nicht rückwirkend für bereits bezahlte Rechnungen</li>
+                <li> muss in der Steuererklärung geltend gemacht werden</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary">§35c für Vermieter</h3>
+          <p>
+            Auch wenn Sie das Dachgeschoss vermieten, können Sie §35c nutzen. Die Kosten werden als Werbungskosten abgesetzt – und erhöhen damit den Steuervorteil gegenüber der Eigennutzung, da Vermieter oft einen höheren Grenzsteuersatz haben. Die Handwerkerrechnung muss auf Sie als Eigentümer ausgestellt sein.
+          </p>
+
+          <!-- Beispiel -->
+          <div class="bg-primary rounded-2xl p-8 text-white">
+            <h3 class="text-xl font-bold mb-4">Beispiel: 100.000 € DG-Ausbau</h3>
+            <div class="prose prose-lg max-w-none text-white/80">
+              <ul class="space-y-2">
+                <li>Gesamtkosten: 100.000 €</li>
+                <li>Arbeitskosten (geschätzt 50–60%): ca. 55.000 €</li>
+                <li>§35c: 20% auf 55.000 € = 11.000 € über 3 Jahre</li>
+                <li>Das entspricht einem Steuervorteil von ca. 3.667 € pro Jahr</li>
+              </ul>
+              <p class="mt-4 text-white font-semibold">
+                Effektiv: 11% des Arbeitskostenanteils zurück über die Steuer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 6: KOMBINATIONS-STRATEGIE FÜR HAMBURG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Rechenbeispiele"
+        heading="Kombinations-Strategie für Hamburg"
+        subheading="Drei typische Hamburger Szenarien – und welche Förderung jeweils am meisten bringt."
+      />
+      <div class="max-w-3xl mx-auto">
+        <!-- Beispiel A -->
+        <div class="bg-surface rounded-2xl p-8 border border-border mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold text-sm">A</span>
+            <h3 class="text-xl font-bold text-text-primary">Einfacher DG-Ausbau ohne Gaube</h3>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            <strong>Szenario:</strong> 60m² Dachgeschoss in Eimsbüttel, Baujahr 1975, einfacher Ausbau (Dämmung, Ausbau, Böden). Kosten: 84.000 €. Kein Gaube, kein EH-Standard.
+          </p>
+          <div class="bg-bg rounded-xl p-5 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-text-primary text-sm mb-2">Option A: BAFA</h4>
+                <ul class="text-xs text-text-secondary space-y-1">
+                  <li>Förderfähige Kosten: 60.000 € (Obergrenze)</li>
+                  <li>15% Zuschuss = 9.000 €</li>
+                  <li>Mit iSFP (20%): 12.000 €</li>
+                  <li>Restkosten: 72.000 – 75.000 €</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary text-sm mb-2">Option B: §35c</h4>
+                <ul class="text-xs text-text-secondary space-y-1">
+                  <li>Arbeitskosten: ~50.000 €</li>
+                  <li>20% = 10.000 € über 3 Jahre</li>
+                  <li>Steuervorteil: ~4.000 € (bei 40% Satz)</li>
+                  <li>Restkosten: ~74.000 €</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-primary">Empfehlung:</strong> BAFA mit iSFP ist hier die bessere Wahl – der iSFP erhöht den Zuschuss auf 20%, und die Auftragserteilung ist unkomplizierter als bei KfW 261.
+          </p>
+        </div>
+
+        <!-- Beispiel B -->
+        <div class="bg-surface rounded-2xl p-8 border border-border mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold text-sm">B</span>
+            <h3 class="text-xl font-bold text-text-primary">DG-Ausbau mit Gaube auf EH-Standard</h3>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            <strong>Szenario:</strong> 80m² Dachgeschoss in Harburg, Baujahr 1968, Komplettausbau mit Trapezgaube, Dämmung auf EH-70-Standard, Wärmepumpe. Kosten: 140.000 € (mit Gaube).
+          </p>
+          <div class="bg-bg rounded-xl p-5 mb-4">
+            <div>
+              <h4 class="font-semibold text-text-primary text-sm mb-2">Option C: KfW 261 + BAFA-Kombination (nicht direkt kombinierbar – einer der Wege)</h4>
+              <ul class="text-xs text-text-secondary space-y-1">
+                <li>KfW 261 Kredit: 120.000 €</li>
+                <li>EH 70: 10% Tilgungszuschuss = 12.000 €</li>
+                <li>EE-Klasse (Wärmepumpe): +5% = 6.000 €</li>
+                <li>WPB-Bonus (Gebäude vor 1977): +10% = 12.000 €</li>
+                <li>Serielle Sanierung (falls zutreffend): +15% = 18.000 €</li>
+                <li class="font-bold text-primary">Maximaler Tilgungszuschuss: 48.000 € (bei voller Kumulierung)</li>
+                <li>Realistisch: 30.000–40.000 € bei typischem Altbau</li>
+                <li>Restkosten: 100.000–110.000 € (statt 140.000 €)</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-primary">Empfehlung:</strong> KfW 261 ist hier die richtige Wahl. Der EH-70-Standard ist für ein 1968er Gebäude realistisch erreichbar, und die Kumulierung der Boni (EE + WPB) macht den Tilgungszuschuss erheblich.
+          </p>
+        </div>
+
+        <!-- Beispiel C -->
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold text-sm">C</span>
+            <h3 class="text-xl font-bold text-text-primary">DG-Ausbau als Steuerstrategie</h3>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            <strong>Szenario:</strong> 55m² Dachgeschoss in Eppendorf, Baujahr 1955, Denkmalschutz relevant, einfacher Ausbau. Kosten: 95.000 € (höhere Hamburger Kosten). Eigentümer hat 42% Grenzsteuersatz.
+          </p>
+          <div class="bg-bg rounded-xl p-5 mb-4">
+            <div>
+              <h4 class="font-semibold text-text-primary text-sm mb-2">§35c als Ergänzung zur BAFA</h4>
+              <ul class="text-xs text-text-secondary space-y-1">
+                <li>BAFA auf Dämmung: 8.000 € (15% auf ca. 53.000 €)</li>
+                <li>§35c auf Arbeitskosten: 8.000 € (20% auf 40.000 €)</li>
+                <li>Gesamtförderung: 16.000 €</li>
+                <li>Steuervorteil §35c: ~3.360 € (bei 42% Satz)</li>
+                <li>Restkosten: ~79.000 €</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-primary">Empfehlung:</strong> Für Denkmalschutz-Objekte in Eppendorf und Harvestehude: BAFA (weil KfW 261 bei Denkmalschutz schwieriger ist) + §35c als Ergänzung. In Eppendorf kann der Planungsaufwand durch die Erhaltungssatzung die Förderung teilweise aufbrauchen – trotzdem lohnt es sich, weil die Mietwertsteigerung die Kosten übertrifft.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 7: WAS NICHT FÖRDERFÄHIG IST
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Ehrlichkeit zählt"
+          heading="Was NICHT förderfähig ist"
+          subheading=" Transparenz schützt Sie vor Fehlplanung. Diese Maßnahmen sollten Sie nicht auf Fördermittel einplanen."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Nicht alles, was beim DG-Ausbau anfällt, ist förderfähig. Hier die häufigsten Fehler – und wie Sie sie vermeiden.
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-start gap-4 p-5 bg-surface rounded-xl border border-border">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Aufzug</h3>
+                <p class="text-sm text-text-secondary">
+                  Der Aufzug ist nach §37 Abs. 4 HBauO 2026 ausdrücklich nicht mehr Pflicht bei DG-Ausbau in bestehenden Gebäuden. Und er ist auch nicht förderfähig. Sparen Sie sich die 25.000–40.000 €, die ein Aufzug kosten würde – und investieren Sie das in die energetische Sanierung, die sehr wohl gefördert wird.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-5 bg-surface rounded-xl border border-border">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Luxus-Ausstattung</h3>
+                <p class="text-sm text-text-secondary">
+                  Hochwertigste Materialien, Smart-Home-Systeme der Spitzenklasse, Designerküchen oder automatisierte Beleuchtung go beyond den Standard, den die Förderprogramme anerkennen. Die Förderprogramme orientieren sich am Standard „gehobener Wohnungsbau", nicht an Luxus. Was darüber hinausgeht, ist Ihr privater Kostenanteil.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-5 bg-surface rounded-xl border border-border">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Maßnahmen vor Antragstellung begonnen</h3>
+                <p class="text-sm text-text-secondary">
+                  Das ist der häufigste Grund, warum Förderanträge abgelehnt werden. Wenn Sie bereits Aufträge erteilt, Material bestellt oder Handwerker beauftragt haben, bevor Ihr Förderantrag genehmigt wurde, verfällt Ihr Anspruch. Dies gilt für alle drei Programme. Auch wenn Sie nur mit der Planung angefangen haben (z.B. Architekt beauftragt), ist das kein Problem – solange noch keine vertragliche Bindung mit Ausführungsauftrag besteht.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-5 bg-surface rounded-xl border border-border">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              <div>
+                <h3 class="font-bold text-text-primary mb-1">Materialkosten bei §35c</h3>
+                <p class="text-sm text-text-secondary">
+                  §35c erkennt nur die Arbeitskosten an, nicht die Materialkosten. Wenn Sie den Handwerker batbeiten lassen und die Materialien selbst beschaffen, können Sie die Arbeitskosten absetzen, aber nicht den Materialanteil. Optimal ist die Schlüsselfertig-Offerte: Eine Rechnung, die Arbeitskosten und Material zusammen ausweist – wobei Sie die Arbeitskosten als 20% ansetzen können.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 8: HAMBURGER BEZIRKSSPEZIFISCHE REALITÄT
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburg-Spezifik"
+          heading="Hamburger bezirksspezifische Förder-Realität"
+          subheading="Nicht jeder Hamburger Stadtteil ist gleich – die Förderwirkung hängt von Ihrem Bezirk ab."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Hamburg ist nicht gleich Hamburg. Die bezirksspezifischen Unterschiede bei Grundstückspreisen, Handwerkerverfügbarkeit und denkmalpflegerischen Auflagen haben direkte Auswirkungen auf die Wirtschaftlichkeit Ihres DG-Ausbaus – und damit auf die Wirkung der Fördermittel.
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">Eppendorf, Harvestehude, Rotherbaum</h3>
+              <p class="text-sm text-text-secondary">
+                In diesen Stadtteilen dominieren Altbauten aus der Jahrhundertwende, viele in Erhaltungssatzungsgebieten. Die Planungskosten sind hier höher (Erhaltungssatzung erfordert zusätzliche Abstimmungen), was die Förderung teilweise aufbrauchen kann. Trotzdem: Die hohen Mieten (18–25 €/m²) und die starke Nachfrage machen den DG-Ausbau hier besonders profitabel. Nutzen Sie KfW 261 mit EH-Denkmal-Klasse – die Auflagen sind höher, aber der Mietwert steigt überproportional.
+              </p>
+            </div>
+
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">Harburg, Bergedorf, Wilhelmsburg</h3>
+              <p class="text-sm text-text-secondary">
+                In den südlichen Hamburger Stadtteilen sind die Handwerkerpreise niedriger als im Hamburger Westen. Das bedeutet: Ihre Fördermittel machen einen größeren Anteil des Projekts aus. Ein DG-Ausbau in Harburg oder Bergedorf kann von den niedrigeren Handwerkerkosten (bis zu 10% unter dem Hamburger Durchschnitt) profitieren, was den Eigenanteil nach Förderung deutlich reduziert. KfW 261 mit WPB-Bonus ist hier besonders wirksam.
+              </p>
+            </div>
+
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">Altona Elbvororte (Othmarschen, Blankenese, Nienstedten)</h3>
+              <p class="text-sm text-text-secondary">
+                Die Elbvororte haben eine Besonderheit: Viele Villen stehen unter Denkmalschutz (§6 HDSchG). Für diese Objekte gibt es die KfW EH-Denkmal-Klasse (5% Basis, 10% mit EE). Zusätzlich kann die Hamburger Denkmalschutzförderung beantragt werden. Wenn die Denkmalschutzauflagen erfüllt sind, steigt der Immobilienwert überproportional – ein DG-Ausbau in den Elbvororten ist eine der rentabelsten Strategien in ganz Hamburg.
+              </p>
+            </div>
+
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-2">Eimsbüttel, Altona-Altstadt, Sternschanze</h3>
+              <p class="text-sm text-text-secondary">
+                Dicht bebaute Viertel mit wenig Platz für Anbauten. Der DG-Ausbau ist hier oft die einzige Möglichkeit, zusätzlichen Wohnraum zu schaffen. Die Nachfrage ist hoch, die Mieten steigen. BAFA-Einzelmaßnahmen sind hier die bevorzugte Option, weil KfW 261 einen EH-Standard erfordert, der bei den engen Grundstücken schwieriger zu erreichen ist. Nutzen Sie den iSFP-Bonus (20% statt 15%), um den BAFA-Zuschuss zu maximieren.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 9: SCHRITT-FÜR-SCHRITT ZUR FÖRDERUNG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Checkliste"
+          heading="Schritt für Schritt zur Förderung"
+          subheading="Von der Beratung bis zur Auszahlung – so verläuft der Förderprozess in der Praxis."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <div class="relative">
+            <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-border"></div>
+            <div class="space-y-8">
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">1</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Energieberater beauftragen</h3>
+                  <p class="text-sm">Suchen Sie einen zertifizierten Energieberater aus der dena-Liste. Er erstellt die technische Projektauslegung und berät Sie zur Zielklasse (EH-Standard oder Einzelmaßnahme). Optional: Lassen Sie einen iSFP erstellen, falls Sie BAFA mit 20% anstreben.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">2</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Antrag stellen – VOR Auftragserteilung</h3>
+                  <p class="text-sm">KfW 261: Antrag über Ihre Hausbank (Bank reicht ein). BAFA: Online über das BAFA-Portal. Beides muss vor jedem Auftrag erfolgen – bestellen Sie keine Handwerker, bevor Sie die schriftliche Zusage haben.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">3</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Zusage abwarten</h3>
+                  <p class="text-sm">KfW 261: 2–6 Wochen Bearbeitungszeit über die Bank. BAFA: meist schneller, 1–3 Wochen. In dieser Zeit können Sie die Planung finalisieren und Materialien recherchieren, aber keine Aufträge erteilen.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">4</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Auftrag erteilen</h3>
+                  <p class="text-sm">Mit der schriftlichen Förderzusage können Sie jetzt Aufträge an Ihre Handwerker vergeben. Achten Sie darauf, dass die Aufträge exakt der technischen Projektauslegung entsprechen – sonst gibt es Probleme bei der BnD.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">5</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Durchführung dokumentieren</h3>
+                  <p class="text-sm">Ihr Energieberater begleitet die Baumaßnahme und dokumentiert alle Schritte. Alle Materialien und Arbeit müssen nachvollziehbar sein. Rechnungen müssen auf den Antragsteller (Sie) ausgestellt sein.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">6</div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">BnD (Bestätigung nach Durchführung)</h3>
+                  <p class="text-sm">Nach Abschluss der Maßnahme erstellt der Energieberater die BnD – die Bestätigung, dass die Maßnahme wie beantragt durchgeführt wurde. Diese reichen Sie bei der KfW oder dem BAFA ein.</p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary text-primary flex items-center justify-center font-bold text-lg z-10">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <div class="pt-2">
+                  <h3 class="font-bold text-text-primary mb-1">Auszahlung / Gutschrift</h3>
+                  <p class="text-sm">KfW 261: Der Tilgungszuschuss wird auf Ihren Kredit angerechnet – Ihre Restschuld sinkt. BAFA: Der Zuschuss wird auf Ihr Konto überwiesen. §35c: Sie machen den Betrag in Ihrer Einkommensteuererklärung geltend (als Anlage zum Mantelbogen).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       FAQ SECTION
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Häufige Fragen"
+          heading="Häufige Fragen zu Fördermitteln für DG-Ausbau"
+          subheading="Drei Fragen, die uns immer wieder gestellt werden – mit ehrlichen Antworten."
+          headingLevel="h2"
+        />
+
+        <div class="space-y-4">
+          {faqs.map(faq => (
+            <div class="bg-surface rounded-xl border border-border overflow-hidden">
+              <details class="group">
+                <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none">
+                  <h3 class="font-semibold text-text-primary text-base">{faq.question}</h3>
+                  <span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-open:rotate-180 transition-transform">
+                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                  </span>
+                </summary>
+                <div class="px-6 pb-6 text-sm text-text-secondary leading-relaxed">
+                  {faq.answer}
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-6 text-center">
+          <p class="text-sm text-text-secondary">
+            Weitere Fragen? <a href="/faq" class="text-primary font-semibold hover:underline">Alle FAQ ansehen</a> oder uns direkt kontaktieren.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Jetzt Fördermittel-Check für Ihr DG-Projekt anfordern
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir analysieren Ihr Hamburger Objekt und sagen Ihnen, welche Förderung für Sie infrage kommt – und wie hoch Ihr voraussichtlicher Zuschuss ausfällt. Unverbindlich, kostenlos, in 24 Stunden.
+          </p>
+          <div class="max-w-lg mx-auto">
+            <LeadGenForm />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       INTERNAL LINKS SECTION
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Weiterlesen"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Kosten für DG-Ausbau in Hamburg</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel-Einsparpotenzial.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Genehmigung nach HBauO 2026</h3>
+            <p class="text-sm text-text-secondary">§62 Freistellung, §61 vereinfachtes Verfahren, Erhaltungssatzung, Denkmalschutz – was gilt für Ihr Projekt?</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten im Detail – mit Hamburger Preisen und Genehmigungshinweisen.</p>
+          </a>
+
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dämmung – Förderfähig, notwendig, wirtschaftlich</h3>
+            <p class="text-sm text-text-secondary">U-Werte, GEG §47, KfW 261 und BAFA: Welche Dämmung sich lohnt und wie Sie die Förderung maximieren.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
