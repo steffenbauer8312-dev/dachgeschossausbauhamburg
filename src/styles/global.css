@@ -87,4 +87,21 @@
     @apply bg-surface rounded-2xl p-8 border border-border
            hover:border-primary/30 hover:shadow-lg transition-all duration-200;
   }
+
+  /* Sticky CTA Bar */
+  .sticky-cta {
+    @apply fixed bottom-0 left-0 right-0 z-50 bg-primary text-white shadow-[0_-4px_20px_rgba(0,0,0,0.15)];
+    @apply px-4 py-3;
+    @apply flex items-center justify-between gap-4;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  .sticky-cta.visible {
+    transform: translateY(0);
+  }
+
+  /* Hamburger Menu Lines */
+  .hamburger-line {
+    @apply block w-6 h-0.5 bg-current transition-all;
+  }
 }

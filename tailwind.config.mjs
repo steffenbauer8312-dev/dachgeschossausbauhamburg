@@ -4,14 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary:   '#2D4A3E',
-        secondary: '#C9A96E',
-        accent:    '#E85D04',
-        bg:        '#FDFBF7',
+        // Hamburg "Backstein & Wasser"
+        primary:   '#8B3A3A',    // Rotklinker dunkel
+        'primary-dark': '#6B2A2A', // Rotklinker sehr dunkel
+        secondary: '#C9A96E',     // Verblichenes Gold (bleached wood)
+        accent:    '#2C5F7D',    // Wasser-Blau (nordisch)
+        'accent-light': '#4A7D9B', // Wasser-Blau hell
+        bg:        '#FAF8F5',     // Warmes Creme
         surface:   '#FFFFFF',
-        border:    '#E5E7EB',
+        border:    '#E5E0D8',     // Warmes Grau
         'text-primary':   '#1A1A1A',
-        'text-secondary': '#6B7280',
+        'text-secondary': '#6B6560',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
