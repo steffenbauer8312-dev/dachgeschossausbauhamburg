@@ -1,0 +1,709 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import CostTable from '@/components/content/CostTable.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachgeschossausbau Kosten Hamburg 2025/2026 – Preise, Gauben, Förderung';
+const pageDescription = 'Aktuelle Hamburger Kosten für Dachgeschossausbau: 800–2.500 €/m², Gauben 8.000–25.000 €, Bad 10.000–25.000 €. KfW 261, BAFA, §35c EStG Förderung. Jetzt Fördermittel sichern!';
+
+const schema = JSON.stringify(generateLocalBusinessSchema());
+const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+  { name: 'Kosten', url: 'https://dachgeschossausbauhamburg.de/kosten/' },
+]));
+
+// Kostenübersicht Ausbauarten
+const ausbauRows = [
+  { position: 'Einfacher Ausbau', einheit: 'm² Nutzfläche', vonPreis: 800, bisPreis: 1200, bemerkung: 'Dämmung, Trockenbau, Böden, Elektrik' },
+  { position: 'Komplettausbau', einheit: 'm² Nutzfläche', vonPreis: 1200, bisPreis: 1800, bemerkung: 'Plus Dachfenster, Heizung, Bad-Vorbereitung' },
+  { position: 'Premium-Ausbau', einheit: 'm² Nutzfläche', vonPreis: 1800, bisPreis: 2500, bemerkung: 'Gauben, Vollbad, gehobene Ausstattung' },
+];
+
+// Gauben-Positionen
+const gaubenRows = [
+  { position: 'Schleppgaube', einheit: 'Stück', vonPreis: 8000, bisPreis: 18000, bemerkung: 'Typisch für Hamburger Satteldächer' },
+  { position: 'Fledermausgaube', einheit: 'Stück', vonPreis: 15000, bisPreis: 25000, bemerkung: 'Flachgeneigte Dächer, großzügiger Raumgewinn' },
+  { position: 'Trapezgaube', einheit: 'Stück', vonPreis: 10000, bisPreis: 18000 },
+  { position: 'Segmentgaube', einheit: 'Stück', vonPreis: 12000, bisPreis: 20000 },
+  { position: 'Dachfenster (VELUX)', einheit: 'Stück', vonPreis: 400, bisPreis: 1500, bemerkung: 'Einbau inkl. Innenausbau' },
+];
+
+// Dämmung
+const daemmungRows = [
+  { position: 'Aufsparrendämmung', einheit: 'm² Dachfläche', vonPreis: 100, bisPreis: 250, bemerkung: 'Höchste Dämmleistung, komplette Neueindeckung' },
+  { position: 'Zwischensparrendämmung', einheit: 'm² Dachfläche', vonPreis: 60, bisPreis: 120, bemerkung: 'Standard in Hamburg, mit Dampfbremse' },
+  { position: 'Untersparrendämmung', einheit: 'm² Dachfläche', vonPreis: 40, bisPreis: 80, bemerkung: 'Innen, wenn Dach unberührt bleiben soll' },
+];
+
+// Bad
+const badRows = [
+  { position: 'Standard-Bad', einheit: 'pauschal', vonPreis: 10000, bisPreis: 15000, bemerkung: 'Dusche, WC, Waschbecken, Fliesen' },
+  { position: 'Premium-Bad', einheit: 'pauschal', vonPreis: 15000, bisPreis: 25000, bemerkung: 'Bodengleiche Dusche, Markensanitär, großformatige Fliesen' },
+];
+
+// Genehmigung
+const genehmigungRows = [
+  { position: '§62 HBauO Genehmigungsfreistellung', einheit: 'pauschal', vonPreis: 0, bisPreis: 100, bemerkung: 'Nur Anzeige, 4 Wochen warten' },
+  { position: '§61 HBauO vereinfachtes Verfahren', einheit: 'pauschal', vonPreis: 200, bisPreis: 800 },
+  { position: 'Statik-Gutachten', einheit: 'pauschal', vonPreis: 500, bisPreis: 2000, bemerkung: 'Pflicht bei Gauben und Nutzungsänderung' },
+  { position: 'Aufzugspflicht (§37 Abs. 4 HBauO)', einheit: 'entfällt', vonPreis: 0, bisPreis: 0, bemerkung: 'Keine Aufzugspflicht im DG – spart bis zu 30.000 €' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/kosten/"
+  currentPath="/kosten/"
+>
+  <JsonLdSchema schema={schema} />
+  <JsonLdSchema schema={breadcrumbSchema} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Marktpreise 2025/2026
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau Hamburg – Kosten
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Aktuelle Hamburger Richtwerte. 800–2.500 € pro m². Gauben ab 8.000 €. Fördermittel bis 25% der Gesamtkosten. Erfahren Sie hier, was Ihr Projekt wirklich kostet.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Hamburger Marktpreise – nicht bundesweiter Durchschnitt</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>KfW 261, BAFA, §35c EStG – bis zu 25% Förderung</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>HBauO 2026: Genehmigungsfreistellung §62 spart 200–800 €</span>
+            </div>
+          </div>
+          <!-- Trust signals inline -->
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">15,12 €</div>
+              <div class="text-xs text-white/60 mt-1">Median/m² DG 2026</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">9,94 €</div>
+              <div class="text-xs text-white/60 mt-1">Mietenspiegel 2025</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">25%</div>
+              <div class="text-xs text-white/60 mt-1">max. Förderung</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM HAMBURG?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktanalyse"
+          heading="Warum Hamburg?"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Hamburg hat einen der dynamischsten Dachgeschoss-Märkte Deutschlands. Die Hansestadt kombiniert steigende Mietpreise mit begrenztem Neubauvolumen.
+          </p>
+          <p>
+            Der Median für Dachgeschossflächen liegt 2026 bei 15,12 €/m². Das ist mehr als der Hamburger Durchschnittsmietpreis (9,94 €/m² laut Mietenspiegel 2025) – und die Tendenz steigt. Gleichzeitig ist das Neubauvolumen in Hamburg strukturell begrenzt. Die Stadt verfolgt eine Bestandsorientierte Strategie. Dachgeschoss-Ausbau ist damit die renditestärkste Alternative.
+          </p>
+          <p>
+            Im Vergleich zu München (Median DG über 22 €/m²) oder Berlin (Median DG über 18 €/m²) sind Hamburger Dachgeschosse noch unterbewertet. Besonders in Bezirken wie Eimsbüttel, Eppendorf und Altona-Altstadt besteht erhebliches Aufwertungspotenzial. Der Hamburger Senat hat 2026 die Genehmigungsfreistellung für Dachgeschossausbauten erweitert. Damit ist Hamburg eines der handlungsfreundlichsten Bundesländer für DG-Projekte.
+          </p>
+          <p>
+            Die maritime Lage bringt spezifische Bauthemen mit sich. Feuchteschutz, Winddichtheit und die Anforderungen an die Wärmedämmung sind in Hamburg besonders streng. Das treibt die Kosten im Vergleich zu München oder Stuttgart. Dafür sparen Hamburger Bauherren bei der Aufzugspflicht: §37 Abs. 4 HBauO befreit Dachgeschosse von der Aufzugsnachrüstung. Das spart bis zu 30.000 € gegenüber vergleichbaren Projekten in anderen Bundesländern.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: KOSTEN PRO M²
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Richtwerte"
+        heading="Kosten pro m² – Hamburger Ausbauarten"
+        subheading="Hamburger Richtwerte 2025/2026 für den Großraum Hamburg. Alle Preise inklusive Handwerkerkosten und Material."
+      />
+      <div class="max-w-5xl mx-auto space-y-16">
+        <!-- Ausbauarten Tabelle -->
+        <CostTable rows={ausbauRows} title="Dachgeschossausbau Hamburg – Kosten nach Ausbauart" />
+
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <h3 class="text-xl font-bold text-text-primary mb-4">Einfacher Ausbau: 800–1.200 €/m²</h3>
+          <p class="mb-4">
+            Diese Kategorie umfasst die grundlegende Herrichtung der Dachgeschossfläche. Dazu gehören Dämmung (in der Regel Zwischensparrendämmung mit Dampfbremse), Trockenbau an den Dachschrägen, neuer Bodenaufbau mit Estrich und Fertigboden, sowie die elektrische Neuinstallation mit Standard-Leuchten. Heizung und Bad sind nicht enthalten. Diese Variante eignet sich für Eigentümer, die das Dachgeschoss als Lagerfläche oder Büro nutzen wollen.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Komplettausbau: 1.200–1.800 €/m²</h3>
+          <p class="mb-4">
+            Der Komplettausbau geht einen Schritt weiter. Zusätzlich zur Grundausstattung kommen Dachflächenfenster (VELUX o.ä.), die Heizungsanbindung mit Heizkörpern oder Fußbodenheizung, sowie die Vorbereitung für ein Badezimmer. In dieser Kategorie ist das Dachgeschoss als vollwertiger Wohnraum nutzbar. Die Kosten hängen stark davon ab, ob eine zentrale Heizungsanbindung vorhanden ist oder eine separate Lösung installiert werden muss.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Premium-Ausbau: 1.800–2.500 €/m²</h3>
+          <p class="mb-4">
+            Beim Premium-Ausbau kommt alles zusammen. Gauben für zusätzlichen Raumgewinn und Kopfhöhe, ein vollständiges Badezimmer mit gehobener Ausstattung, maßgefertigte Einbauten, hochwertige Bodenbeläge und möglicherweise eine Smart-Home-Integration. Diese Variante ist die richtige Wahl für Eigentümer, die das Dachgeschoss langfristig als hochwertigen Wohnraum nutzen oder vermieten wollen. In Top-Lagen wie Eimsbüttel oder Eppendorf erzielt ein premium-ausgebautes Dachgeschoss Mieten von 16–20 €/m².
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Warum Hamburg teurer ist als der Deutsche Durchschnitt</h3>
+          <p class="mb-4">
+            Der bundesweite Durchschnitt für Dachgeschossausbau liegt bei 1.000–1.800 €/m². Hamburg liegt am oberen Rand. Die Gründe sind handfest: Die maritime Lage erfordert erhöhte Anforderungen an Feuchteschutz und Winddichtheit. Die Hamburger Bauordnung (HBauO 2026) schreibt in bestimmten Satzungsgebieten den Erhalt historischer Dachformen vor. Das Verarbeitungsplus bei Gauben und Anschlüssen ist in Küstennähe deutlich höher. Dazu kommt: Hamburger Handwerkstarife liegen wegen des hohen Lebenshaltungsindexes über dem Bundesdurchschnitt.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: GAUBEN-KOSTEN
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Einzelpositionen"
+        heading="Gauben-Kosten – Hamburger Richtwerte"
+        subheading="Gauben sind der größte einzelne Posten im Dachgeschossausbau. Die Preise variieren stark nach Form und Größe."
+      />
+      <div class="max-w-5xl mx-auto space-y-12">
+        <CostTable rows={gaubenRows} title="Gauben-Preise Hamburg 2025/2026" />
+
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <h3 class="text-xl font-bold text-text-primary mb-4">Schleppgaube: 8.000–18.000 €</h3>
+          <p class="mb-4">
+            Die Schleppgaube ist die am häufigsten gewählte Gaubenform in Hamburg. Sie passt optimal zu den typischen Hamburger Satteldächern mit 30–50° Neigung. Die Gaube erstreckt sich über mehrere Dachfelder und schafft einen nahezu rechteckigen Raum. Für ein Standard-Hamburger Reihenmittelhaus (6 m Breite) ist eine Schleppgaube mit 3 m Breite und 1,5 m Tiefe die übliche Lösung. Die Kosten setzen sich zusammen aus: Gerüst, Abbruch der Dachhaut, Holzkonstruktion, Gaubenfenster, Blecharbeiten, Neueindeckung und Innenausbau. In Hamburg kommen die maritime Witterungsbeständigkeit und die geforderte Wärmedämmung als Kostenfaktoren hinzu.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Fledermausgaube: 15.000–25.000 €</h3>
+          <p class="mb-4">
+            Die Fledermausgaube hat eine flachgeneigte Dachfläche und große Fensterflächen. Sie eignet sich besonders für Dächer mit niedriger Neigung (20–35°). Der Vorteil: mehr Licht und ein großzügigeres Raumgefühl. Der Nachteil: höhere Kosten wegen des höheren Glasanteils und der aufwändigeren Statik. In Hamburger Altbaugebieten mit Flachdachneigung (z.B. Teile von Altona oder Barmbek) ist die Fledermausgaube die bevorzugte Lösung. Die.preise variieren stark nach Gaubengröße. Eine Fledermausgaube mit 4 m Breite kostet in Hamburg schnell 20.000–25.000 € inclusive aller Nebenarbeiten.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Trapezgaube und Segmentgaube</h3>
+          <p class="mb-4">
+            Trapezgauben liegen preislich zwischen Schleppgaube und Fledermausgaube. Die Segmentgaube bietet eine elegante, gerundete Optik, die in Hamburgs Altbauquartieren gut ankommt. Beide Formen sind in der Hamburger Bauordnung zulässig. Die Genehmigungsfähigkeit hängt vom Bebauungsplan und der Satzung des jeweiligen Bezirks ab. In Erhaltungssatzungsgebieten (z.B. Altona-Altstadt, Harvestehude, Eimsbüttel-Altstadt) gelten gestalterische Einschränkungen. Eine Abstimmung mit dem Bezirksamt vor Antragstellung ist dringend zu empfehlen.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Dachflächenfenster (VELUX): 400–1.500 €/Fenster</h3>
+          <p class="mb-4">
+            Dachflächenfenster sind die kostengünstigere Alternative zu Gauben. Sie eignen sich, wenn keine zusätzliche Stehhöhe benötigt wird. VELUX-Fenster der Spitzenklasse (z.B. VELUX Integra mit Solar-Antrieb) kosten 800–1.500 € inklusive Einbau. Einfachere Modelle sind ab 400 € zu haben. Pro m² Dachgeschoss sollten 2–4 Fenster eingeplant werden. Die Lichtausbeute ist gut, aber die Raumnutzung unter der Dachschräge bleibt eingeschränkt. In Kombination mit einer kleineren Gaube ergibt sich oft die beste Kosten-Nutzen-Relation.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: DÄMMUNG NACH ART
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Energieeffizienz"
+        heading="Dämmung nach Dämmart – Hamburger Preise"
+        subheading="Dämmung ist Pflicht und macht den größten Anteil der energetischen Sanierung aus. Die Wahl der Dämmart bestimmt Kosten und Förderfähigkeit."
+      />
+      <div class="max-w-5xl mx-auto space-y-12">
+        <CostTable rows={daemmungRows} title="Dämmkosten Hamburg – nach Dämmart" />
+
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <h3 class="text-xl font-bold text-text-primary mb-4">Aufsparrendämmung: 100–250 €/m²</h3>
+          <p class="mb-4">
+            Die Aufsparrendämmung ist die beste Lösung für höchste Dämmleistung. Die Dämmung wird auf den Sparren montiert, direkt unter der Dachhaut. Das sorgt für eine durchgehende Dämmebene ohne Wärmebrücken. Der Nachteil: Das gesamte Dach muss neu eingedeckt werden. Das treibt die Kosten. In Hamburg mit seinen häufigen Regenfällen und der Windbelastung ist diese Lösung besonders sinnvoll. Die Aufsparrendämmung ist förderfähig nach KfW 261 und BAFA. Sie erreicht U-Werte von 0,10–0,15 W/m²K. Für ein typisches Hamburger Dach (120 m²) liegen die Kosten bei 12.000–30.000 €.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Zwischensparrendämmung: 60–120 €/m²</h3>
+          <p class="mb-4">
+            Die Zwischensparrendämmung ist der Hamburger Standard. Minerwolle oder Hanf wird zwischen die Sparren geklemmt. Eine Dampfbremse auf der Innenseite verhindert Feuchteschäden. Die Kosten sind günstiger als bei der Aufsparrendämmung. Das Dach bleibt in seiner Struktur erhalten. Für die meisten Hamburger Altbauten (Bj. 1950–1980) ist diese Lösung die richtige Wahl. Der U-Wert erreicht 0,15–0,25 W/m²K. Förderfähig nach KfW 261 und BAFA. In Kombination mit einer Untersparrendämmung (zusätzlich 40–80 €/m²) lässt sich der U-Wert weiter verbessern.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Untersparrendämmung: 40–80 €/m²</h3>
+          <p class="mb-4">
+            Die Untersparrendämmung wird von innen auf die Sparren aufgebracht. Sie eignet sich als Ergänzung zur Zwischensparrendämmung oder als alleinige Lösung, wenn das Dach von außen nicht zugänglich ist. In Hamburg ist diese Variante besonders bei bewohnten Gebäuden beliebt, da der Innenausbau nicht gestört wird. Die Dämmleistung ist geringer als bei den anderen Varianten. Die Kombination mit einer Dampfbremse und Gipskarton-Beplankung kostet etwa 60–100 €/m². Förderfähig nach BAFA und §35c EStG.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 5: BAD IM DACHGESCHOSS
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Ausbau"
+        heading="Bad im Dachgeschoss – Kosten Hamburg"
+        subheading="Ein Bad ist Pflicht, wenn das Dachgeschoss als Wohnraum genutzt werden soll. Die Kosten hängen von Ausstattung und Sanitärtechnik ab."
+      />
+      <div class="max-w-5xl mx-auto space-y-12">
+        <CostTable rows={badRows} title="Bad-Kosten Dachgeschoss Hamburg" />
+
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <h3 class="text-xl font-bold text-text-primary mb-4">Standard-Bad: 10.000–15.000 €</h3>
+          <p class="mb-4">
+            Das Standard-Bad im Dachgeschoss umfasst eine Dusche mit Duschwanne, ein WC, ein Waschbecken und Standard-Fliesen. Die Kosten setzen sich zusammen aus: Rohrleitungen (Abwasser, Wasser, Heizung), Fliesenarbeiten (30–60 €/m² inklusive Material), Sanitärkeramik (Marken wie Duravit, Keramag oder Villeroy & Boch), Armaturen (Grohe oder Hansgrohe Einhebelmischer), Duschkabine oder Duschwand. Hinzu kommen die Trockenbauarbeiten für die Badumwehrung und die Estricharbeiten für den bodengleichen Duschbereich. In Hamburg kommen die Handwerkerkosten hinzu: Ein Hamburger Installateur berechnet 60–90 €/Stunde. Die Gesamtkosten für ein 6 m² Bad liegen typischerweise bei 12.000–15.000 €.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Premium-Bad: 15.000–25.000 €</h3>
+          <p class="mb-4">
+            Das Premium-Bad bietet gehobene Ausstattung und mehr Komfort. Bodengleiche Dusche mit Echtglas-Duschwand, großformatige Fliesen (60x60 cm oder größer), wandhängendes WC mit Soft-Close-Deckel, Markenarmaturen (Dornbracht oder Hansgrohe Axor), Handtuchheizkörper und möglicherweise eine Badewanne. Die Installationskosten sind wegen der aufwändigeren Verlegung (großformatige Fliesen erfordern Fliesenlegermeister) höher. Für ein 8 m² Premium-Bad in Hamburg liegen die Kosten bei 18.000–25.000 €. In Einzelfällen (Exklusivmarken, Beton Ciré statt Fliesen) sind auch 30.000 € möglich. Die gute Nachricht: Ein hochwertiges Bad im Dachgeschoss steigert den Mietwert nachhaltig. In Eimsbüttel erzielt eine Wohnung mit Vollbad einen Mietaufschlag von 10–15% gegenüber einer Wohnung ohne Bad.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Zusatzkosten im DG-Bad</h3>
+          <p class="mb-4">
+            Bei Dachgeschoss-Bädern kommen spezifische Kostenpositionen hinzu, die bei Normalgeschossen nicht anfallen. Die Abwasserhebeanlage: In Hamburg liegt das DG oft unterhalb der Rückstauebene. Ein Abwasserhebesatz kostet 1.500–3.000 € inklusive Einbau. Die Schallschutz-Decke: Trockenbau mit Schallschutzmatten ist im DG Pflicht. Das kostet 80–120 €/m² zusätzlich. Die Statik: Ein vollwertiges Bad mit Fliesen und Beton Estrich bringt 150–200 kg/m² zusätzliche Deckenlast. In Altbauten (Bj. vor 1948) ist ein Statik-Gutachten dringend zu empfehlen (500–2.000 €).
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 6: GENEHMIGUNGSKOSTEN
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Hamburger Recht"
+        heading="Genehmigungskosten Hamburg – HBauO 2026"
+        subheading="Die Hamburger Bauordnung 2026 hat die Genehmigungspflichten für Dachgeschossausbauten deutlich vereinfacht."
+      />
+      <div class="max-w-5xl mx-auto space-y-12">
+        <CostTable rows={genehmigungRows} title="Genehmigungskosten Hamburg 2026" />
+
+        <div class="prose prose-lg max-w-none text-text-secondary">
+          <h3 class="text-xl font-bold text-text-primary mb-4">§62 HBauO – Genehmigungsfreistellung: 0–100 €</h3>
+          <p class="mb-4">
+            Die wichtigste Änderung der HBauO 2026: Viele Dachgeschossausbauten sind genehmigungsfrei. Die Bauherrschaft zeigt das Vorhaben beim Bezirksamt an. Nach Ablauf von vier Wochen gilt es als genehmigt. Die Bearbeitungsgebühr liegt bei 0–100 €. Die Voraussetzungen: Das Dachgeschoss darf nicht mehr als zwei Wohnungen umfassen. Die Nutzungsänderung musswohnbaulich sein. Das Gebäude darf nicht in einem Erhaltungssatzungsgebiet liegen. Und das Dach muss in seinem Bestand nicht verändert werden (z.B. keine Gaube). In der Praxis trifft das auf etwa 60% aller Hamburger DG-Projekte zu.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">§61 HBauO – Vereinfachtes Verfahren: 200–800 €</h3>
+          <p class="mb-4">
+            Wenn die Voraussetzungen für die Genehmigungsfreistellung nicht erfüllt sind, kommt das vereinfachte Verfahren in Frage. Das betrifft Gauben, Nutzungsänderungen (Gewerbe zu Wohnen) und Erweiterungen des DG über die bestehende Dachfläche hinaus. Die Bearbeitungszeit beträgt 4–8 Wochen. Die Kosten richten sich nach der Bausumme und liegen bei 200–800 € für ein typisches DG-Projekt. Enthalten ist die Prüfung durch die Bauaufsichtsbehörde und ggf. die Abstimmung mit der Feuerwehr.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Statik-Gutachten: 500–2.000 €</h3>
+          <p class="mb-4">
+            Ein Statik-Gutachten ist bei Gauben, Nutzungsänderungen und jeder wesentlichen Veränderung der Dachstruktur Pflicht. Ein Hamburger Tragwerksplaner berechnet für ein übliches DG-Projekt 500–1.500 €. Bei komplizierten Altbauten (z.B. Fachwerkkonstruktionen in Harvestehude oder den Elbvororten) können die Kosten auf 2.000 € und mehr steigen. Das Gutachten prüft die Deckenlast, die Dachkonstruktion und die Fundamente. In den meisten Fällen reicht ein vereinfachtes Gutachten. Ein vollständiger Statik-Nachweis ist teurer, aber bei Neubauten oder größeren Eingriffen erforderlich.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Aufzugspflicht entfällt: §37 Abs. 4 HBauO</h3>
+          <p class="mb-4">
+            Eine Hamburger Besonderheit, die bares Geld spart: Die Aufzugspflicht nach Landesbauordnung gilt nicht für Dachgeschosse. Das bedeutet: In einem 5-geschossigen Altbau in Hamburg muss für das DG kein Aufzug nachgerüstet werden. In anderen Bundesländern (z.B. Nordrhein-Westfalen oder Bayern) kann die Aufzugspflicht bis zu 30.000 € kosten. Hamburg hat diese Pflicht 2026 durch die HBauO-Novelle ausdrücklich ausgeschlossen. Das ist ein klares Signal zugunsten des DG-Ausbaus.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4">Denkmalschutz und Erhaltungssatzungsgebiete</h3>
+          <p class="mb-4">
+            In bestimmten Hamburger Vierteln gelten zusätzliche Auflagen. Erhaltungssatzungsgebiete gibt es in Altona-Altstadt, Harvestehude, Eimsbüttel-Altstadt, der Grindelviertel und Teilen von Barmbek-Süd. In diesen Gebieten ist die äußere Erscheinung des Daches geschützt. Gauben müssen in Form und Material dem historischen Bestand entsprechen. Die Bezirksämter prüfen vor Baubeginn die Zustimmung. Das kann 4–8 Wochen zusätzliche Bearbeitungszeit bedeuten. Bei echten Baudenkmälern (nach §6 HDSchG) ist eine separate denkmalschutzrechtliche Genehmigung erforderlich. Die Kosten sind individuell.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 7: FÖRDERMITTEL
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Förderung"
+        heading="Fördermittel Hamburg 2025/2026 – KfW, BAFA, §35c EStG"
+        subheading="Fördermittel können bis zu 25% der Gesamtkosten decken. Alle drei Programme sind kombinierbar."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-8">
+          <!-- KfW 261 -->
+          <div class="bg-surface rounded-2xl p-8 border border-border">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-text-primary">KfW 261 – Wohngebäude Kredit</h3>
+                <span class="text-sm text-secondary font-semibold">Bis zu 150.000 €/Wohneinheit, 35% Tilgungszuschuss</span>
+              </div>
+            </div>
+            <div class="prose prose-sm max-w-none text-text-secondary">
+              <p class="mb-3">
+                Der KfW-Wohngebäude Kredit 261 ist das Flaggschiff der Wohnraumförderung. Er ist ein Tilgungszuschuss von 35% der förderfähigen Kosten bei energetischer Sanierung. Förderfähig sind Dämmung, Gauben mit energetischem Mehrwert, neue Fenster und Heizungstechnik. Für eine 60m² DG-Wohnung mit Dämmung und Gaube (Gesamtkosten 100.000 €) beträgt der Zuschuss bis zu 35.000 €. Der Kredit wird über die Hausbank beantragt. Die KfW bietet günstige Zinskonditionen (Stand 2026: effektiv ca. 2,5–3,5%). Die Antragstellung muss vor Baubeginn erfolgen.
+              </p>
+              <p class="mb-3">
+                <strong>Wichtig:</strong> KfW 261 ist ein Kredit, kein Zuschuss. Die Tilgungszuschüsse reduzieren die Restschuld. Bei einem KfW-Darlehen von 100.000 € und 35% Tilgungszuschuss müssen nur 65.000 € zurückgezahlt werden. Kombiniert mit dem aktuellen Zinsniveau ist das eine der günstigsten Finanzierungsformen für den DG-Ausbau.
+              </p>
+              <p>
+                Förderfähig sind auch combine Maßnahmen: Dämmung der Dachflächen, Einbau von Gauben mit Wärmeschutzverglasung, Erneuerung der Heizungsanlage. Für ein komplettes DG-Projekt mit Gaube und Dämmung sind die Voraussetzungen in der Regel erfüllt.
+              </p>
+            </div>
+          </div>
+
+          <!-- BAFA -->
+          <div class="bg-surface rounded-2xl p-8 border border-border">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-text-primary">BAFA – Einzelmaßnahmen</h3>
+                <span class="text-sm text-secondary font-semibold">Zuschuss zu Dämm-Maßnahmen</span>
+              </div>
+            </div>
+            <div class="prose prose-sm max-w-none text-text-secondary">
+              <p class="mb-3">
+                Das BAFA fördert Einzelmaßnahmen an der Gebäudehülle. Dazu gehören Dämmung der Dachflächen, Erneuerung von Fenstern und Außentüren. Der Förderatz beträgt 15% der förderfähigen Kosten. Für eine Aufsparrendämmung (Kosten: 15.000 €) beträgt der BAFA-Zuschuss 2.250 €. Die Antragstellung erfolgt über das BAFA-Portal. Vor Beginn der Maßnahme muss der Antrag gestellt sein.
+              </p>
+              <p>
+                <strong> Kombination KfW 261 + BAFA:</strong> KfW 261 und BAFA sind für dieselbe Maßnahme nicht kombinierbar. Aber: Verschiedene Maßnahmen an demselben Gebäude können unterschiedlich gefördert werden. Beispiel: KfW 261 für die Gaube (energetisch), BAFA für die Dämmung. Das ist zulässig, wenn die Maßnahmen technisch getrennt betrachtet werden können. Lassen Sie sich hier beraten.
+              </p>
+            </div>
+          </div>
+
+          <!-- §35c EStG -->
+          <div class="bg-surface rounded-2xl p-8 border border-border">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-text-primary">§35c EStG – Steuerliche Förderung</h3>
+                <span class="text-sm text-secondary font-semibold">20% der Kosten, max. 40.000 € über 3 Jahre</span>
+              </div>
+            </div>
+            <div class="prose prose-sm max-w-none text-text-secondary">
+              <p class="mb-3">
+                §35c Einkommensteuergesetz ermöglicht eine steuerliche Absetzung von energetischen Maßnahmen. 20% der Kosten können über 3 Jahre von der Einkommensteuer abgesetzt werden. Maximal sind 40.000 € möglich. Die Maßnahmen müssen zertifiziert sein (z.B. KfW-Zertifikat oder Energieberater-Nachweis). Für einen DG-Ausbau mit Dämmung und Gaube (Gesamtkosten 100.000 €) beträgt die Steuerersparnis bis zu 20.000 €. Das entspricht einem efectivos Zuschuss von 20%.
+              </p>
+              <p class="mb-3">
+                Die Kombination ist möglich: §35c + KfW 261 oder §35c + BAFA. Die Fördermittel können sich ergänzen. Wichtig: Die Steuerförderung wird über die Einkommensteuererklärung geltend gemacht. Ein Energieberater (nach §88 GEG) muss die Maßnahmen bescheinigen. Kosten für den Energieberater: 500–1.500 € in Hamburg. Auch das ist förderfähig.
+              </p>
+              <p>
+                <strong>Rechenbeispiel Förderung für 100.000 € Projekt:</strong> KfW 261 (35% Tilgungszuschuss auf 80.000 € Kredit) = 28.000 €. BAFA für Dämmung (15% auf 15.000 €) = 2.250 €. §35c (20% auf 50.000 €) = 10.000 €. Gesamtförderung: bis zu 40.250 €. Das sind über 40% der förderfähigen Kosten. Aber: Die Summe aller Förderungen darf die Gesamtkosten nicht überschreiten.
+              </p>
+            </div>
+          </div>
+
+          <!-- Kombination -->
+          <div class="bg-primary text-white rounded-2xl p-8">
+            <h3 class="text-xl font-bold mb-3">Kombination aller drei Programme</h3>
+            <p class="text-white/80">
+              KfW 261, BAFA und §35c EStG können kombiniert werden, wenn die förderfähigen Maßnahmen sich nicht überschneiden. Beispiel: KfW 261 für die Gaube (energetischer Anteil), BAFA für die Dämmung, §35c für die remainderen energetischen Maßnahmen. In der Praxis sind bis zu 25% Förderung der Gesamtkosten realistisch. Wir empfehlen eine individuelle Fördermittelberatung vor Baubeginn. Wir unterstützen Sie bei der Antragstellung.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 8: RECHENBEISPIEL
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Rechenbeispiel"
+        heading="60m² DG in Hamburg Eimsbüttel – Konkrete Kalkulation"
+        subheading="Ein reales Rechenbeispiel mit aktuellen Hamburger Preisen. Alle Angaben ohne Gewähr – eine individuelle Beratung ist unverzichtbar."
+      />
+      <div class="max-w-4xl mx-auto">
+        <!-- Szenario Tabelle -->
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Ausbauvariante</th>
+                <th class="px-6 py-4 font-semibold text-right">Kosten</th>
+                <th class="px-6 py-4 font-semibold text-right">monatliche Miete</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Einfacher Ausbau (60m²)</td>
+                <td class="px-6 py-4 text-right font-mono">48.000–72.000 €</td>
+                <td class="px-6 py-4 text-right font-mono text-text-secondary">—</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Komplettausbau (60m²)</td>
+                <td class="px-6 py-4 text-right font-mono">72.000–108.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">~598 €/Monat</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">+ Gaube (Schleppgaube)</td>
+                <td class="px-6 py-4 text-right font-mono">+8.000–18.000 €</td>
+                <td class="px-6 py-4 text-right font-mono text-text-secondary">—</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">+ Vollbad (Premium)</td>
+                <td class="px-6 py-4 text-right font-mono">+15.000–25.000 €</td>
+                <td class="px-6 py-4 text-right font-mono text-text-secondary">—</td>
+              </tr>
+              <tr class="bg-primary/5">
+                <td class="px-6 py-4 font-bold">Gesamtkosten (Komplettausbau + Gaube + Bad)</td>
+                <td class="px-6 py-4 text-right font-mono font-bold">95.000–151.000 €</td>
+                <td class="px-6 py-4 text-right font-mono font-bold">~598 €/Monat</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Rechenbeispiel: Komplettausbau 60m² in Eimsbüttel
+          </p>
+          <p>
+            Grundfläche: 60m². Zwischensparrendämmung (100 €/m² × 80m² Dachfläche): 8.000 €. Trockenbau Dachschrägen und Wände (70 €/m² × 100m²): 7.000 €. Bodenaufbau Estrich + Fertigparkett (80 €/m² × 60m²): 4.800 €. Elektro komplett (100 €/m² × 60m²): 6.000 €. Heizung Anbindung + 3 Heizkörper: 4.000 €. Bad Vorbereitung (ohne Sanitär): 3.000 €. Malerarbeiten (20 €/m² × 120m²): 2.400 €. Gerüst + Baunebenkosten: 3.500 €. Summe Eigenleistung (ohne Gaube und Bad): ~38.700–48.000 €.
+          </p>
+          <p>
+            Addiere: Gaube Schleppgaube (12.000 €), Bad Premium (18.000 €), Statik + Genehmigung §62 (500 €). Gesamtkosten: 69.200–78.500 € für den Ausbau. Mit Komplettausbau-Kosten: 78.000–108.000 €. Mit Gaube + Bad: 108.000–138.000 €.
+          </p>
+
+          <p>
+            <strong>Mieteinnahmen nach Hamburger Mietenspiegel 2025:</strong> Der Hamburger Mietenspiegel 2025 weist für Eimsbüttel eine durchschnittliche Nettokaltmiete von 11,50–13,50 €/m² aus. Für ein Dachgeschoss (mit Gaube, Neubauqualität): ca. 9,94 €/m² (Hamburger Durchschnitt, nach Abzug 15% DG-Abschlag). Bei 60m²: 598 €/Monat Nettokaltmiete. Das sind 7.176 €/Jahr.
+          </p>
+
+          <p>
+            <strong>Mietrendite:</strong> Bei 108.000 € Gesamtkosten und 7.176 €/Jahr Mieteinnahmen: 6,6% Bruttorendite. Nach Abzug von Bewirtschaftungskosten (20%): 5,3% Nettorendite. Das ist eine solide Rendite für Hamburger Immobilien. Zum Vergleich: Die Durchschnittsrendite für Hamburger Altbauwohnungen liegt bei 3–4%.
+          </p>
+
+          <p>
+            <strong>Förderung KfW 261:</strong> Förderfähige Kosten (energetische Maßnahmen, Gaube): ca. 60.000 €. Tilgungszuschuss 35%: 21.000 €. Effektiv: Die Restschuld beträgt 39.000 € statt 60.000 €. Das verbessert die Rendite deutlich.
+          </p>
+
+          <p>
+            <strong> §35c EStG Steuerersparnis:</strong> 20% von 50.000 € (förderfähiger Anteil) = 10.000 € über 3 Jahre. Wird auf die Steuer angerechnet. Ergibt einen weiteren Zuschuss von 10.000 €. Gesamtförderung realistisch: 21.000 (KfW) + 10.000 (§35c) = 31.000 €. Netto-Projektkosten: 108.000 – 31.000 = 77.000 €. Rendite auf Nettokosten: 7.176 / 77.000 = 9,3% brutto.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 9: PREISTREIBER
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Einflussfaktoren"
+        heading="Was den Preis beeinflusst – Hamburg-Faktoren"
+        subheading="Nicht jedes Dachgeschoss ist gleich. Diese Faktoren bestimmen, ob Ihr Projekt eher am unteren oder oberen Rand der Richtwerte liegt."
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Faktor 1 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Zustand der Bausubstanz</h3>
+            <p class="text-sm text-text-secondary">
+              Altbauten (bis 1948) haben oft schlechtere Statik. Historische Dachstühle sind häufig nicht für Wohnlasten ausgelegt. Ein Statik-Gutachten ist dann Pflicht. Morsche Sparren oder Asbest in der Dämmung treiben die Kosten. Altbaugutachten: 1.500–3.000 € extra.
+            </p>
+          </div>
+
+          <!-- Faktor 2 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Dachform</h3>
+            <p class="text-sm text-text-secondary">
+              Satteldach (typisch Hamburg, 30–50°): Gauben gut möglich, Kosten im mittleren Bereich. Flachdach (besonders in Barmbek, Altona): Aufstockung möglich, aber Statik aufwändiger. Pultdach: Selten, individuelle Lösung. Die Dachform bestimmt die Gaubenoption und damit den Projektcharakter.
+            </p>
+          </div>
+
+          <!-- Faktor 3 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Bezirk</h3>
+            <p class="text-sm text-text-secondary">
+              Eimsbüttel und Eppendorf: Höchste Preise. Hier liegen die Handwerkerkosten 10–15% über dem Hamburger Durchschnitt. Billwerder und Rahlstedt: Günstigere Handwerker, längere Anfahrtswege. Harburg und Bergedorf: Noch günstiger, aber weniger Handwerker mit DG-Erfahrung. Die Bezirkswahl beeinflusst die Gesamtkosten um 5–15%.
+            </p>
+          </div>
+
+          <!-- Faktor 4 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Denkmalschutz</h3>
+            <p class="text-sm text-text-secondary">
+              Erhaltungssatzungsgebiete in Altona-Altstadt, Harvestehude, Eimsbüttel-Altstadt: Gestaltungsauflagen für Gauben. Echte Baudenkmäler (§6 HDSchG): Separate denkmalschutzrechtliche Genehmigung. In der Regel sind Mehrkosten von 2.000–5.000 € einzuplanen. Die Bezirksämter Harvestehude und Eimsbüttel sind besonders streng bei der Prüfung.
+            </p>
+          </div>
+
+          <!-- Faktor 5 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Zugang und Logistik</h3>
+            <p class="text-sm text-text-secondary">
+              Dicht besiedelte Bezirke (Eimsbüttel, Altona-Altstadt): Enge Straßen, kein Kranstellplatz. Material muss per Hand transportiert werden. Das treibt die Baunebenkosten. Mehrfamilienhäuser mit bewohnten Geschossen: Lärmschutzauflagen, beschränkte Arbeitszeiten. Das verlängert die Bauzeit und erhöht die Kosten.
+            </p>
+          </div>
+
+          <!-- Faktor 6 -->
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">Haustechnik</h3>
+            <p class="text-sm text-text-secondary">
+              Wenn die zentrale Heizung im Haus alt ist (über 25 Jahre), empfiehlt sich eine Sanierung. Kosten: 8.000–15.000 € für das ganze Haus. Bei einem DG-Ausbau mit Fußbodenheizung (70–100 €/m²) kommen schnell 5.000–8.000 € nur für die DG-Heizung zusammen. Eine Abwasserhebeanlage (bei tief liegenden DG) kostet 1.500–3.000 € extra.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 10: KOSTEN SENKEN
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Sparstrategien"
+        heading="Kosten senken – legale Wege für Hamburg"
+        subheading="Die Richtwerte sind Obergrenzen. Mit der richtigen Strategie lassen sich die Kosten deutlich drücken – ohne Abstriche bei der Qualität."
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-6">
+          <!-- Sparweg 1 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">§62 HBauO Genehmigungsfreistellung nutzen</h3>
+              <p class="text-sm text-text-secondary">
+                Wer die Voraussetzungen für die Genehmigungsfreistellung erfüllt, spart 200–800 € an Verfahrenskosten. Noch wichtiger: Die Bauzeit verkürzt sich um 4–8 Wochen, weil kein Antrag geprüft werden muss. Voraussetzung: Keine Gaube, keine Nutzungsänderung, kein Eingriff in die Statik. Prüfen Sie vorab mit uns, ob §62 für Ihr Projekt infrage kommt.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sparweg 2 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Alle Fördermittel kombinieren</h3>
+              <p class="text-sm text-text-secondary">
+                KfW 261 + BAFA + §35c EStG können in der Kombination bis zu 25% der Gesamtkosten decken. Viele Eigentümer lassen Fördergeld liegen, weil sie nur ein Programm kennen. Wir berechnen für jedes Projekt die optimale Fördermittelstrategie. Bei einem 100.000 €-Projekt sind das bis zu 25.000 € gespart. Fördermittelberatung: Bei uns kostenlos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sparweg 3 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Schleppgaube statt Fledermausgaube</h3>
+              <p class="text-sm text-text-secondary">
+                Die Fledermausgaube ist optisch reizvoller, kostet aber 7.000 € mehr als die Schleppgaube. Für die Raumgewinnung ist die Schleppgaube genauso effektiv. Die Kosten liegen bei 8.000–18.000 € (Schleppgaube) gegenüber 15.000–25.000 € (Fledermausgaube). Das sind 7.000 € gespart bei gleichem Nutzen. In den meisten Hamburger Satteldächern ist die Schleppgaube die bessere Wahl.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sparweg 4 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Zwischensparrendämmung statt Aufsparrendämmung</h3>
+              <p class="text-sm text-text-secondary">
+                Die Aufsparrendämmung ist energetisch besser, kostet aber 40–130 €/m² mehr als die Zwischensparrendämmung. Für ein 100m²-Dach: 4.000–13.000 € gespart. Mit KfW 261 Förderung wird der Unterschied kleiner. Aber: Wenn keine Neueindeckung notwendig ist, ist die Zwischensparrendämmung der bessere Deal. Die Dämmleistung ist für die meisten Projekte ausreichend.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sparweg 5 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Eigenleistung bei Malerarbeiten verhandeln</h3>
+              <p class="text-sm text-text-secondary">
+                Malerarbeiten sind mit 12–25 €/m² ein kleiner, aber verhandelbarer Posten. Wenn Sie die Malerarbeiten selbst übernehmen oder in Eigenleistung erbringen, können Sie 2.000–4.000 € sparen. Wichtig: Nur die Eigenleistung, die Sie tatsächlich fachgerecht ausführen können. Pfusch am Bau kostet am Ende mehr. Unsere Erfahrung: Eigentümer, die die Endreinigung selbst machen, sparen 500–1.000 €.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sparweg 6 -->
+          <div class="flex gap-4 p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Bauzeitplan optimieren</h3>
+              <p class="text-sm text-text-secondary">
+                Jede Woche Verzögerung kostet 500–1.500 € (Baustellenkosten, Gerüst, Handwerker). Ein klarer Zeitplan mit festen Terminen spart Geld. In Hamburg sind die Handwerker im Sommer (Mai–September) besonders ausgelastet. Wer im Winter (November–Februar) baut, bekommt oft bessere Termine und kann 5–10% auf die Handwerkerrechnung verhandeln.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Kostenlose Kostenanalyse für Ihr Projekt
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir erstellen Ihnen ein unverbindliches Angebot mit allen Positionen – auf Basis aktueller Hamburger Marktpreise. Inklusive Fördermittel-Check.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
