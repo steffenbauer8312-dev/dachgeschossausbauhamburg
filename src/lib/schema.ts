@@ -1,125 +1,91 @@
-// src/lib/schema.ts
-
-export interface LocalBusinessSchema {
-  name: string;
-  description: string;
-  url: string;
-  telephone: string;
-  email: string;
-  address: {
-    streetAddress: string;
-    addressLocality: string;
-    postalCode: string;
-    addressCountry: string;
-  };
-  geo?: { latitude: number; longitude: number };
-  openingHours?: string[];
-  priceRange?: string;
-}
-
-export function localBusinessSchema(data: LocalBusinessSchema): string {
-  return JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: data.name,
-    description: data.description,
-    url: data.url,
-    telephone: data.telephone,
-    email: data.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: data.address.streetAddress,
-      addressLocality: data.address.addressLocality,
-      postalCode: data.address.postalCode,
-      addressCountry: data.address.addressCountry,
+export function generateLocalBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Dachgeschossausbau München",
+    "description": "Professioneller Dachgeschossausbau in München. Wir verwandeln ungenutzte Dachböden in wertvollen Wohnraum.",
+    "url": "https://dachgeschossausbaumuenchen.de",
+    "telephone": "+49-89-XXXXXXXX",
+    "email": "info@dachgeschossausbaumuenchen.de",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "München",
+      "addressRegion": "Bayern",
+      "postalCode": "80XXX",
+      "streetAddress": "[Ihre Straße]"
     },
-    ...(data.geo && {
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: data.geo.latitude,
-        longitude: data.geo.longitude,
-      },
-    }),
-    ...(data.openingHours && { openingHours: data.openingHours }),
-    ...(data.priceRange && { priceRange: data.priceRange }),
-  });
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "48.1351",
+      "longitude": "11.5820"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "priceRange": "€€€"
+  }
 }
 
-export function serviceSchema(data: {
-  name: string;
-  description: string;
-  provider: string;
-  areaServed: string;
-  url: string;
-}): string {
-  return JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: data.name,
-    description: data.description,
-    provider: { '@type': 'Organization', name: data.provider },
-    areaServed: { '@type': 'City', name: data.areaServed },
-    url: data.url,
-  });
+export function generateServiceSchema(service: { name: string; description: string; slug: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.name,
+    "description": service.description,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Dachgeschossausbau München"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "München"
+    },
+    "url": `https://dachgeschossausbaumuenchen.de/leistungen/${service.slug}`
+  }
 }
 
-export interface FaqItem {
-  question: string;
-  answer: string;
+export function generateFaqSchema(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer: {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }
 }
 
-export function faqPageSchema(faqs: FaqItem[], pageUrl: string): string {
-  return JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  });
+export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  }
 }
 
-export function articleSchema(data: {
-  headline: string;
-  description: string;
-  datePublished: string;
-  dateModified?: string;
-  author: string;
-  url: string;
-  image?: string;
-}): string {
-  return JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.headline,
-    description: data.description,
-    datePublished: data.datePublished,
-    ...(data.dateModified && { dateModified: data.dateModified }),
-    author: { '@type': 'Organization', name: data.author },
-    publisher: { '@type': 'Organization', name: 'Dachgeschossausbau München' },
-    url: data.url,
-    ...(data.image && { image: data.image }),
-  });
-}
-
-export interface BreadcrumbItem {
-  label: string;
-  href: string;
-}
-
-export function breadcrumbSchema(items: BreadcrumbItem[], siteUrl: string): string {
-  return JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.label,
-      item: `${siteUrl}${item.href}`,
-    })),
-  });
+export function generateHowToSchema(steps: { name: string; text: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Dachgeschossausbau Prozess",
+    "description": "Schritt für Schritt zum fertigen Dachgeschoss",
+    "step": steps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text
+    }))
+  }
 }
