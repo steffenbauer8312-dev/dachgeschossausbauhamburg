@@ -54,7 +54,7 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
     "mainEntity": faqs.map(faq => ({
       "@type": "Question",
       "name": faq.question,
-      "acceptedAnswer: {
+      "acceptedAnswer": {
         "@type": "Answer",
         "text": faq.answer
       }
