@@ -2,6 +2,7 @@
 import BaseHead from '@/components/layout/BaseHead.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
+import StickyCtaBar from '@/components/layout/StickyCtaBar.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -32,5 +33,6 @@ const { title, description, ogImage, canonical, currentPath = '/', noindex = fal
     <slot />
   </main>
   <Footer />
+  <StickyCtaBar />
 </body>
 </html>

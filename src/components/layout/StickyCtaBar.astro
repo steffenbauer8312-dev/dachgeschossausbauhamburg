@@ -1,0 +1,28 @@
+---
+---
+<div id="sticky-cta" class="sticky-cta translate-y-full">
+  <div class="max-w-content mx-auto w-full flex items-center justify-between gap-4">
+    <p class="text-sm font-medium hidden sm:block">
+      Dachgeschossausbau in Hamburg? Wir beraten kostenlos.
+    </p>
+    <a href="/kontakt" class="bg-secondary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary/90 transition whitespace-nowrap">
+      Kostenlose Beratung →
+    </a>
+  </div>
+</div>
+
+<script>
+  const sticky = document.getElementById('sticky-cta');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 600) {
+      sticky?.classList.remove('translate-y-full');
+      sticky?.classList.add('translate-y-0');
+    } else {
+      sticky?.classList.add('translate-y-full');
+      sticky?.classList.remove('translate-y-0');
+    }
+    lastScroll = scrollY;
+  });
+</script>
