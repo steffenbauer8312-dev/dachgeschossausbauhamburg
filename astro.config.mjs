@@ -4,7 +4,4 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://www.dachgeschossausbauhamburg.de',
   integrations: [tailwind()],
-  prefetch: {
-    prefetchAll: true
-  }
 });

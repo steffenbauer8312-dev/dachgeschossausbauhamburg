@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sitemap – Dachgeschossausbau Hamburg"
+  description="Alle Seiten von dachgeschossausbauhamburg.de im Überblick."
+  canonical="/sitemap/"
+  currentPath="/sitemap/"
+  noindex={true}
+>
+  <section class="py-20 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 lg:px-8">
+      <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-10">Sitemap</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Hauptseiten -->
+        <div>
+          <h2 class="text-lg font-bold text-text-primary mb-4">Hauptseiten</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/" class="text-primary hover:underline">Home – Dachgeschossausbau Hamburg</a></li>
+            <li><a href="/kosten/" class="text-primary hover:underline">Kosten – Hamburger Richtwerte 2025/2026</a></li>
+            <li><a href="/genehmigung/" class="text-primary hover:underline">Genehmigung – HBauO 2026</a></li>
+            <li><a href="/faq/" class="text-primary hover:underline">FAQ – 40+ Fragen</a></li>
+            <li><a href="/prozess/" class="text-primary hover:underline">Prozess – Der Ablauf</a></li>
+            <li><a href="/kontakt/" class="text-primary hover:underline">Kontakt – Kostenlose Beratung</a></li>
+            <li><a href="/ueber-uns/" class="text-primary hover:underline">Über uns</a></li>
+          </ul>
+        </div>
+
+        <!-- Leistungen -->
+        <div>
+          <h2 class="text-lg font-bold text-text-primary mb-4">Leistungen</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/leistungen/" class="text-primary hover:underline">Alle Leistungen</a></li>
+            <li><a href="/leistungen/dachgeschossausbau/" class="text-primary hover:underline">Dachgeschossausbau</a></li>
+            <li><a href="/leistungen/dachgauben/" class="text-primary hover:underline">Dachgauben</a></li>
+            <li><a href="/leistungen/daemmung/" class="text-primary hover:underline">Dachdämmung</a></li>
+            <li><a href="/leistungen/innenausbau/" class="text-primary hover:underline">Innenausbau</a></li>
+          </ul>
+        </div>
+
+        <!-- Standorte -->
+        <div>
+          <h2 class="text-lg font-bold text-text-primary mb-4">Hamburger Bezirke</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/standorte/eppendorf/" class="text-primary hover:underline">Eppendorf</a></li>
+            <li><a href="/standorte/eimsbuettel/" class="text-primary hover:underline">Eimsbüttel</a></li>
+            <li><a href="/standorte/altona/" class="text-primary hover:underline">Altona</a></li>
+            <li><a href="/standorte/harburg/" class="text-primary hover:underline">Harburg</a></li>
+            <li><a href="/standorte/bergedorf/" class="text-primary hover:underline">Bergedorf</a></li>
+            <li><a href="/fuer-investoren/" class="text-primary hover:underline">Für Investoren</a></li>
+          </ul>
+        </div>
+
+        <!-- Rechtliches -->
+        <div>
+          <h2 class="text-lg font-bold text-text-primary mb-4">Rechtliches</h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/impressum/" class="text-primary hover:underline">Impressum</a></li>
+            <li><a href="/datenschutz/" class="text-primary hover:underline">Datenschutzerklärung</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
