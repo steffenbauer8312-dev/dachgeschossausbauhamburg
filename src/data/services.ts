@@ -1,0 +1,84 @@
+import type { Service } from '../types'
+
+export const SERVICES: Service[] = [
+  {
+    id: 'dachgeschossausbau',
+    title: 'Dachgeschossausbau',
+    slug: 'dachgeschossausbau',
+    shortDescription: 'Verwandeln Sie Ihren ungenutzten Dachboden in wertvollen Wohnraum – professionell und termingerecht.',
+    description: 'Der Dachgeschossausbau ist unsere Kernkompetenz. Wir übernehmen den kompletten Prozess von der ersten Beratung bis zur schlüsselfertigen Übergabe. Unser Team aus erfahrenen Handwerkern und Planern arbeitet Hand in Hand, um Ihr Projekt erfolgreich umzusetzen.',
+    benefits: [
+      'Bis zu 50% mehr Wohnfläche ohne Grundstücksvergrößerung',
+      'Steigerung des Immobilienwerts um 15-25%',
+      'Energieeffiziente Dämmung nach aktuellen Standards',
+      'Individuelle Planung nach Ihren Wünschen',
+    ],
+    useCases: [
+      'Zusätzliches Schlafzimmer für wachsende Familien',
+      'Homeoffice oder Arbeitszimmer',
+      'Gästezimmer oder Einliegerwohnung',
+      'Ausbau für Mietwohnungen',
+    ],
+    priceRange: '1.800–3.800 €/m²',
+  },
+  {
+    id: 'dachgauben',
+    title: 'Dachgauben',
+    slug: 'dachgauben',
+    shortDescription: 'Dachgauben schaffen lichtdurchfluteten Wohnraum und verbessern die Raumqualität im Dachgeschoss erheblich.',
+    description: 'Dachgauben sind eine elegante Lösung, um mehr Licht und Stehhöhe in Ihr Dachgeschoss zu bringen. Wir beraten Sie bei der Wahl der optimalen Gaubenform – ob Schleppgaube, Fledermausgaube, Trapezgaube oder Segmentgaube – und setzen diese fachgerecht um.',
+    benefits: [
+      'Erhebliche Verbesserung der Lichtverhältnisse',
+      'Mehr nutzbare Raumhöhe',
+      ' Individuelle Anpassung an Ihre Dachform',
+      'Seit 2025 in Bayern genehmigungsfrei möglich',
+    ],
+    useCases: [
+      'Schaffung von zusätzlichen Fenstern',
+      'Vergrößerung der nutzbaren Fläche',
+      'Optische Aufwertung der Fassade',
+      'Balkonintegration möglich',
+    ],
+    priceRange: '10.000–25.000 € pro Gaube',
+  },
+  {
+    id: 'daemmung',
+    title: 'Dachdämmung',
+    slug: 'daemmung',
+    shortDescription: 'Professionelle Dämmung für optimalen Wärmeschutz und Energieeffizienz nach neuesten Standards.',
+    description: 'Eine fachgerechte Dachdämmung ist die Grundlage für ein behagliches Wohnklima im Dachgeschoss. Wir bieten Aufsparrendämmung, Zwischensparrendämmung und Untersparrendämmung – abgestimmt auf Ihre baulichen Gegebenheiten und Ihre energetischen Ziele.',
+    benefits: [
+      'Reduzierung der Heizkosten um bis zu 30%',
+      'Optimaler Wärmeschutz im Sommer und Winter',
+      'Erfüllung der Energieeinsparverordnung (EnEV)',
+      'Förderfähig durch KfW-Programme',
+    ],
+    useCases: [
+      'Energetische Sanierung des Dachgeschosses',
+      'Vorbereitung für den Ausbau',
+      'Nachträgliche Verbesserung der Dämmung',
+      'Kombination mit Gaubeneinbau',
+    ],
+    priceRange: '60–150 €/m²',
+  },
+  {
+    id: 'innenausbau',
+    title: 'Innenausbau',
+    slug: 'innenausbau',
+    shortDescription: 'Vom Trockenbau bis zum vollständigen Innenausbau – wir machen Ihr Dachgeschoss bezugsfertig.',
+    description: 'Der Innenausbau ist der abschließende Schritt zum fertigen Wohnraum. Wir übernehmen alle Arbeiten: Trockenbau, Elektroinstallation, Heizungs- und Sanitärinstallation, Böden, Malerarbeiten und vieles mehr. Alles aus einer Hand, koordiniert von einem Ansprechpartner.',
+    benefits: [
+      'Alles aus einer Hand – kein Koordinationsaufwand für Sie',
+      'Feste Ansprechpartner während des gesamten Projekts',
+      'Saubere und termingerechte Ausführung',
+      'Hohe Qualität durch erfahrene Fachkräfte',
+    ],
+    useCases: [
+      'Komplettumbau zur Wohnung',
+      'Teilrenovierung nach dem Ausbau',
+      'Bad- und Kücheneinbau',
+      'Bodenarbeiten und Malerarbeiten',
+    ],
+    priceRange: '800–2.500 €/m²',
+  },
+]
