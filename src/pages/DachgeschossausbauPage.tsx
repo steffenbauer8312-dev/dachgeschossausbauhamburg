@@ -150,7 +150,7 @@ export default function DachgeschossausbauPage() {
                   <div className="space-y-4">
                     {[
                       { step: '1', title: 'Kostenlose Beratung vor Ort', desc: 'Wir besichtigen Ihr Dachgeschoss, besprechen Ihre Wünsche und zeigen Möglichkeiten auf.' },
-                      { step: '2', title: 'Planung und Statik', desc: 'Unsere Planer erstellen die detailed Planung. Der Tragwerksplaner berechnet die Statik.' },
+                      { step: '2', title: 'Planung und Statik', desc: 'Unsere Planer erstellen die detaillierte Planung. Der Tragwerksplaner berechnet die Statik.' },
                       { step: '3', title: 'Anzeige (falls nötig)', desc: 'Bei verfahrensfreien Projekten reichen wir die Anzeige für Sie ein. Genehmigungsfrei ab 2025.' },
                       { step: '4', title: 'Ausführung', desc: 'Wir koordinieren alle Gewerke und führen die Arbeiten sauber und termingerecht durch.' },
                       { step: '5', title: 'Übergabe', desc: 'Schlüsselfertige Übergabe mit ausführlicher Einweisung. Kein Koordinationsaufwand für Sie.' }
