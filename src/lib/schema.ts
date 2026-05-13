@@ -4,22 +4,22 @@ export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Dachgeschossausbau München",
-    "description": "Professioneller Dachgeschossausbau in München. Wir verwandeln ungenutzte Dachböden in wertvollen Wohnraum.",
-    "url": "https://dachgeschossausbaumuenchen.de",
-    "telephone": "+49-89-XXXXXXXX",
-    "email": "info@dachgeschossausbaumuenchen.de",
+    "name": "Dachgeschossausbau Hamburg",
+    "description": "Professioneller Dachgeschossausbau in Hamburg. Wir verwandeln ungenutzte Dachböden in wertvollen Wohnraum.",
+    "url": "https://dachgeschossausbauhamburg.de",
+    "telephone": "+49-40-XXXXXXXX",
+    "email": "info@dachgeschossausbauhamburg.de",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "München",
-      "addressRegion": "Bayern",
-      "postalCode": "80XXX",
+      "addressLocality": "Hamburg",
+      "addressRegion": "Hamburg",
+      "postalCode": "20XXX",
       "streetAddress": "[Ihre Straße]"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "48.1351",
-      "longitude": "11.5820"
+      "latitude": "53.5481",
+      "longitude": "9.9875"
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -39,13 +39,13 @@ export function generateServiceSchema(service: { name: string; description: stri
     "description": service.description,
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Dachgeschossausbau München"
+      "name": "Dachgeschossausbau Hamburg"
     },
     "areaServed": {
       "@type": "City",
-      "name": "München"
+      "name": "Hamburg"
     },
-    "url": `https://dachgeschossausbaumuenchen.de/leistungen/${service.slug}`
+    "url": `https://dachgeschossausbauhamburg.de/leistungen/${service.slug}`
   }
 }
 
@@ -57,13 +57,13 @@ export function generateServiceSchemaFromService(service: Service) {
     "description": service.description,
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Dachgeschossausbau München"
+      "name": "Dachgeschossausbau Hamburg"
     },
     "areaServed": {
       "@type": "City",
-      "name": "München"
+      "name": "Hamburg"
     },
-    "url": `https://dachgeschossausbaumuenchen.de/leistungen/${service.slug}`
+    "url": `https://dachgeschossausbauhamburg.de/leistungen/${service.slug}`
   }
 }
 

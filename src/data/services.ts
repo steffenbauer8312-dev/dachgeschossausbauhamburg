@@ -19,7 +19,7 @@ export const SERVICES: Service[] = [
       'Gästezimmer oder Einliegerwohnung',
       'Ausbau für Mietwohnungen',
     ],
-    priceRange: '1.800–3.800 €/m²',
+    priceRange: '800–2.500 €/m²',
   },
   {
     id: 'dachgauben',
@@ -31,7 +31,7 @@ export const SERVICES: Service[] = [
       'Erhebliche Verbesserung der Lichtverhältnisse',
       'Mehr nutzbare Raumhöhe',
       'Individuelle Anpassung an Ihre Dachform',
-      'Seit 2025 in Bayern genehmigungsfrei möglich',
+      'Seit 2026 in Hamburg nach §62 HBauO freigestellt',
     ],
     useCases: [
       'Schaffung von zusätzlichen Fenstern',
@@ -51,7 +51,7 @@ export const SERVICES: Service[] = [
       'Reduzierung der Heizkosten um bis zu 30%',
       'Optimaler Wärmeschutz im Sommer und Winter',
       'Erfüllung der Energieeinsparverordnung (EnEV)',
-      'Förderfähig durch KfW-Programme',
+      'Förderfähig durch KfW 261, BAFA, §35c EStG',
     ],
     useCases: [
       'Energetische Sanierung des Dachgeschosses',
