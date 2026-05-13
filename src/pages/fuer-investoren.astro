@@ -1,0 +1,493 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema } from '@/lib/schema';
+
+const localSchema = JSON.stringify(generateLocalBusinessSchema());
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachgeschossausbau Investment Hamburg',
+  description: 'DG-Ausbau als renditestarke Kapitalanlage in Hamburg – von der Standortanalyse bis zur steueroptimierten Umsetzung.',
+  slug: '/fuer-investoren/',
+}));
+
+const breadcrumbSchemaStr = JSON.stringify(generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+  { name: 'Für Investoren', url: 'https://dachgeschossausbauhamburg.de/fuer-investoren/' },
+]));
+---
+
+<BaseLayout
+  title="Dachgeschossausbau als Investment Hamburg – Rendite, Mietmarkt, Steuervorteil"
+  description="Dachgeschossausbau als Kapitalanlage in Hamburg: 6–9% Rendite nach Förderung, KfW 261 + §35c EStG, Hamburger Mietpreise 2026. Jetzt beraten lassen."
+  canonical="/fuer-investoren/"
+  currentPath="/fuer-investoren/"
+>
+  <JsonLdSchema schema={localSchema} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={breadcrumbSchemaStr} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white py-20 lg:py-28">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <span class="inline-block text-sm font-semibold text-white/60 mb-6 uppercase tracking-wider">
+            Für Investoren · Hamburg · Standortanalyse 2026
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau<br />als Investment – Hamburg
+          </h1>
+          <p class="text-xl lg:text-2xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            6–9% Rendite nach Förderung. Hamburger Mietmarkt 2026.
+          </p>
+          <p class="text-base text-white/60 mb-10 max-w-lg">
+            Der Hamburger DG-Markt ist einer der dynamischsten Deutschlands.
+            Begrenztes Neubauvolumen trifft auf steigende Mietpreise – und macht
+            den DG-Ausbau zur renditestärksten Alternative. Wir begleiten Sie von
+            der Standortanalyse bis zur steueroptimierten Umsetzung.
+          </p>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Kostenlose Renditeanalyse für Ihr Objekt
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              KfW 261 + §35c EStG Fördermittelberatung
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Hamburger Mietpreisanalyse nach Bezirk
+            </li>
+          </ul>
+        </div>
+        <div class="lg:sticky lg:top-28">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 1: Warum Hamburg? -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Marktanalyse"
+        heading="Warum Hamburg?"
+        subheading="Hamburg kombiniert steigende Mietpreise mit begrenztem Neubauvolumen – der DG-Ausbau ist die renditestärkste Alternative."
+        align="left"
+      />
+      <div class="max-w-3xl space-y-6 text-text-secondary leading-relaxed">
+        <p>
+          Hamburg hat einen der dynamischsten Dachgeschoss-Märkte Deutschlands.
+          Die Hansestadt kombiniert steigende Mietpreise mit begrenztem
+          Neubauvolumen. Der Median für DG-Flächen liegt 2026 bei
+          <strong>15,12 €/m²</strong>. Neubauten sind knapp und teuer – der
+          DG-Ausbau ist damit die renditestärkste Alternative.
+        </p>
+        <p>
+          Im Vergleich zu München (Median DG über 22 €/m²) und Berlin (Median DG
+          über 18 €/m²) sind Hamburger Dachgeschosse noch unterbewertet. Das
+          bedeutet: niedrigere Einstiegskosten bei vergleichbarem Mietpotenzial.
+          Wer jetzt einsteigt, sichert sich die Hamburger Mietpreisentwicklung
+          der nächsten Jahre.
+        </p>
+        <p>
+          Mit der <a href="/genehmigung" class="text-primary font-semibold hover:underline">HBauO 2026 §62 Freistellung</a>
+          wurden zudem die Genehmigungshürden gesenkt – bestimmte DG-Ausbauten
+          sind seit 2026 genehmigungsfrei möglich. Das verkürzt die
+          Projektdauer und reduziert das Risiko.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 2: Rendite – Die Zahlen -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Rendite"
+        heading="Rendite – Die Zahlen (Hamburg 2026)"
+        subheading="Rechenbeispiel: 60 m² DG in Eimsbüttel"
+        align="left"
+      />
+      <div class="max-w-3xl">
+        <div class="bg-surface border border-border rounded-2xl p-8 lg:p-10">
+          <h3 class="text-xl font-bold text-text-primary mb-6">Rechenbeispiel: 60 m² Dachgeschoss in Eimsbüttel</h3>
+
+          <div class="space-y-4 text-sm text-text-secondary mb-8">
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>Kaufpreis Altbau (Bj. 1960, 120 m², DG-Potenzial)</span>
+              <span class="font-semibold text-text-primary text-right">~380.000 €</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>DG-Ausbau Komplettausbau (60 m², 1.200–1.800 €/m²)</span>
+              <span class="font-semibold text-text-primary text-right">72.000–108.000 €</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>Gaube (Schleppgaube)</span>
+              <span class="font-semibold text-text-primary text-right">+12.000–18.000 €</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>Bad (komplett neu)</span>
+              <span class="font-semibold text-text-primary text-right">+15.000–25.000 €</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border font-semibold text-text-primary">
+              <span>Gesamtkosten DG-Ausbau</span>
+              <span class="text-right">~99.000–151.000 €</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>Hamburger Mietenspiegel 2025: 9,94 €/m² × 60 m²</span>
+              <span class="font-semibold text-text-primary text-right">~596 €/Monat NK</span>
+            </div>
+            <div class="flex justify-between items-start gap-4 py-3 border-b border-border">
+              <span>Jahresmiete (Nettokaltmiete)</span>
+              <span class="font-semibold text-text-primary text-right">~7.152 €/Jahr</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-primary/5 border border-primary/20 rounded-xl p-5">
+              <p class="text-sm font-medium text-text-secondary mb-1">Bruttomietrendite</p>
+              <p class="text-3xl font-bold text-primary">4,7–7,2%</p>
+              <p class="text-xs text-text-secondary mt-1">je nach Ausbauvariante</p>
+            </div>
+            <div class="bg-secondary/10 border border-secondary/20 rounded-xl p-5">
+              <p class="text-sm font-medium text-text-secondary mb-1">Nach KfW 261 + §35c EStG</p>
+              <p class="text-3xl font-bold text-secondary">bis 9,3%</p>
+              <p class="text-xs text-text-secondary mt-1">Nettorendite auf Nettokosten</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-text-secondary mt-6">
+            * Richtwerte Hamburg 2026. Rendite variiert je nach Finanzierungsstruktur,
+            Steuerkonstellation und Lage. Alle Angaben ohne Gewähr.
+          </p>
+        </div>
+
+        <p class="text-text-secondary leading-relaxed mt-8">
+          Die <a href="/kosten" class="text-primary font-semibold hover:underline">Hamburger Richtwerte für DG-Ausbau</a>
+          zeigen: Bei Ausbaukosten von 1.200–1.800 €/m² und einem
+          Mietpotenzial von 9,94–18 €/m² je nach Bezirk ergibt sich eine
+          Bruttorendite, die mit wenigen Anlageformen in Deutschland vergleichbar
+          ist. Mit der steuerlichen Förderung über §35c EStG und KfW 261
+          verbessert sich die Nettorendite zusätzlich.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 3: Fördermittel -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Förderung"
+        heading="Fördermittel für Investoren"
+        subheading="Bis zu 25% der Gesamtkosten – durch geschickte Kombination von KfW 261 und §35c EStG."
+        align="left"
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
+        <div class="bg-surface border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">KfW 261</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-4">
+            35% Tilgungszuschuss auf förderfähige Kosten bei energetischer
+            Sanierung. Bei einem DG-Ausbau mit GEG-konformer Dämmung:
+            Tilgungszuschuss bis zu <strong>35.000 €</strong>.
+          </p>
+          <p class="text-xs text-text-secondary">
+            Voraussetzung: Wohnfläche nach Ausbau max. 160 m², energetischer
+            Standard nach GEG.
+          </p>
+        </div>
+
+        <div class="bg-surface border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary mb-3">§35c EStG</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-4">
+            20% Steuerersparnis auf energetische Maßnahmen – bis zu
+            <strong>40.000 € über 3 Jahre</strong>. Gilt für selbstgenutzte
+            und vermietete Objekte gleichermaßen.
+          </p>
+          <p class="text-xs text-text-secondary">
+            Beispiel: 100.000 € energetische Kosten → 20.000 €
+            Steuerersparnis (bei 42% Grenzsteuersatz).
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 max-w-3xl">
+        <div class="bg-secondary/10 border border-secondary/20 rounded-xl p-6">
+          <h4 class="font-bold text-text-primary mb-2">Kombination aus beiden: bis zu 25% Förderung</h4>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Bei einem DG-Ausbau mit Gaube, GEG-Dämmung und Bad-Modernisierung
+            (Gesamtkosten ~120.000 €) sind realistisch: KfW 261 Tilgungszuschuss
+            ~30.000 € + §35c Steuerersparnis ~20.000 € = ~50.000 € Förderung.
+            Das entspricht rund 42% der Ausbaukosten als Zuschuss.
+          </p>
+          <p class="text-xs text-text-secondary mt-3">
+            Für die <a href="/leistungen/daemmung" class="text-primary font-semibold hover:underline">GEG-konforme Dämmung mit Förderung</a>
+            beraten wir Sie gerne – inklusive Antragstellung.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 4: Mietpreisanalyse nach Bezirk -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Mietmarkt"
+        heading="Mietpreisanalyse nach Bezirk"
+        subheading="Hamburger Mietpreise für Dachgeschossflächen 2026 – aktuelle Bezirksdaten."
+        align="left"
+      />
+      <div class="max-w-3xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-border rounded-xl overflow-hidden">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th class="px-4 py-3 text-left font-semibold">Bezirk / Stadtteil</th>
+                <th class="px-4 py-3 text-right font-semibold">DG-Mietpreis/m²</th>
+                <th class="px-4 py-3 text-right font-semibold">Renditepotenzial</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-4 py-3 font-medium">Eimsbüttel / Eppendorf</td>
+                <td class="px-4 py-3 text-right">14–18 €/m²</td>
+                <td class="px-4 py-3 text-right font-semibold text-primary">Sehr hoch</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-4 py-3 font-medium">Hoheluft-West / Winterhude</td>
+                <td class="px-4 py-3 text-right">13–16 €/m²</td>
+                <td class="px-4 py-3 text-right font-semibold text-primary">Hoch</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-4 py-3 font-medium">Altona-Altstadt</td>
+                <td class="px-4 py-3 text-right">11–14 €/m²</td>
+                <td class="px-4 py-3 text-right font-semibold text-primary">Hoch</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-4 py-3 font-medium">Harburg / Bergedorf</td>
+                <td class="px-4 py-3 text-right">8–10 €/m²</td>
+                <td class="px-4 py-3 text-right font-semibold text-secondary">Sehr gut (günstiger Einstieg)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-text-secondary mt-4">
+          * Richtwerte 2026, Hamburger Mietenspiegel 2025. DG-Abschlag zum
+          Referenzwert 9,94 €/m² (Hamburger Median). Rendite variiert je
+          nach Kaufpreis und Ausbaukosten.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 5: Was Sie als Investor brauchen -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Leistungen"
+        heading="Was Sie als Investor brauchen"
+        subheading=" Vom Standort-Check bis zur steueroptimierten Umsetzung – wir haben die Erfahrung für Hamburger DG-Investments."
+        align="left"
+      />
+      <div class="max-w-3xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+            </div>
+            <h4 class="font-semibold text-text-primary mb-2">Standortanalyse</h4>
+            <p class="text-sm text-text-secondary">
+              Welche Dächer haben DG-Potenzial? Welche Bezirke bieten die beste
+              Rendite? Unsere Datenbasis umfasst alle Hamburger Bezirke.
+            </p>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h4 class="font-semibold text-text-primary mb-2">Genehmigungsstrategie</h4>
+            <p class="text-sm text-text-secondary">
+              §62 oder §61 HBauO 2026? Nutzungsänderung? Wir prüfen die
+              Genehmigungsfähigkeit vor dem Kauf und begleiten den Antrag.
+            </p>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h4 class="font-semibold text-text-primary mb-2">Fördermittel-Optimierung</h4>
+            <p class="text-sm text-text-secondary">
+              KfW 261 + BAFA + §35c – wir kennen alle Fördertöpfe und
+              stellen die Anträge für Sie. Bis zu 25% Zuschuss auf die
+              Gesamtkosten.
+            </p>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h4 class="font-semibold text-text-primary mb-2">Mietrechtliche Beratung</h4>
+            <p class="text-sm text-text-secondary">
+              Hamburger Mietenspiegel, Mieterhöhung nach BGB, Staffelmiete –
+              wir vermitteln die richtigen Partner für Ihre mietrechtlichen
+              Fragen.
+            </p>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6 md:col-span-2">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+              </svg>
+            </div>
+            <h4 class="font-semibold text-text-primary mb-2">Steuerliche Strukturierung</h4>
+            <p class="text-sm text-text-secondary">
+              §35c EStG + lineare AfA – wir zeigen Ihnen die optimale steuerliche
+              Struktur für Ihr Investment. Welcher Steuersatz greift, wie
+              hoch die Abschreibung ist, und wie Sie die Förderung maximal
+              nutzen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 6: Unser Angebot für Investoren -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Angebot"
+        heading="Unser Angebot für Investoren"
+        subheading="Alles aus einer Hand – von der ersten Analyse bis zur Mieterstscheidung."
+        align="left"
+      />
+      <div class="max-w-3xl">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="font-semibold text-text-primary">Kostenlose Standort- und Renditeanalyse für Ihr Objekt</p>
+              <p class="text-sm text-text-secondary mt-1">
+                Wir prüfen Ihr konkretes Objekt: Dachfläche, Statik, Genehmigungsfähigkeit und Mietpotenzial.
+                Daraus ergibt sich eine belastbare Renditekalkulation.
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="font-semibold text-text-primary">Komplette Bauvorlage nach HBauO 2026</p>
+              <p class="text-sm text-text-secondary mt-1">
+                Von der präzisen Kostenaufstellung nach Hamburger Richtwerten bis zur
+                bauaufsichtlichen Bauvorlage – wir übernehmen die gesamte Planung.
+                <a href="/genehmigung" class="text-primary font-semibold hover:underline">HBauO 2026 Genehmigungsverfahren</a>
+                inklusive.
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="font-semibold text-text-primary">Fördermittelberatung und Antragstellung</p>
+              <p class="text-sm text-text-secondary mt-1">
+                KfW 261, BAFA, §35c EStG – wir kennen die aktuellen Programme,
+                bereiten die Anträge vor und begleiten die Prüfung.
+                <a href="/leistungen/daemmung" class="text-primary font-semibold hover:underline">GEG-konforme Dämmung mit Förderung</a>
+                ist einer der größten Einzelposten bei der Förderung.
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="font-semibold text-text-primary">Bauleitung: Ein Ansprechpartner von Anfang bis Ende</p>
+              <p class="text-sm text-text-secondary mt-1">
+                Ein fester Ansprechpartner koordiniert alle Gewerke – vom
+                Dachdecker bis zum Elektriker. Saubere Ausführung, pünktlich,
+                wie besprochen. <a href="/leistungen/dachgauben" class="text-primary font-semibold hover:underline">Gauben für mehr Wohnfläche</a>
+                sind dabei oft der Schlüssel zu einer vermietbaren Fläche.
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="font-semibold text-text-primary">Mietrechtliche Erstberatung inklusive</p>
+              <p class="text-sm text-text-secondary mt-1">
+                Hamburger Mietenspiegel, Mieterhöhung nach BGB §558,
+                Staffelmiete – wir vermitteln Ihnen eine Erstberatung mit
+                einem erfahrenen Mietrechtler. Für allgemeine Fragen steht
+                auch unser <a href="/faq" class="text-primary font-semibold hover:underline">FAQ mit 40+ Fragen zum DG-Ausbau</a>
+                zur Verfügung.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+  <!-- End CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto bg-primary text-white rounded-2xl p-10 lg:p-14 text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+          Investment-Analyse für Ihr Objekt – kostenlos
+        </h2>
+        <p class="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          Senden Sie uns Ihre Objektadresse oder rufen Sie an. Wir melden uns
+          innerhalb von 24 Stunden mit einer ersten Einschätzung zur Rendite.
+        </p>
+        <a href="#kontakt-formular" class="cta-primary text-lg px-10 py-4">
+          Kostenlose Analyse anfordern
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
