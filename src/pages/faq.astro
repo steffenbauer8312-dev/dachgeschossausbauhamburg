@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import FaqAccordion from '@/components/content/FaqAccordion.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateFaqSchema } from '@/lib/schema';
+import { FAQ_DATA } from '@/data/faqData';
+
+const pageTitle = 'FAQ Dachgeschossausbau Hamburg – 40+ Fragen & Antworten';
+const pageDescription = 'Die häufigsten Fragen zum Dachgeschossausbau in Hamburg beantwortet: Kosten, HBauO 2026 Genehmigung, Fördermittel KfW 261, Gauben, Dämmung.';
+
+const schema = JSON.stringify(generateLocalBusinessSchema());
+const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+  { name: 'FAQ', url: 'https://dachgeschossausbauhamburg.de/faq/' },
+]));
+const faqSchema = JSON.stringify(generateFaqSchema(FAQ_DATA));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/faq/"
+  currentPath="/faq/"
+>
+  <JsonLdSchema schema={schema} />
+  <JsonLdSchema schema={breadcrumbSchema} />
+  <JsonLdSchema schema={faqSchema} />
+
+  <!-- Hero -->
+  <section class="bg-bg py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Fragen & Antworten"
+          heading="40+ Fragen zum Dachgeschossausbau in Hamburg"
+          subheading="Alles, was Sie wissen müssen – von den Kosten über die HBauO 2026 bis zu Fördermitteln und Bauphase."
+          align="left"
+        />
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="pb-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <FaqAccordion faqs={FAQ_DATA} />
+      </div>
+    </Container>
+  </section>
+
+  <!-- Keine passende Frage? -->
+  <section class="pb-20 bg-bg">
+    <Container>
+      <div class="max-w-xl mx-auto">
+        <div class="bg-surface rounded-2xl border border-border p-8 text-center">
+          <p class="text-lg font-semibold text-text-primary mb-2">Ihre Frage war nicht dabei?</p>
+          <p class="text-sm text-text-secondary mb-6">
+            Dann fragen Sie uns direkt. Wir antworten innerhalb von 24 Stunden –
+            spezifisch für Ihr Hamburger Projekt.
+          </p>
+          <a href="/kontakt" class="cta-primary inline-block">
+            Frage stellen →
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
