@@ -1,0 +1,691 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema } from '@/lib/schema';
+
+const currentPath = '/ratgeber/prozess/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Prozess', href: '/ratgeber/prozess/' },
+];
+
+const processSteps = [
+  { phase: 'Phase 1', title: 'Ist-Analyse', duration: '2–4 Wochen' },
+  { phase: 'Phase 2', title: 'Planung & Architekt', duration: '4–8 Wochen' },
+  { phase: 'Phase 3', title: 'Genehmigung', duration: '4–12 Wochen' },
+  { phase: 'Phase 4', title: 'Ausschreibung & Vergabe', duration: '2–4 Wochen' },
+  { phase: 'Phase 5', title: 'Bauausführung', duration: '3–6 Monate' },
+  { phase: 'Phase 6', title: 'Abnahme & Einzug', duration: '1–2 Wochen' },
+];
+---
+
+<BaseLayout
+  title="Dachgeschossausbau in Hamburg: Der komplette Prozess von der Idee bis zum Einzug"
+  description="Was passiert wann? Von der ersten Idee über die Genehmigung bis zum bezugsfertigen Dachgeschoss – ein realistischer Zeitplan für Hamburger Eigentümer."
+  canonical="/ratgeber/prozess/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Dachgeschossausbau Prozess', url: 'https://dachgeschossausbauhamburg.de/ratgeber/prozess/' },
+  ]))} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Dachgeschossausbau in Hamburg: Der komplette Prozess von der Idee bis zum Einzug',
+    description: 'Was passiert wann? Von der ersten Idee über die Genehmigung bis zum bezugsfertigen Dachgeschoss – ein realistischer Zeitplan für Hamburger Eigentümer.',
+    datePublished: '2026-01-15',
+    dateModified: '2026-05-13',
+    author: 'Dachgeschossausbau Hamburg',
+    url: 'https://dachgeschossausbauhamburg.de/ratgeber/prozess/'
+  }))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · Prozess · Zeitplan
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            DG-Ausbau in Hamburg: Der komplette Prozess von der Idee bis zum Einzug
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Was passiert wann? Von der ersten Idee über die Genehmigung bis zum bezugsfertigen Dachgeschoss – ein realistischer Zeitplan, der ehrlich ist, was Dauer und Risiken angeht.
+          </p>
+          <div class="grid grid-cols-3 gap-4 text-center mb-10">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">12–18 Monate</div>
+              <div class="text-xs text-white/60 mt-1">Gesamtzeitraum</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">6 Phasen</div>
+              <div class="text-xs text-white/60 mt-1">von Analyse bis Einzug</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">§62 HBauO 2026</div>
+              <div class="text-xs text-white/60 mt-1">teils schneller</div>
+            </div>
+          </div>
+          <h2 class="text-xl font-bold mb-4 text-white">Checkliste: Alle Schritte</h2>
+          <div class="space-y-2 text-sm text-white/80">
+            {processSteps.map(step => (
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span><strong>{step.phase}:</strong> {step.title} <span class="text-white/50">({step.duration})</span></span>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6 p-4 bg-secondary/20 border border-secondary/30 rounded-xl">
+            <p class="text-sm text-white/90">
+              <strong>HBauO 2026-Info:</strong> Mit §62 Genehmigungsfreistellung geht bei Ein-/Zweifamilienhäusern vieles schneller – aber längst nicht alles. Lesen Sie Phase 3 genau.
+            </p>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 1: IST-ANALYSE
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 1"
+          heading="Ist-Analyse: Zustand des Dachstuhls prüfen lassen"
+          subheading="Bevor Sie irgendetwas planen, müssen Sie wissen, was Sie haben. Die Analyse kostet 500–1.500 € – und kann Ihnen hinterher 30.000 € sparen."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Ist-Analyse ist der Most undervalued Schritt im gesamten Prozess. Die meisten Eigentümer wollen direkt in die Planung einsteigen – und wundern sich dann, warum die Kosten später explodieren. Lassen Sie den Dachstuhl erst professionell prüfen.
+          </p>
+          <p>
+            Ein guter Architekt oder ein Statiker schaut sich bei der Analyse folgende Punkte an:
+          </p>
+          <ul class="space-y-2">
+            <li><strong>Zustand des Dachstuhls:</strong> Holzqualität, Feuchtigkeit,已有的 Schäden. Ich habe schon Dachstühle gesehen, die nach 30 Jahren von holzbohrenden Insekten befallen waren – das sieht man von außen nicht.</li>
+            <li><strong>Statik:</strong> Kann das bestehende Dach die Last eines DG-Ausbaus tragen? Bei schweren Dacheindeckungen (Ziegel, Schiefer) ist die Antwort oft: nein, nicht ohne Verstärkung.</li>
+            <li><strong>Schadstoffe:</strong> Asbest ist das große Thema in Hamburger Altbauten. Wenn Ihr Haus vor 1993 gebaut wurde, ist Asbest im Dachbereich extrem wahrscheinlich – besonders in Form von Asbestplatten oder in der Dämmung. Ein Schadstoffgutachten kostet 300–800 € und ist Pflicht vor jeder Handwerkerbeauftragung.</li>
+            <li><strong>Raumhöhe:</strong> Die Mindestraumhöhe im DG beträgt 2,30 m über mindestens 2/3 der Fläche. Bei einer Dachschräge im Altbau kann das eine Überraschung werden.</li>
+            <li><strong>Bebauungsplan & Erhaltungssatzung:</strong> Ihr Architekt prüft, welche baulichen Möglichkeiten Ihr Grundstück tatsächlich hat – nicht alles, was technisch geht, ist rechtlich erlaubt.</li>
+          </ul>
+          <div class="p-5 bg-surface border border-border rounded-xl my-6">
+            <p class="text-sm text-text-primary font-medium">
+              <strong>Asbest-Tipp:</strong> In Hamburg sind Dachgeschossausbauten vor Baujahr 1993 in über 60% der Fälle mit Asbest belastet. Wenn Sie Asbest im Dach haben, muss das fachgerecht entsorgt werden – das kostet 2.000–8.000 € je nach Umfang und ist kein Verhandlungsgegenstand. Planen Sie das von Anfang an ein.
+            </p>
+          </div>
+          <p>
+            <strong>Dauer der Ist-Analyse:</strong> 2–4 Wochen. Ja, das ist lang. Aber ohne saubere Analyse ist jede Planung nur geraten.
+          </p>
+          <p>
+            Wer die Ist-Analyse überspringt, zahlt das später doppelt – entweder durch nachträgliche Kosten bei unvorhergesehenen Schäden, oder durch Planungsfehler, die teuer zu korrigieren sind.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 2: PLANUNG & ARCHITEKT
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 2"
+          heading="Planung & Architekt: Den richtigen Partner finden"
+          subheading="Architekt ja oder nein? In Hamburg: ja. Ohne Architekt bekommen Sie keine Genehmigung, wenn das Bezirksamt es verlangt – und bei Denkmalschutz oder Erhaltungssatzung verlangt es das Bezirksamt immer."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Ein Architekt ist für den DG-Ausbau in Hamburg nicht optional – er ist Ihr wichtigstes Werkzeug, um durch das Genehmigungsverfahren zu kommen. Ohne einen Architekten, der die Hamburger Verwaltungspraxis kennt, stehen Sie bei jedem Bezirksamt vor geschlossenen Türen.
+          </p>
+          <p>
+            Die Kosten für einen Architekten bei einem DG-Ausbau liegen je nach Umfang zwischen 2.000 und 8.000 Euro. Das klingt viel – aber ein guter Architekt spart Ihnen das Vielfache, weil er:
+          </p>
+          <ul class="space-y-2">
+            <li>die Antragsunterlagen beim ersten Versuch vollständig einreicht und Nachbesserungen vermeidet</li>
+            <li>bei Erhaltungssatzung oder Denkmalschutz weiß, welche Gaubenform das Bezirksamt bevorzugt</li>
+            <li>die Hamburger Bauordnung 2026 kennt und weiß, wann §62 greift und wann nicht</li>
+            <li>die Handwerkerangebote vergleichen und bewerten kann</li>
+          </ul>
+          <p>
+            <strong>Was der Architekt in dieser Phase tut:</strong>
+          </p>
+          <ul class="space-y-2">
+            <li><strong>Vorentwurf:</strong> Der Architekt erstellt auf Basis der Ist-Analyse einen Vorentwurf, der zeigt, was baulich möglich ist und wie es aussehen könnte.</li>
+            <li><strong>Entwässerung:</strong> Die Entwässerung des DG muss an die bestehende Entwässerungsleitung angeschlossen werden. Das klingt banal – ist es aber nicht. In Eppendorf und Winterhude sind die bestehenden Leitungen oft alt und unterdimensioniert.</li>
+            <li><strong>Haustechnik-Konzept:</strong> Heizung, Lüftung, Sanitär – im DG muss alles neu verlegt oder angeschlossen werden. Der Architekt koordiniert die Fachplaner.</li>
+          </ul>
+          <div class="overflow-x-auto rounded-xl border border-border mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary text-white text-left">
+                  <th class="px-6 py-4 font-semibold">Position</th>
+                  <th class="px-6 py-4 font-semibold text-right">Von</th>
+                  <th class="px-6 py-4 font-semibold text-right">Bis</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface">
+                  <td class="px-6 py-4 font-medium">Architekt-Honorar (je nach Umfang)</td>
+                  <td class="px-6 py-4 text-right font-mono">2.000 €</td>
+                  <td class="px-6 py-4 text-right font-mono">8.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-6 py-4 font-medium">Schadstoffgutachten (Asbest)</td>
+                  <td class="px-6 py-4 text-right font-mono">300 €</td>
+                  <td class="px-6 py-4 text-right font-mono">800 €</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-6 py-4 font-medium">Statik-Gutachten</td>
+                  <td class="px-6 py-4 text-right font-mono">500 €</td>
+                  <td class="px-6 py-4 text-right font-mono">1.500 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-6 py-4 font-medium">Dauer Phase 2</td>
+                  <td class="px-6 py-4 text-right font-mono" colspan="2">4–8 Wochen</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            <strong>Wie Sie den richtigen Architekten finden:</strong> Fragen Sie in Ihrem Bekanntenkreis nach Empfehlungen. Schauen Sie sich frühere DG-Projekte an – ein guter Architekt hat Referenzen in Ihrem Stadtteil. Achten Sie darauf, dass der Architekt Erfahrung mit dem zuständigen Bezirksamt hat. Ein Architekt, der in Eppendorf regelmäßig Anträge stellt, kennt die Sachbearbeiter und deren Preferences.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 3: GENEHMIGUNG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 3"
+          heading="Genehmigung: Wann brauchen Sie welche Erlaubnis?"
+          subheading="Hamburger Baurecht ist kompliziert. §62 HBauO 2026 macht einiges einfacher – aber längst nicht alles."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Genehmigungsphase ist der Punkt, an dem viele DG-Projekte scheitern oder sich um Monate verzögern. Ich sage Ihnen ehrlich: Die meisten Verzögerungen, die ich in 15 Jahren Hamburger DG-Planung gesehen habe, passieren in dieser Phase –不是因为 der Bau itself schwierig ist, sondern weil die Anträge unvollständig eingereicht werden oder weil Eigentümer die Komplexität unterschätzen.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">§62 Genehmigungsfreistellung (HBauO 2026)</h3>
+          <p>
+            Die gute Nachricht zuerst: §62 HBauO 2026 stellt Ein- und Zweifamilienhäuser mit DG-Ausbau von der Baugenehmigung frei – unter bestimmten Bedingungen. Das heißt: Kein vollständiges Genehmigungsverfahren mehr, sondern eine Genehmigungsfreistellung beim Bezirksamt.
+          </p>
+          <p>
+            Die Bedingungen für §62:
+          </p>
+          <ul class="space-y-2">
+            <li>Das Gebäude ist ein Ein- oder Zweifamilienhaus (oder es wird eines)</li>
+            <li>Der DG-Ausbau verändert nicht die Tragstruktur des Gebäudes wesentlich</li>
+            <li>Es liegt keine Erhaltungssatzung und kein Denkmalschutz vor</li>
+            <li>Keine Aufzugspflicht (§37 Abs. 4 HBauO: DG-Ausbau löst keine Aufzugspflicht aus)</li>
+          </ul>
+          <p>
+            <strong>Wenn §62 greift: 4–6 Wochen Bearbeitungszeit.</strong> Die Freistellung wird beim Bezirksamt eingereicht, das Bezirksamt prüft und bestätigt den Eingang – dann kann gebaut werden.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Wann Sie trotzdem eine Baugenehmigung brauchen</h3>
+          <ul class="space-y-2">
+            <li><strong>Mit Gaube:</strong> Gauben brauchen in Hamburg immer eine Baugenehmigung, auch bei §62. Das ist die häufigste Fehlerquelle.</li>
+            <li><strong>Erhaltungssatzung:</strong> Wenn Ihr Viertel unter Erhaltungssatzung steht (Eppendorf, Eimsbüttel, Teile von Winterhude), gelten zusätzliche Anforderungen. Das Bezirksamt prüft dann, ob die geplante Gaube oder Dachform die Eigenart des Gebiets erhält.</li>
+            <li><strong>Denkmalschutz:</strong> Wenn Ihr Gebäude als Baudenkmal eingetragen ist, brauchen Sie eine denkmalrechtliche Genehmigung nach §6 HDSchG zusätzlich zur Baugenehmigung. Mehr dazu in unserem <a href="/ratgeber/denkmalschutz/" class="text-primary underline">Ratgeber zu Denkmalschutz</a>.</li>
+          </ul>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Paralleles Antragsverfahren</h3>
+          <p>
+            Bei denkmalgeschützten Gebäuden oder Gebäuden in Erhaltungssatzungsgebieten empfehle ich, die Anträge parallel zu stellen – Denkmalschutzamt und Bezirksamt gleichzeitig. Das spart 4–8 Wochen, weil beide Verfahren nebeneinander laufen.
+          </p>
+          <p>
+            <strong>Das Prinzip:</strong> Sie reichen beide Anträge am selben Tag ein. Das Denkmalschutzamt bearbeitet seinen Antrag, das Bezirksamt seinen. Wenn das Denkmalschutzamt zuerst fertig ist, haben Sie dessen Genehmigung – und das Bezirksamt kann sich daran orientieren.
+          </p>
+
+          <div class="p-5 bg-surface border border-border rounded-xl my-6">
+            <p class="text-sm text-text-primary font-medium">
+              <strong>Zeitplan-Realität:</strong> Die Genehmigungsphase dauert 4–12 Wochen – je nach Verfahren und ob es Komplikationen gibt. Bei einfachen Fällen mit §62: 4–6 Wochen. Bei Gaube + Erhaltungssatzung: 8–12 Wochen. Bei Denkmalschutz: 10–16 Wochen. Rechnen Sie im Zweifel eher mit dem längeren Zeitraum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 4: AUSSCHREIBUNG & VERGABE
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 4"
+          heading="Ausschreibung & Vergabe: Hamburger Handwerker finden"
+          subheading="Hamburg ist 10–15% teurer als der Bundesdurchschnitt. Das ist die Realität – und Sie müssen wissen, wie Sie damit umgehen."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Hamburger Handwerker sind teuer – und sie haben selten Zeit. Das ist kein Klischee, sondern Realität. Die Auftragsbücher der Dachdecker, Zimmerer und Trockenbauer in Hamburg sind voll. Wer jetzt anfängt, nach dem günstigsten Angebot zu suchen, wird entweder enttäuscht oder bezahlt doppelt.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Gewerke-Reihenfolge: Das ist die richtige Abfolge</h3>
+          <p>
+            Die Reihenfolge der Gewerke beim DG-Ausbau ist kein Zufall – sie folgt einer logischen Abhängigkeit. Hier ist die richtige Reihenfolge:
+          </p>
+          <ol class="space-y-3">
+            <li><strong>Asbest-Sanierung</strong> (wenn erforderlich) – muss immer zuerst kommen, bevor irgendetwas anderes anfängt.</li>
+            <li><strong>Dachdecker / Gauben</strong> – die Gaube ist das Erste, was Sie planen und beauftragen sollten. Ohne Gaube kein Raumgewinn, und Gauben haben die längsten Vorlaufzeiten.</li>
+            <li><strong>Zimmerer / Dachstuhl-Verstärkung</strong> – falls statische Anpassungen nötig sind.</li>
+            <li><strong>Dämmung</strong> – nach dem Gaubenausbau, vor dem Trockenbau.</li>
+            <li><strong>Trockenbau / Innenausbau</strong> – die Vorstufe für den Innenausbau.</li>
+            <li><strong>Sanitär / Heizung</strong> – nach Trockenbau, vor Ausbau.</li>
+            <li><strong>Elektro</strong> – parallel zu Sanitär, nach Trockenbau.</li>
+            <li><strong>Bodenleger / Maler</strong> – am Ende, nach Haustechnik.</li>
+          </ol>
+
+          <div class="p-5 bg-surface border border-border rounded-xl my-6">
+            <p class="text-sm text-text-primary font-medium">
+              <strong>Tipp Gauben zuerst:</strong> Die Gaube ist das kritische Gewerk. Die meisten Verzögerungen im DG-Ausbau entstehen, weil die Gaube nicht rechtzeitig geplant oder beauftragt wurde. Gauben haben in Hamburg Vorlaufzeiten von 6–12 Wochen. Planen Sie das ein.
+            </p>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Drei Angebote einholen – aber richtig</h3>
+          <p>
+            Die Empfehlung, drei Angebote einzuholen, kennen alle. Aber die wenigsten wissen, wie man das richtig macht:
+          </p>
+          <ul class="space-y-2">
+            <li><strong>Fordern Sie gleiche Unterlagen von allen drei an:</strong> Was genau soll angeboten werden? Dämmstärke, Material, Ausführungszeitraum? Ohne detaillierte Leistungsbeschreibung vergleichen Sie Äpfel mit Birnen.</li>
+            <li><strong>Schauen Sie nicht nur auf den Preis:</strong> Der günstigste Dachdecker hat oft die längste Wartezeit. Wenn Sie 3 Monate auf die Gaube warten, kostet das auch Geld – weil Sie in dieser Zeit keine Mieteinnahmen haben.</li>
+            <li><strong>Prüfen Sie Referenzen in Ihrem Stadtteil:</strong> Ein Dachdecker, der in Eppendorf regelmäßig arbeitet, kennt die örtlichen Gegebenheiten und die bevorzugten Gaubenformen des Bezirksamts.</li>
+          </ul>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Hamburger Aufschlag: Was Sie wissen müssen</h3>
+          <p>
+            Hamburger Handwerker berechnen 10–15% mehr als der Bundesdurchschnitt. Das gilt für alle Gewerke beim DG-Ausbau. Für Sie als Eigentümer heißt das:
+          </p>
+          <ul class="space-y-2">
+            <li><strong>Dachdecker:</strong> Bundesdurchschnitt ca. 80–120 €/m², Hamburg: 90–140 €/m²</li>
+            <li><strong>Trockenbau:</strong> Bundesdurchschnitt ca. 50–80 €/m², Hamburg: 60–90 €/m²</li>
+            <li><strong>Zimmerer:</strong> Bundesdurchschnitt ca. 60–90 €/m², Hamburg: 70–100 €/m²</li>
+          </ul>
+          <p>
+            <strong>Was Sie tun können:</strong> Wenn Sie zeitlich flexibel sind, können Sie außerhalb der Stoßzeiten ausschreiben (Winter ist oft günstiger als Sommer). Und: Wenn Sie mehrere Gewerke an einen Generalunternehmer vergeben, bekommen Sie oft bessere Konditionen als bei Einzelvergabe.
+          </p>
+          <p>
+            <strong>Dauer Phase 4:</strong> 2–4 Wochen für Ausschreibung und Vergabe. Rechnen Sie 4–6 Wochen, wenn Sie besondere Anforderungen haben oder wenn Sie in einem Stadtteil planen, in dem Handwerker rar sind.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 5: BAUAUSFÜHRUNG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 5"
+          heading="Bauausführung: Der typische Bauzeitenplan"
+          subheading="Drei bis sechs Monate – je nach Umfang. Hier ist, was wann passiert."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Bauausführung ist die Phase, in der Sie zum ersten Mal echtes Geld verbrennen – jeden Tag, an dem die Baustelle offen steht, laufen Kosten. Ein realistischer Bauzeitenplan ist deshalb keine Nice-to-have, sondern ein Muss.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Typischer Bauzeitenplan DG-Ausbau</h3>
+
+          <div class="space-y-4">
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Dachöffnung & Asbest-Sanierung</h4>
+                <span class="text-sm text-text-secondary">Woche 1–2</span>
+              </div>
+              <p class="text-sm text-text-secondary">Wenn Asbest gefunden wurde: Fachfirma für Asbest-Sanierung beauftragen. Das Dach wird geöffnet, die alte Dämmung entfernt, Asbest fachgerecht entsorgt. Dauer: 1–2 Wochen. Kosten: 2.000–8.000 € je nach Umfang.</p>
+            </div>
+
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Dämmung & Dampfbremse</h4>
+                <span class="text-sm text-text-secondary">Woche 2–4</span>
+              </div>
+              <p class="text-sm text-text-secondary">Zwischensparrendämmung oder Aufsparrendämmung einbauen. Die Dampfbremse ist critical – wenn sie fehlt oder falsch verlegt ist, kondensiert Feuchtigkeit im Dach und Sie haben in 5 Jahren Schimmel. Dauer: 1–2 Wochen. Kosten: 40–80 €/m².</p>
+            </div>
+
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Gaube (falls geplant)</h4>
+                <span class="text-sm text-text-secondary">Woche 3–8</span>
+              </div>
+              <p class="text-sm text-text-secondary">Die Gaube wird gesetzt. Das ist das kritische Gewerk – wenn die Gaube nicht passt oder nicht genehmigt ist, haben Sie ein Problem. Dauer: 2–4 Wochen ab Montage. Vorlaufzeit in Hamburg: 6–12 Wochen. Kosten: 8.000–25.000 € je nach Größe und Form.</p>
+            </div>
+
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Rohbau DG</h4>
+                <span class="text-sm text-text-secondary">Woche 4–10</span>
+              </div>
+              <p class="text-sm text-text-secondary">Wände stellen, Trockenbau-Unterkonstruktion, Estrich (falls Fußbodenheizung). Die Raumaufteilung wird sichtbar. Dauer: 2–4 Wochen.</p>
+            </div>
+
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Haustechnik</h4>
+                <span class="text-sm text-text-secondary">Woche 8–14</span>
+              </div>
+              <p class="text-sm text-text-secondary">Heizungsleitung verlegen, Sanitäranschlüsse, Elektro-Unterputz. Die Heizung im DG ist oft die größte Herausforderung – besonders wenn das Haus keine zentrale Warmwasserbereitung hat. Dauer: 2–4 Wochen.</p>
+            </div>
+
+            <div class="p-5 bg-surface rounded-xl border border-border">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-bold text-text-primary">Ausbau & Fertigstellung</h4>
+                <span class="text-sm text-text-secondary">Woche 12–20</span>
+              </div>
+              <p class="text-sm text-text-secondary">Trockenbau verschließen, Spachteln, Streichen, Bodenbelag, Türen, Lichtschalter. Die letzten 20% der Arbeit nehmen oft 30% der Zeit. Dauer: 2–4 Wochen.</p>
+            </div>
+          </div>
+
+          <div class="p-5 bg-primary/5 border border-primary/20 rounded-xl my-6">
+            <p class="text-sm text-text-primary font-medium">
+              <strong>Lichte Raumhöhe:</strong> Die Mindestraumhöhe im DG beträgt 2,30 m über mindestens 2/3 der Fläche. Das klingt einfach – ist aber in der Praxis oft knifflig, besonders bei Dachschrägen und Bestandsgebäuden mit niedrigen Decken. Ihr Architekt muss das bei der Planung exakt prüfen.
+            </p>
+          </div>
+
+          <p>
+            <strong>Dauer Phase 5 gesamt:</strong> 3–6 Monate je nach Umfang. Einfacher Ausbau ohne Gaube: 3–4 Monate. Komplettausbau mit Gaube: 4–6 Monate. Mit Haustechnik-Umstellung: 5–6 Monate.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       PHASE 6: ABNAHME & EINZUG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Phase 6"
+          heading="Abnahme & Einzug: Was jetzt noch kommt"
+          subheading="Fast geschafft – aber bevor Sie einziehen, gibt es noch ein paar Pflichten."
+          headingLevel="h2"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Die Abnahme ist der Moment, in dem die Bauphase offiziell endet – und in dem Sie als Eigentümer zum ersten Mal wirklich sehen, was Sie bekommen haben. Ich rate Ihnen: Seien Sie bei der Abnahme penibel. Jeder Mangel, den Sie bei der Abnahme nicht dokumentieren, müssen Sie hinterher selbst bezahlen.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Abnahmeprotokoll</h3>
+          <p>
+            Die Abnahme erfolgt gemeinsam mit dem ausführenden Unternehmen. Gehen Sie Raum für Raum durch und dokumentieren Sie jeden Mangel – mit Fotos, mit konkreten Beschreibung, mit Fristsetzung zur Mängelbeseitigung. Das Abnahmeprotokoll ist Ihr rechtliches Dokument, auf das Sie sich berufen können, wenn die Mängelbeseitigung nicht erfolgt.
+          </p>
+          <p>
+            Typische Mängel, die bei der DG-Abnahme auftreten:
+          </p>
+          <ul class="space-y-2">
+            <li>Risse im Trockenbau (kommen oft erst nach 4–6 Wochen zum Vorschein)</li>
+            <li>Undichtigkeiten an Gaube oder Dachflächenfenstern</li>
+            <li>Feuchtigkeitsflecken an der Dampfbremse oder in der Dämmung</li>
+            <li>Heizungsrohre, die nicht isoliert sind oder falsch verlegt wurden</li>
+            <li>Türen, die nicht richtig schließen</li>
+          </ul>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Mängelbeseitigung</h3>
+          <p>
+            Nach der Abnahme haben Sie einen Anspruch auf Mängelbeseitigung. Die Frist dafür beträgt in der Regel 2–4 Wochen je nach Art des Mangels. Wichtig: Manche Mängel zeigen sich erst nach der Heizperiode – wenn die Heizung zum ersten Mal richtig läuft, stellen sich Probleme heraus, die vorher nicht sichtbar waren.
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mt-8 mb-4">Nutzungsaufnahme & Pflichten</h3>
+          <ul class="space-y-2">
+            <li><strong>Rauchmelder-Pflicht:</strong> In Hamburg sind Rauchmelder in Wohnungen Pflicht. Für Neu- und Umbauten müssen Rauchmelder installiert und vom Schornsteinfeger oder einem zugelassenen Unternehmen abgenommen werden.</li>
+            <li><strong>Heizungsübergabe:</strong> Wenn Sie eine neue Heizung für das DG installiert haben, muss diese vom Heizungsinstallateur dokumentiert und übergeben werden – inklusive Einweisung in die Bedienung.</li>
+            <li><strong>Anmeldung Stromversorgung:</strong> Das DG muss als eigenständiger Stromkreis oder als Erweiterung der bestehenden Stromversorgung angemeldet werden.</li>
+            <li><strong>Versicherung:</strong> Informieren Sie Ihre Gebäudeversicherung über den DG-Ausbau – der Neuwert Ihres Hauses hat sich erhöht.</li>
+          </ul>
+
+          <p>
+            <strong>Dauer Phase 6:</strong> 1–2 Wochen für Abnahme und Übergabe, plus weitere 2–4 Wochen für Mängelbeseitigung. Rechnen Sie mit 4–6 Wochen bis zur endgültigen Fertigstellung nach Abnahme.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       REALISTISCHER ZEITPLAN (TABELLE)
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Zeitplan"
+          heading="Realistischer Zeitplan: So lange dauert Ihr DG-Projekt"
+          subheading="Hamburger Richtwerte – nach unten gerundet, damit Sie positiv überrascht werden, nicht negativ."
+          headingLevel="h2"
+        />
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Projekttyp</th>
+                <th class="px-6 py-4 font-semibold text-right">Min. Dauer</th>
+                <th class="px-6 py-4 font-semibold text-right">Max. Dauer</th>
+                <th class="px-6 py-4 font-semibold">Besonderheit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Einfacher Ausbau ohne Gaube</td>
+                <td class="px-6 py-4 text-right font-mono">6 Monate</td>
+                <td class="px-6 py-4 text-right font-mono">9 Monate</td>
+                <td class="px-6 py-4">§62 HBauO 2026 oft möglich; kein Denkmalschutz</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Komplettausbau mit Gaube</td>
+                <td class="px-6 py-4 text-right font-mono">9 Monate</td>
+                <td class="px-6 py-4 text-right font-mono">14 Monate</td>
+                <td class="px-6 py-4">Gaube braucht separate Genehmigung; Vorlaufzeit 6–12 Wochen</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Mit Denkmalschutz</td>
+                <td class="px-6 py-4 text-right font-mono">12 Monate</td>
+                <td class="px-6 py-4 text-right font-mono">18 Monate</td>
+                <td class="px-6 py-4">Paralleles Antragsverfahren Pflicht; §6 HDSchG + Bauamt</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Mit HBauO 2026 §62</td>
+                <td class="px-6 py-4 text-right font-mono">-1–2 Monate</td>
+                <td class="px-6 py-4 text-right font-mono">-1–2 Monate</td>
+                <td class="px-6 py-4">§62 beschleunigt Genehmigungsphase um 1–2 Monate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-text-secondary text-sm">
+          <strong>Hinweis:</strong> Die Zeitangaben sind realistische Schätzungen für Hamburg – nicht optimistisch, nicht pessimistisch. Verzögerungen durch Nachbesserungen, Handwerker-Wartezeiten oder unvorhergesehene Schäden sind nicht eingerechnet. Rechnen Sie bei einem Komplettausbau mit Gaube und Denkmalschutz eher mit 14–18 Monaten als mit 9.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       TYPISCHE FEHLER
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Vermeiden"
+          heading="Typische Fehler: Was schiefgeht – und wie Sie es vermeiden"
+          subheading="Die Fehler, die ich in 15 Jahren Hamburger DG-Planung immer wieder gesehen habe. Lernen Sie aus den Fehlern anderer."
+          headingLevel="h2"
+        />
+        <div class="space-y-6">
+          <div class="p-6 bg-red-50 rounded-xl border border-red-200">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Fehler #1: Mit dem Bau beginnen, bevor Fördermittel beantragt sind
+            </h3>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              Das ist der häufigste und teuerste Fehler. Fördermittel (KfW 261, BAFA, §35c EStG) dürfen nicht für Maßnahmen beantragt werden, die bereits begonnen oder beauftragt wurden. Wenn Sie einen Architektenvertrag unterschreiben oder gar einen Handwerker beauftragen, bevor die Fördermittel-Zusage vorliegt, verfällt Ihr Anspruch. Informieren Sie sich <strong>vor</strong> der Planung über Fördermittel – in unserem <a href="/ratgeber/foerdermittel/" class="text-primary underline">Ratgeber zu Fördermitteln</a>.
+            </p>
+          </div>
+
+          <div class="p-6 bg-red-50 rounded-xl border border-red-200">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Fehler #2: Asbest vergessen
+            </h3>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              In Hamburger Altbauten vor 1993 ist Asbest im Dachbereich extrem wahrscheinlich – in über 60% der Fälle. Wenn Sie Asbest im Dach haben und das nicht im Vorfeld klären, wird es teuer: 2.000–8.000 € für fachgerechte Entsorgung, plus Verzögerung von 2–4 Wochen. Ein Schadstoffgutachten vor Beginn der Planung ist Pflicht – nicht optional.
+            </p>
+          </div>
+
+          <div class="p-6 bg-red-50 rounded-xl border border-red-200">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Fehler #3: Zu knapp budgetiert
+            </h3>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              Die Hamburger Kosten für DG-Ausbau liegen bei 800–2.500 €/m² je nach Ausbauqualität. Wer mit 800 €/m² rechnet und dann 1.500 € braucht, hat ein Problem. Rechnen Sie mit dem oberen Richtwert und legen Sie 15–20% Reserve an – für unvorhergesehene Schäden, für Handwerker-Verzögerungen, für Nachbesserungen. DG-Ausbauten sind nie pünktlich und nie billiger als geplant.
+            </p>
+          </div>
+
+          <div class="p-6 bg-red-50 rounded-xl border border-red-200">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Fehler #4: Handwerker zu spät beauftragt
+            </h3>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              Hamburger Handwerker haben 3–6 Monate Vorlaufzeit. Wer den Dachdecker erst beauftragt, wenn die Genehmigung da ist, verliert 3–6 Monate. Die richtige Reihenfolge: Genehmigung abwarten für das, was genehmigungspflichtig ist – aber die Handwerkerplanung und -beauftragung frühzeitig beginnen. Gauben zuerst, Trockenbau dann, Haustechnik parallel.
+            </p>
+          </div>
+
+          <div class="p-6 bg-red-50 rounded-xl border border-red-200">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              Fehler #5: Raumhöhe nicht geprüft
+            </h3>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              Die Mindestraumhöhe im DG beträgt 2,30 m über mindestens 2/3 der Fläche – das ist gesetzlich vorgeschrieben. Aber in der Praxis ist das bei vielen Hamburger Altbauten knapp: Dachschrägen, niedrige Decken, vorhandene Balken. Wenn Ihr Architekt das nicht exakt prüft, bauen Sie am Ende eine Fläche, die Sie nicht nutzen dürfen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       INTERNE VERLINKUNG
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Kosten für DG-Ausbau in Hamburg</h3>
+            <p class="text-sm text-text-secondary">800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel im Überblick. Detaillierte Hamburger Richtwerte.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">DG-Genehmigung in Hamburg – §62 HBauO 2026</h3>
+            <p class="text-sm text-text-secondary">Genehmigungsfreistellung, vereinfachtes Verfahren, Erhaltungssatzung und Denkmalschutz im Detail.</p>
+          </a>
+
+          <a href="/ratgeber/denkmalschutz/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Denkmalschutz & DG-Ausbau Hamburg</h3>
+            <p class="text-sm text-text-secondary">§6 HDSchG, Genehmigungsverfahren, Denkmalschutzamt Hamburg, 2-Monats-Frist, Gebühren 80–500€.</p>
+          </a>
+
+          <a href="/ratgeber/foerdermittel/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Fördermittel für DG-Ausbau Hamburg 2026</h3>
+            <p class="text-sm text-text-secondary">KfW 261, BAFA, §35c EStG – bis zu 45% Tilgungszuschuss sichern. Antrag vor Baubeginn!</p>
+          </a>
+
+          <a href="/standorte/eppendorf" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Eppendorf – DG-Potenzial und Erhaltungssatzung</h3>
+            <p class="text-sm text-text-secondary">Eppendorf ist ein Hotspot für DG-Ausbau – aber die Erhaltungssatzung macht Genehmigungen komplizierter.</p>
+          </a>
+
+          <a href="/leistungen/dachgauben" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Alle Varianten, Kosten und Genehmigung in Hamburg.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            DG-Ausbau planen? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir helfen Ihnen bei der Ist-Analyse, der Architektenwahl und der Fördermittelplanung – alles aus einer Hand, in Hamburg beheimatet.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
