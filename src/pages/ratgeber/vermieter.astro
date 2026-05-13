@@ -1,0 +1,931 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+
+const currentPath = '/ratgeber/vermieter/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Vermieter & Investoren', href: '/ratgeber/vermieter/' },
+];
+
+const faqs = [
+  {
+    question: 'Lohnt sich DG-Ausbau als Kapitalanlage in Hamburg?',
+    answer: 'Ja – unter bestimmten Bedingungen. In Eppendorf, Harvestehude und den Elbvororten liegt die Brutto-Mietrendite nach DG-Ausbau bei 7–9% auf den Gesamteinsatz. Hinzu kommt die Wertsteigerung von 8–15% auf das Gesamtobjekt, der Steuervorteil durch §35c (bis 40.000 €) und der WekipW-Entfall nach HBauO 2026 (25.000–40.000 € gespart). In Randlagen wie Harburg oder Bergedorf ist die Rendite niedriger (5–7%), aber die KfW-Förderung (bis 45% Tilgungszuschuss) gleicht dies teilweise aus. DG-Ausbau als Kapitalanlage funktioniert am besten in Stadtteilen mit stabiler DG-Nachfrage – Eppendorf, Eimsbüttel, Altonaer Elbvororte.',
+  },
+  {
+    question: 'Kann ich als Vermieter §35c EStG nutzen?',
+    answer: 'Ja. Vermieter können §35c EStG sogar besser nutzen als Eigennutzer, weil die Kosten als Werbungskosten abgesetzt werden und so die steuerpflichtigen Mieteinnahmen senken. Der Steuervorteil wird über 3 Jahre in der Einkommensteuererklärung geltend gemacht (Anlage Vermietung). Voraussetzung: Die Handwerkerrechnung muss auf Sie als Eigentümer ausgestellt sein, und nur die Arbeitskosten zählen – nicht das Material. Bei einem 100.000-Euro-Ausbau mit 55.000 Euro Arbeitskosten und 42% Grenzsteuersatz sparen Sie rund 11.000 Euro über 3 Jahre. §35c und BAFA schließen sich gegenseitig aus – §35c und KfW 261 ebenfalls.',
+  },
+  {
+    question: 'Wie hoch darf ich die Miete nach DG-Ausbau ansetzen?',
+    answer: 'Nach einem DG-Ausbau können Sie die Miete auf zwei Wegen erhöhen: (1) Über die ortsübliche Vergleichsmiete (§558 BGB) – in Hamburgs Top-Lagen 18–25 €/m². (2) Über die Modernisierungsumlage (§559 BGB) – 11% der Modernisierungskosten pro Jahr umlegbar. Beispiel: 120.000 € Ausbau → 13.200 €/Jahr Umlage → 1.100 €/Monat Mietsteigerung. Achtung: Die Hamburger Kappungsgrenze begrenzt Mieterhöhungen im bestehenden Mietverhältnis auf 15% in 3 Jahren (in vielen Bezirken). Nutzen Sie die Staffelmiete (§557a BGB) bei Neuvermietung – so sind höhere Einstiegsmieten möglich. Die Modernisierungsumlage nach §559 ist nicht durch die Kappungsgrenze gedeckelt.',
+  },
+];
+
+const articleSchema = generateArticleSchema({
+  headline: 'Dachgeschossausbau als Kapitalanlage in Hamburg – Rendite, Steuervorteile, Risiken',
+  description: 'Warum Hamburger Vermieter und Investoren auf DG-Ausbau setzen: Mieterträge, Steuerersparnis durch §35c EStG, Wertsteigerung. Realistische Rendite-Berechnung für Hamburg 2026.',
+  datePublished: '2026-01-15',
+  dateModified: '2026-05-13',
+  url: 'https://dachgeschossausbauhamburg.de/ratgeber/vermieter/',
+});
+---
+
+<BaseLayout
+  title="Dachgeschossausbau als Kapitalanlage in Hamburg – Rendite, Steuervorteile, Risiken"
+  description="Warum Hamburger Vermieter und Investoren auf DG-Ausbau setzen: Mieterträge, Steuerersparnis durch §35c EStG, Wertsteigerung. Realistische Rendite-Berechnung für Hamburg 2026."
+  canonical="/ratgeber/vermieter/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(articleSchema)} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Vermieter & Investoren', url: 'https://dachgeschossausbauhamburg.de/ratgeber/vermieter/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · Kapitalanlage · Rendite · Steuervorteile
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau als Kapitalanlage in Hamburg
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Warum Hamburger Vermieter und Investoren auf DG-Ausbau setzen – und warum die Rechnung trotz gestiegener Baukosten aufgeht.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>DG-Mieten Hamburg: €15–22/m² (Median bis Spitze)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Wertsteigerung nach Sanierung: 8–15% auf Gesamtobjekt</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>§35c Steuervorteil: bis 40.000 € über 3 Jahre</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Aufzugspflicht entfällt → spart 25.000–40.000 €</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>HBauO 2026 macht Genehmigung einfacher</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">7–9%</div>
+              <div class="text-xs text-white/60 mt-1">Brutto-Rendite (Eppendorf)</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">40.000 €</div>
+              <div class="text-xs text-white/60 mt-1">§35c Steuervorteil</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">15%</div>
+              <div class="text-xs text-white/60 mt-1">Wertsteigerung (DG-Schnitt)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <div class="bg-primary text-white rounded-2xl p-5 lg:p-6">
+            <h2 class="text-lg lg:text-xl font-bold mb-1">
+              Beraten Sie mich als Kapitalanleger
+            </h2>
+            <p class="text-white/70 mb-5 text-xs">
+              Rendite-Analyse für Ihr Hamburger Objekt – in 24 Stunden.
+            </p>
+            <LeadGenForm />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WARUM DG-AUSBAU FÜR VERMIETER?
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Vorteile"
+          heading="Warum DG-Ausbau für Vermieter?"
+          subheading="Fünf Gründe, warum Hamburger Vermieter auf Dachgeschoss-Ausbau setzen."
+          headingLevel="h2"
+        />
+        <div class="space-y-6">
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <span class="text-primary font-bold text-lg">1</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Hamburger Mietmarkt: angespannt, DG-Nachfrage stabil hoch</h3>
+              <p class="text-sm text-text-secondary">
+                Der Hamburger Mietmarkt ist bundesweit unter den angespanntesten. Die Nachfrage nach Dachgeschosswohnungen ist besonders hoch, weil junge Berufstätige und Pendler den Charakter von DG-Wohnungen schätzen (Freiraum, Licht, Stadtlage). In Eppendorf, Eimsbüttel und den Elbvororten liegt die DG-Nachfrage stabil über dem Angebot – das bedeutet: niedrige Leerstandsquoten und regelmäßige Mieterhöhungen.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <span class="text-primary font-bold text-lg">2</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Quadratmeter-Gewinn: Aus 60m² Nutzfläche werden 70–80m² Wohnfläche</h3>
+              <p class="text-sm text-text-secondary">
+                Der Ausbau eines DG-Rohbodens in eine vollwertige Wohnung ist die effizienteste Form der Flächenschaffung in Hamburg – ohne Grundstückskosten, ohne Stellplatzpflicht (bei DG nach HBauO 2026). Der Quadratmetergewinn liegt typischerweise bei 15–25% gegenüber der ursprünglichen Nutzfläche. Das bedeutet: mehr Mieteinnahmen pro Quadratmeter Grundstücksfläche.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <span class="text-primary font-bold text-lg">3</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Aufzugskosten fallen nach HBauO 2026 weg</h3>
+              <p class="text-sm text-text-secondary">
+                Nach §37 Abs. 4 HBauO 2026 entfällt die Aufzugspflicht bei DG-Ausbau in bestehenden Gebäuden. Das spart 25.000–40.000 Euro – Kosten, die sonst die Rendite ruiniert hätten. Dieser Hamburger Vorteil gilt nur hier und macht den DG-Ausbau gegenüber Neubau in dieser Hinsicht deutlich wirtschaftlicher.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <span class="text-primary font-bold text-lg">4</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Mieterhöhungspotenzial: Modernisierungsumlage nutzen</h3>
+              <p class="text-sm text-text-secondary">
+                Nach DG-Ausbau können Sie die DG-Miete auf Mietniveau des Neubaus anheben – über die ortsübliche Vergleichsmiete (§558 BGB) plus Modernisierungsumlage (§559 BGB). In der Praxis: 11% der Ausbaukosten pro Jahr auf die Miete umlegbar. Bei 120.000 Euro Ausbau sind das 13.200 Euro/Jahr = 1.100 Euro/Monat zusätzlich. Die Kappungsgrenze (15% in 3 Jahren) gilt nur für das bestehende Mietverhältnis – bei Neuvermietung sind höhere Einstiegsmieten möglich.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <span class="text-primary font-bold text-lg">5</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Hamburgs Mietpreisbremse: DG-Ausbau als Modernisierung → 11% Umlage möglich</h3>
+              <p class="text-sm text-text-secondary">
+                Die Hamburger Mietpreisbremse (§558 BGB) begrenzt Mieterhöhungen im Bestand auf 15% in 3 Jahren. Der DG-Ausbau umgeht dieses Limit teilweise: Über §559 BGB (Modernisierung) können Sie 11% der Kosten pro Jahr auf die Miete aufschlagen – und zwar oberhalb der Kappungsgrenze. Voraussetzung: Die Modernisierung muss eine nachhaltige Verbesserung darstellen (neue Gaube zählt, reine Instandsetzung nicht).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: MIETERHÖHUNG NACH DG-AUSBAU
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Mieterhöhung"
+          heading="Mieterhöhung nach DG-Ausbau"
+          subheading="§558 + §559 BGB: So erhöhen Sie die Miete rechtssicher nach dem Ausbau."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Nach einem DG-Ausbau haben Vermieter zwei Hebel für Mieterhöhungen: Die ortsübliche Vergleichsmiete (§558 BGB) und die Modernisierungsumlage (§559 BGB). Die Kombination beider Wege maximiert das Erhöhungspotenzial – ist aber an klare rechtliche Vorgaben gebunden.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">§558 BGB – Ortsübliche Vergleichsmiete</h3>
+              <ul class="text-sm space-y-2">
+                <li>Mieterhöhung bis zur ortsüblichen Vergleichsmiete</li>
+                <li>In Hamburgs Top-Lagen: 18–25 €/m² netto kalt</li>
+                <li>Begrenzt durch Kappungsgrenze: 15% in 3 Jahren (Bestandsmieter)</li>
+                <li>Bei Neuvermietung: freie Preisgestaltung (ortsüblich = Marktniveau)</li>
+              </ul>
+            </div>
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">§559 BGB – Modernisierungsumlage</h3>
+              <ul class="text-sm space-y-2">
+                <li>11% der Modernisierungskosten/Jahr auf Miete umlegbar</li>
+                <li>Nicht durch Kappungsgrenze begrenzt!</li>
+                <li>Beispiel: 120.000 € → 13.200 €/Jahr = 1.100 €/Monat</li>
+                <li>Mieter muss 2 Monate vor Erhöhung informiert werden (§559 Abs. 4)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary">Praxisbeispiel: Mieterhöhung nach DG-Ausbau</h3>
+          <div class="bg-primary rounded-2xl p-8 text-white">
+            <div class="prose prose-lg max-w-none text-white/80">
+              <p><strong class="text-white">Szenario:</strong> DG-Ausbau in Eppendorf, 70m² Wohnfläche.</p>
+              <ul class="space-y-2 my-4">
+                <li>Kaufpreis DG-Anteil (geschätzt): 45.000 €</li>
+                <li>Ausbaukosten: 120.000 €</li>
+                <li>Gesamteinsatz: 165.000 €</li>
+                <li>Vorher-Miete: 580 €/Monat (8,29 €/m²)</li>
+                <li>Nachher-Miete (Vergleichsmiete): 980 €/Monat (14 €/m²)</li>
+                <li>Modernisierungsumlage (§559): +1.100 €/Monat</li>
+                <li>Gesamtmiete nach Ausbau: <strong class="text-secondary">2.080 €/Monat</strong></li>
+              </ul>
+              <p class="mt-4 text-white/80">
+                <strong class="text-white">Anmerkung:</strong> Die Modernisierungsumlage ist nicht durch die Kappungsgrenze gedeckelt, muss aber als eigenständige Erhöhung neben der Vergleichsmiete geltend gemacht werden. Häufig ist eine Stufen-Mieterhöhung über 3 Jahre sinnvoll, um den Mieter nicht zu überfordern und den Cashflow zu glätten.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary">Kappungsgrenze beachten</h3>
+          <p>
+            In Hamburg gelten je nach Bezirk unterschiedliche Kappungsgrenzen. In vielen Bezirken (Eimsbüttel, Hamburg-Nord, Altona) gilt die 15%-Regel innerhalb von 3 Jahren für Bestandsmieter. Das bedeutet: Wenn Ihre aktuelle Miete 600 € beträgt, können Sie in 3 Jahren maximal auf 690 € erhöhen – plus die Modernisierungsumlage nach §559, die davon unabhängig ist.
+          </p>
+          <p>
+            <strong class="text-text-primary">Bei Neuvermietung:</strong> Die Kappungsgrenze gilt nicht. Sie können die Miete frei auf ortsübliches Niveau setzen. Nutzen Sie die Staffelmiete nach §557a BGB – so haben Sie als Vermieter Planungssicherheit und der Mieter透明的 Kostenentwicklung.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: §35c ESTG – STEUERVORTEIL FÜR VERMIETER
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Steuervorteil"
+          heading="§35c EStG – Steuervorteil für Vermieter"
+          subheading="20% der Handwerkerrechnungen absetzen – für Vermieter oft attraktiver als für Eigennutzer."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-6">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Vermieter haben einen entscheidenden Steuervorteil bei §35c EStG gegenüber Eigennutzern: Die Kosten werden als Werbungskosten abgesetzt und senken die steuerpflichtigen Mieteinnahmen. Das erhöht den effektiven Steuervorteil – besonders für Vermieter mit hohem Grenzsteuersatz.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">So funktioniert es</h3>
+              <ul class="text-sm space-y-2">
+                <li>20% der Handwerkerrechnungen absetzbar</li>
+                <li>Maximal 40.000 € über 3 Jahre (13.333 €/Jahr)</li>
+                <li>Über Werbungskosten → senkt steuerpflichtige Mieteinnahmen</li>
+                <li>Nur Arbeitskosten (nicht Material!)</li>
+                <li>Handwerkerrechnung muss aufschlüsseln</li>
+              </ul>
+            </div>
+            <div class="bg-surface rounded-xl p-6 border border-border">
+              <h3 class="font-bold text-text-primary mb-3">Warum besser für Vermieter?</h3>
+              <ul class="text-sm space-y-2">
+                <li>Vermieter haben oft höheren Grenzsteuersatz</li>
+                <li>Werbungskosten mindern Einkommen aus Vermietung</li>
+                <li>Effektiver Steuervorteil = 20% × Grenzsteuersatz</li>
+                <li>Bei 42% Steuersatz: effektiv 8,4% der Arbeitskosten gespart</li>
+                <li>Eigennutzer: Steuervorteil zählt nur gegen Einkommensteuer</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-text-primary">Beispiel: 100.000 € Ausbau</h3>
+          <div class="bg-primary rounded-2xl p-8 text-white">
+            <div class="prose prose-lg max-w-none text-white/80">
+              <ul class="space-y-2">
+                <li>Gesamtkosten: 100.000 €</li>
+                <li>Arbeitskosten (geschätzt 50–60%): ca. 55.000 €</li>
+                <li>§35c: 20% auf 55.000 € = 11.000 € über 3 Jahre</li>
+                <li>Bei 42% Grenzsteuersatz: effektive Ersparnis ~4.620 €</li>
+              </ul>
+              <p class="mt-4 text-white font-semibold">
+                Nur Arbeitskosten zählen! Die Handwerkerrechnung muss Material und Arbeitskosten separat ausweisen.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-surface border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              <div>
+                <p class="text-sm text-text-secondary">
+                  <strong class="text-text-primary">Wichtig:</strong> §35c EStG und BAFA BEG EM schließen sich gegenseitig aus – Sie müssen sich für eines entscheiden. §35c und KfW 261 ebenfalls. Für Vermieter mit hohem Steuersatz ist §35c oft die bessere Wahl, weil der effektive Steuervorteil die Förderung übersteigt.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: RENDITE-BERECHNUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Rendite"
+          heading="Rendite-Berechnung – Drei Szenarien"
+          subheading="Konkrete Zahlen für typische Hamburger DG-Investments 2026."
+          headingLevel="h2"
+          align="left"
+        />
+
+        <!-- Szenario A -->
+        <div class="bg-surface rounded-2xl p-8 border border-border mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">A</span>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary">Einfacher Ausbau (Eppendorf, 55m²)</h3>
+              <p class="text-sm text-text-secondary">Bestes Szenario: Top-Lage, einfacher Ausbau, hohe Mieteinnahmen.</p>
+            </div>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-border mb-6">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary/5 text-left">
+                  <th class="px-4 py-3 font-semibold text-text-primary">Position</th>
+                  <th class="px-4 py-3 font-semibold text-text-primary text-right">Betrag</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Kaufpreis Bestand (anteilig DG)</td>
+                  <td class="px-4 py-3 text-right font-mono">55.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Ausbaukosten</td>
+                  <td class="px-4 py-3 text-right font-mono">70.000 €</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3 font-bold text-text-primary">Gesamteinsatz</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold text-text-primary">125.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Mieteinnahme neu</td>
+                  <td class="px-4 py-3 text-right font-mono">880 €/Monat (16 €/m²)</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Jahresmiete</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold">10.560 €/Jahr</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Rendite (auf Einsatz)</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold text-primary">8,4%</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">§35c Steuervorteil (42% Satz)</td>
+                  <td class="px-4 py-3 text-right font-mono">~6.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3 font-bold text-text-primary">Effektive Rendite (nach Steuervorteil)</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold text-secondary">~13%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-text-primary">Kommentar:</strong> In Eppendorf funktioniert die Rechnung am besten. Die 16 €/m² sind für die Lage konservativ – bei guter Ausstattung sind 18–20 €/m² realistisch. Die effektive Rendite von 13% nach Steuervorteil ist für Hamburg außergewöhnlich hoch.
+          </p>
+        </div>
+
+        <!-- Szenario B -->
+        <div class="bg-surface rounded-2xl p-8 border border-border mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">B</span>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary">Komplettausbau mit Gaube (Harburg, 70m²)</h3>
+              <p class="text-sm text-text-secondary">Höheres Risiko, niedrigere Rendite – aber bessere Förderung.</p>
+            </div>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-border mb-6">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary/5 text-left">
+                  <th class="px-4 py-3 font-semibold text-text-primary">Position</th>
+                  <th class="px-4 py-3 font-semibold text-text-primary text-right">Betrag</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Kaufpreis Bestand (anteilig DG)</td>
+                  <td class="px-4 py-3 text-right font-mono">42.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Ausbaukosten (inkl. Gaube 18.000 €)</td>
+                  <td class="px-4 py-3 text-right font-mono">110.000 €</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3 font-bold text-text-primary">Gesamteinsatz</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold text-text-primary">152.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Mieteinnahme neu</td>
+                  <td class="px-4 py-3 text-right font-mono">980 €/Monat (14 €/m²)</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Jahresmiete</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold">11.760 €/Jahr</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Rendite (auf Einsatz)</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold text-primary">7,7%</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">KfW 261 Tilgungszuschuss (geschätzt)</td>
+                  <td class="px-4 py-3 text-right font-mono">~12.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3 font-bold text-text-primary">Effektive Rendite (nach Förderung)</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold text-secondary">~10,7%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-text-primary">Kommentar:</strong> In Harburg sind die Kaufpreise für DG-Anteile niedriger, was den Gesamteinsatz senkt. Die Miete von 14 €/m² ist für Harburg realistisch. Der KfW 261 Tilgungszuschuss gleicht die niedrigere Rendite teilweise aus. Risiko: In Harburg ist der DG-Markt weniger stabil als in Eppendorf – mit höherer Leerstandsgefahr.
+          </p>
+        </div>
+
+        <!-- Szenario C -->
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">C</span>
+            <div>
+              <h3 class="text-xl font-bold text-text-primary">Denkmalschutz-Objekt (Altona, 50m²)</h3>
+              <p class="text-sm text-text-secondary">Steuerabschreibung macht den Unterschied – langfristige Strategie.</p>
+            </div>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-border mb-6">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary/5 text-left">
+                  <th class="px-4 py-3 font-semibold text-text-primary">Position</th>
+                  <th class="px-4 py-3 font-semibold text-text-primary text-right">Betrag</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Kaufpreis Bestand (anteilig DG)</td>
+                  <td class="px-4 py-3 text-right font-mono">45.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Ausbaukosten</td>
+                  <td class="px-4 py-3 text-right font-mono">95.000 €</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3 font-bold text-text-primary">Gesamteinsatz</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold text-text-primary">140.000 €</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Mieteinnahme neu</td>
+                  <td class="px-4 py-3 text-right font-mono">850 €/Monat (17 €/m²)</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">Jahresmiete</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold">10.200 €/Jahr</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Rendite (auf Einsatz)</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold text-primary">7,3%</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-4 py-3">§7i EStG Denkmalschutz-Abschreibung</td>
+                  <td class="px-4 py-3 text-right font-mono">10 Jahre je 9%</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-4 py-3">Steuervorteil Denkmalschutz</td>
+                  <td class="px-4 py-3 text-right font-mono">~8.000–12.000 €/Jahr</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-text-secondary">
+            <strong class="text-text-primary">Kommentar:</strong> Denkmalschutz-Objekte erfordern mehr Vorarbeit (denkmalrechtliche Genehmigung, erfahrener Architekt, längere Genehmigungsdauer) – haben aber den Vorteil der Sonder-AfA nach §7i EStG: 9% des Gebäudewerts pro Jahr über 10 Jahre. Das ergibt bei einem Gebäudeanteil von 80.000 € einen jährlichen Steuervorteil von 7.200 € (bei 42% Satz). Die Rendite auf den Cashflow ist niedriger, aber der Steuervorteil kompensiert das über die Laufzeit.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 5: WAS VERMIETER ANDERS MACHEN MÜSSEN
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Pflichten"
+          heading="Was Vermieter anders machen müssen"
+          subheading="Vermietung ist nicht Eigennutzung – diese Punkte müssen Vermieter beachten."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Mieter mitnehmen</h3>
+            <p class="text-sm text-text-secondary">
+              Eigenbedarf-Kündigung für DG ist rechtlich kompliziert. Wenn ein Mieter im DG wohnt, können Sie diesen nicht einfach wegen Eigenbedarfs kündigen. Staffelmiete nach §557a BGB bei Neuvermietung nutzen – das gibt Planungssicherheit.
+            </p>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Betriebskosten</h3>
+            <p class="text-sm text-text-secondary">
+              DG-Nebenkosten (Heizung, Wasser, Entwässerung) sind auf Mieter umlegbar – aber nur nach Heizkostenverordnung und Betriebskostenverordnung. Die Dämmung des DG senkt langfristig die Heizkosten für das gesamte Gebäude, nicht nur für das DG.
+            </p>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Versicherung anpassen</h3>
+            <p class="text-sm text-text-secondary">
+              Nach DG-Ausbau muss die Gebäudeversicherung angepasst werden – die Wohnfläche hat sich erhöht, der Wert der Immobilie ebenfalls. Lassen Sie die Versicherungssumme aktualisieren, um im Schadensfall Unterdeckung zu vermeiden.
+            </p>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" /></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Rauchmelder & Brandschutz</h3>
+            <p class="text-sm text-text-secondary">
+              Rauchmelder sind nach Hamburger Landesbauordnung Pflicht – auch im DG. Nach DG-Ausbau müssen alle Räume mit Rauchmeldern ausgestattet sein. Der Brandschutz im DG (Fluchtwege, Brandschutztüren) muss den aktuellen Vorschriften entsprechen.
+            </p>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border md:col-span-2">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Grundbuch: Wohnflächenanpassung</h3>
+            <p class="text-sm text-text-secondary">
+              Nach DG-Ausbau ändern sich die tatsächlichen Wohnflächen – und damit die anteiligen Eigentumsrechte (bei TEV). Lassen Sie die Wohnflächenberechnung aktualisieren und im Grundbuch berücksichtigen. Das ist besonders wichtig bei Mehrfamilienhäusern mit mehreren Eigentumswohnungen, wo die DG-Fläche anteilig zugeteilt wird.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 6: RISIKEN EHRICH
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Risiken"
+          heading="Risiken ehrlich betrachtet"
+          subheading="DG-Ausbau ist keine risikolose Geldanlage – diese Risiken müssen Sie kennen."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 p-5 bg-red-50 rounded-xl border border-red-200">
+            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Mietausfall: DG-Mieter kündigen häufiger</h3>
+              <p class="text-sm text-text-secondary">
+                DG-Mieter sind typischerweise junge Berufstätige (25–40) – mobiles Publikum mit höherer Kündigungswahrscheinlichkeit als Familien. Rechnen Sie mit 1–2 Monaten Leerstand pro Mieterwechsel. In Eppendorf und Eimsbüttel ist die Wiedervermietung schnell (2–4 Wochen), in Harburg und Bergedorf kann es länger dauern (4–8 Wochen).
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 bg-red-50 rounded-xl border border-red-200">
+            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Leerstand: In Eppendorf minimal, in Harburg/Bergedorf möglich</h3>
+              <p class="text-sm text-text-secondary">
+                Die DG-Leerstandsquote variiert stark je nach Stadtteil. In Eppendorf liegt sie bei unter 2% – in Harburg und Bergedorf kann sie bei 5–8% liegen. Berücksichtigen Sie diesen Unterschied in Ihrer Renditeberechnung: In Eppendorf können Sie mit stabilen Mieteinnahmen rechnen, in Harburg sollten Sie einen Risiko-Puffer einplanen.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 bg-red-50 rounded-xl border border-red-200">
+            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Instandhaltungsrücklage: DG hat mehr Technik</h3>
+              <p class="text-sm text-text-secondary">
+                DG-Wohnungen haben mehr technische Anlagen als Standardwohnungen: Gaube (Dachabdichtung, Fenstermechanik), Dämmung (Feuchtigkeitsrisiko), neue Haustechnik (Heizung, Elektrik). Planen Sie eine höhere Instandhaltungsrücklage ein als für eine Altbauwohnung – 15–20 €/m²/Jahr statt 10 €/m².
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 bg-red-50 rounded-xl border border-red-200">
+            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Schimmelrisiko: DG-Fenster oft größer – Lüftungsverhalten Mieter wichtig</h3>
+              <p class="text-sm text-text-secondary">
+                DG-Wohnungen haben größere Fensterflächen (Gauben, Dachflächenfenster) – das erhöht den Lichteinfall, aber auch das Schimmelrisiko bei unzureichendem Lüften. Mietern sollte eine mechanische Entlüftung (Abluftventilator, Fensterlüfter) angeboten werden. Führen Sie bei Neuvermietung eine Blower-Door-Messung durch, um die Luftdichtheit zu prüfen.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 bg-red-50 rounded-xl border border-red-200">
+            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+              <h3 class="font-bold text-text-primary mb-1">Kappungsgrenze: Hamburg begrenzt Mieterhöhungen</h3>
+              <p class="text-sm text-text-secondary">
+                Die Hamburger Kappungsgrenze (15% in 3 Jahren) begrenzt Mieterhöhungen im Bestand. Wenn Ihre DG-Miete bereits nah an der ortsüblichen Vergleichsmiete liegt, können Sie in den ersten 3 Jahren nach Ausbau nur begrenzt erhöhen. Nutzen Sie die Modernisierungsumlage nach §559 BGB als workaround – die ist nicht durch die Kappungsgrenze gedeckelt.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 7: FÖRDERMITTEL SPEZIELL FÜR VERMIETER
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Förderung"
+          heading="Fördermittel speziell für Vermieter"
+          subheading="Warum Vermieter bei der Förderung oft besser dastehen als Eigennutzer."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">§35c EStG – Besser für Vermieter</h3>
+            <ul class="text-sm space-y-2 text-text-secondary">
+              <li>Vermieter haben oft höheren Grenzsteuersatz</li>
+              <li>Werbungskosten senken steuerpflichtige Mieteinnahmen</li>
+              <li>Effektiver Vorteil: 20% × Steuersatz</li>
+              <li>Bei 42%: 8,4% der Arbeitskosten gespart</li>
+              <li>Alternativ zu BAFA/KfW – nicht kombinierbar</li>
+            </ul>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">KfW 261 – Kredit + Tilgungszuschuss</h3>
+            <ul class="text-sm space-y-2 text-text-secondary">
+              <li>Bei Vermietung problemlos nutzbar</li>
+              <li>Bis 150.000 €/Wohneinheit</li>
+              <li>5–45% Tilgungszuschuss (nicht zurückzahlbar)</li>
+              <li>Effektive Kreditkosten sinken erheblich</li>
+              <li>Mit WPB-Bonus (Gebäude vor 1977): +10%</li>
+            </ul>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">BAFA – Einzelmaßnahmen</h3>
+            <ul class="text-sm space-y-2 text-text-secondary">
+              <li>Zuschuss direkt – kein Kredit</li>
+              <li>Bis 12.000 €/Wohneinheit (15–20%)</li>
+              <li>Einzelmaßnahmen: Dämmung, Gaube, Fenster</li>
+              <li>Schließt §35c aus – entweder/oder</li>
+              <li>iSFP erhöht auf 20% (500–2.000 € extra)</li>
+            </ul>
+          </div>
+
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h3 class="font-bold text-text-primary mb-3">§7i EStG – Denkmalschutz-AfA</h3>
+            <ul class="text-sm space-y-2 text-text-secondary">
+              <li>Nur wenn Objekt im Denkmalverzeichnis</li>
+              <li>10 Jahre je 9% des Gebäudewerts</li>
+              <li>Steuervorteil: 8.000–12.000 €/Jahr</li>
+              <li>Übersteigt §35c bei hohem Steuersatz</li>
+              <li>Kombination mit KfW 261 möglich (nicht mit BAFA)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 p-5 bg-primary/5 border border-primary/20 rounded-xl">
+          <p class="text-sm text-text-primary font-medium">
+            <strong>Keine Strafsteuer bei Vermietung:</strong> Anders als bei Ferienwohnungen (BjHWG) fällt bei Vermietung keine Steuerstrafe an. Die Mietpreisbremse gilt für Vermietung, aber die Modernisierungsumlage nach §559 ist davon nicht betroffen.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 8: CHECKLISTE VOR DEM KAUF
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Checkliste"
+          heading="Checkliste: Vor dem Kauf prüfen"
+          subheading="Diese sieben Punkte müssen Sie klären, bevor Sie ein DG-Objekt kaufen."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-3">
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Erhaltungssatzung im Bebauungsplan?</h3>
+              <p class="text-sm text-text-secondary">Prüfen Sie, ob das Gebäude in einem Erhaltungssatzungsgebiet liegt – das beeinflusst Genehmigungsverfahren und Gestaltungsvorschriften. Erhaltungssatzung ≠ Denkmalschutz, aber verwandte Einschränkungen.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Denkmalschutz-Eintrag?</h3>
+              <p class="text-sm text-text-secondary">Ist das Gebäude im Denkmalverzeichnis eingetragen? Das eröffnet §7i EStG, erfordert aber denkmalrechtliche Genehmigung – und erhöht Planungskosten um 2.000–5.000 €.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">3</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Statik ausreichend für DG-Last?</h3>
+              <p class="text-sm text-text-secondary">Lassen Sie die Statik des Dachstuhls prüfen – ein DG-Ausbau lastet mit 150–250 kg/m² auf der Decke. Bei Altbauten (vor 1960) ist oft eine Verstärkung erforderlich, die 5.000–15.000 € extra kostet.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">4</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Schadstoffe im Dachstuhl (Asbest vor 1990)?</h3>
+              <p class="text-sm text-text-secondary">Altbauten vor 1990 haben oft Asbest in Dachdämmung, Flexplatten oder Nachtspeicheröfen. Schadstoffgutachten kostet 500–1.500 € – kann aber 10.000–30.000 € Entsorgungskosten aufdecken, die im Kaufpreis berücksichtigt werden müssen.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">5</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Stellplatz vorhanden (Stellplatzpflicht je nach Bezirk)?</h3>
+              <p class="text-sm text-text-secondary">Die Stellplatzpflicht gilt in Hamburg je nach Bebauungsplan. In einigen Bezirken (Eppendorf, Eimsbüttel) kann die Pflicht entfallen, wenn ein Carport oder eine Garage nachgewiesen wird. Bei Neubau kann die Stellplatzpflicht teuer werden (5.000–15.000 € pro Stellplatz).</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">6</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Rohdach oder bereits ausgebaut?</h3>
+              <p class="text-sm text-text-secondary">Ein Rohdach (unbeheizter Dachboden) ist der ideale Ausgangspunkt – die Kosten für DG-Ausbau sind kalkulierbar. Ein bereits teilweise ausgebautes DG hat oft niedrigere Kosten, aber unbekannte Bausubstanz und möglicherweise Bestandsschutz, der Modernisierungen erschwert.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-surface rounded-xl border border-border">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">7</div>
+            <div>
+              <h3 class="font-semibold text-text-primary mb-1">Mietniveau im Viertel: Ist die Zielmiete realistisch?</h3>
+              <p class="text-sm text-text-secondary">Prüfen Sie das aktuelle Mietniveau im Viertel: ortsübliche Vergleichsmiete, Neuvermittlungspreise, Insertionspreise auf Immoscout. Wenn Ihre Zielmiete (nach Ausbau) über dem Viertel-Durchschnitt liegt, riskieren Sie längere Leerstandszeiten. In Eppendorf sind 18 €/m² realistisch, in Harburg eher 12–14 €/m².</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       FAQ SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Fragen & Antworten"
+          heading="Häufig gestellte Fragen"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-surface rounded-xl border border-border overflow-hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-5 text-text-primary font-semibold text-base hover:bg-primary/5 transition-colors list-none">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-text-secondary flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-5 pb-5 text-text-secondary text-sm leading-relaxed border-t border-border">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       INTERNAL LINKS
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Weiterlesen"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/ratgeber/foerdermittel/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">§35c EStG und Fördermittel</h3>
+            <p class="text-sm text-text-secondary">Vertiefung: KfW 261, BAFA BEG EM, §35c EStG – welche Förderung für Ihr Projekt die richtige ist.</p>
+          </a>
+
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Kosten für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Orientierung für Investoren.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Genehmigung – HBauO 2026</h3>
+            <p class="text-sm text-text-secondary">§62 Genehmigungsfreistellung, vereinfachtes Verfahren, Erhaltungssatzung – was für Investoren gilt.</p>
+          </a>
+
+          <a href="/standorte/eppendorf" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Eppendorf – Rendite-Lage</h3>
+            <p class="text-sm text-text-secondary">Warum Eppendorf für DG-Investoren besonders interessant ist: Mietniveau, Nachfrage, Rendite-Potenzial.</p>
+          </a>
+
+          <a href="/standorte/harburg" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Harburg – Aufholpotenzial</h3>
+            <p class="text-sm text-text-secondary">DG-Ausbau in Harburg: Niedrigere Kaufpreise, höhere Förderung, längere Leerstandszeiten – ehrliche Analyse.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            DG-Investment in Hamburg planen?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie zu Rendite, Förderung und Risiken – speziell für Ihre Hamburger Kapitalanlage. Unverbindlich, kostenlos, in 24 Stunden.
+          </p>
+          <div class="max-w-lg mx-auto">
+            <div class="bg-primary text-white rounded-2xl p-5 lg:p-6">
+              <h3 class="text-lg lg:text-xl font-bold mb-1">
+                Beraten Sie mich als Kapitalanleger
+              </h3>
+              <p class="text-white/70 mb-5 text-xs">
+                Rendite-Analyse für Ihr Hamburger Objekt – in 24 Stunden.
+              </p>
+              <LeadGenForm />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
