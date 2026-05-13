@@ -1,0 +1,592 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema, generateFaqSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title="Dachgeschossausbau in Winterhude – Potenzial, Kosten und Genehmigung"
+  description="Winterhude gehört zu den beliebtesten Hamburger Stadtteilen für DG-Ausbau. Was Sie über Erhaltungssatzungen, Bezirksamt Hamburg-Nord und Kosten wissen müssen."
+  canonical="/standorte/winterhude/"
+  currentPath="/standorte/winterhude/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateServiceSchema({ name: 'Dachgeschossausbau Winterhude Hamburg', description: 'Dachgeschossausbau, Gauben und Dämmung in Winterhude – alle Gewerke aus einer Hand. Bezirksamt Hamburg-Nord.', slug: '/standorte/winterhude/' }))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Standorte', url: 'https://dachgeschossausbauhamburg.de/standorte/' },
+    { name: 'Winterhude', url: 'https://dachgeschossausbauhamburg.de/standorte/winterhude/' },
+  ]))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema([
+    {
+      question: 'Gibt es in Winterhude Erhaltungssatzungen?',
+      answer: 'Ja, punktuell im Goldbekmarkt-Umfeld und Teilen des Winterhuder Wegs. Anders als Eppendorf ist Winterhude jedoch nicht flächendeckend geschützt. Vor jedem Projekt lohnt eine Prüfung über hamburg.de/bebauungspläne oder eine Vorab-Auskunft beim Bezirksamt Hamburg-Nord (§68 HBauO).'
+    },
+    {
+      question: 'Wie lange dauert die Genehmigung in Hamburg-Nord?',
+      answer: 'Das Bezirksamt Hamburg-Nord braucht für DG-Ausbauprojekte typischerweise 4–8 Wochen. Bei einfachen Maßnahmen nach §62 HBauO 2026 (Genehmigungsfreistellung) genügt eine Anzeige – nach vier Wochen gelter die Maßnahme als genehmigt. Bei Erhaltungssatzung oder Gauben ist ein separater Antrag nötig, was länger dauert.'
+    },
+    {
+      question: 'Was kostet ein DG-Ausbau in Winterhude?',
+      answer: 'Kaufpreise für Bestandsimmobilien mit DG-Potenzial liegen bei 4.500–7.500 €/m². Der DG-Ausbau selbst kostet 900–1.800 €/m² (Komplettausbau mit Gaube). Die Mieteinnahmen nach Ausbau liegen bei 16–22 €/m² – deutlich über dem Hamburger Median von 15,12 €/m². Die Rendite liegt typischerweise bei 4–6 % auf das eingesetzte Kapital.'
+    }
+  ]))} />
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <!-- Linke Spalte: Text -->
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · HBauO 2026 · Winterhude
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau in Winterhude
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Winterhude gehrt zu den beliebtesten Hamburger Stadtteilen. See-Nhe, gute Infrastruktur und ein Mietspiegel ber dem Hamburger Median – das macht den DG-Ausbau hier besonders attraktiv. Erfahren Sie, was Winterhude von Eppendorf unterscheidet.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>DG-Mieten 16–22 €/m² – ber dem Hamburger Median</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Erhaltungssatzung nur punktuell – mehr Spielraum als in Eppendorf</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Bezirksamt Hamburg-Nord – 4–8 Wochen Bearbeitungszeit</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">4.500–7.500</div>
+              <div class="text-xs text-white/60 mt-1">Kaufpreis €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">16–22</div>
+              <div class="text-xs text-white/60 mt-1">Miete €/m²</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">900–1.800</div>
+              <div class="text-xs text-white/60 mt-1">DG-Ausbau €/m²</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Formular -->
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 1: WINTERHUDE IM ÜBERBLICK
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Marktanalyse"
+          heading="Winterhude im Überblick"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Winterhude gehrt zu den gefragtesten Stadtteilen Hamburgs – und das aus gutem Grund: direkte Alster-Nähe, der Goldbekmarkt als Treffpunkt, grüne Promenaden und eine durchmischte Bausubstanz, die von Gründerzeit bis 50er-Jahre reicht.
+          </p>
+          <p>
+            Der Mietspiegel liegt mit 16–22 €/m² deutlich über dem Hamburger Median von 15,12 €/m². Kaufpreise für Bestandsimmobilien mit DG-Potenzial bewegen sich bei 4.500–7.500 €/m² – je nach Zustand und Lage. Damit ist Winterhude etwa 15–20 % günstiger als Eppendorf, bietet aber ähnlich hohe Mieterträge.
+          </p>
+          <p>
+            Die Bausubstanz ist gemischt: Im Bereich Goldbekpromenade und Winterhuder Weg dominieren gehobene Altbauten, teils Gründerzeit. In Richtung Barmbek-Süd und Alsterdorf finden sich einfacher gepflegte 50er/60er-Jahre-Bauten. Das bedeutet für DG-Projekte: Je nach Lage sind unterschiedliche Genehmigungswege relevant – von der unkomplizierten §62-Freistellung bis zum Erhaltungssatzungs-Verfahren.
+          </p>
+          <p>
+            Was Winterhude von Eppendorf unterscheidet? Weniger flächendeckende Erhaltungssatzungen, mehr Spielraum bei Gauben und günstigere Grundstücke bei vergleichbaren Mieterträgen. Wer in Eppendorf kein Budget hat, findet in Winterhude eine realistische Alternative.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 2: DG-POTENZIAL NACH TEILGEBIET
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Teilgebiete"
+        heading="DG-Potenzial nach Teilgebiet in Winterhude"
+        subheading="Winterhude ist kein einheitlicher Stadtteil. Je nach Lage gelten unterschiedliche Regeln und Preise."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-6">
+          <!-- Goldbekmarkt-Umgebung -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">Goldbekmarkt-Umgebung</h3>
+                <p class="text-text-secondary text-sm mb-3">Gehobener Altbau, teils Gründerzeit. Hier liegt die höchste Lagequalität in Winterhude – entsprechend höher die Kaufpreise.</p>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Kaufpreis</span>
+                    <div class="font-mono font-bold text-primary">6.000–8.000 €/m²</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Erhaltungssatzung</span>
+                    <div class="font-mono font-bold text-primary">möglich</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3 col-span-2">
+                    <span class="text-text-secondary">Empfehlung</span>
+                    <div class="font-bold text-primary">Schleppgaube bevorzugt, Vorab-Anfrage beim Bezirksamt</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Winterhuder Weg -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">Winterhuder Weg</h3>
+                <p class="text-text-secondary text-sm mb-3">Gemischte Bausubstanz, belebte Meile mit guter Infrastruktur. Mehr Spielraum bei Gauben als im Goldbekmarkt-Bereich.</p>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Kaufpreis</span>
+                    <div class="font-mono font-bold text-primary">5.000–7.000 €/m²</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Erhaltungssatzung</span>
+                    <div class="font-mono font-bold text-primary">punktuell</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3 col-span-2">
+                    <span class="text-text-secondary">Empfehlung</span>
+                    <div class="font-bold text-primary">Gute Mietnachfrage, Gauben oft genehmigungsfähig</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barmbek-Grenze -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">Barmbek-Süd (Grenze zu Winterhude)</h3>
+                <p class="text-text-secondary text-sm mb-3">Einfachere Bausubstanz, mehr 50er/60er-Jahre-Bauten. Weniger Denkmalschutz, mehr Neubau-Potenzial. Günstigste Lage in diesem Vergleich.</p>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Kaufpreis</span>
+                    <div class="font-mono font-bold text-primary">3.500–5.500 €/m²</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Erhaltungssatzung</span>
+                    <div class="font-mono font-bold text-primary">eher nicht</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3 col-span-2">
+                    <span class="text-text-secondary">Empfehlung</span>
+                    <div class="font-bold text-primary">§62 HBauO oft ausreichend, schnelle Genehmigung mglich</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- City Nord Grenze -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">City Nord Grenze</h3>
+                <p class="text-text-secondary text-sm mb-3">Gewerbe- und Bürostandort. DG-Ausbau ist hier weniger typisch – die Nachfrage nach Wohn-DG ist geringer.</p>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Kaufpreis</span>
+                    <div class="font-mono font-bold text-primary">3.000–5.000 €/m²</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Wohn-DG-Nachfrage</span>
+                    <div class="font-mono font-bold text-primary">gering</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alsterdorf -->
+          <div class="bg-surface rounded-xl border border-border p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-2">Alsterdorf (Grenzgebiet)</h3>
+                <p class="text-text-secondary text-sm mb-3">Einfachere Bebauung, mehr Neubau. Für DG-Ausbau in Ein-/Zweifamilienhäusern ist §62 HBauO oft ausreichend.</p>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Kaufpreis</span>
+                    <div class="font-mono font-bold text-primary">3.500–5.000 €/m²</div>
+                  </div>
+                  <div class="bg-bg rounded-lg p-3">
+                    <span class="text-text-secondary">Genehmigung</span>
+                    <div class="font-mono font-bold text-primary">§62 oft ausreichend</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 3: ERHALTUNGSSATZUNGEN IN WINTERHUDE
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Ortsrecht"
+          heading="Erhaltungssatzungen in Winterhude"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Anders als Eppendorf oder Altona ist Winterhude nicht flächendeckend durch Erhaltungssatzungen geschützt. Die Satzungen konzentrieren sich auf punktuelle Bereiche.
+          </p>
+          <p>
+            Betroffen sind insbesondere das Goldbekmarkt-Umfeld und Teile des Winterhuder Wegs. Wer dort eine Gaube planen möchte, muss mit dem Bezirksamt Hamburg-Nord abstimmen. Die gute Nachricht: Winterhude hat deutlich weniger denkmalgeschützte Gebäude als Eppendorf oder Altona – der Spielraum ist größer.
+          </p>
+          <p>
+            <strong>Prüfen Sie vor Beginn:</strong> Nutzen Sie hamburg.de/bebauungspläne oder fragen Sie direkt beim Bezirksamt Hamburg-Nord an. Im Zweifel hilft eine Vorab-Auskunft nach §68 HBauO – das spart später Zeit und Geld.
+          </p>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <h4 class="font-bold text-text-primary mb-3">Empfohlenes Vorgehen bei Erhaltungssatzung</h4>
+            <ol class="space-y-2 text-sm text-text-secondary">
+              <li class="flex gap-3">
+                <span class="font-bold text-primary">1.</span>
+                <span>Bebauungsplan prüfen auf hamburg.de/bebauungspläne</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="font-bold text-primary">2.</span>
+                <span>Vorab-Auskunft beim Bezirksamt Hamburg-Nord (§68 HBauO)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="font-bold text-primary">3.</span>
+                <span>Bei Gaube: Schleppgaube bevorzugen (in Winterhude bevorzugte Variante)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="font-bold text-primary">4.</span>
+                <span>Mit erfahrenem Architekten den Antrag einreichen (4–8 Wochen Bearbeitung)</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 4: GENEHMIGUNG IN HAMBURG-NORD
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburger Recht"
+          heading="Genehmigung in Hamburg-Nord"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Zuständig für alle DG-Projekte in Winterhude ist das Bezirksamt Hamburg-Nord, Team Bauordnung. Die Bearbeitungszeit beträgt typischerweise 4–8 Wochen.
+          </p>
+          <p>
+            Die Hamburger Bauordnung 2026 (HBauO 2026) bietet mit §62 die Möglichkeit einer Genehmigungsfreistellung. Für Ein- und Zweifamilienhäuser reicht oft eine Anzeige – nach vier Wochen gilt die Maßnahme als genehmigt. Die Kosten liegen bei 0–100 €.
+          </p>
+          <p>
+            Sobald eine Gaube geplant ist oder das Gebäude in einem Erhaltungssatzungsgebiet liegt, wird ein separater Antrag erforderlich. Das verlängert die Bearbeitungszeit und erfordert mehr Unterlagen. Wir empfehlen, vor Planungsbeginn eine Bauvoranfrage zu stellen.
+          </p>
+          <p>
+            Mehr Informationen zur <a href="/genehmigung" class="text-primary font-semibold hover:underline">Genehmigungsfreistellung nach HBauO 2026</a> finden Sie auf unserer bersichtsseite.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 5: KOSTENÜBERSICHT WINTERHUDE
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Richtwerte"
+        heading="Kostenübersicht für Winterhude"
+        subheading="Winterhude ist 15–20 % günstiger als Eppendorf – bei ähnlichen Mieterträgen."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Kaufpreis Bestand mit DG-Potenzial</td>
+                <td class="px-6 py-4 text-right font-mono">4.500 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">7.500 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">DG-Ausbau (Komplettausbau mit Gaube)</td>
+                <td class="px-6 py-4 text-right font-mono">900 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">1.800 €/m²</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Mietpotenzial nach Ausbau</td>
+                <td class="px-6 py-4 text-right font-mono">16 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">22 €/m²</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Mietrendite (auf eingesetztes Kapital)</td>
+                <td class="px-6 py-4 text-right font-mono">4 %</td>
+                <td class="px-6 py-4 text-right font-mono">6 %</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Vergleich zu Eppendorf: Kaufpreis</td>
+                <td class="px-6 py-4 text-right font-mono text-text-secondary" colspan="2">~15–20 % günstiger bei ähnlichen Mieterträgen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p>
+            Alle Hamburger Richtwerte und eine detaillierte Kostenaufstellung finden Sie auf unserer <a href="/kosten" class="text-primary font-semibold hover:underline">Kostenübersicht für Dachgeschossausbau in Hamburg</a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 6: TYPISCHE FALLBEISPIELE
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Praxisbeispiele"
+        heading="Typische Fallbeispiele in Winterhude"
+        subheading="Reale Szenarien aus der Winterhuder Praxis."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Fall A -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="bg-primary text-white p-6">
+              <span class="text-xs font-semibold text-secondary uppercase tracking-wider">Fall A</span>
+              <h3 class="text-xl font-bold mt-2">Gründerzeit-Mehrfamilienhaus Goldbekmarkt</h3>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span class="text-text-secondary">DG-Fläche</span>
+                  <div class="font-bold text-text-primary">120 m²</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Erhaltungssatzung</span>
+                  <div class="font-bold text-text-primary">relevant</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Ausbaukosten</span>
+                  <div class="font-bold text-text-primary">~180.000 €</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Gaubenform</span>
+                  <div class="font-bold text-text-primary">Schleppgaube</div>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-border">
+                <p class="text-sm text-text-secondary">
+                  Hohe Lagequalität am Goldbekmarkt rechtfertigt höhere Ausbaukosten. Erhaltungssatzung erfordert sorgfältige Abstimmung – dafür langfristig wertstabil.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fall B -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="bg-primary text-white p-6">
+              <span class="text-xs font-semibold text-secondary uppercase tracking-wider">Fall B</span>
+              <h3 class="text-xl font-bold mt-2">50er-Jahre-Einfamilienhaus Barmbek-Grenze</h3>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span class="text-text-secondary">DG-Fläche</span>
+                  <div class="font-bold text-text-primary">60 m²</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Erhaltungssatzung</span>
+                  <div class="font-bold text-text-primary">nicht relevant</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Ausbaukosten</span>
+                  <div class="font-bold text-text-primary">~70.000 €</div>
+                </div>
+                <div>
+                  <span class="text-text-secondary">Genehmigungsweg</span>
+                  <div class="font-bold text-primary">§62 HBauO</div>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-border">
+                <p class="text-sm text-text-secondary">
+                  Schnelle Genehmigung nach §62, einfache Bausubstanz, günstiger Einstiegspreis. Ideal für erste DG-Projekte oder Vermietung.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 7: WAS IN WINTERHUDE BESONDERS IST
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Lokales Wissen"
+          heading="Was in Winterhude besonders ist"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Winterhude ist kein均匀er Stadtteil – das macht ihn für DG-Ausbau so interessant. Hier ein paar Beobachtungen aus der Praxis:
+          </p>
+          <p>
+            <strong>Goldbekmarkt-Nähe als Lage-Qualitätsmarker:</strong> Wer in Laufweite zum Goldbekmarkt wohnt, profitiert von der gehobenen Infrastruktur und dem Charme des Viertels. DG-Projekte in dieser Lage sind langfristig wertstabil.
+          </p>
+          <p>
+            <strong>Alster-Nähe für Gehobene:</strong> Die direkte Alster-Nähe macht Winterhude für Mieter attraktiv, diePendeln aber nicht im Zentrum wohnen wollen. Die Mietnachfrage ist stabil – auch bei Konjunkturschwankungen.
+          </p>
+          <p>
+            <strong>Viertelfläche als Puffer zu Barmbek:</strong> Die Nähe zu Barmbek-Süd ist kein Nachteil – sie bedeutet günstigere Kaufpreise bei guter Anbindung. Für DG-Ausbau-Einsteiger ein realistischer Startpunkt.
+          </p>
+          <p>
+            <strong>City Nord als Arbeitsplatz-Nähe:</strong> Für Berufspendler, die in der City Nord oder am Flughafen arbeiten, ist Winterhude ideal gelegen. Die Nachfrage nach Wohnraum in DG-Nähe bleibt stabil.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       SECTION 8: INTERNE VERLINKUNG
+       ================================================ -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/standorte/eppendorf" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Eppendorf</h3>
+            <p class="text-sm text-text-secondary">Das Edelviertel – teurer, aber wertstabil. Mehr Erhaltungssatzung, höhere Kaufpreise.</p>
+          </a>
+
+          <a href="/standorte/eimsbuettel" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Eimsbüttel</h3>
+            <p class="text-sm text-text-secondary">Junges Viertel mit viel Altbau-Charme. Guter Mix aus Genehmigungsfreundlichkeit und Mietnachfrage.</p>
+          </a>
+
+          <a href="/standorte/altona" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Altona</h3>
+            <p class="text-sm text-text-secondary">Westlich und vielfältig – von Ottensen bis Othmarschen. Mehr Denkmäler, mehr Genehmigungsaufwand.</p>
+          </a>
+
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Hamburger Richtwerte für DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">Detaillierte Kostenaufstellung: 800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026 – Genehmigung leicht gemacht</h3>
+            <p class="text-sm text-text-secondary">§62 Freistellung, §61 vereinfachtes Verfahren, Erhaltungssatzung, Denkmalschutz.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       END CTA SECTION
+       ================================================ -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            DG-Ausbau in Winterhude? Kostenlose Erstberatung.
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir beraten Sie unverbindlich zu Ihrem DG-Projekt in Winterhude – inklusive Lage-Einschätzung, Kostenabschätzung und Genehmigungsprüfung nach HBauO 2026.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
