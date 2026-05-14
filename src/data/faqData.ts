@@ -317,4 +317,43 @@ export const FAQ_DATA: FaqItem[] = [
       { label: "Alle Schritte von Beratung bis Übergabe", href: "/ratgeber/prozess/" },
     ],
   },
+  {
+    question: "Was kostet eine Dachsanierung in Hamburg?",
+    answer: "Die Kosten für eine Dachsanierung in Hamburg (2025/2026) liegen je nach Umfang zwischen 120 und 350 Euro pro Quadratmeter Dachfläche. Einfache Neueindeckung mit Dämmung: 120–180 €/m². Komplette Sanierung inklusive Aufsparrendämmung: 200–350 €/m². Hinzu kommen: Gerüst 1.500–4.000 €, Gauben 8.000–25.000 €, Statik-Gutachten 500–2.000 €. Für ein typisches Hamburger Satteldach (120 m²) liegen die Gesamtkosten zwischen 15.000 und 45.000 Euro.",
+    links: [
+      { label: "Alle Hamburger Kostenrichtwerte", href: "/ratgeber/dachsanierung/" },
+    ],
+  },
+  {
+    question: "Wann lohnt sich eine Dachsanierung in Hamburg?",
+    answer: "Eine Dachsanierung lohnt sich in Hamburg, wenn mindestens eines der folgenden Kriterien zutrifft: Das Dach ist älter als 30 Jahre und zeigt Alterungserscheinungen (Moos, poröse Ziegel, Korrosion). Es gibt Undichtigkeiten oder Feuchteschäden im Dachgeschoss. Die Dämmung entspricht nicht dem GEG (Gebäudeenergiegesetz). Eine Dachsanierung mit energetischer Verbesserung ist förderfähig durch KfW 261 und BAFA, was die Gesamtkosten um bis zu 25 Prozent senken kann.",
+    links: [
+      { label: "Fördermittel für Dachsanierung", href: "/ratgeber/dachsanierung/" },
+      { label: "Sanierung oder DG-Ausbau?", href: "/ratgeber/dachsanierung/" },
+    ],
+  },
+  {
+    question: "Dachsanierung oder Dachgeschossausbau – was ist besser?",
+    answer: "Die Entscheidung hängt von Ihrem Ziel ab: Wenn Sie rein die Bausubstanz sichern wollen (Feuchteschutz, Wärmedämmung, Werterhalt), ist eine Dachsanierung ohne Ausbau ausreichend und günstiger. Wenn Sie zusätzlich neuen Wohnraum gewinnen wollen, ist der DG-Ausbau die wirtschaftlichere Wahl – denn die Sanierungskosten fallen ohnehin an, und der Ausbau schafft nutzbare Fläche. In Hamburg gelten für beide Vorhaben unterschiedliche Genehmigungsregeln.",
+    links: [
+      { label: "DG-Ausbau vs. Sanierung", href: "/ratgeber/dachsanierung/" },
+      { label: "Kosten im Vergleich", href: "/kosten/" },
+    ],
+  },
+  {
+    question: "Welche Fördermittel gibt es für Dachsanierung in Hamburg?",
+    answer: "Für die energetische Dachsanierung in Hamburg gibt es drei Förderwege: KfW 261 (Wohngebäude-Kredit) mit Tilgungszuschuss bis 25 % der Kosten und zinsgünstigen Darlehen bis 150.000 € je Wohneinheit. BAFA-Einzelmaßnahmen mit direkten Zuschüssen für Dämmmaßnahmen an der Dachfläche (bis zu 12.000 € je Maßnahme). §35c EStG für handwerkliche Handwerkerkosten – 20 % der Lohnkosten direkt von der Steuerlast absetzbar.",
+    links: [
+      { label: "Alle Fördermittel im Detail", href: "/ratgeber/foerdermittel/" },
+      { label: "KfW 261 für Hamburg", href: "/ratgeber/dachsanierung/" },
+    ],
+  },
+  {
+    question: "Wie lange dauert eine Dachsanierung in Hamburg?",
+    answer: "Eine Dachsanierung in Hamburg dauert je nach Umfang ein bis vier Wochen. Einfache Neueindeckung: 1–2 Wochen. Sanierung mit Dämmung: 2–3 Wochen. Komplette Sanierung inklusive Gauben: 3–4 Wochen. Die Vorlaufzeit für Planung, Statik-Gutachten und eventuelle Genehmigung beträgt zusätzlich 4–12 Wochen. HBauO 2026 ermöglicht für einfache Sanierungen (Neueindeckung ohne Gauben) eine genehmigungsfreie Durchführung nach §62 – das spart 4–8 Wochen Genehmigungszeit.",
+    links: [
+      { label: "HBauO 2026: Was ist genehmigungsfrei?", href: "/genehmigung/" },
+      { label: "Der komplette Prozess", href: "/ratgeber/prozess/" },
+    ],
+  },
 ];

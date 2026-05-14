@@ -1,0 +1,676 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+
+const currentPath = '/ratgeber/dachsanierung/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Dachsanierung Hamburg', href: '/ratgeber/dachsanierung/' },
+];
+
+const faqs = [
+  {
+    question: 'Was kostet eine Dachsanierung in Hamburg?',
+    answer: 'Die Kosten für eine Dachsanierung in Hamburg (2025/2026) liegen je nach Umfang zwischen 120 und 350 Euro pro Quadratmeter Dachfläche. Einfache Neueindeckung mit Dämmung: 120–180 €/m². Komplette Sanierung inklusive Aufsparrendämmung: 200–350 €/m². Hinzu kommen: Gerüst 1.500–4.000 €, Gauben 8.000–25.000 €, Statik-Gutachten 500–2.000 €. Für ein typisches Hamburger Satteldach (120 m²) liegen die Gesamtkosten zwischen 15.000 und 45.000 Euro.',
+  },
+  {
+    question: 'Wann lohnt sich eine Dachsanierung in Hamburg?',
+    answer: 'Eine Dachsanierung lohnt sich in Hamburg, wenn mindestens eines der folgenden Kriterien zutrifft: Das Dach ist älter als 30 Jahre und zeigt Alterungserscheinungen (Moos, poröse Ziegel, Korrosion). Es gibt Undichtigkeiten oder Feuchteschäden im Dachgeschoss. Die Dämmung entspricht nicht dem GEG (Gebäudeenergiegesetz) – besonders relevant nach den verschärften Anforderungen 2024/2025. Eine Dachsanierung mit energetischer Verbesserung ist förderfähig durch KfW 261 und BAFA, was die Gesamtkosten um bis zu 25 Prozent senken kann.',
+  },
+  {
+    question: 'Dachsanierung oder Dachgeschossausbau – was ist besser?',
+    answer: 'Die Entscheidung hängt von Ihrem Ziel ab: Wenn Sie rein die Bausubstanz sichern wollen (Feuchteschutz, Wärmedämmung, Werterhalt), ist eine Dachsanierung ohne Ausbau ausreichend und günstiger. Wenn Sie zusätzlich neuen Wohnraum gewinnen wollen, ist der DG-Ausbau die wirtschaftlichere Wahl – denn die Sanierungskosten fallen ohnehin an, und der Ausbau schafft nutzbare Fläche. In Hamburg gelten für beide Vorhaben unterschiedliche Genehmigungsregeln: Die Sanierung allein ist oft genehmigungsfrei nach §62 HBauO 2026, der DG-Ausbau kann ein vereinfachtes Verfahren nach §61 erfordern.',
+  },
+  {
+    question: 'Welche Fördermittel gibt es für Dachsanierung in Hamburg?',
+    answer: 'Für die energetische Dachsanierung in Hamburg gibt es drei Förderwege: KfW 261 (Wohngebäude-Kredit) mit Tilgungszuschuss bis 25 % der Kosten und zinsgünstigen Darlehen bis 150.000 € je Wohneinheit. BAFA-Einzelmaßnahmen mit direkten Zuschüssen für Dämmmaßnahmen an der Dachfläche (bis zu 12.000 € je Maßnahme). §35c EStG für handwerkliche Handwerkerkosten – 20 % der Lohnkosten direkt von der Steuerlast absetzbar. Die Hamburger Energielotsen bieten eine kostenlose Vor-Ort-Beratung zu Fördermitteln und Sanierungsfahrplänen.',
+  },
+  {
+    question: 'Wie lange dauert eine Dachsanierung in Hamburg?',
+    answer: 'Eine Dachsanierung in Hamburg dauert je nach Umfang ein bis vier Wochen. Einfache Neueindeckung: 1–2 Wochen. Sanierung mit Dämmung: 2–3 Wochen. Komplette Sanierung inklusive Gauben: 3–4 Wochen. Die Vorlaufzeit für Planung, Statik-Gutachten und eventuelle Genehmigung beträgt zusätzlich 4–12 Wochen. HBauO 2026 ermöglicht für einfache Sanierungen (Neueindeckung ohne Gauben) eine genehmigungsfreie Durchführung nach §62 – das spart 4–8 Wochen Genehmigungszeit.',
+  },
+];
+
+const kostenRows = [
+  { position: 'Neueindeckung Satteldach (Ziegel)', einheit: 'm²', vonPreis: 80, bisPreis: 140 },
+  { position: 'Neueindeckung Flachdach (Bitumen/PVC)', einheit: 'm²', vonPreis: 60, bisPreis: 120 },
+  { position: 'Zwischensparrendämmung (Mineralwolle, Dampfbremse)', einheit: 'm²', vonPreis: 60, bisPreis: 120 },
+  { position: 'Aufsparrendämmung (inkl. Neubedachung)', einheit: 'm²', vonPreis: 120, bisPreis: 250 },
+  { position: 'Dachflächenfenster (VELUX, Roto)', einheit: 'Stück', vonPreis: 400, bisPreis: 1500 },
+  { position: 'Schleppgaube (inkl. Anschlüsse)', einheit: 'Stück', vonPreis: 8000, bisPreis: 18000 },
+  { position: 'Fledermausgaube (inkl. Anschlüsse)', einheit: 'Stück', vonPreis: 15000, bisPreis: 25000 },
+  { position: 'Gerüst', einheit: 'pauschal', vonPreis: 1500, bisPreis: 4000 },
+  { position: 'Statik-Gutachten', einheit: 'pauschal', vonPreis: 500, bisPreis: 2000 },
+];
+
+const schritte = [
+  { label: 'Bestandsanalyse', desc: 'Zustand, Alter, Schäden, Statik prüfen' },
+  { label: 'Planung & Konzept', desc: 'Sanierungsumfang, Kostenrahmen, Förderantrag' },
+  { label: 'HBauO-Prüfung', desc: 'Genehmigungsfreiheit nach §62 oder vereinfachtes Verfahren' },
+  { label: 'Angebote einholen', desc: '3 Vergleichsangebote, Festpreise vereinbaren' },
+  { label: 'Umsetzung', desc: 'Koordination aller Gewerke, Bauleitung' },
+  { label: 'Abnahme & Doku', desc: 'Endkontrolle, Rechnungsprüfung, Förderabrechnung' },
+];
+---
+
+<BaseLayout
+  title="Dachsanierung Hamburg 2025/2026 – Kosten, Förderung, Genehmigung"
+  description="Dachsanierung Hamburg: Aktuelle Kosten 120–350 €/m², KfW 261 + BAFA Förderung, HBauO 2026 Genehmigungsregeln. Alles über Sanierung vs. DG-Ausbau in Hamburg."
+  canonical="/ratgeber/dachsanierung/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Dachsanierung Hamburg – Kosten, Förderung, Genehmigung', url: 'https://dachgeschossausbauhamburg.de/ratgeber/dachsanierung/' },
+  ]))} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Dachsanierung Hamburg 2025/2026 – Kosten, Förderung, Genehmigung',
+    description: 'Was kostet eine Dachsanierung in Hamburg? Welche Fördermittel gibt es? Wann ist eine Genehmigung nötig? Und wann lohnt sich die Kombination mit einem DG-Ausbau?',
+    datePublished: '2026-05-14',
+    dateModified: '2026-05-14',
+    author: 'Dachgeschossausbau Hamburg',
+    url: 'https://dachgeschossausbauhamburg.de/ratgeber/dachsanierung/',
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- HERO -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20 lg:py-28 items-start">
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · GEG 2024 · KfW 261 · HBauO 2026
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachsanierung Hamburg<br />
+            <span class="text-secondary">– Was kostet es, was lohnt sich?</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
+            Hamburger Dachflächen sind Wind, Regen und salzhaltiger Seeluft ausgesetzt. Das setzt dem Dach zu – und macht regelmäßige Sanierungen notwendig. Dieser Ratgeber zeigt aktuelle Kostenrichtwerte, Fördermöglichkeiten und die Entscheidung zwischen reiner Sanierung und Kombination mit einem DG-Ausbau.
+          </p>
+          <div class="space-y-3 text-sm text-white/70 mb-8">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>Hamburger Kostenrichtwerte 2025/2026: 120–350 €/m²</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>KfW 261 + BAFA Förderung: bis zu 25 % der Sanierungskosten</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>HBauO 2026: Sanierung oft genehmigungsfrei nach §62</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span>GEG 2024: verschärfte Pflichtwerte für Dachdämmung</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">120–350 €</div>
+              <div class="text-xs text-white/60 mt-1">pro m² Dachfläche</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">bis 25 %</div>
+              <div class="text-xs text-white/60 mt-1">Förderung möglich</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-2xl font-bold text-secondary">1–4 Wochen</div>
+              <div class="text-xs text-white/60 mt-1">reine Bauzeit</div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:sticky lg:top-28 lg:max-w-lg lg:ml-auto">
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 1: Was ist Dachsanierung -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Grundlagen"
+          heading="Was ist eine Dachsanierung – und was nicht?"
+          subheading="Der Begriff wird oft verwechselt. Hier die klare Abgrenzung."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Eine <strong>Dachsanierung</strong> umfasst alle Maßnahmen zur Wiederherstellung oder Verbesserung der Funktionsfähigkeit eines Daches – ohne dass zusätzlicher Wohnraum geschaffen wird. Das Ziel ist der Erhalt der Bausubstanz, die Verbesserung der Wärmedämmung und der Schutz vor Witterungseinflüssen. Eine Sanierung kann punktuell sein (Reparatur einzelner Schäden) oder umfassend (komplette Neueindeckung inklusive Dämmung).
+          </p>
+          <p>
+            Der <strong>Dachgeschossausbau</strong> (auch „Dachausbau Hamburg" genannt) geht einen Schritt weiter: Er schafft neuen, nutzbaren Wohnraum im Dachgeschoss. Das kann eine Erweiterung des bestehenden Dachgeschosses sein (Gauben, Aufstockung) oder die erstmalige Herrichtung einer unbewohnten Dachfläche zur Wohnnutzung. DG-Ausbau und Sanierung werden dabei häufig kombiniert, weil die Sanierungskosten ohnehin anfallen und der Ausbau Synergien nutzt.
+          </p>
+          <div class="p-5 bg-primary/5 border border-primary/20 rounded-xl my-6">
+            <h3 class="font-bold text-text-primary mb-2">Wann sprechen wir von „Dachsanierung Hamburg"?</h3>
+            <p class="text-sm text-text-secondary">In diesem Ratgeber geht es um die klassische <strong>punktuelle oder flächige Sanierung</strong> bestehender Dächer: Neueindeckung, Dämmung, Austausch von Fenstern und Gauben-Reparatur. Wenn Sie zusätzlich Wohnraum gewinnen wollen, lesen Sie parallel unseren Ratgeber zum <a href="/ratgeber/prozess/" class="text-primary underline hover:underline">DG-Ausbau in Hamburg</a>.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 2: Kosten Hamburg 2026 -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Kosten"
+          heading="Dachsanierung Hamburg – Kostenrichtwerte 2025/2026"
+          subheading="Hamburger Marktpreise. Die genauen Kosten hängen von Zustand, Dachform und Umfang ab."
+          headingLevel="h2"
+        />
+        <div class="overflow-x-auto rounded-xl border border-border mb-8">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th class="px-6 py-4 font-semibold text-left">Maßnahme</th>
+                <th class="px-6 py-4 font-semibold text-right">Einheit</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              {kostenRows.map((row, i) => (
+                <tr class={i % 2 === 0 ? 'bg-surface' : 'bg-bg'}>
+                  <td class="px-6 py-4 font-medium">{row.position}</td>
+                  <td class="px-6 py-4 text-right text-text-secondary">{row.einheit}</td>
+                  <td class="px-6 py-4 text-right font-mono">{row.vonPreis.toLocaleString('de-DE')} €</td>
+                  <td class="px-6 py-4 text-right font-mono">{row.bisPreis.toLocaleString('de-DE')} €</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p>
+            <strong>Beispiel:</strong> Für ein typisches Hamburger Satteldach (120 m² Dachfläche) ergeben sich folgende Richtwerte: Neueindeckung mit Zwischensparrendämmung: 18.000–30.000 €. Mit Aufsparrendämmung und Gauben: 35.000–60.000 €. Gerüst, Statik und Genehmigungen kommen zusätzlich hinzu (2.000–6.000 €).
+          </p>
+          <p>
+            Die Hamburger Preise liegen rund 10–15 Prozent über dem Bundesdurchschnitt. Das liegt an den spezifischen Anforderungen der maritimen Klimazone: higher Windlasten, erhöhte Feuchtigkeitsbelastung und die Verwendung besonders witterungsbeständiger Materialien. Im Gegenzug profitieren Hamburger Bauherren von der <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Aufhebung der Aufzugspflicht nach §37 Abs. 4 HBauO</a> – im Vergleich zu anderen Bundesländern spart das bei DG-Projekten bis zu 30.000 Euro.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 3: Wann lohnt sich Sanierung -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Entscheidungshilfe"
+          heading="Wann lohnt sich eine Dachsanierung – und wann ein DG-Ausbau?"
+          subheading="Die richtige Entscheidung hängt von Ziel, Zustand und Budget ab."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-3">Nur Sanierung – wenn...</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Das Dach ist undicht, aber das DG wird nicht genutzt</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Die Raumhöhe im DG reicht nicht für Wohnzwecke (unter 2,30 m)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Der Zustand des Dachstuhls lässt keinen Ausbau zu</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Sie den Wohnraum nicht erweitern wollen (Mietrecht, Erbschaftssteuer)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Das Gebäude ist denkmalgeschützt und Ausbau ist genehmigungstechnisch nicht möglich</span>
+              </li>
+            </ul>
+          </div>
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-3">Sanierung + DG-Ausbau – wenn...</h3>
+            <ul class="space-y-2 text-sm text-text-secondary">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Sie zusätzlichen Wohnraum gewinnen wollen (Familie, Homeoffice, Vermietung)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Die Raumhöhe im DG beträgt mindestens 2,30 m über 2/3 der Fläche</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Der Dachstuhl ist statisch ausreichend oder ertüchtigbar</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Sie die Hamburger Mietpreise für DG-Flächen nutzen wollen (Median 15,12 €/m²)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Sie von §35c EStG und KfW 261 gleichzeitig profitieren wollen</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-5 bg-primary/5 border border-primary/20 rounded-xl">
+          <p class="text-sm text-text-primary font-medium">
+            <strong>Tipp:</strong> Wenn eine Sanierung ohnehin ansteht, prüfen Sie frühzeitig, ob der DG-Ausbau wirtschaftlich Sinn ergibt. Die Kombination nutzt Synergien bei Gerüst, Dachöffnung und Gewerkekoordination – und die Gesamtkosten fallen günstiger aus als zwei getrennte Projekte. <a href="/kosten" class="text-primary underline hover:underline">Kostenvergleich Dachausbau Hamburg →</a>
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 4: GEG Pflichtwerte -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="GEG 2024"
+          heading="Das Gebäudesenergiegesetz (GEG) – Pflichtwerte für Hamburg"
+          subheading="Seit 2024 gelten verschärfte Anforderungen. Das ist für Ihre Sanierung relevant."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Das GEG 2024 hat die Pflichtwerte für die Dämmung bei Sanierungen verschärft. Das betrifft jede Dachsanierung, die über eine reine Reparatur hinausgeht – insbesondere, wenn die Dacheindeckung erneuert wird.
+          </p>
+          <p>
+            Für die <strong>Dachsanierung in Hamburg</strong> gelten nach GEG 2024 folgende Pflichtwerte: Bei Ersatz der gesamten Dachhaut muss die Dämmung einen U-Wert von maximal 0,20 W/(m²K) erreichen. Bei Erneuerung einzelner Bauteile (z.B. nur Dämmung ohne Neueindeckung) gelten Übergangswerte. Für Denkmäler und Gebäude in Erhaltungssatzungsgebieten gibt es Sonderregelungen, die niedrigere Pflichtwerte ermöglichen – hier berät das Denkmalschutzamt Hamburg in Abstimmung mit der Energieberatung.
+          </p>
+          <p>
+            <strong>Warum ist das für Hamburg besonders relevant?</strong> Die maritime Klimazone mit hoher Feuchtigkeitsbelastung und Windlast erfordert robuste Dämmsysteme. Aufsparrendämmung mit hochwertigen Mineralwolle- oder Holzfaser-Dämmstoffen erreichen die GEG-Pflichtwerte zuverlässig und bieten zusätzlich einen verbesserten sommerlichen Hitzeschutz – ein Thema, das in Hamburg mit seinen zunehmend heißen Sommern immer wichtiger wird.
+          </p>
+          <div class="overflow-x-auto rounded-xl border border-border my-6">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th class="px-6 py-4 font-semibold text-left">Dämmart</th>
+                  <th class="px-6 py-4 font-semibold text-right">U-Wert (W/m²K)</th>
+                  <th class="px-6 py-4 font-semibold text-right">GEG-konform?</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-surface">
+                  <td class="px-6 py-4 font-medium">Zwischensparrendämmung (20 cm Mineralwolle)</td>
+                  <td class="px-6 py-4 text-right font-mono">0,20–0,25</td>
+                  <td class="px-6 py-4 text-right text-primary font-medium">✓ Ja</td>
+                </tr>
+                <tr class="bg-bg">
+                  <td class="px-6 py-4 font-medium">Aufsparrendämmung (24 cm Holzfaser)</td>
+                  <td class="px-6 py-4 text-right font-mono">0,15–0,18</td>
+                  <td class="px-6 py-4 text-right text-primary font-medium">✓ Ja, optimal</td>
+                </tr>
+                <tr class="bg-surface">
+                  <td class="px-6 py-4 font-medium">Untersparrendämmung (12 cm)</td>
+                  <td class="px-6 py-4 text-right font-mono">0,30–0,40</td>
+                  <td class="px-6 py-4 text-right text-red-600 font-medium">✗ Nein (Zusatz)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            <strong>Energieberater in Hamburg:</strong> Die <a href="https://www.energie-effizienz-experten.de/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Expertenliste der Deutschen Energie-Agentur (dena)</a> zeigt zertifizierte Energieberater in Hamburg, die GEG-Nachweise erstellen und bei der Förderantragstellung unterstützen. Ein Energieberater ist Pflicht für KfW 261 und BAFA-Anträge.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 5: HBauO 2026 Genehmigung -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Genehmigung"
+          heading="Dachsanierung Hamburg – Wann brauche ich eine Genehmigung?"
+          subheading="HBauO 2026 vereinfacht vieles. Aber nicht alles ist genehmigungsfrei."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-6">
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <span class="w-8 h-8 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm font-bold flex-shrink-0">✓</span>
+              Genehmigungsfrei nach §62 HBauO 2026
+            </h3>
+            <p class="text-sm text-text-secondary">Diese Maßnahmen sind verfahrensfrei und können ohne Genehmigung durchgeführt werden:</p>
+            <ul class="mt-3 space-y-2 text-sm text-text-secondary grid grid-cols-1 md:grid-cols-2 gap-2">
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Neueindeckung ohne Veränderung der Dachform</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Zwischensparrendämmung von innen</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Fensteraustausch auf gleiche Größe</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Reparatur von Gauben (ohne Formänderung)</li>
+            </ul>
+          </div>
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <span class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center text-sm font-bold flex-shrink-0">!</span>
+              Vereinfachtes Verfahren nach §61 HBauO
+            </h3>
+            <p class="text-sm text-text-secondary">Diese Maßnahmen erfordern ein vereinfachtes Genehmigungsverfahren beim Bezirksamt:</p>
+            <ul class="mt-3 space-y-2 text-sm text-text-secondary grid grid-cols-1 md:grid-cols-2 gap-2">
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Gauben-Einbau (Schleppgaube bis 1/3 Dachseite)</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Aufsparrendämmung bei Veränderung der Dachrandprofile</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Dachflächenvergrößerung (Aufstockung)</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Nutzungsänderung (DG wird Wohnraum)</li>
+            </ul>
+          </div>
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+              <span class="w-8 h-8 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-sm font-bold flex-shrink-0">✗</span>
+              Reglementiertes Verfahren (Normal)
+            </h3>
+            <p class="text-sm text-text-secondary">Diese Maßnahmen erfordern das vollständige Genehmigungsverfahren:</p>
+            <ul class="mt-3 space-y-2 text-sm text-text-secondary grid grid-cols-1 md:grid-cols-2 gap-2">
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Fledermausgauben in Erhaltungssatzungsgebieten</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Änderung der Dachform (Walmdach statt Satteldach)</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Denkmalgeschützte Gebäude (§6 HDSchG)</li>
+              <li class="flex items-start gap-2"><svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Aufstockung um mehr als eine Vollgeschoss</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-text-secondary text-sm mt-6">
+          Die <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Hamburgische Bauordnung (HBauO) Volltext auf hamburg.de</a> enthält die genauen Regelungen zu §61 und §62. Bei Unsicherheit empfiehlt sich eine Vorab-Prüfung beim zuständigen Bezirksamt – das spart Zeit und Kosten.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 6: Förderung -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Förderung"
+          heading="Fördermittel für Dachsanierung in Hamburg"
+          subheading="KfW 261, BAFA und §35c EStG – so senken Sie die Kosten um bis zu 25 %."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-4">KfW 261 – Wohngebäude Kredit</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Tilgungszuschuss</span>
+                <span class="font-bold text-primary">bis 25 % der Kosten</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Darlehenshöhe</span>
+                <span class="font-bold">bis 150.000 € je WE</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Effizienzhaus-Standard</span>
+                <span class="font-bold">EH 70 Denkmal, EH 85</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Zinssatz</span>
+                <span class="font-bold text-green-600">ab 0,75 % effektiv</span>
+              </div>
+            </div>
+            <p class="text-text-secondary text-sm mt-4">
+              Förderfähig: Dämmung der Dachflächen, Erneuerung der Dachhaut inklusive Dämmung, Gauben-Einbau bei Sanierung. Voraussetzung: Energieberater-Gutachten. <a href="https://www.kfw.de/inlandsprogramm/ Wohngebäude/Kredite/261/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Mehr auf kfw.de →</a>
+            </p>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-4">BAFA Einzelmaßnahmen</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Zuschuss</span>
+                <span class="font-bold text-primary">bis 12.000 € je Maßnahme</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Fördersatz</span>
+                <span class="font-bold">15 % der Kosten</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Antragsweg</span>
+                <span class="font-bold">vor Maßnahmenbeginn</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Kumulierbar</span>
+                <span class="font-bold">mit KfW 261</span>
+              </div>
+            </div>
+            <p class="text-text-secondary text-sm mt-4">
+              Förderfähig: Dämmung der Dachflächen (Außendämmung, Zwischensparren), Fenster- und Türenaustausch im Dachbereich. Antragstellung über <a href="https://www.bafa.de/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">bafa.de</a> – vor Beginn aller Maßnahmen.
+            </p>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
+            <h3 class="text-lg font-bold text-text-primary mb-4">§35c EStG – Steuerabzug</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Abzug</span>
+                <span class="font-bold text-primary">20 % der Lohnkosten</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Max. Abzug</span>
+                <span class="font-bold">6.000 € pro Jahr</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Zeitraum</span>
+                <span class="font-bold">3 Jahre (18.000 €)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Voraussetzung</span>
+                <span class="font-bold"> Fachbetrieb-Rechnung</span>
+              </div>
+            </div>
+            <p class="text-text-secondary text-sm mt-4">
+              Gilt für alle Handwerkerleistungen bei der Dachsanierung – also Dämmung, Neueindeckung, Gauben-Einbau durch einen Hamburger Fachbetrieb. Die Rechnung muss eine Lohnkosten-Aufschlüsselung enthalten. <a href="/ratgeber/foerdermittel/" class="text-primary underline hover:underline">Alle Fördermittel im Überblick →</a>
+            </p>
+          </div>
+
+          <div class="p-6 bg-primary/5 rounded-xl border border-primary/20">
+            <h3 class="text-lg font-bold text-text-primary mb-4">Hamburger Energielotsen</h3>
+            <p class="text-text-secondary text-sm mb-3">
+              Die kostenlose Beratung der Hamburger Energielotsen hilft bei der Auswahl der richtigen Fördermittel-Kombination. Sie prüfen, welche Programme für Ihre Dachsanierung in Frage kommen und unterstützen bei der Antragstellung.
+            </p>
+            <p class="text-text-secondary text-sm">
+              <strong>Ansprechpartner:</strong> hamburg.de/energielotsen<br />
+              <strong>Kosten:</strong> Kostenlos für Hamburger Eigentümer
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 7: Ablauf 6 Schritte -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Ablauf"
+          heading="Dachsanierung Hamburg – in 6 Schritten zum Ziel"
+          subheading="Von der Bestandsanalyse bis zur Abrechnung der Fördermittel."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-4">
+          {schritte.map((step, i) => (
+            <div class="flex gap-6 p-5 bg-surface rounded-xl border border-border items-start">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg font-bold">
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-text-primary mb-1">{step.label}</h3>
+                <p class="text-sm text-text-secondary">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 8: Hamburger Besonderheiten -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Hamburg-Spezial"
+          heading="Hamburger Besonderheiten bei der Dachsanierung"
+          subheading="Was das maritime Klima, Denkmalschutz und Erhaltungssatzungen für Ihr Projekt bedeuten."
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="prose prose-lg max-w-none text-text-secondary space-y-4">
+          <p class="text-lg leading-relaxed font-medium text-text-primary">
+            Hamburg ist eine Küstenstadt – und das wirkt sich direkt auf die Anforderungen an Dächer aus. Wind, Regen, Salzluft und die hohe Luftfeuchtigkeit setzen Hamburger Dächer unter besonderen Druck.
+          </p>
+          <p>
+            <strong>Maritime Witterung:</strong> Die Windlasten in Hamburg sind höher als im Binnenland. Das betrifft die Befestigung der Dacheindeckung (Windlastzone 3 nach DIN 1055-4), die Wahl der Dachziegel und die Auslegung von Gauben. Ein erfahrener Hamburger Dachdecker kennt diese Anforderungen und plant sie von Anfang an ein.
+          </p>
+          <p>
+            <strong>Salzgehalt der Luft:</strong> In Stadtteilen nahe der Elbe und der Nordsee (Blankenese, Övelgönne, Rissen) ist die Salzbelastung der Luft erhöht. Das beschleunigt die Korrosion von Metalldächern und Dachrinnen. Für diese Lagen empfehlen sich Edelstahl oder titanzinkbeschichtetes Blech statt normaler verzinkter Stahl. Ein guter Hamburger Dachdecker berücksichtigt das in der Angebotserstellung.
+          </p>
+          <p>
+            <strong>Erhaltungssatzungen in Hamburg:</strong> Viele Hamburger Stadtteile – insbesondere Eppendorf, Eimsbüttel, Teile von Winterhude und die Altonaer Elbvororte – unterliegen Erhaltungssatzungen nach §172 BauGB. Das bedeutet: Änderungen am äußeren Erscheinungsbild des Gebäudes (Dachform, Gauben, Materialwahl) brauchen die Zustimmung des Bezirksamts. Für die reine Sanierung (Neueindeckung auf gleiche Form) ist das unproblematisch. Für Gauben-Einbau oder Aufsparrendämmung mit veränderten Dachrandprofilen ist die Abstimmung Pflicht.
+          </p>
+          <p>
+            <strong>Denkmalschutz:</strong> Hamburg hat rund 1.650 Baudenkmäler. Wenn Ihr Haus im Denkmalverzeichnis steht, gelten zusätzliche Regelungen nach §6 HDSchG. Die Sanierung kann in diesem Fall teurer werden (2.000–5.000 € Zusatzkosten für denkmalrechtliche Genehmigung und spezielle Materialien), aber auch steuerlich absetzbar sein (§8, §9 HDSchG). <a href="/ratgeber/denkmalschutz/" class="text-primary underline hover:underline">Mehr zum Denkmalschutz →</a>
+          </p>
+          <p>
+            <strong>Stellplatzpflicht:</strong> In einigen Hamburger Bezirken kann eine Dachsanierung mit DG-Ausbau eine Stellplatznachweispflicht auslösen. Diese Regelung unterscheidet sich nach Bezirk und ist bei der Planung zu berücksichtigen. Das zuständige Bezirksamt kann hierzu Auskunft geben.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SECTION 9: Interne Verlinkung -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Mehr erfahren"
+        heading="Zusammenhängende Themen"
+        headingLevel="h2"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/kosten" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachausbau Hamburg – Kosten im Detail</h3>
+            <p class="text-sm text-text-secondary">800–2.500 €/m², Gauben 8.000–25.000 €, Fördermittel im Überblick. Der vollständige Kostenüberblick für DG-Ausbau in Hamburg.</p>
+          </a>
+
+          <a href="/ratgeber/foerdermittel/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Alle Fördermittel im Überblick</h3>
+            <p class="text-sm text-text-secondary">KfW 261, BAFA, §35c EStG, IFB Hamburg: Welche Fördermittel gibt es, wie beantrage ich sie, was ist kumulierbar?</p>
+          </a>
+
+          <a href="/ratgeber/gauben/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgauben – Formen, Kosten, Genehmigung</h3>
+            <p class="text-sm text-text-secondary">Schleppgaube, Fledermausgaube, Trapezgaube: Welche Gaube eignet sich für Ihr Hamburger Dach? Kosten und Genehmigung.</p>
+          </a>
+
+          <a href="/ratgeber/denkmalschutz/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Denkmalschutz & DG-Ausbau</h3>
+            <p class="text-sm text-text-secondary">§6 HDSchG, Denkmalschutzamt Hamburg, Genehmigungsverfahren, Kosten und Förderung für denkmalgeschützte Gebäude.</p>
+          </a>
+
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026: Genehmigungsfreistellung §62</h3>
+            <p class="text-sm text-text-secondary">Was ändert sich ab 01.01.2026? Welche Vorhaben sind genehmigungsfrei, welche brauchen ein vereinfachtes Verfahren?</p>
+          </a>
+
+          <a href="/ratgeber/prozess/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">DG-Ausbau: Der vollständige Prozess</h3>
+            <p class="text-sm text-text-secondary">Von der Potenzialanalyse bis zur schlüsselfertigen Übergabe – alle 6 Phasen des DG-Ausbaus in Hamburg erklärt.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <SectionHeader
+          badge="Fragen & Antworten"
+          heading="Häufig gestellte Fragen zur Dachsanierung Hamburg"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="group bg-surface rounded-xl border border-border overflow-hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-5 text-text-primary font-semibold text-base hover:bg-primary/5 transition-colors list-none">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-text-secondary flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-5 pb-5 text-text-secondary text-sm leading-relaxed border-t border-border">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-primary text-white">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+          Dachsanierung Hamburg – Kostenlose Erstberatung
+        </h2>
+        <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+          Sie planen eine Dachsanierung in Hamburg? Wir begleiten Sie von der Bestandsanalyse bis zur Fördermittelabrechnung – mit festen Ansprechpartnern und Hamburger Marktkenntnis.
+        </p>
+        <LeadGenForm />
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
