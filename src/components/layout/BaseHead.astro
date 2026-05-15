@@ -9,12 +9,14 @@ interface Props {
 const { title, description, ogImage, canonical, noindex = false } = Astro.props;
 const siteUrl = 'https://www.dachgeschossausbauhamburg.de';
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
-const defaultOgImage = `${siteUrl}/og-image.jpg`;
+const defaultOgImage = `${siteUrl}/logo.png`;
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="canonical" href={canonicalUrl} />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+<link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon.png" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Primary Meta -->

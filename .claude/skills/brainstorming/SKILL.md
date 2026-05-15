@@ -36,7 +36,7 @@ Transform rough ideas into fully-formed designs through structured questioning a
 ### Phase 4: Worktree Setup (for implementation)
 When design is approved and implementation will follow:
 - Announce: "I'm using the Using Git Worktrees skill to set up an isolated workspace."
-- Switch to skills/collaboration/using-git-worktrees
+- Switch to `using-git-worktrees` skill
 - Follow that skill's process for directory selection, safety verification, and setup
 - Return here when worktree ready
 
@@ -45,7 +45,7 @@ Ask: "Ready to create the implementation plan?"
 
 When your human partner confirms (any affirmative response):
 - Announce: "I'm using the Writing Plans skill to create the implementation plan."
-- Switch to skills/collaboration/writing-plans skill
+- Switch to `writing-plans` skill
 - Create detailed plan in the worktree
 
 ## When to Revisit Earlier Phases
@@ -61,10 +61,10 @@ When your human partner confirms (any affirmative response):
 ## Related Skills
 
 **During exploration:**
-- When approaches have genuine trade-offs: skills/architecture/preserving-productive-tensions
+- When approaches have genuine trade-offs: `preserving-productive-tensions`
 
 **Before proposing changes to existing code:**
-- Understand why it exists: skills/research/tracing-knowledge-lineages
+- Understand why it exists: `tracing-knowledge-lineages`
 
 ## Remember
 - One question per message during Phase 1
