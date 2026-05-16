@@ -42,7 +42,14 @@ export function generateLocalBusinessSchema() {
     "priceRange": "€€",
     "sameAs": [
       "https://www.facebook.com/dachgeschossausbauhamburg",
-      "https://www.instagram.com/dachgeschossausbauhamburg"
+      "https://www.instagram.com/dachgeschossausbauhamburg",
+      "https://dachgeschossausbauhamburg.blogspot.com/",
+      "https://dachgeschossausbauhamburg.wordpress.com/",
+      "https://sites.google.com/view/dachgeschossausbauhamburg/home",
+      "https://hamburger.branchen.online/eintrag/dachgeschossausbau-hamburg-d8k4l",
+      "https://dachgeschossausbauhamburg.blogspot.com/2026/05/dachsanierung-hamburg-dach-prufen.html",
+      "https://dachsanierunghamburg.z1.web.core.windows.net/",
+      "https://claude.ai/public/artifacts/5607f23d-abc2-4dce-b016-371733f72ee5"
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
