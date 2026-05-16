@@ -26,11 +26,11 @@ const faqs = [
   },
   {
     question: 'Dachsanierung oder Dachgeschossausbau – was ist besser?',
-    answer: 'Die Entscheidung hängt von Ihrem Ziel ab: Wenn Sie rein die Bausubstanz sichern wollen (Feuchteschutz, Wärmedämmung, Werterhalt), ist eine Dachsanierung ohne Ausbau ausreichend und günstiger. Wenn Sie zusätzlich neuen Wohnraum gewinnen wollen, ist der DG-Ausbau die wirtschaftlichere Wahl – denn die Sanierungskosten fallen ohnehin an, und der Ausbau schafft nutzbare Fläche. In Hamburg gelten für beide Vorhaben unterschiedliche Genehmigungsregeln: Die Sanierung allein ist oft genehmigungsfrei nach §62 HBauO 2026, der DG-Ausbau kann ein vereinfachtes Verfahren nach §61 erfordern.',
+    answer: 'Die Entscheidung hängt von Ihrem Ziel ab: Wenn Sie rein die Bausubstanz sichern wollen (Feuchteschutz, Wärmedämmung, Werterhalt), ist eine Dachsanierung ohne Ausbau ausreichend und günstiger. Wenn Sie zusätzlich neuen Wohnraum gewinnen wollen, ist der DG-Ausbau die wirtschaftlichere Wahl – denn die Sanierungskosten fallen ohnehin an, und der Ausbau schafft nutzbare Fläche. In Hamburg gelten für beide Vorhaben unterschiedliche Genehmigungsregeln: Die Sanierung allein ist oft genehmigungsfrei nach §62 HBauO 2026, der DG-Ausbau kann ein vereinfachtes Verfahren nach §63 HBauO 2026 erfordern.',
   },
   {
     question: 'Welche Fördermittel gibt es für Dachsanierung in Hamburg?',
-    answer: 'Für die energetische Dachsanierung in Hamburg gibt es drei Förderwege: KfW 261 (Wohngebäude-Kredit) mit Tilgungszuschuss bis 25 % der Kosten und zinsgünstigen Darlehen bis 150.000 € je Wohneinheit. BAFA-Einzelmaßnahmen mit direkten Zuschüssen für Dämmmaßnahmen an der Dachfläche (bis zu 12.000 € je Maßnahme). §35c EStG für handwerkliche Handwerkerkosten – 20 % der Lohnkosten direkt von der Steuerlast absetzbar. Die Hamburger Energielotsen bieten eine kostenlose Vor-Ort-Beratung zu Fördermitteln und Sanierungsfahrplänen.',
+    answer: 'Für die energetische Dachsanierung in Hamburg gibt es vier Förderwege: KfW 261 (Wohngebäude-Kredit) mit Tilgungszuschuss bis 25 % der Kosten und zinsgünstigen Darlehen bis 150.000 € je Wohneinheit. BAFA-Einzelmaßnahmen mit direkten Zuschüssen für Dämmmaßnahmen an der Dachfläche (bis zu 4.500 € je Maßnahme, bis 12.000 € mit iSFP). §35c EStG für energetische Modernisierungsmaßnahmen – 20 % aller Kosten (Material + Lohn) direkt von der Steuerlast absetzbar, max. 40.000 € über 3 Jahre (7 % + 7 % + 6 %). IFB Hamburg Wärmeschutz-Zuschüsse mit bis zu 58,30 €/m² für Steildachdämmung. Die Hamburger Energielotsen bieten eine kostenlose Vor-Ort-Beratung zu Fördermitteln und Sanierungsfahrplänen.',
   },
   {
     question: 'Wie lange dauert eine Dachsanierung in Hamburg?',
@@ -295,7 +295,7 @@ const schritte = [
         <SectionHeader
           badge="GEG 2024"
           heading="Das Gebäudesenergiegesetz (GEG) – Pflichtwerte für Hamburg"
-          subheading="Seit 2024 gelten verschärfte Anforderungen. Das ist für Ihre Sanierung relevant."
+          subheading="Seit 2024 gelten verschärfte Anforderungen. Das ist für Ihre Sanierung relevant. U-Wert ≤0,20 W/(m²K) bei Neudeckung."
           headingLevel="h2"
           align="left"
         />
@@ -304,7 +304,10 @@ const schritte = [
             Das GEG 2024 hat die Pflichtwerte für die Dämmung bei Sanierungen verschärft. Das betrifft jede Dachsanierung, die über eine reine Reparatur hinausgeht – insbesondere, wenn die Dacheindeckung erneuert wird.
           </p>
           <p>
-            Für die <strong>Dachsanierung in Hamburg</strong> gelten nach GEG 2024 folgende Pflichtwerte: Bei Ersatz der gesamten Dachhaut muss die Dämmung einen U-Wert von maximal 0,20 W/(m²K) erreichen. Bei Erneuerung einzelner Bauteile (z.B. nur Dämmung ohne Neueindeckung) gelten Übergangswerte. Für Denkmäler und Gebäude in Erhaltungssatzungsgebieten gibt es Sonderregelungen, die niedrigere Pflichtwerte ermöglichen – hier berät das Denkmalschutzamt Hamburg in Abstimmung mit der Energieberatung.
+            Für die <strong>Dachsanierung in Hamburg</strong> gelten nach <a href="https://www.geg-rechner.de/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">GEG 2024</a> folgende Pflichtwerte: Bei Ersatz der gesamten Dachhaut muss die Dämmung einen U-Wert von maximal <strong>0,20 W/(m²K)</strong> erreichen (10-%-Regel). Bei bestehender Nachrüstpflicht (Dach ungedämmt): U-Wert max. <strong>0,24 W/(m²K)</strong>. Für Denkmäler und Gebäude in Erhaltungssatzungsgebieten gibt es Sonderregelungen mit niedrigeren Pflichtwerten – hier berät das <a href="https://www.hamburg.de/denkmalschutz/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Denkmalschutzamt Hamburg</a> in Abstimmung mit der Energieberatung.
+          </p>
+          <p>
+            <strong>PV-Pflicht in Hamburg:</strong> Seit dem 1. Januar 2023 müssen bei grundlegender Dachsanierung oder DG-Ausbau Photovoltaik-Anlagen installiert werden – auch auf Dächern mit einer nutzbaren Fläche von mindestens 50 m². Die <a href="https://www.hamburg.de/pv-pflicht/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Hamburger PV-Pflicht</a> gilt seit 01.01.2024 für alle Neubauten und grundlegenden Dachsanierungen. Prüfen Sie frühzeitig, ob eine PV-Installation auf Ihrem Dach sinnvoll ist – das reduziert die Energiekosten langfristig.
           </p>
           <p>
             <strong>Warum ist das für Hamburg besonders relevant?</strong> Die maritime Klimazone mit hoher Feuchtigkeitsbelastung und Windlast erfordert robuste Dämmsysteme. Aufsparrendämmung mit hochwertigen Mineralwolle- oder Holzfaser-Dämmstoffen erreichen die GEG-Pflichtwerte zuverlässig und bieten zusätzlich einen verbesserten sommerlichen Hitzeschutz – ein Thema, das in Hamburg mit seinen zunehmend heißen Sommern immer wichtiger wird.
@@ -315,14 +318,14 @@ const schritte = [
                 <tr class="bg-primary text-white">
                   <th class="px-6 py-4 font-semibold text-left">Dämmart</th>
                   <th class="px-6 py-4 font-semibold text-right">U-Wert (W/m²K)</th>
-                  <th class="px-6 py-4 font-semibold text-right">GEG-konform?</th>
+                  <th class="px-6 py-4 font-semibold text-right">GEG 2024-konform?</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-border">
                 <tr class="bg-surface">
-                  <td class="px-6 py-4 font-medium">Zwischensparrendämmung (20 cm Mineralwolle)</td>
-                  <td class="px-6 py-4 text-right font-mono">0,20–0,25</td>
-                  <td class="px-6 py-4 text-right text-primary font-medium">✓ Ja</td>
+                  <td class="px-6 py-4 font-medium">Zwischensparrendämmung (24 cm Mineralwolle λ 0,035)</td>
+                  <td class="px-6 py-4 text-right font-mono">0,15–0,17</td>
+                  <td class="px-6 py-4 text-right text-primary font-medium">✓ Ja, optimal</td>
                 </tr>
                 <tr class="bg-bg">
                   <td class="px-6 py-4 font-medium">Aufsparrendämmung (24 cm Holzfaser)</td>
@@ -332,7 +335,7 @@ const schritte = [
                 <tr class="bg-surface">
                   <td class="px-6 py-4 font-medium">Untersparrendämmung (12 cm)</td>
                   <td class="px-6 py-4 text-right font-mono">0,30–0,40</td>
-                  <td class="px-6 py-4 text-right text-red-600 font-medium">✗ Nein (Zusatz)</td>
+                  <td class="px-6 py-4 text-right text-yellow-600 font-medium">⚠ Nur Zusatzdämmung</td>
                 </tr>
               </tbody>
             </table>
@@ -373,7 +376,7 @@ const schritte = [
           <div class="p-6 bg-surface rounded-xl border border-border">
             <h3 class="text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
               <span class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center text-sm font-bold flex-shrink-0">!</span>
-              Vereinfachtes Verfahren nach §61 HBauO
+              Vereinfachtes Verfahren nach §63 HBauO 2026
             </h3>
             <p class="text-sm text-text-secondary">Diese Maßnahmen erfordern ein vereinfachtes Genehmigungsverfahren beim Bezirksamt:</p>
             <ul class="mt-3 space-y-2 text-sm text-text-secondary grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -398,7 +401,7 @@ const schritte = [
           </div>
         </div>
         <p class="text-text-secondary text-sm mt-6">
-          Die <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Hamburgische Bauordnung (HBauO) Volltext auf hamburg.de</a> enthält die genauen Regelungen zu §61 und §62. Bei Unsicherheit empfiehlt sich eine Vorab-Prüfung beim zuständigen Bezirksamt – das spart Zeit und Kosten.
+          Die <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Hamburgische Bauordnung (HBauO) Volltext auf hamburg.de</a> enthält die genauen Regelungen zu §62 (genehmigungsfrei), §63 (vereinfachtes Verfahren) und §64 (normales Verfahren). Bei Unsicherheit empfiehlt sich eine Vorab-Prüfung beim zuständigen Bezirksamt – das spart Zeit und Kosten.
         </p>
       </div>
     </Container>
@@ -418,10 +421,13 @@ const schritte = [
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="p-6 bg-surface rounded-xl border border-border">
             <h3 class="text-lg font-bold text-text-primary mb-4">KfW 261 – Wohngebäude Kredit</h3>
+            <div class="bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-4">
+              <p class="text-xs text-red-700 font-medium">⚠ KfW 261 Budget 2026 um 58 % gekürzt – Anträge frühzeitig stellen!</p>
+            </div>
             <div class="space-y-3 text-sm">
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Tilgungszuschuss</span>
-                <span class="font-bold text-primary">bis 25 % der Kosten</span>
+                <span class="font-bold text-primary">bis 45 % der Kosten</span>
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Darlehenshöhe</span>
@@ -429,7 +435,7 @@ const schritte = [
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Effizienzhaus-Standard</span>
-                <span class="font-bold">EH 70 Denkmal, EH 85</span>
+                <span class="font-bold">EH 70 Denkmal, EH 85, EH 100</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-text-secondary">Zinssatz</span>
@@ -437,7 +443,7 @@ const schritte = [
               </div>
             </div>
             <p class="text-text-secondary text-sm mt-4">
-              Förderfähig: Dämmung der Dachflächen, Erneuerung der Dachhaut inklusive Dämmung, Gauben-Einbau bei Sanierung. Voraussetzung: Energieberater-Gutachten. <a href="https://www.kfw.de/inlandsprogramm/ Wohngebäude/Kredite/261/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Mehr auf kfw.de →</a>
+              Förderfähig: Dämmung der Dachflächen, Erneuerung der Dachhaut inklusive Dämmung, Gauben-Einbau bei Sanierung. Voraussetzung: Energieberater-Gutachten. <a href="https://www.kfw.de/inlandsprogramm/Wohngeb%C3%A4ude/Kredite/261/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Mehr auf kfw.de/261 →</a>
             </p>
           </div>
 
@@ -446,23 +452,23 @@ const schritte = [
             <div class="space-y-3 text-sm">
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Zuschuss</span>
-                <span class="font-bold text-primary">bis 12.000 € je Maßnahme</span>
+                <span class="font-bold text-primary">bis 4.500 € je Maßnahme</span>
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Fördersatz</span>
-                <span class="font-bold">15 % der Kosten</span>
+                <span class="font-bold">15 % der Kosten (max. 30.000 €)</span>
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">iSFP-Bonus</span>
+                <span class="font-bold">+5 % (bis 12.000 € mit Sanierungsfahrplan)</span>
+              </div>
+              <div class="flex justify-between items-center">
                 <span class="text-text-secondary">Antragsweg</span>
                 <span class="font-bold">vor Maßnahmenbeginn</span>
               </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-secondary">Kumulierbar</span>
-                <span class="font-bold">mit KfW 261</span>
-              </div>
             </div>
             <p class="text-text-secondary text-sm mt-4">
-              Förderfähig: Dämmung der Dachflächen (Außendämmung, Zwischensparren), Fenster- und Türenaustausch im Dachbereich. Antragstellung über <a href="https://www.bafa.de/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">bafa.de</a> – vor Beginn aller Maßnahmen.
+              Förderfähig: Dämmung der Dachflächen (Außendämmung, Zwischensparren), Fenster- und Türenaustausch im Dachbereich. Antragstellung über <a href="https://www.bafa.de/DE/Energie/Effiziente_Gebaeude/BEG_Einzelmassnahmen/beg_einzelmassnahmen_node.html" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">bafa.de →</a> – vor Beginn aller Maßnahmen.
             </p>
           </div>
 
@@ -471,34 +477,59 @@ const schritte = [
             <div class="space-y-3 text-sm">
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Abzug</span>
-                <span class="font-bold text-primary">20 % der Lohnkosten</span>
+                <span class="font-bold text-primary">20 % aller Kosten (Material + Lohn)</span>
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
                 <span class="text-text-secondary">Max. Abzug</span>
-                <span class="font-bold">6.000 € pro Jahr</span>
+                <span class="font-bold">40.000 € über 3 Jahre</span>
               </div>
               <div class="flex justify-between items-center border-b border-border pb-2">
-                <span class="text-text-secondary">Zeitraum</span>
-                <span class="font-bold">3 Jahre (18.000 €)</span>
+                <span class="text-text-secondary">Zeitliche Aufteilung</span>
+                <span class="font-bold">7 % + 7 % + 6 % (Lohnkosten)</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-text-secondary">Voraussetzung</span>
-                <span class="font-bold"> Fachbetrieb-Rechnung</span>
+                <span class="font-bold">Fachbetrieb-Rechnung mit Lohnkosten-Aufschlüsselung</span>
               </div>
             </div>
             <p class="text-text-secondary text-sm mt-4">
-              Gilt für alle Handwerkerleistungen bei der Dachsanierung – also Dämmung, Neueindeckung, Gauben-Einbau durch einen Hamburger Fachbetrieb. Die Rechnung muss eine Lohnkosten-Aufschlüsselung enthalten. <a href="/ratgeber/foerdermittel/" class="text-primary underline hover:underline">Alle Fördermittel im Überblick →</a>
+              Gilt für energetische Modernisierungsmaßnahmen – also Dämmung, Neueindeckung, Gauben-Einbau durch einen Hamburger Fachbetrieb. Achtung: §35c EStG ist <strong>nicht kumulierbar mit BAFA oder KfW für dieselbe Maßnahme</strong>. Rechnungen müssen Lohn- und Materialkosten separat ausweisen. <a href="/ratgeber/foerdermittel/" class="text-primary underline hover:underline">Alle Fördermittel im Überblick →</a>
             </p>
           </div>
 
           <div class="p-6 bg-primary/5 rounded-xl border border-primary/20">
+            <h3 class="text-lg font-bold text-text-primary mb-4">IFB Hamburg – Landesförderung</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Wärmeschutz-Zuschuss Steildach</span>
+                <span class="font-bold text-primary">43,50 €/m²</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Wärmeschutz-Zuschuss Flachdach</span>
+                <span class="font-bold text-primary">58,30 €/m²</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-border pb-2">
+                <span class="text-text-secondary">Modernisierungsdarlehen</span>
+                <span class="font-bold">bis 25.000 € je Wohneinheit</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Kumulierung</span>
+                <span class="font-bold">mit KfW/BAFA möglich</span>
+              </div>
+            </div>
+            <p class="text-text-secondary text-sm mt-4">
+              Die IFB Hamburg (Investitionsbank Hamburg) bietet Hamburger Eigentümern zinsgünstige Darlehen und Zuschüsse für energetische Sanierungen. Antragstellung über <a href="https://www.ifbhh.de/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">ifbhh.de →</a>
+            </p>
+          </div>
+
+          <div class="p-6 bg-surface rounded-xl border border-border">
             <h3 class="text-lg font-bold text-text-primary mb-4">Hamburger Energielotsen</h3>
             <p class="text-text-secondary text-sm mb-3">
-              Die kostenlose Beratung der Hamburger Energielotsen hilft bei der Auswahl der richtigen Fördermittel-Kombination. Sie prüfen, welche Programme für Ihre Dachsanierung in Frage kommen und unterstützen bei der Antragstellung.
+              Die kostenlose Vor-Ort-Beratung der Hamburger Energielotsen hilft bei der Auswahl der richtigen Fördermittel-Kombination. Sie prüfen, welche Programme für Ihre Dachsanierung in Frage kommen, und unterstützen bei der Antragstellung. <a href="https://www.hamburg.de/energielotsen/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Termin buchen auf hamburg.de →</a>
             </p>
             <p class="text-text-secondary text-sm">
-              <strong>Ansprechpartner:</strong> hamburg.de/energielotsen<br />
-              <strong>Kosten:</strong> Kostenlos für Hamburger Eigentümer
+              <strong>Kosten:</strong> Kostenlos für Hamburger Eigentümer<br />
+              <strong>Angebot:</strong> Beratung zu Fördermitteln, Sanierungsfahrpläne, Energieberater-Vermittlung
             </p>
           </div>
         </div>
