@@ -23,8 +23,9 @@ const timeframes = [
   </p>
 
   <form action="https://api.web3forms.com/submit" method="POST" id="leadgen-form" class="space-y-3">
-    <input type="hidden" name="access_key" value="DEIN_WEB3FORMS_KEY" />
+    <input type="hidden" name="access_key" value="03797b00-547c-4cf8-8cdb-109a618abe0c" />
     <input type="hidden" name="subject" value="Leadgen Hamburg – dachgeschossausbauhamburg.de" />
+    <input type="hidden" name="reply_to" id="reply_to" value="" />
 
     <!-- Name -->
     <div>
@@ -135,6 +136,14 @@ const timeframes = [
       btnLoading.classList.remove('hidden');
       btnLoading.classList.add('flex');
       submitBtn.disabled = true;
+
+      // reply_to für Web3Forms setzen
+      const emailInput = document.getElementById('email') as HTMLInputElement | null;
+      const replyToField = document.getElementById('reply_to') as HTMLInputElement | null;
+      if (emailInput && replyToField) {
+        replyToField.value = emailInput.value;
+      }
+
       try {
         const res = await fetch(form.action, {
           method: 'POST',
