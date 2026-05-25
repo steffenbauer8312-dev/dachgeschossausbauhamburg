@@ -76,7 +76,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Was passiert, wenn mein Dachgeschoss den Brandschutz-Anforderungen nicht genügt?",
-    answer: "Das Brandschutzrecht schreibt bei DG-Ausbau bestimmte Trennwand- und Rettungsweg-Anforderungen vor. Die neuen Abweichungstatbestände (§69 Abs. 1 Nr. 3 HBauO) ermöglichen im Bestand Ausnahmen, wenn das Vorhaben ansonsten nicht umsetzbar wäre und die öffentliche Sicherheit nicht gefährdet ist.",
+    answer: "Das Brandschutzrecht schreibt bei DG-Ausbau bestimmte Trennwand- und Rettungsweg-Anforderungen vor. Die Abweichungstatbestände (§69 Abs. 1 Nr. 3 HBauO) ermöglichen im Bestand Ausnahmen, wenn das Vorhaben ansonsten nicht umsetzbar wäre und die öffentliche Sicherheit nicht gefährdet wird.",
     links: [
       { label: "§69 Abweichungstatbestand im Detail", href: "/genehmigung/" },
     ],
@@ -99,7 +99,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Was ist die Digitale Baugenehmigung Hamburg?",
-    answer: "Ab 2026 können Bauanträge in Hamburg über den länderübergreifenden Online-Dienst Digitale Baugenehmigung eingereicht werden. Das Verfahren ist komplett digital – von der Antragstellung bis zur Bescheidzustellung. Das spart Zeit und Papierkram.",
+    answer: "Ab 2026 können Bauanträge in Hamburg über den länderübergreifenden Online-Dienst Digitale Baugenehmigung eingereicht werden. Das Verfahren läuft komplett digital – von der Antragstellung bis zur Bescheidzustellung.",
     links: [
       { label: "Digitales Genehmigungsverfahren", href: "/genehmigung/" },
     ],
@@ -114,7 +114,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Was kostet eine Fledermausgaube in Hamburg?",
-    answer: "Eine Fledermausgaube kostet in Hamburg zwischen 15.000 und 25.000 Euro. Der höhere Preis gegenüber einer Schleppgaube resultiert aus der aufwendigeren Konstruktion und Statik. Dafür bietet sie bei flachgeneigten Dächern deutlich mehr Stehhöhe.",
+    answer: "Eine Fledermausgaube kostet in Hamburg zwischen 15.000 und 25.000 Euro. Der höhere Preis gegenüber einer Schleppgaube kommt durch die aufwendigere Konstruktion und Statik. Dafür bietet sie bei flachgeneigten Dächern deutlich mehr Stehhöhe.",
     links: [
       { label: "Gauben-Typen und Kosten im Vergleich", href: "/ratgeber/gauben/" },
       { label: "Kostenübersicht", href: "/kosten/" },
@@ -129,7 +129,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Was ist besser: Aufsparren- oder Zwischensparrendämmung?",
-    answer: "Die Aufsparrendämmung bietet die höchste Dämmleistung und keine Wärmebrücken an den Sparren. Sie erfordert jedoch eine komplette Dacheindeckung. Die Zwischensparrendämmung ist günstiger und bei Bestandssanierungen bevorzugt. Welche Lösung die richtige ist, hängt von Ihrem Dach und Budget ab.",
+    answer: "Die Aufsparrendämmung bietet die höchste Dämmleistung und keine Wärmebrücken an den Sparren. Sie erfordert jedoch eine komplette Dacheindeckung. Die Zwischensparrendämmung ist günstiger und bei Bestandssanierungen bevorzugt.",
     links: [
       { label: "Dämmung im Detail: Arten, Preise, Förderung", href: "/leistungen/daemmung/" },
       { label: "Förderung für Dämm-Maßnahmen", href: "/ratgeber/foerdermittel/" },
@@ -153,7 +153,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Bringt ein DG-Ausbau wirklich etwas für den Immobilienwert?",
-    answer: "Ja. Ein ausgebautes Dachgeschoss zählt zur Wohnfläche nach DIN 277 und steigert den Immobilienwert nachweislich. In Hamburg liegen die Kaufpreisaufschläge für DG-Wohnungen bei 7 bis 15 Prozent des Gesamtwerts – je nach Lage und Ausstattung.",
+    answer: "Ja. Ein ausgebautes Dachgeschoss zählt zur Wohnfläche nach DIN 277 und steigert den Immobilienwert. In Hamburg liegen die Kaufpreisaufschläge für DG-Wohnungen bei 7 bis 15 Prozent des Gesamtwerts – je nach Lage und Ausstattung.",
     links: [
       { label: "Rendite und Wertsteigerung als Vermieter", href: "/ratgeber/vermieter/" },
     ],
@@ -181,7 +181,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Darf ich als Mieter ein Dachgeschoss ausbauen lassen?",
-    answer: "Als Mieter benötigen Sie die schriftliche Zustimmung des Vermieters für bauliche Maßnahmen im Dachgeschoss. Der Vermieter kann eine angemessene Mieterhöhung nach dem DG-Ausbau verlangen. Wir beraten both Seiten.",
+    answer: "Als Mieter benötigen Sie die schriftliche Zustimmung des Vermieters für bauliche Maßnahmen im Dachgeschoss. Der Vermieter kann eine angemessene Mieterhöhung nach dem DG-Ausbau verlangen. Wir beraten beide Seiten.",
     links: [
       { label: "Was Vermieter wissen müssen", href: "/ratgeber/vermieter/" },
     ],
@@ -203,7 +203,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Sind Dachgeschossfenster von VELUX oder ROTO besser?",
-    answer: "VELUX ist Marktführer mit dem breitesten Zubehörsortiment und Smart-Home-Integration. ROTO punktet mit robustem Beschlag und gutem Preis-Leistungs-Verhältnis. FAKRO bietet außergewöhnliche Größen und Formate. Wir beraten herstellerunabhängig.",
+    answer: "VELUX ist Marktführer mit dem breitesten Zubehörsortiment und Smart-Home-Integration. ROTO punktet mit robustem Beschlag und gutem Preis-Leistungs-Verhältnis. FAKRO bietet außergewöhnliche Größen und Formate.",
     links: [
       { label: "Gauben und Dachfenster im Vergleich", href: "/ratgeber/gauben/" },
     ],
@@ -241,7 +241,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Gibt es in Hamburg besondere Regelungen für den Denkmalschutz?",
-    answer: "Ja. Gebäude unter Denkmalschutz oder in Erhaltungssatzungsgebieten unterliegen besonderen Vorschriften. Gaubenform, Dacheindeckung und Fensterteilung können vorgeschrieben sein. Fledermausgauben statt Schleppgauben sind in vielen Altbaugebieten Pflicht.",
+    answer: "Ja. Gebäude unter Denkmalschutz oder in Erhaltungssatzungsgebieten unterliegen besonderen Vorschriften. Gaubenform, Dacheindeckung und Fensterteilung können vorgeschrieben sein. In einigen Altbaugebieten bevorzugen die Bezirksämter Fledermausgauben über Schleppgauben.",
     links: [
       { label: "Denkmalschutz-Ratgeber für Hamburg", href: "/ratgeber/denkmalschutz/" },
       { label: "Eppendorf – Denkmalschutz beachten", href: "/standorte/eppendorf/" },
@@ -256,7 +256,7 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     question: "Warum ist Hamburg besonders geeignet für DG-Ausbau?",
-    answer: "Hamburg hat einen der angespanntesten Wohnungsmärkte Deutschlands. Die Miet- und Kaufpreise machen den DG-Ausbau wirtschaftlich besonders attraktiv. Gleichzeitig hat die Stadt 2018 und 2026 die Vorschriften spürbar vereinfacht.",
+    answer: "Hamburg hat einen der angespanntesten Wohnungsmärkte Deutschlands. Die Miet- und Kaufpreise machen den DG-Ausbau wirtschaftlich attraktiv. Die Stadt hat 2018 und 2026 die Vorschriften für Ein- und Zweifamilienhäuser vereinfacht.",
     links: [
       { label: "Alle Hamburger Stadtteile im Vergleich", href: "/ratgeber/vermieter/" },
       { label: "Prozess-Guide", href: "/ratgeber/prozess/" },
