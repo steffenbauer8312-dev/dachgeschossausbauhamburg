@@ -72,7 +72,7 @@ const breadcrumbItems = [
           --fr-radius-md: 8px;
           --fr-radius-lg: 12px;
           --fr-font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-          font-family: var(--fr-font);
+          font-family: var(--fr-font) !important;
           color: var(--fr-text-primary);
           background: var(--fr-bg-secondary);
           border-radius: var(--fr-radius-lg);
@@ -136,7 +136,7 @@ const breadcrumbItems = [
         .fr-info-banner { font-size: 12px; color: var(--fr-primary-dark); background: var(--fr-primary-bg); border-radius: var(--fr-radius-md); padding: 8px 12px; margin-bottom: 12px; line-height: 1.5; border: 0.5px solid rgba(61,61,61,0.2); display: flex; gap: 6px; align-items: flex-start; }
         .fr-info-banner svg { flex-shrink: 0; margin-top: 1px; }
         .fr-tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
-        .fr-tab { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--fr-border-strong); cursor: pointer; background: transparent; color: var(--fr-text-secondary); font-family: var(--fr-font); transition: background 0.15s; }
+        .fr-tab { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--fr-border-strong); cursor: pointer; background: transparent; color: var(--fr-text-secondary); font-family: var(--fr-font) !important; transition: background 0.15s; }
         .fr-tab:hover { background: var(--fr-bg-secondary); }
         .fr-tab.active { background: var(--fr-text-primary); color: var(--fr-bg-primary); border-color: var(--fr-text-primary); }
         .fr-prog-list { display: flex; flex-direction: column; gap: 8px; }
@@ -170,6 +170,9 @@ const breadcrumbItems = [
         }
       </style>
 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
       <div class="max-w-3xl mx-auto">
         <div class="fr-wrap">
 
