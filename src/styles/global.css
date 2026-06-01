@@ -104,4 +104,28 @@
   .hamburger-line {
     @apply block w-6 h-0.5 bg-current transition-all;
   }
+
+  /* Content Area Styling */
+  .content-area h2 {
+    @apply text-2xl font-bold text-text-primary mt-12 mb-6;
+  }
+  .content-area h3 {
+    @apply text-xl font-semibold text-text-primary mt-8 mb-4;
+  }
+  .content-area p {
+    @apply text-text-secondary leading-relaxed mb-6;
+  }
+  .content-area ul,
+  .content-area ol {
+    @apply space-y-3 my-6 text-text-secondary;
+  }
+  .content-area li {
+    @apply leading-relaxed;
+  }
+  .content-area ul li {
+    @apply list-disc pl-6;
+  }
+  .content-area ol li {
+    @apply list-decimal pl-6;
+  }
 }

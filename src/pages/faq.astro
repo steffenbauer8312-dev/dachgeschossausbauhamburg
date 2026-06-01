@@ -33,7 +33,7 @@ const faqSchema = JSON.stringify(generateFaqSchema(FAQ_DATA));
   <!-- Hero -->
   <section class="bg-bg py-20">
     <Container>
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto content-area">
         <SectionHeader
           badge="Fragen & Antworten"
           heading="40+ Fragen zum Dachgeschossausbau in Hamburg"
@@ -47,7 +47,7 @@ const faqSchema = JSON.stringify(generateFaqSchema(FAQ_DATA));
   <!-- FAQ Accordion -->
   <section class="pb-20">
     <Container>
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto content-area">
         <FaqAccordion faqs={FAQ_DATA} />
         <p class="text-center text-xs text-text-secondary mt-6">
           Jede Frage hat eine eigene URL, z.B. <a href={`/faq/${generateFaqSlug(FAQ_DATA[0].question)}/`} class="underline hover:text-primary">dachgeschossausbauhamburg.de/faq/was-kostet-ein-dachgeschossausbau-hamburg/</a>
