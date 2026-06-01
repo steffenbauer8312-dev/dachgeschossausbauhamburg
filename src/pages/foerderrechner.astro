@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
-import SectionHeader from '@/components/ui/SectionHeader.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
@@ -44,123 +43,135 @@ const breadcrumbItems = [
     </Container>
   </section>
 
-  <!-- Förderrechner Widget -->
+  <!-- Förderrechner Widget – komplett isoliert, kein .content-area Einfluss -->
   <section class="pb-20">
     <Container>
-      <div class="max-w-3xl mx-auto content-area">
-        <style>
-          /* Förderrechner – standalone CSS */
-          *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      <style>
+        /* Förderrechner – standalone CSS. NICHT in .content-area einbetten! */
+        .fr-wrap, .fr-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
 
-          .foerderrechner-wrap {
-            --fr-primary: #3D3D3D;
-            --fr-primary-dark: #2A2A2A;
-            --fr-primary-deep: #4A4A4A;
-            --fr-primary-bg: #FAF4F1;
-            --fr-amber-bg: #FAF3E0;
-            --fr-amber-text: #7A5A10;
-            --fr-blue: #2C5F7D;
-            --fr-coral-bg: #FAE8E3;
-            --fr-coral-text: #9A3D1A;
-            --fr-green: #2A7A5A;
-            --fr-green-dark: #1A5A3A;
-            --fr-text-primary: #1A1A1A;
-            --fr-text-secondary: #6B6560;
-            --fr-text-tertiary: #9A9590;
-            --fr-bg-primary: #ffffff;
-            --fr-bg-secondary: #FAF8F5;
-            --fr-border: #E5E0D8;
-            --fr-border-strong: #D0CAC4;
-            --fr-radius-md: 8px;
-            --fr-radius-lg: 12px;
-            --fr-font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-family: var(--fr-font);
-            color: var(--fr-text-primary);
-            background: var(--fr-bg-secondary);
-            border-radius: var(--fr-radius-lg);
-            padding: 1.5rem 1.25rem;
-            margin-bottom: 2rem;
+        .fr-wrap {
+          --fr-primary: #3D3D3D;
+          --fr-primary-dark: #2A2A2A;
+          --fr-primary-deep: #4A4A4A;
+          --fr-primary-bg: #FAF4F1;
+          --fr-amber-bg: #FAF3E0;
+          --fr-amber-text: #7A5A10;
+          --fr-blue: #2C5F7D;
+          --fr-coral-bg: #FAE8E3;
+          --fr-coral-text: #9A3D1A;
+          --fr-green: #2A7A5A;
+          --fr-green-dark: #1A5A3A;
+          --fr-text-primary: #1A1A1A;
+          --fr-text-secondary: #6B6560;
+          --fr-text-tertiary: #9A9590;
+          --fr-bg-primary: #ffffff;
+          --fr-bg-secondary: #FAF8F5;
+          --fr-border: #E5E0D8;
+          --fr-border-strong: #D0CAC4;
+          --fr-radius-md: 8px;
+          --fr-radius-lg: 12px;
+          --fr-font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+          font-family: var(--fr-font);
+          color: var(--fr-text-primary);
+          background: var(--fr-bg-secondary);
+          border-radius: var(--fr-radius-lg);
+          padding: 1.5rem 1.25rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .fr-wrap {
+            --fr-text-primary: #ececea;
+            --fr-text-secondary: #b0b0aa;
+            --fr-text-tertiary: #808080;
+            --fr-bg-primary: #2A2A28;
+            --fr-bg-secondary: #1E1E1C;
+            --fr-border: rgba(255,255,255,0.10);
+            --fr-border-strong: rgba(255,255,255,0.18);
           }
+        }
 
-          @media (prefers-color-scheme: dark) {
-            .foerderrechner-wrap {
-              --fr-text-primary: #ececea;
-              --fr-text-secondary: #b0b0aa;
-              --fr-text-tertiary: #808080;
-              --fr-bg-primary: #2A2A28;
-              --fr-bg-secondary: #1E1E1C;
-              --fr-border: rgba(255,255,255,0.10);
-              --fr-border-strong: rgba(255,255,255,0.18);
-            }
-          }
+        .fr-header { margin-bottom: 1.5rem; }
+        .fr-header h2 { font-size: 20px; font-weight: 600; color: var(--fr-text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .fr-header p { font-size: 13px; color: var(--fr-text-secondary); }
+        .fr-section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fr-text-tertiary); margin-bottom: 10px; }
+        .fr-card { background: var(--fr-bg-primary); border: 0.5px solid var(--fr-border); border-radius: var(--fr-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+        .fr-field-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .fr-field-row:last-child { margin-bottom: 0; }
+        .fr-field-label { font-size: 13px; color: var(--fr-text-secondary); min-width: 175px; flex-shrink: 0; }
+        .fr-slider {
+          -webkit-appearance: none; appearance: none; flex: 1; height: 4px;
+          background: var(--fr-border-strong); border-radius: 2px; outline: none; cursor: pointer;
+          background-image: linear-gradient(var(--fr-primary), var(--fr-primary));
+          background-size: 60% 100%; background-repeat: no-repeat;
+        }
+        .fr-slider::-webkit-slider-thumb {
+          -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+          background: var(--fr-primary); border: 2px solid white;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.2); cursor: pointer;
+        }
+        .fr-slider::-moz-range-thumb {
+          width: 18px; height: 18px; border-radius: 50%;
+          background: var(--fr-primary); border: 2px solid white; cursor: pointer;
+        }
+        .fr-field-val { font-size: 13px; font-weight: 600; color: var(--fr-text-primary); min-width: 80px; text-align: right; }
+        .fr-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 0.5px solid var(--fr-border); cursor: pointer; user-select: none; gap: 12px; }
+        .fr-toggle-row:last-child { border-bottom: none; }
+        .fr-tl { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+        .fr-tl-name { font-size: 14px; font-weight: 500; color: var(--fr-text-primary); }
+        .fr-tl-sub { font-size: 12px; color: var(--fr-text-secondary); line-height: 1.4; }
+        .fr-toggle { width: 40px; height: 22px; border-radius: 11px; border: 0.5px solid var(--fr-border-strong); background: var(--fr-bg-secondary); position: relative; flex-shrink: 0; transition: background 0.2s; }
+        .fr-toggle.on { background: var(--fr-primary); border-color: var(--fr-primary-dark); }
+        .fr-toggle::after { content: ''; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--fr-text-secondary); transition: transform 0.2s, background 0.2s; }
+        .fr-toggle.on::after { transform: translateX(18px); background: white; }
+        .fr-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 12px; }
+        .fr-metric { background: var(--fr-bg-secondary); border-radius: var(--fr-radius-md); padding: 12px 14px; }
+        .fr-metric .fr-ml { font-size: 12px; color: var(--fr-text-secondary); margin-bottom: 4px; }
+        .fr-metric .fr-mv { font-size: 22px; font-weight: 600; color: var(--fr-text-primary); }
+        .fr-metric .fr-mv.red { color: var(--fr-primary-dark); }
+        .fr-divider { height: 0.5px; background: var(--fr-border); margin: 1rem 0; }
+        .fr-warn { font-size: 12px; color: var(--fr-amber-text); background: var(--fr-amber-bg); border-radius: var(--fr-radius-md); padding: 8px 12px; margin-bottom: 10px; line-height: 1.5; display: flex; gap: 6px; align-items: flex-start; }
+        .fr-warn.info { color: var(--fr-primary-dark); background: var(--fr-primary-bg); }
+        .fr-warn svg { flex-shrink: 0; margin-top: 1px; }
+        .fr-info-banner { font-size: 12px; color: var(--fr-primary-dark); background: var(--fr-primary-bg); border-radius: var(--fr-radius-md); padding: 8px 12px; margin-bottom: 12px; line-height: 1.5; border: 0.5px solid rgba(61,61,61,0.2); display: flex; gap: 6px; align-items: flex-start; }
+        .fr-info-banner svg { flex-shrink: 0; margin-top: 1px; }
+        .fr-tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+        .fr-tab { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--fr-border-strong); cursor: pointer; background: transparent; color: var(--fr-text-secondary); font-family: var(--fr-font); transition: background 0.15s; }
+        .fr-tab:hover { background: var(--fr-bg-secondary); }
+        .fr-tab.active { background: var(--fr-text-primary); color: var(--fr-bg-primary); border-color: var(--fr-text-primary); }
+        .fr-prog-list { display: flex; flex-direction: column; gap: 8px; }
+        .fr-prog-item { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: var(--fr-radius-md); border: 0.5px solid var(--fr-border); background: var(--fr-bg-primary); }
+        .fr-prog-item.active { border-color: var(--fr-primary); background: var(--fr-primary-bg); }
+        .fr-prog-item.inactive { opacity: 0.45; }
+        .fr-prog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+        .fr-prog-header-left { display: flex; flex-direction: column; gap: 2px; }
+        .fr-prog-name { font-size: 13px; font-weight: 600; color: var(--fr-text-primary); }
+        .fr-prog-item.active .fr-prog-name { color: var(--fr-primary-deep); }
+        .fr-prog-amount { font-size: 13px; font-weight: 600; color: var(--fr-primary-dark); white-space: nowrap; }
+        .fr-prog-item.inactive .fr-prog-amount { color: var(--fr-text-tertiary); }
+        .fr-prog-type { font-size: 11px; color: var(--fr-text-tertiary); }
+        .fr-prog-item.active .fr-prog-type { color: var(--fr-primary); }
+        .fr-prog-cond { font-size: 11px; color: var(--fr-text-secondary); margin-top: 4px; line-height: 1.6; }
+        .fr-prog-item.active .fr-prog-cond { color: var(--fr-primary-deep); }
+        .fr-combo-badge { font-size: 11px; padding: 3px 9px; border-radius: var(--fr-radius-md); display: inline-flex; align-items: center; gap: 4px; margin-top: 3px; font-weight: 500; }
+        .fr-combo-yes { background: #E1F5EE; color: var(--fr-green-dark); }
+        .fr-combo-no  { background: var(--fr-coral-bg); color: var(--fr-coral-text); }
+        .fr-combo-warn { background: var(--fr-amber-bg); color: var(--fr-amber-text); }
+        .fr-source-links { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
+        .fr-source-link { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--fr-blue); text-decoration: none; width: fit-content; }
+        .fr-source-link:hover { text-decoration: underline; }
+        .fr-prog-item.active .fr-source-link { color: var(--fr-primary-dark); }
+        .fr-footnote { font-size: 11px; color: var(--fr-text-tertiary); line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid var(--fr-border); }
 
-          .fr-header { margin-bottom: 1.5rem; }
-          .fr-header h2 { font-size: 20px; font-weight: 600; color: var(--fr-text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-          .fr-header p { font-size: 13px; color: var(--fr-text-secondary); }
-          .fr-section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fr-text-tertiary); margin-bottom: 10px; }
-          .fr-card { background: var(--fr-bg-primary); border: 0.5px solid var(--fr-border); border-radius: var(--fr-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
-          .fr-field-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-          .fr-field-row:last-child { margin-bottom: 0; }
-          .fr-field-label { font-size: 13px; color: var(--fr-text-secondary); min-width: 175px; flex-shrink: 0; }
-          .fr-slider { -webkit-appearance: none; appearance: none; flex: 1; height: 4px; background: var(--fr-border-strong); border-radius: 2px; outline: none; cursor: pointer; background-image: linear-gradient(var(--fr-primary), var(--fr-primary)); background-size: 60% 100%; background-repeat: no-repeat; }
-          .fr-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--fr-primary); border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.2); cursor: pointer; }
-          .fr-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--fr-primary); border: 2px solid white; cursor: pointer; }
-          .fr-field-val { font-size: 13px; font-weight: 600; color: var(--fr-text-primary); min-width: 80px; text-align: right; }
-          .fr-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 0.5px solid var(--fr-border); cursor: pointer; user-select: none; gap: 12px; }
-          .fr-toggle-row:last-child { border-bottom: none; }
-          .fr-tl { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-          .fr-tl-name { font-size: 14px; font-weight: 500; color: var(--fr-text-primary); }
-          .fr-tl-sub { font-size: 12px; color: var(--fr-text-secondary); line-height: 1.4; }
-          .fr-toggle { width: 40px; height: 22px; border-radius: 11px; border: 0.5px solid var(--fr-border-strong); background: var(--fr-bg-secondary); position: relative; flex-shrink: 0; transition: background 0.2s; }
-          .fr-toggle.on { background: var(--fr-primary); border-color: var(--fr-primary-dark); }
-          .fr-toggle::after { content: ''; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--fr-text-secondary); transition: transform 0.2s, background 0.2s; }
-          .fr-toggle.on::after { transform: translateX(18px); background: white; }
-          .fr-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 12px; }
-          .fr-metric { background: var(--fr-bg-secondary); border-radius: var(--fr-radius-md); padding: 12px 14px; }
-          .fr-metric .fr-ml { font-size: 12px; color: var(--fr-text-secondary); margin-bottom: 4px; }
-          .fr-metric .fr-mv { font-size: 22px; font-weight: 600; color: var(--fr-text-primary); }
-          .fr-metric .fr-mv.red { color: var(--fr-primary-dark); }
-          .fr-divider { height: 0.5px; background: var(--fr-border); margin: 1rem 0; }
-          .fr-warn { font-size: 12px; color: var(--fr-amber-text); background: var(--fr-amber-bg); border-radius: var(--fr-radius-md); padding: 8px 12px; margin-bottom: 10px; line-height: 1.5; display: flex; gap: 6px; align-items: flex-start; }
-          .fr-warn.info { color: var(--fr-primary-dark); background: var(--fr-primary-bg); }
-          .fr-warn svg { flex-shrink: 0; margin-top: 1px; }
-          .fr-info-banner { font-size: 12px; color: var(--fr-primary-dark); background: var(--fr-primary-bg); border-radius: var(--fr-radius-md); padding: 8px 12px; margin-bottom: 12px; line-height: 1.5; border: 0.5px solid rgba(61,61,61,0.2); display: flex; gap: 6px; align-items: flex-start; }
-          .fr-info-banner svg { flex-shrink: 0; margin-top: 1px; }
-          .fr-tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
-          .fr-tab { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--fr-border-strong); cursor: pointer; background: transparent; color: var(--fr-text-secondary); font-family: var(--fr-font); transition: background 0.15s; }
-          .fr-tab:hover { background: var(--fr-bg-secondary); }
-          .fr-tab.active { background: var(--fr-text-primary); color: var(--fr-bg-primary); border-color: var(--fr-text-primary); }
-          .fr-prog-list { display: flex; flex-direction: column; gap: 8px; }
-          .fr-prog-item { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: var(--fr-radius-md); border: 0.5px solid var(--fr-border); background: var(--fr-bg-primary); }
-          .fr-prog-item.active { border-color: var(--fr-primary); background: var(--fr-primary-bg); }
-          .fr-prog-item.inactive { opacity: 0.45; }
-          .fr-prog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-          .fr-prog-header-left { display: flex; flex-direction: column; gap: 2px; }
-          .fr-prog-name { font-size: 13px; font-weight: 600; color: var(--fr-text-primary); }
-          .fr-prog-item.active .fr-prog-name { color: var(--fr-primary-deep); }
-          .fr-prog-amount { font-size: 13px; font-weight: 600; color: var(--fr-primary-dark); white-space: nowrap; }
-          .fr-prog-item.inactive .fr-prog-amount { color: var(--fr-text-tertiary); }
-          .fr-prog-type { font-size: 11px; color: var(--fr-text-tertiary); }
-          .fr-prog-item.active .fr-prog-type { color: var(--fr-primary); }
-          .fr-prog-cond { font-size: 11px; color: var(--fr-text-secondary); margin-top: 4px; line-height: 1.6; }
-          .fr-prog-item.active .fr-prog-cond { color: var(--fr-primary-deep); }
-          .fr-combo-badge { font-size: 11px; padding: 3px 9px; border-radius: var(--fr-radius-md); display: inline-flex; align-items: center; gap: 4px; margin-top: 3px; font-weight: 500; }
-          .fr-combo-yes { background: #E1F5EE; color: var(--fr-green-dark); }
-          .fr-combo-no  { background: var(--fr-coral-bg); color: var(--fr-coral-text); }
-          .fr-combo-warn { background: var(--fr-amber-bg); color: var(--fr-amber-text); }
-          .fr-source-links { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
-          .fr-source-link { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--fr-blue); text-decoration: none; width: fit-content; }
-          .fr-source-link:hover { text-decoration: underline; }
-          .fr-prog-item.active .fr-source-link { color: var(--fr-primary-dark); }
-          .fr-footnote { font-size: 11px; color: var(--fr-text-tertiary); line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid var(--fr-border); }
-          @media (max-width: 520px) {
-            .fr-field-row { flex-wrap: wrap; }
-            .fr-field-label { min-width: 100%; }
-            .fr-field-val { min-width: auto; }
-          }
-        </style>
+        @media (max-width: 520px) {
+          .fr-field-row { flex-wrap: wrap; }
+          .fr-field-label { min-width: 100%; }
+          .fr-field-val { min-width: auto; }
+        }
+      </style>
 
-        <div class="foerderrechner-wrap">
+      <div class="max-w-3xl mx-auto">
+        <div class="fr-wrap">
 
           <div class="fr-header">
             <h2>
@@ -281,298 +292,296 @@ const breadcrumbItems = [
 
 <script>
 (function() {
-const toggleDefs = [
-  { id: 'gebaeude5j',     label: 'Gebäude mind. 5 Jahre alt (BAFA / KfW)',   sub: 'Pflicht für BAFA BEG EM und KfW 261',                                                val: true  },
-  { id: 'gebaeude20j',    label: 'Baugenehmigung mind. 20 Jahre alt (IFB WSG)', sub: 'Hamburg-spezifisch: Pflicht für das IFB WSG-Programm',                              val: true  },
-  { id: 'isfp',           label: 'Individueller Sanierungsfahrplan (iSFP)',    sub: '+5 % BAFA-Bonus; steigert auch förderfähige Kostenpauschale',                         val: false },
-  { id: 'energieberater', label: 'Energieeffizienz-Experte eingebunden',      sub: 'Pflicht für BAFA; für IFB WSG: IFB-registrierter Energieberater (ab 5.000 € Förderung)', val: true },
-  { id: 'nachhaltig',     label: 'Nachhaltiger Dämmstoff (nicht mineralölbasiert)', sub: '+10 €/m² IFB-Nachhaltigkeitsbonus auf WSG-Förderung',                          val: false },
-  { id: 'modBonus3',      label: '3 oder mehr WSG-Maßnahmen (Modernisierungsbonus)', sub: '+20 % auf alle WSG-Zuschüsse bei ≥ 3 Maßnahmen (z. B. Dach + Fassade + Fenster)', val: false },
-  { id: 'modBonus4',      label: '4 oder mehr WSG-Maßnahmen (+30 % Bonus)',   sub: 'Statt 20 % gilt dann +30 % Modernisierungsbonus auf alle WSG-Zuschüsse',              val: false },
-  { id: 'komplettsanierung', label: 'Komplettsanierung zum Effizienzhaus',    sub: 'Für KfW 261 – Gebäude erreicht mind. Effizienzhaus-Stufe 85',                          val: false },
-  { id: 'eigennutzung',   label: 'Selbstgenutzte Immobilie',                  sub: 'Für KfW-Zinsverbilligung und Steuerbonus § 35c EStG',                                 val: true  },
-];
-
-let state = {};
-toggleDefs.forEach(t => { state[t.id] = t.val; });
-
-const toggleContainer = document.getElementById('toggles');
-if (toggleContainer) {
-toggleDefs.forEach(t => {
-  const row = document.createElement('div');
-  row.className = 'fr-toggle-row';
-  row.innerHTML =
-    `<div class="fr-tl"><span class="fr-tl-name">${t.label}</span><span class="fr-tl-sub">${t.sub}</span></div>` +
-    `<div class="fr-toggle ${t.val ? 'on' : ''}" id="tog_${t.id}" role="switch" aria-checked="${t.val}" aria-label="${t.label}"></div>`;
-  row.addEventListener('click', () => {
-    state[t.id] = !state[t.id];
-    if (t.id === 'modBonus4' && state['modBonus4']) state['modBonus3'] = true;
-    if (t.id === 'modBonus3' && !state['modBonus3']) state['modBonus4'] = false;
-    ['modBonus3','modBonus4'].forEach(id => {
-      const tog = document.getElementById('tog_' + id);
-      if (tog) { tog.classList.toggle('on', state[id]); tog.setAttribute('aria-checked', state[id]); }
-    });
-    const tog = document.getElementById('tog_' + t.id);
-    tog.classList.toggle('on', state[t.id]);
-    tog.setAttribute('aria-checked', state[t.id]);
-    recalcFR();
-  });
-  toggleContainer.appendChild(row);
-});
-}
-
-let activeTab = 'alle';
-function setTabFR(tab, btn) {
-  activeTab = tab;
-  document.querySelectorAll('.fr-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  recalcFR();
-}
-
-function fmt(n) { return n.toLocaleString('de-DE') + '\u00a0€'; }
-
-const iconCheck = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
-const iconX     = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-const iconWarn  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
-const iconInfo  = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
-const iconLink  = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
-
-function recalcFR() {
-  if (!document.getElementById('sliderKosten')) return;
-  const kosten    = parseInt(document.getElementById('sliderKosten').value);
-  const flaeche   = parseInt(document.getElementById('sliderFlaeche').value);
-  const daemmAnt  = parseInt(document.getElementById('sliderDaemmAnt').value) / 100;
-  const we        = parseInt(document.getElementById('sliderWE').value);
-
-  document.getElementById('valKosten').textContent   = kosten.toLocaleString('de-DE') + '\u00a0€';
-  document.getElementById('valFlaeche').textContent  = flaeche + '\u00a0m²';
-  document.getElementById('valDaemmAnt').textContent = Math.round(daemmAnt * 100) + '\u00a0%';
-  document.getElementById('valWE').textContent       = we;
-
-  const S = state;
-
-  const bafaRate   = S.isfp ? 0.20 : 0.15;
-  const bafaBase   = Math.min(kosten * daemmAnt, (S.isfp ? 60000 : 30000) * we);
-  const bafaActive = S.gebaeude5j && S.energieberater;
-  const bafaBetrag = bafaActive ? Math.round(bafaBase * bafaRate) : 0;
-
-  const wsgSatz     = 43.50 + (S.nachhaltig ? 10 : 0);
-  const wsgModMult  = S.modBonus4 ? 1.30 : (S.modBonus3 ? 1.20 : 1.0);
-  const wsgActive   = S.gebaeude20j;
-  const wsgRaw      = flaeche * wsgSatz * we;
-  const wsgCap      = 50000 * we;
-  const wsgBetrag   = wsgActive ? Math.min(Math.round(wsgRaw * wsgModMult), wsgCap) : 0;
-
-  const kfw261Active = S.gebaeude5j && S.energieberater && S.komplettsanierung;
-  const kfw261Max    = Math.min(kosten * we, 150000 * we);
-  const kfw261Tilg   = kfw261Active ? Math.round(kfw261Max * 0.05) : 0;
-
-  const gesamt      = bafaBetrag + wsgBetrag + kfw261Tilg;
-  const eigenanteil = Math.max(0, kosten - gesamt);
-  const foerderQuote = kosten > 0 ? Math.round((gesamt / kosten) * 100) : 0;
-
-  document.getElementById('results').innerHTML =
-    `<div class="fr-metric"><div class="fr-ml">Gesamtförderung</div><div class="fr-mv red">${fmt(gesamt)}</div></div>` +
-    `<div class="fr-metric"><div class="fr-ml">IFB WSG (Dach)</div><div class="fr-mv">${fmt(wsgBetrag)}</div></div>` +
-    `<div class="fr-metric"><div class="fr-ml">Eigenanteil</div><div class="fr-mv">${fmt(eigenanteil)}</div></div>` +
-    `<div class="fr-metric"><div class="fr-ml">Förderquote</div><div class="fr-mv">${foerderQuote}\u00a0%</div></div>`;
-
-  const warns = [];
-  if (!S.gebaeude5j)   warns.push('BAFA & KfW: Gebäude muss mind. 5 Jahre alt sein.');
-  if (!S.gebaeude20j)  warns.push('IFB WSG: Baugenehmigung muss mind. 20 Jahre alt sein – Hamburg-spezifische Pflichtvoraussetzung.');
-  if (!S.energieberater) warns.push('Ohne eingebundenen Energieeffizienz-Experten entfällt die BAFA-Förderung. Für IFB WSG: ab 5.000 € Förderung ist ein IFB-registrierter Energieberater Pflicht.');
-  warns.push('Hamburg-Hebel: BAFA und IFB WSG dürfen NICHT für dasselbe Bauteil kombiniert werden. Empfehlung: Dachdämmung über IFB WSG, andere teure Bauteile über BAFA mit iSFP-Bonus abrechnen.');
-  if (!S.modBonus3 && !S.modBonus4) warns.push('Tipp: Kombinieren Sie Dach, Fassade und Fenster in einem Antrag – ab 3 Maßnahmen steigen alle IFB-Zuschüsse um 20 %.');
-
-  document.getElementById('warnBox').innerHTML =
-    warns.map((w, i) => `<div class="fr-warn ${i >= 2 ? 'info' : ''}">${iconWarn}<span>${w}</span></div>`).join('');
-
-  const modBonusText = S.modBonus4 ? '+30\u00a0% Modernisierungsbonus Plus' : (S.modBonus3 ? '+20\u00a0% Modernisierungsbonus Basis' : 'kein Bonus aktiv');
-
-  const progs = [
-    {
-      id: 'bafa', ebene: 'bund', status: bafaActive ? 'active' : 'inactive',
-      name: 'BAFA BEG Einzelmaßnahmen (BEG EM)',
-      type: 'Zuschuss – nicht rückzahlbar',
-      betrag: bafaBetrag,
-      kombiIcon: 'warn',
-      kombiText: 'In Hamburg: NICHT für dasselbe Bauteil wie IFB WSG kombinierbar. Strategische Aufteilung empfohlen (Hamburg-Hebel).',
-      bedingungen: [
-        'Gebäude mind. 5 Jahre alt',
-        'Antrag zwingend vor Auftragsvergabe beim BAFA stellen',
-        'Energieeffizienz-Experte (EEE) einbinden',
-        `Fördersatz: ${bafaRate * 100}\u00a0% ${S.isfp ? '(inkl. +5\u00a0% iSFP-Bonus)' : '– mit iSFP auf 20\u00a0% erhöhbar'}`,
-        `Förderfähige Kosten: ${S.isfp ? '60.000' : '30.000'}\u00a0€ / WE / Jahr`,
-        'U-Wert Dach: ≤ 0,14 W/(m²K)',
-        'Hamburg-Hebel: Bauteile aufteilen – teure Bauteile mit hohem Förderwert über BAFA, flächenintensive Dämmung über IFB WSG',
-      ],
-      links: [
-        { label: 'BAFA – Gebäudehülle (offiziell)', url: 'https://www.bafa.de/DE/Energie/Effiziente_Gebaeude/Sanierung_Wohngebaeude/Gebaeudehuelle/gebaeudehuelle_node.html' },
-        { label: 'BAFA – Antragstellung & Portal',  url: 'https://www.bafa.de/DE/Energie/Effiziente_Gebaeude/Informationen_fuer_Antragstellende/informationen_fuer_antragstellende_node.html' },
-      ]
-    },
-    {
-      id: 'kfw261', ebene: 'bund', status: kfw261Active ? 'active' : 'inactive',
-      name: 'KfW 261 – Wohngebäude-Kredit (Effizienzhaus)',
-      type: 'Zinsgünstiger Kredit + Tilgungszuschuss',
-      betrag: kfw261Tilg,
-      kombiIcon: 'yes',
-      kombiText: 'Kombinierbar mit BAFA BEG EM und IFB WSG; Budget 2026 begrenzt',
-      bedingungen: [
-        'Komplettsanierung auf mind. Effizienzhaus-Stufe 85',
-        'Gebäude mind. 5 Jahre alt',
-        'Antrag vor Baubeginn über eine Hausbank stellen',
-        'Fachplanung + Baubegleitung durch EEE ist Pflicht',
-        `Kredit max. ${(150000 * we).toLocaleString('de-DE')}\u00a0€ (${we}\u00a0WE × 150.000\u00a0€)`,
-        'Tilgungszuschuss: 5\u00a0% (EH 85) bis 45\u00a0% (EH 40 EE)',
-        'Dachgeschossausbau (vormals unbeheizt → Wohnraum) gilt laut KfW als förderfähige Sanierung',
-      ],
-      links: [
-        { label: 'KfW 261 – offizielle Produktseite', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Bestehende-Immobilie/F%C3%B6rderprodukte/Bundesf%C3%B6rderung-f%C3%BCr-effiziente-Geb%C3%A4ude-Wohngeb%C3%A4ude-Kredit-(261-262)/' },
-        { label: 'KfW – Energieeffizienz-Experten finden', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Bestehende-Immobilie/Energieeffizient-Sanieren/Energieeffizienz-Experten/' },
-      ]
-    },
-    {
-      id: 'ifb-wsg', ebene: 'hamburg', status: wsgActive ? 'active' : 'inactive',
-      name: 'IFB Hamburg – Wärmeschutz im Gebäudebestand (WSG)',
-      type: 'Landeszuschuss – flächenbasiert, nicht rückzahlbar · Gültig ab 01.02.2025',
-      betrag: wsgBetrag,
-      kombiIcon: 'warn',
-      kombiText: 'Nicht für dasselbe Bauteil mit BAFA kombinierbar. Kombinierbar mit KfW 261 (Kredit). Modernisierungsbonus: ' + modBonusText,
-      bedingungen: [
-        'Baugenehmigung mind. 20 Jahre alt (Hamburg-spezifisch!)',
-        'EFH, DHH, RH oder kleines MFH (bis 2 vermieteten WE) – auch WEG',
-        'Förderantrag vor Beginn des Vorhabens (vor Vertragsabschluss!) stellen',
-        `Steildach / Gaubenwangen / Gaubendächer: 43,50\u00a0€/m²`,
-        `Nachhaltiger Dämmstoff (nicht mineralölbasiert): +10\u00a0€/m² → gesamt ${S.nachhaltig ? '53,50' : '43,50'}\u00a0€/m²`,
-        'Oberste Geschossdecke: 25,30\u00a0€/m² (wenn Dachraum nicht ausgebaut wird)',
-        'Einblasdämmung Steildach: 10,40\u00a0€/m²',
-        `Modernisierungsbonus: ${modBonusText} bei ≥ 3 bzw. ≥ 4 Maßnahmengruppen`,
-        'Max. 50.000\u00a0€ Förderung pro Wohneinheit',
-        'Ab 5.000\u00a0€ Förderung: IFB-registrierter Energieberater + hydraulischer Abgleich Pflicht',
-        'Backsteinförderung: Zusätzlich bis 72,50\u00a0€/m² für Gebäude mit bestehender Backsteinfassade (≥3 WE)',
-      ],
-      links: [
-        { label: 'IFB Hamburg – WSG-Programm (offiziell)', url: 'https://www.ifbhh.de/foerderprogramm/waermeschutz-im-gebaeudebestand' },
-        { label: 'IFB Hamburg – Antrag stellen / Kontakt', url: 'https://www.hamburg.de/service/info/111113162/' },
-        { label: 'Förderrichtlinie WSG ab 01.02.2025 (PDF)', url: 'https://www.ifbhh.de/resource/blob/1808/000bf9f595804e99aeb9fd9836ea033d/foerderrichtlinie-waermeschutz-im-gebaeudebestand-data.pdf' },
-      ]
-    },
-    {
-      id: 'ifb-dga', ebene: 'hamburg', status: 'inactive',
-      name: 'IFB Hamburg – Modernisierung Mietwohnungen (B/C) inkl. Dachgeschossausbau',
-      type: 'Zinsvergünstigtes Darlehen + Zuschuss (für Mietwohngebäude)',
-      betrag: 0,
-      kombiIcon: 'warn',
-      kombiText: 'Nur für Mietwohngebäude; nicht für selbst genutzte Eigenheime; kombinierbar mit WSG',
-      bedingungen: [
-        'Nur für Vermieter und Wohnungsbaugesellschaften (nicht Selbstnutzer)',
-        'Fördert explizit Dachgeschossausbau und Aufstockung als Maßnahme',
-        'Zinsvergünstigte IFB-Darlehen + Zuschussanteil',
-        'Einkommensabhängige Miettpreisbindung als Gegenleistung',
-        'Antrag über IFB Hamburg vor Maßnahmenbeginn',
-      ],
-      links: [
-        { label: 'IFB Hamburg – Modernisierung Mietwohnungen B/C', url: 'https://www.ifbhh.de/foerderprogramm/modernisierung-von-mietwohnungen' },
-      ]
-    },
-    {
-      id: 'ifb-gruendach', ebene: 'hamburg', status: 'inactive',
-      name: 'IFB Hamburg – Hamburger Gründachförderung',
-      type: 'Zuschuss für Dachbegrünung (Richtlinie 2026)',
-      betrag: 0,
-      kombiIcon: 'yes',
-      kombiText: 'Kombinierbar mit WSG und BAFA; eigenständiges Programm der IFB Hamburg',
-      bedingungen: [
-        'Fördert Begrünung von Flach- und flach geneigten Dächern',
-        'Neue Förderrichtlinie 2026 der IFB Hamburg',
-        'Relevant wenn Dachausbau Flachdachanteile oder Gaubenbereich begrünt',
-        'Antrag vor Beginn der Maßnahme bei IFB Hamburg',
-        'Details und aktuelle Förderkonditionen: Downloads-Bereich der IFB',
-      ],
-      links: [
-        { label: 'IFB Hamburg – Gründachförderung 2026 (offiziell)', url: 'https://www.ifbhh.de/downloads' },
-      ]
-    },
-    {
-      id: 'steuer', ebene: 'bund', status: 'inactive',
-      name: 'Steuerbonus § 35c EStG (Alternative)',
-      type: 'Steuerermäßigung – alternativ zu BAFA/KfW-Zuschuss',
-      betrag: 0,
-      kombiIcon: 'no',
-      kombiText: 'Nicht kombinierbar mit BAFA/KfW-Zuschuss; in Hamburg: kombinierbar mit IFB WSG',
-      bedingungen: [
-        '20\u00a0% der Sanierungskosten über 3 Jahre absetzbar (7\u00a0% / 7\u00a0% / 6\u00a0%)',
-        'Nur selbst genutzte Eigentumswohnungen / Häuser',
-        'Mindeststandards an Dämmung wie bei BEG',
-        'Sinnvoll, wenn BAFA-Antrag versäumt wurde',
-        'Hamburg-Besonderheit: Da IFB WSG ein Landesprogramm ist, darf § 35c für dieselbe Maßnahme kombiniert werden – steuerlich prüfen lassen',
-      ],
-      links: [
-        { label: 'BMF – § 35c EStG (Bundesfinanzministerium)', url: 'https://www.bundesfinanzministerium.de/Content/DE/FAQ/2020-03-09-steuerforderung-energetische-gebaudesanierung.html' },
-      ]
-    },
+  const toggleDefs = [
+    { id: 'gebaeude5j',     label: 'Gebäude mind. 5 Jahre alt (BAFA / KfW)',   sub: 'Pflicht für BAFA BEG EM und KfW 261',                                                val: true  },
+    { id: 'gebaeude20j',   label: 'Baugenehmigung mind. 20 Jahre alt (IFB WSG)', sub: 'Hamburg-spezifisch: Pflicht für das IFB WSG-Programm',                              val: true  },
+    { id: 'isfp',           label: 'Individueller Sanierungsfahrplan (iSFP)',    sub: '+5 % BAFA-Bonus; steigert auch förderfähige Kostenpauschale',                         val: false },
+    { id: 'energieberater', label: 'Energieeffizienz-Experte eingebunden',      sub: 'Pflicht für BAFA; für IFB WSG: IFB-registrierter Energieberater (ab 5.000 € Förderung)', val: true },
+    { id: 'nachhaltig',     label: 'Nachhaltiger Dämmstoff (nicht mineralölbasiert)', sub: '+10 €/m² IFB-Nachhaltigkeitsbonus auf WSG-Förderung',                          val: false },
+    { id: 'modBonus3',      label: '3 oder mehr WSG-Maßnahmen (Modernisierungsbonus)', sub: '+20 % auf alle WSG-Zuschüsse bei ≥ 3 Maßnahmen (z. B. Dach + Fassade + Fenster)', val: false },
+    { id: 'modBonus4',      label: '4 oder mehr WSG-Maßnahmen (+30 % Bonus)',   sub: 'Statt 20 % gilt dann +30 % Modernisierungsbonus auf alle WSG-Zuschüsse',              val: false },
+    { id: 'komplettsanierung', label: 'Komplettsanierung zum Effizienzhaus',    sub: 'Für KfW 261 – Gebäude erreicht mind. Effizienzhaus-Stufe 85',                          val: false },
+    { id: 'eigennutzung',   label: 'Selbstgenutzte Immobilie',                  sub: 'Für KfW-Zinsverbilligung und Steuerbonus § 35c EStG',                                 val: true  },
   ];
 
-  const list = document.getElementById('progList');
-  if (!list) return;
-  list.innerHTML = '';
-  progs
-    .filter(p => activeTab === 'alle' || p.ebene === activeTab)
-    .forEach(p => {
-      const comboBadge = p.kombiIcon === 'yes'
-        ? `<span class="fr-combo-badge fr-combo-yes">${iconCheck} Kombinierbar</span>`
-        : p.kombiIcon === 'warn'
-        ? `<span class="fr-combo-badge fr-combo-warn">${iconInfo} Bedingt kombinierbar</span>`
-        : `<span class="fr-combo-badge fr-combo-no">${iconX} Nicht mit BAFA/KfW kombinierbar</span>`;
+  let state = {};
+  toggleDefs.forEach(t => { state[t.id] = t.val; });
 
-      const betragDisp = p.betrag > 0
-        ? fmt(p.betrag)
-        : (p.id === 'kfw261' && p.status === 'active' ? '(Kredit + Tilgungszuschuss)' : 'nicht anwendbar');
+  const toggleContainer = document.getElementById('toggles');
+  if (!toggleContainer) return;
 
-      const linksHtml = p.links
-        .map(l => `<a class="fr-source-link" href="${l.url}" target="_blank" rel="noopener noreferrer">${iconLink} ${l.label}</a>`)
-        .join('');
-
-      list.innerHTML +=
-        `<div class="fr-prog-item ${p.status}">` +
-          `<div class="fr-prog-header">` +
-            `<div class="fr-prog-header-left">` +
-              `<span class="fr-prog-name">${p.name}</span>` +
-              `<span class="fr-prog-type">${p.type}</span>` +
-            `</div>` +
-            `<span class="fr-prog-amount">${betragDisp}</span>` +
-          `</div>` +
-          `<div class="fr-prog-cond">${p.bedingungen.map(b => '· ' + b).join('<br>')}</div>` +
-          `<div style="margin-top:5px">${comboBadge}</div>` +
-          `<div class="fr-prog-cond" style="margin-top:3px;font-style:italic">${p.kombiText}</div>` +
-          `<div class="fr-source-links">${linksHtml}</div>` +
-        `</div>`;
+  toggleDefs.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'fr-toggle-row';
+    row.innerHTML =
+      `<div class="fr-tl"><span class="fr-tl-name">${t.label}</span><span class="fr-tl-sub">${t.sub}</span></div>` +
+      `<div class="fr-toggle ${t.val ? 'on' : ''}" id="tog_${t.id}" role="switch" aria-checked="${t.val}" aria-label="${t.label}"></div>`;
+    row.addEventListener('click', () => {
+      state[t.id] = !state[t.id];
+      if (t.id === 'modBonus4' && state['modBonus4']) state['modBonus3'] = true;
+      if (t.id === 'modBonus3' && !state['modBonus3']) state['modBonus4'] = false;
+      ['modBonus3','modBonus4'].forEach(id => {
+        const tog = document.getElementById('tog_' + id);
+        if (tog) { tog.classList.toggle('on', state[id]); tog.setAttribute('aria-checked', state[id]); }
+      });
+      const tog = document.getElementById('tog_' + t.id);
+      tog.classList.toggle('on', state[t.id]);
+      tog.setAttribute('aria-checked', state[t.id]);
+      recalcFR();
     });
-}
+    toggleContainer.appendChild(row);
+  });
 
-window.recalcFR = recalcFR;
-window.setTabFR = setTabFR;
-
-// Slider track fill via JS
-const sliders = document.querySelectorAll('.fr-slider');
-sliders.forEach(slider => {
-  function updateFill() {
-    const min = parseFloat(slider.min);
-    const max = parseFloat(slider.max);
-    const val = parseFloat(slider.value);
-    const pct = ((val - min) / (max - min)) * 100;
-    slider.style.backgroundSize = pct + '% 100%';
-    // ensure gradient is set
-    if (!slider.style.backgroundImage.includes('linear-gradient')) {
-      slider.style.backgroundImage = 'linear-gradient(var(--fr-primary), var(--fr-primary))';
-    }
+  let activeTab = 'alle';
+  function setTabFR(tab, btn) {
+    activeTab = tab;
+    document.querySelectorAll('.fr-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    recalcFR();
   }
-  slider.addEventListener('input', updateFill);
-  updateFill();
-});
 
-recalcFR();
+  function fmt(n) { return n.toLocaleString('de-DE') + '\u00a0€'; }
+
+  const iconCheck = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
+  const iconX     = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+  const iconWarn  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+  const iconInfo  = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+  const iconLink  = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+  function recalcFR() {
+    if (!document.getElementById('sliderKosten')) return;
+    const kosten   = parseInt(document.getElementById('sliderKosten').value);
+    const flaeche   = parseInt(document.getElementById('sliderFlaeche').value);
+    const daemmAnt = parseInt(document.getElementById('sliderDaemmAnt').value) / 100;
+    const we        = parseInt(document.getElementById('sliderWE').value);
+
+    document.getElementById('valKosten').textContent   = kosten.toLocaleString('de-DE') + '\u00a0€';
+    document.getElementById('valFlaeche').textContent   = flaeche + '\u00a0m²';
+    document.getElementById('valDaemmAnt').textContent  = Math.round(daemmAnt * 100) + '\u00a0%';
+    document.getElementById('valWE').textContent        = we;
+
+    const S = state;
+
+    const bafaRate   = S.isfp ? 0.20 : 0.15;
+    const bafaBase   = Math.min(kosten * daemmAnt, (S.isfp ? 60000 : 30000) * we);
+    const bafaActive = S.gebaeude5j && S.energieberater;
+    const bafaBetrag = bafaActive ? Math.round(bafaBase * bafaRate) : 0;
+
+    const wsgSatz     = 43.50 + (S.nachhaltig ? 10 : 0);
+    const wsgModMult = S.modBonus4 ? 1.30 : (S.modBonus3 ? 1.20 : 1.0);
+    const wsgActive  = S.gebaeude20j;
+    const wsgRaw    = flaeche * wsgSatz * we;
+    const wsgCap    = 50000 * we;
+    const wsgBetrag = wsgActive ? Math.min(Math.round(wsgRaw * wsgModMult), wsgCap) : 0;
+
+    const kfw261Active = S.gebaeude5j && S.energieberater && S.komplettsanierung;
+    const kfw261Max    = Math.min(kosten * we, 150000 * we);
+    const kfw261Tilg  = kfw261Active ? Math.round(kfw261Max * 0.05) : 0;
+
+    const gesamt       = bafaBetrag + wsgBetrag + kfw261Tilg;
+    const eigenanteil  = Math.max(0, kosten - gesamt);
+    const foerderQuote = kosten > 0 ? Math.round((gesamt / kosten) * 100) : 0;
+
+    document.getElementById('results').innerHTML =
+      `<div class="fr-metric"><div class="fr-ml">Gesamtförderung</div><div class="fr-mv red">${fmt(gesamt)}</div></div>` +
+      `<div class="fr-metric"><div class="fr-ml">IFB WSG (Dach)</div><div class="fr-mv">${fmt(wsgBetrag)}</div></div>` +
+      `<div class="fr-metric"><div class="fr-ml">Eigenanteil</div><div class="fr-mv">${fmt(eigenanteil)}</div></div>` +
+      `<div class="fr-metric"><div class="fr-ml">Förderquote</div><div class="fr-mv">${foerderQuote}\u00a0%</div></div>`;
+
+    const warns = [];
+    if (!S.gebaeude5j)    warns.push('BAFA & KfW: Gebäude muss mind. 5 Jahre alt sein.');
+    if (!S.gebaeude20j)   warns.push('IFB WSG: Baugenehmigung muss mind. 20 Jahre alt sein – Hamburg-spezifische Pflichtvoraussetzung.');
+    if (!S.energieberater) warns.push('Ohne eingebundenen Energieeffizienz-Experten entfällt die BAFA-Förderung. Für IFB WSG: ab 5.000 € Förderung ist ein IFB-registrierter Energieberater Pflicht.');
+    warns.push('Hamburg-Hebel: BAFA und IFB WSG dürfen NICHT für dasselbe Bauteil kombiniert werden. Empfehlung: Dachdämmung über IFB WSG, andere teure Bauteile über BAFA mit iSFP-Bonus abrechnen.');
+    if (!S.modBonus3 && !S.modBonus4) warns.push('Tipp: Kombinieren Sie Dach, Fassade und Fenster in einem Antrag – ab 3 Maßnahmen steigen alle IFB-Zuschüsse um 20 %.');
+
+    document.getElementById('warnBox').innerHTML =
+      warns.map((w, i) => `<div class="fr-warn ${i >= 2 ? 'info' : ''}">${iconWarn}<span>${w}</span></div>`).join('');
+
+    const modBonusText = S.modBonus4 ? '+30\u00a0% Modernisierungsbonus Plus' : (S.modBonus3 ? '+20\u00a0% Modernisierungsbonus Basis' : 'kein Bonus aktiv');
+
+    const progs = [
+      {
+        id: 'bafa', ebene: 'bund', status: bafaActive ? 'active' : 'inactive',
+        name: 'BAFA BEG Einzelmaßnahmen (BEG EM)',
+        type: 'Zuschuss – nicht rückzahlbar',
+        betrag: bafaBetrag,
+        kombiIcon: 'warn',
+        kombiText: 'In Hamburg: NICHT für dasselbe Bauteil wie IFB WSG kombinierbar. Strategische Aufteilung empfohlen (Hamburg-Hebel).',
+        bedingungen: [
+          'Gebäude mind. 5 Jahre alt',
+          'Antrag zwingend vor Auftragsvergabe beim BAFA stellen',
+          'Energieeffizienz-Experte (EEE) einbinden',
+          `Fördersatz: ${bafaRate * 100}\u00a0% ${S.isfp ? '(inkl. +5\u00a0% iSFP-Bonus)' : '– mit iSFP auf 20\u00a0% erhöhbar'}`,
+          `Förderfähige Kosten: ${S.isfp ? '60.000' : '30.000'}\u00a0€ / WE / Jahr`,
+          'U-Wert Dach: ≤ 0,14 W/(m²K)',
+          'Hamburg-Hebel: teure Bauteile über BAFA, flächenintensive Dämmung über IFB WSG',
+        ],
+        links: [
+          { label: 'BAFA – Gebäudehülle (offiziell)', url: 'https://www.bafa.de/DE/Energie/Effiziente_Gebaeude/Sanierung_Wohngebaeude/Gebaeudehuelle/gebaeudehuelle_node.html' },
+          { label: 'BAFA – Antragstellung & Portal',  url: 'https://www.bafa.de/DE/Energie/Effiziente_Gebaeude/Informationen_fuer_Antragstellende/informationen_fuer_antragstellende_node.html' },
+        ]
+      },
+      {
+        id: 'kfw261', ebene: 'bund', status: kfw261Active ? 'active' : 'inactive',
+        name: 'KfW 261 – Wohngebäude-Kredit (Effizienzhaus)',
+        type: 'Zinsgünstiger Kredit + Tilgungszuschuss',
+        betrag: kfw261Tilg,
+        kombiIcon: 'yes',
+        kombiText: 'Kombinierbar mit BAFA BEG EM und IFB WSG; Budget 2026 begrenzt',
+        bedingungen: [
+          'Komplettsanierung auf mind. Effizienzhaus-Stufe 85',
+          'Gebäude mind. 5 Jahre alt',
+          'Antrag vor Baubeginn über eine Hausbank stellen',
+          'Fachplanung + Baubegleitung durch EEE ist Pflicht',
+          `Kredit max. ${(150000 * we).toLocaleString('de-DE')}\u00a0€ (${we}\u00a0WE × 150.000\u00a0€)`,
+          'Tilgungszuschuss: 5\u00a0% (EH 85) bis 45\u00a0% (EH 40 EE)',
+          'Dachgeschossausbau (vormals unbeheizt → Wohnraum) gilt als förderfähige Sanierung',
+        ],
+        links: [
+          { label: 'KfW 261 – offizielle Produktseite', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Bestehende-Immobilie/F%C3%B6rderprodukte/Bundesf%C3%B6rderung-f%C3%BCr-effiziente-Geb%C3%A4ude-Wohngeb%C3%A4ude-Kredit-(261-262)/' },
+          { label: 'KfW – Energieeffizienz-Experten finden', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Bestehende-Immobilie/Energieeffizient-Sanieren/Energieeffizienz-Experten/' },
+        ]
+      },
+      {
+        id: 'ifb-wsg', ebene: 'hamburg', status: wsgActive ? 'active' : 'inactive',
+        name: 'IFB Hamburg – Wärmeschutz im Gebäudebestand (WSG)',
+        type: 'Landeszuschuss – flächenbasiert, nicht rückzahlbar · Gültig ab 01.02.2025',
+        betrag: wsgBetrag,
+        kombiIcon: 'warn',
+        kombiText: 'Nicht für dasselbe Bauteil mit BAFA kombinierbar. Kombinierbar mit KfW 261. Modernisierungsbonus: ' + modBonusText,
+        bedingungen: [
+          'Baugenehmigung mind. 20 Jahre alt (Hamburg-spezifisch!)',
+          'EFH, DHH, RH oder kleines MFH (bis 2 vermieteten WE) – auch WEG',
+          'Förderantrag vor Beginn des Vorhabens (vor Vertragsabschluss!) stellen',
+          `Steildach / Gaubenwangen / Gaubendächer: 43,50\u00a0€/m²`,
+          `Nachhaltiger Dämmstoff: +10\u00a0€/m² → gesamt ${S.nachhaltig ? '53,50' : '43,50'}\u00a0€/m²`,
+          'Oberste Geschossdecke: 25,30\u00a0€/m² (wenn Dachraum nicht ausgebaut wird)',
+          'Einblasdämmung Steildach: 10,40\u00a0€/m²',
+          `Modernisierungsbonus: ${modBonusText} bei ≥ 3 bzw. ≥ 4 Maßnahmengruppen`,
+          'Max. 50.000\u00a0€ Förderung pro Wohneinheit',
+          'Ab 5.000\u00a0€ Förderung: IFB-registrierter Energieberater + hydraulischer Abgleich Pflicht',
+          'Backsteinförderung: Zusätzlich bis 72,50\u00a0€/m² für Gebäude mit bestehender Backsteinfassade (≥3 WE)',
+        ],
+        links: [
+          { label: 'IFB Hamburg – WSG-Programm (offiziell)', url: 'https://www.ifbhh.de/foerderprogramm/waermeschutz-im-gebaeudebestand' },
+          { label: 'IFB Hamburg – Antrag stellen / Kontakt', url: 'https://www.hamburg.de/service/info/111113162/' },
+          { label: 'Förderrichtlinie WSG ab 01.02.2025 (PDF)', url: 'https://www.ifbhh.de/resource/blob/1808/000bf9f595804e99aeb9fd9836ea033d/foerderrichtlinie-waermeschutz-im-gebaeudebestand-data.pdf' },
+        ]
+      },
+      {
+        id: 'ifb-dga', ebene: 'hamburg', status: 'inactive',
+        name: 'IFB Hamburg – Modernisierung Mietwohnungen (B/C) inkl. Dachgeschossausbau',
+        type: 'Zinsvergünstigtes Darlehen + Zuschuss (für Mietwohngebäude)',
+        betrag: 0,
+        kombiIcon: 'warn',
+        kombiText: 'Nur für Mietwohngebäude; nicht für selbst genutzte Eigenheime; kombinierbar mit WSG',
+        bedingungen: [
+          'Nur für Vermieter und Wohnungsbaugesellschaften (nicht Selbstnutzer)',
+          'Fördert explizit Dachgeschossausbau und Aufstockung als Maßnahme',
+          'Zinsvergünstigte IFB-Darlehen + Zuschussanteil',
+          'Einkommensabhängige Miettpreisbindung als Gegenleistung',
+          'Antrag über IFB Hamburg vor Maßnahmenbeginn',
+        ],
+        links: [
+          { label: 'IFB Hamburg – Modernisierung Mietwohnungen B/C', url: 'https://www.ifbhh.de/foerderprogramm/modernisierung-von-mietwohnungen' },
+        ]
+      },
+      {
+        id: 'ifb-gruendach', ebene: 'hamburg', status: 'inactive',
+        name: 'IFB Hamburg – Hamburger Gründachförderung',
+        type: 'Zuschuss für Dachbegrünung (Richtlinie 2026)',
+        betrag: 0,
+        kombiIcon: 'yes',
+        kombiText: 'Kombinierbar mit WSG und BAFA; eigenständiges Programm der IFB Hamburg',
+        bedingungen: [
+          'Fördert Begrünung von Flach- und flach geneigten Dächern',
+          'Neue Förderrichtlinie 2026 der IFB Hamburg',
+          'Relevant wenn Dachausbau Flachdachanteile oder Gaubenbereich begrünt',
+          'Antrag vor Beginn der Maßnahme bei IFB Hamburg',
+          'Details und aktuelle Förderkonditionen: Downloads-Bereich der IFB',
+        ],
+        links: [
+          { label: 'IFB Hamburg – Gründachförderung 2026 (offiziell)', url: 'https://www.ifbhh.de/downloads' },
+        ]
+      },
+      {
+        id: 'steuer', ebene: 'bund', status: 'inactive',
+        name: 'Steuerbonus § 35c EStG (Alternative)',
+        type: 'Steuerermäßigung – alternativ zu BAFA/KfW-Zuschuss',
+        betrag: 0,
+        kombiIcon: 'no',
+        kombiText: 'Nicht kombinierbar mit BAFA/KfW-Zuschuss; in Hamburg: kombinierbar mit IFB WSG',
+        bedingungen: [
+          '20\u00a0% der Sanierungskosten über 3 Jahre absetzbar (7\u00a0% / 7\u00a0% / 6\u00a0%)',
+          'Nur selbst genutzte Eigentumswohnungen / Häuser',
+          'Mindeststandards an Dämmung wie bei BEG',
+          'Sinnvoll, wenn BAFA-Antrag versäumt wurde',
+          'Hamburg-Besonderheit: Da IFB WSG ein Landesprogramm ist, darf § 35c für dieselbe Maßnahme kombiniert werden – steuerlich prüfen lassen',
+        ],
+        links: [
+          { label: 'BMF – § 35c EStG (Bundesfinanzministerium)', url: 'https://www.bundesfinanzministerium.de/Content/DE/FAQ/2020-03-09-steuerforderung-energetische-gebaudesanierung.html' },
+        ]
+      },
+    ];
+
+    const list = document.getElementById('progList');
+    if (!list) return;
+    list.innerHTML = '';
+    progs
+      .filter(p => activeTab === 'alle' || p.ebene === activeTab)
+      .forEach(p => {
+        const comboBadge = p.kombiIcon === 'yes'
+          ? `<span class="fr-combo-badge fr-combo-yes">${iconCheck} Kombinierbar</span>`
+          : p.kombiIcon === 'warn'
+          ? `<span class="fr-combo-badge fr-combo-warn">${iconInfo} Bedingt kombinierbar</span>`
+          : `<span class="fr-combo-badge fr-combo-no">${iconX} Nicht mit BAFA/KfW kombinierbar</span>`;
+
+        const betragDisp = p.betrag > 0
+          ? fmt(p.betrag)
+          : (p.id === 'kfw261' && p.status === 'active' ? '(Kredit + Tilgungszuschuss)' : 'nicht anwendbar');
+
+        const linksHtml = p.links
+          .map(l => `<a class="fr-source-link" href="${l.url}" target="_blank" rel="noopener noreferrer">${iconLink} ${l.label}</a>`)
+          .join('');
+
+        list.innerHTML +=
+          `<div class="fr-prog-item ${p.status}">` +
+            `<div class="fr-prog-header">` +
+              `<div class="fr-prog-header-left">` +
+                `<span class="fr-prog-name">${p.name}</span>` +
+                `<span class="fr-prog-type">${p.type}</span>` +
+              `</div>` +
+              `<span class="fr-prog-amount">${betragDisp}</span>` +
+            `</div>` +
+            `<div class="fr-prog-cond">${p.bedingungen.map(b => '· ' + b).join('<br>')}</div>` +
+            `<div style="margin-top:5px">${comboBadge}</div>` +
+            `<div class="fr-prog-cond" style="margin-top:3px;font-style:italic">${p.kombiText}</div>` +
+            `<div class="fr-source-links">${linksHtml}</div>` +
+          `</div>`;
+      });
+  }
+
+  window.recalcFR = recalcFR;
+  window.setTabFR = setTabFR;
+
+  // Slider fill
+  document.querySelectorAll('.fr-slider').forEach(slider => {
+    function updateFill() {
+      const min = parseFloat(slider.min);
+      const max = parseFloat(slider.max);
+      const val = parseFloat(slider.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      slider.style.backgroundSize = pct + '% 100%';
+      if (!slider.style.backgroundImage.includes('linear-gradient')) {
+        slider.style.backgroundImage = 'linear-gradient(var(--fr-primary), var(--fr-primary))';
+      }
+    }
+    slider.addEventListener('input', updateFill);
+    updateFill();
+  });
+
+  recalcFR();
 })();
 </script>
 </BaseLayout>
