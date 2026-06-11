@@ -1,0 +1,892 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generateLocalBusinessSchema, generateServiceSchema, generateBreadcrumbSchema, generateFaqSchema } from '@/lib/schema';
+
+const pageTitle = 'Dachaufstockung Hamburg – Mehrgeschoss-Aufstockung, Kosten, Genehmigung';
+const pageDescription = 'Dachaufstockung Hamburg: Ein zusätzliches Vollgeschoss auf Bestandsgebäuden – Holzbau, Modulbau oder Massivbau. Kosten 2.500–4.500 €/m², HBauO 2026, Statik & Förderung.';
+
+const serviceSchemaStr = JSON.stringify(generateServiceSchema({
+  name: 'Dachaufstockung Hamburg',
+  description: pageDescription,
+  slug: '/leistungen/dachaufstockung/',
+}));
+
+const faqSchemaStr = JSON.stringify(generateFaqSchema([
+  {
+    question: 'Was kostet eine Dachaufstockung in Hamburg pro m²?',
+    answer: 'Eine Dachaufstockung in Hamburg kostet zwischen 2.500 und 4.500 Euro pro Quadratmeter Wohnfläche – abhängig von Konstruktionsart (Holzbau günstiger als Massivbau), Erschließungsaufwand (neue Treppe, ggf. Aufzug) und Statik. Ein zusätzliches Vollgeschoss mit 80 m² liegt typischerweise zwischen 200.000 und 360.000 Euro schlüsselfertig.'
+  },
+  {
+    question: 'Brauche ich für eine Dachaufstockung in Hamburg eine Baugenehmigung?',
+    answer: 'Ja, eine Dachaufstockung ist in Hamburg immer genehmigungspflichtig. Sie verändert die Kubatur des Gebäudes und erfordert ein vereinfachtes Baugenehmigungsverfahren nach §61 HBauO 2026. Eine Genehmigungsfreistellung nach §62 ist nicht möglich, da das Vorhaben die Außenwände und die Gebäudehöhe berührt. Die Bearbeitungszeit beim Bezirksamt beträgt 8–12 Wochen.'
+  },
+  {
+    question: 'Welche Häuser eignen sich für eine Dachaufstockung in Hamburg?',
+    answer: 'Am besten eignen sich Flachdach-Bauten aus den 1960er- und 1970er-Jahren, deren Tragwerk für ein zusätzliches Geschoss ausgelegt oder verstärkt werden kann. Auch Satteldach-Häuser mit niedriger Firsthöhe sind geeignet – hier wird das Dach angehoben. Weniger geeignet sind denkmalgeschützte Gebäude, Häuser in Erhaltungssatzungsgebieten mit strengen Gestaltungsregeln sowie Bauten mit unzureichender Statik.'
+  },
+  {
+    question: 'Welche Förderung gibt es für eine Dachaufstockung in Hamburg?',
+    answer: 'Für die energetische Ertüchtigung im Rahmen einer Dachaufstockung sind das KfW-Programm 261 (Wohngebäude-Kredit, 5–45 % Tilgungszuschuss) und die BAFA-Einzelmaßnahmen (15–20 % Zuschuss) relevant. Auf Landesebene ergänzt die IFB Hamburg das Programm Wärmeschutz im Gebäudebestand (WSG) mit 43,50 €/m² für die Dachdämmung. Wichtig: Antrag immer vor Beginn des Vorhabens stellen.'
+  }
+]));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/leistungen/dachaufstockung/"
+  currentPath="/leistungen/dachaufstockung/"
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={serviceSchemaStr} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Leistungen', url: 'https://dachgeschossausbauhamburg.de/leistungen/' },
+    { name: 'Dachaufstockung', url: 'https://dachgeschossausbauhamburg.de/leistungen/dachaufstockung/' },
+  ]))} />
+  <JsonLdSchema schema={faqSchemaStr} />
+
+  <!-- HERO -->
+  <section class="bg-primary py-16 lg:py-20">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-sm font-medium text-white/60 mb-4">Leistungen</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Dachaufstockung Hamburg – Mehr Wohnraum durch ein zusätzliches Geschoss
+          </h1>
+          <p class="text-xl text-white/70 mb-8 leading-relaxed">
+            Eine Dachaufstockung in Hamburg schafft ein vollständig neues Vollgeschoss auf bestehenden Gebäuden
+            – die wirksamste Methode, in der wachsenden Hansestadt zusätzlichen Wohnraum zu schaffen,
+            ohne neue Grundstücksfläche zu verbrauchen. Wir planen, statisch bemessen und bauen Ihre
+            Aufstockung – schlüsselfertig und mit Hamburger Genehmigungssicherheit.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm text-white/60">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              2.500–4.500 €/m²
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              §61 HBauO 2026
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              8–14 Wochen Bauzeit
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              KfW 261 / BAFA / IFB
+            </span>
+          </div>
+        </div>
+        <div>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WAS IST EINE DACHAUFSTOCKUNG? -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Definition"
+          heading="Was ist eine Dachaufstockung?"
+          headingLevel="h2"
+          align="left"
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Eine Dachaufstockung – in der Fachsprache auch <strong class="text-text-primary">Geschossaufstockung</strong>
+          oder <strong class="text-text-primary">Aufstockungsgeschoss</strong> – bezeichnet den vollständigen Neubau eines
+          zusätzlichen Vollgeschosses auf einem bestehenden Gebäude. Im Gegensatz zum klassischen
+          Dachgeschossausbau, der lediglich die bereits vorhandene Dachhülle zu Wohnraum ausbaut,
+          wird bei der Aufstockung das Gebäude in seiner gesamten Höhe verändert: Das alte Dach
+          wird abgetragen, ein neuer Geschosskörper aufgesetzt, das neue Dach kommt obendrauf.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          In Hamburg trifft die Aufstockung einen Nerv: Die Hansestadt wächst jährlich um rund
+          20.000–25.000 Einwohner, freie Bauflächen im inneren Stadtgebiet sind praktisch nicht
+          mehr vorhanden. Wer in Eimsbüttel, Altona, Barmbek oder Winterhude wohnt, kann nicht
+          seitlich anbauen – aber nach oben. Die Dachaufstockung nutzt die ungenutzte Reserve
+          in der Höhe vieler Nachkriegsbauten und schafft auf einen Schlag eine komplette
+          Wohnebene zusätzlich.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Technisch, statisch und genehmigungsrechtlich ist die Aufstockung allerdings eine
+          deutlich größere Aufgabe als ein DG-Ausbau. Sie erfordert eine Tragwerksplanung,
+          Brandschutzkonzepte, neue Erschließung (Treppe, ggf. Aufzug) und immer eine
+          Baugenehmigung. Dafür gewinnen Sie in der Regel 60–100 m² zusätzliche Wohnfläche
+          und steigern den Wert Ihrer Immobilie nachhaltig.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- VORTEILE -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Vorteile"
+          heading="Warum eine Dachaufstockung in Hamburg?"
+          subheading="Fünf Gründe, die für ein zusätzliches Geschoss sprechen – gerade in Hamburg."
+        />
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Volle Wohnfläche</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Anders als beim DG-Ausbau gibt es keine Schrägen – jeder Quadratmeter ist voll nutzbar. Auf 80 m² Grundfläche entstehen 80 m² Wohnraum.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Wertsteigerung 20–30 %</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Eine Aufstockung steigert den Gebäudewert nachweislich um 20–30 %. In Hamburg zahlt sich das aus – die Mieten für neue Dachgeschosswohnungen liegen oft deutlich über dem Bestand.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Kein neuer Boden</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Im dicht bebauten Hamburg ist Bauland knapp und teuer. Die Aufstockung nutzt die vorhandene Bodenfläche – ökologisch wie wirtschaftlich die bessere Lösung.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Förderfähig</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Die energetische Ertüchtigung im Rahmen einer Aufstockung ist über KfW 261 (bis 45 % Tilgungszuschuss), BAFA (15–20 % Zuschuss) und IFB Hamburg (43,50 €/m² WSG) förderfähig.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+            <h3 class="font-bold text-text-text-primary mb-2">Hamburg-Bonus</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">In Hamburg können Eigentümer neuer Dachgeschosswohnungen unter Umständen von erleichterten Stellplatzregelungen und der Wohnraumförderung der IFB profitieren.</p>
+          </div>
+          <div class="bg-surface rounded-xl p-6 border border-border">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">Beste Aussicht</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Die oberste Etage bietet die beste Aussicht und die hellsten Wohnungen – besonders über den Dächern Hamburgs mit Blick auf Alster, Elbe oder Stadtpark ein echtes Verkaufsargument.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- AUFSTOCKUNGS-TYPEN -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Konstruktionsarten"
+          heading="Vier Arten der Dachaufstockung"
+          subheading="Welcher Typ zu Ihrem Gebäude passt, hängt von Statik, Dachform, Stadtbild und Budget ab."
+        />
+
+        <div class="mt-8 space-y-6">
+          <!-- Vollgeschoss in Holzbauweise -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Vollgeschoss in Holzbauweise</h3>
+                  <span class="text-sm text-primary font-semibold">2.500–3.500 €/m²</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Hamburger Standard</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Die mit Abstand häufigste Aufstockungsvariante in Hamburg: Ein komplett vorgefertigter
+                Holzbau-Aufbau in Elementbauweise wird innerhalb weniger Tage auf das Bestandsdach
+                aufgesetzt. Das geringe Eigengewicht (ca. 80–120 kg/m²) belastet die Bestandsstatik
+                nur minimal, die Bauphase ist kurz (1–2 Tage Aufrichten), und der U-Wert der
+                Außenwände ist mit 0,15–0,20 W/(m²K) förderfähig nach GEG.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Gewicht: 80–120 kg/m²</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Bauzeit Aufrichten: 1–2 Tage</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">U-Wert: 0,15–0,20</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Einsatz: Flachdach &amp; Satteldach</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vollgeschoss Massivbau -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Vollgeschoss in Massivbauweise</h3>
+                  <span class="text-sm text-primary font-semibold">3.200–4.500 €/m²</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Höchster Schallschutz</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Wo Holzbau an seine Grenzen stößt – etwa bei Lärm- oder Brandschutzanforderungen in
+                Mehrfamilienhäusern – ist die Massivbau-Aufstockung die richtige Wahl. Kalksandstein,
+                Porenbeton oder Betonfertigteile werden vor Ort ergänzt. Das Gewicht ist mit
+                350–500 kg/m² deutlich höher, was eine sorgfältige statische Bestandsanalyse voraussetzt.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Gewicht: 350–500 kg/m²</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Schallschutz: ≥ 56 dB</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Brandschutz: F90 möglich</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Einsatz: MFH &amp; Gewerbe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staffelgeschoss / Penthouse -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Staffelgeschoss / Penthouse</h3>
+                  <span class="text-sm text-primary font-semibold">3.500–4.800 €/m²</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Premium-Adresse</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Ein Staffelgeschoss setzt das neue Geschoss zurückversetzt (zurückgestaffelt) auf –
+                die entstandene Dachterrasse ist in Hamburg besonders begehrt. Penthouses dieser
+                Art entstehen zunehmend in HafenCity, an der Alster und in Eppendorf. Hohe
+                Lagequalität trifft auf höchste Ausstattungsstandards – und entsprechende Mieten
+                oder Verkaufspreise.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Dachterrasse: inklusive</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Lage: Premium-Viertel</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Miete: 22–30 €/m²</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Stadtbild: prägend</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modulare Aufstockung -->
+          <div class="bg-surface rounded-xl border border-border overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-text-primary mb-1">Modulare Aufstockung (Modulbau)</h3>
+                  <span class="text-sm text-primary font-semibold">2.800–3.800 €/m²</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Schnellste Bauweise</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed mb-4">
+                Bei der modularen Aufstockung werden komplette Raummodule im Werk vorgefertigt und
+                in einem Stück per Kran aufgesetzt. Bauzeit vor Ort: oft nur 2–3 Tage. Ideal für
+                Reihen- und Mehrfamilienhäuser, wenn die Bauphase minimal und die Belastung der
+                Bewohner gering bleiben soll. Voraussetzung: Kranstellplatz und eine Anfahrt für
+                Tieflader.
+              </p>
+              <div class="flex flex-wrap gap-3 text-xs text-text-secondary">
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Bauzeit vor Ort: 2–3 Tage</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Werkstattfertigung</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Kran erforderlich</span>
+                <span class="bg-bg px-3 py-1 rounded-full border border-border">Einsatz: Reihen-/MFH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- KOSTEN -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Kosten Hamburg 2026"
+          heading="Was kostet eine Dachaufstockung in Hamburg?"
+          subheading="Hamburger Richtwerte für ein zusätzliches Vollgeschoss – schlüsselfertig inkl. Erschließung."
+        />
+
+        <div class="mt-8 overflow-x-auto rounded-xl border border-border">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-4 font-semibold">Position</th>
+                <th class="px-6 py-4 font-semibold text-right">Von</th>
+                <th class="px-6 py-4 font-semibold text-right">Bis</th>
+                <th class="px-6 py-4 font-semibold">Bemerkung</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Holzbau-Aufstockung (Vollgeschoss)</td>
+                <td class="px-6 py-4 text-right font-mono">2.500 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">3.500 €/m²</td>
+                <td class="px-6 py-4 text-text-secondary">Hamburger Standard, schnelle Bauweise</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Massivbau-Aufstockung</td>
+                <td class="px-6 py-4 text-right font-mono">3.200 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">4.500 €/m²</td>
+                <td class="px-6 py-4 text-text-secondary">MFH, hoher Schall-/Brandschutz</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Staffelgeschoss / Penthouse</td>
+                <td class="px-6 py-4 text-right font-mono">3.500 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">4.800 €/m²</td>
+                <td class="px-6 py-4 text-text-secondary">Premium-Ausstattung, Dachterrasse</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Modulare Aufstockung</td>
+                <td class="px-6 py-4 text-right font-mono">2.800 €/m²</td>
+                <td class="px-6 py-4 text-right font-mono">3.800 €/m²</td>
+                <td class="px-6 py-4 text-text-secondary">Werkstattfertigung, 2–3 Tage Aufrichten</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Statik-Gutachten &amp; Bemessung</td>
+                <td class="px-6 py-4 text-right font-mono">3.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">8.000 €</td>
+                <td class="px-6 py-4 text-text-secondary">Pflicht, abhängig von Bestand</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Architekten- &amp; Tragwerkplanung</td>
+                <td class="px-6 py-4 text-right font-mono">15.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">40.000 €</td>
+                <td class="px-6 py-4 text-text-secondary">Genehmigungsplanung, Ausführungsplanung</td>
+              </tr>
+              <tr class="bg-surface">
+                <td class="px-6 py-4 font-medium">Innere Erschließung (Treppe, ggf. Aufzug)</td>
+                <td class="px-6 py-4 text-right font-mono">25.000 €</td>
+                <td class="px-6 py-4 text-right font-mono">80.000 €</td>
+                <td class="px-6 py-4 text-text-secondary">je nach Bestand und Stockwerken</td>
+              </tr>
+              <tr class="bg-bg">
+                <td class="px-6 py-4 font-medium">Baunebenkosten (Genehmigung, Statik, SiGeKo)</td>
+                <td class="px-6 py-4 text-right font-mono">8 %</td>
+                <td class="px-6 py-4 text-right font-mono">15 %</td>
+                <td class="px-6 py-4 text-text-secondary">der reinen Baukosten</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-8 content-area">
+          <h3 class="text-xl font-bold text-text-primary mb-4">Beispielrechnung: 80 m² Holz-Aufstockung in Eimsbüttel</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Für ein typisches Hamburger Mehrfamilienhaus aus den 1960er-Jahren in Eimsbüttel
+            mit 80 m² neuer Wohnfläche im aufgestockten Vollgeschoss (Holzbauweise) ergibt sich
+            folgender Kostenrahmen:
+          </p>
+          <ul>
+            <li>Holzbau-Aufstockung schlüsselfertig: 80 m² × 3.000 €/m² = <strong class="text-text-primary">240.000 €</strong></li>
+            <li>Innere Erschließung (Treppenhaus-Anpassung): <strong class="text-text-primary">35.000 €</strong></li>
+            <li>Architekten- &amp; Tragwerkplanung: <strong class="text-text-primary">22.000 €</strong></li>
+            <li>Statik-Gutachten Bestand: <strong class="text-text-primary">5.000 €</strong></li>
+            <li>Baunebenkosten (Genehmigung, SiGeKo, Erschließung): <strong class="text-text-primary">25.000 €</strong></li>
+          </ul>
+          <p class="text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">Gesamtinvestition: ca. 327.000 €</strong> – das entspricht
+            etwa 4.090 €/m² für ein bezugsfertiges Geschoss inklusive Erschließung. Demgegenüber
+            steht eine Wertsteigerung der Immobilie um 200.000–280.000 € (Quelle: Hamburger
+            Gutachterausschuss, Vergleichswerte 2024–2025).
+          </p>
+
+          <h3 class="text-xl font-bold text-text-primary mb-4 mt-8">Drei Faktoren, die die Kosten am stärksten treiben</h3>
+          <p class="text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">1. Bestandsstatik:</strong> Eine Aufstockung ist nur so
+            gut wie das Tragwerk darunter. Bei vielen Hamburger Nachkriegsbauten reicht die Tragfähigkeit
+            nicht aus – dann sind Verstärkungsmaßnahmen (Stahlträger, zusätzliche Stützen,
+            Fundamentverstärkung) nötig. Diese Posten können 20.000–60.000 € ausmachen.
+          </p>
+          <p class="text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">2. Erschließung:</strong> Die neue Wohnebene braucht
+            einen Zugang. In Einfamilienhäusern ist das einfach (neue Treppe ins DG). In
+            Mehrfamilienhäusern muss das Treppenhaus verlängert werden – inklusive Brandschutz-
+            und Schallschutzanforderungen. Das treibt die Kosten deutlich.
+          </p>
+          <p class="text-text-secondary leading-relaxed">
+            <strong class="text-text-primary">3. Dachform und Geschossgeometrie:</strong> Ein
+            rechteckiger Aufbau ist günstiger als ein komplexer Grundriss mit Versätzen,
+            Dachterrassen oder Pultdach-Abschnitten. Auch die Firsthöhe des neuen Dachs und
+            eventuelle Gauben oder Dacherker schlagen zu Buche.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- GENEHMIGUNG -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Hamburger Baurecht"
+          heading="Genehmigung: HBauO 2026 – immer baugenehmigungspflichtig"
+          subheading="Eine Dachaufstockung verändert die Kubatur – und ist daher nie genehmigungsfrei."
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Anders als ein reiner Dachgeschossausbau, der unter günstigen Bedingungen nach
+          <strong class="text-text-primary">§62 HBauO 2026</strong> genehmigungsfrei gestellt
+          werden kann, ist eine Dachaufstockung in Hamburg <strong class="text-text-primary">immer
+          baugenehmigungspflichtig</strong>. Sie verändert die Außenwände, die Gebäudehöhe,
+          die Geschossfläche und in aller Regel auch die Erschließung – vier Tatbestände,
+          die jeweils eine Baugenehmigung erfordern.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Konkret bedeutet das: Sie durchlaufen ein <strong class="text-text-primary">vereinfachtes
+          Baugenehmigungsverfahren nach §61 HBauO 2026</strong>. Das ist weniger aufwendig als
+          ein klassischer Bauantrag (kein vollständiges Brandschutzkonzept durch Dritte,
+          reduzierte Bauvorlagen), erfordert aber einen Architekten, eine vollständige
+          Tragwerksplanung und die Einhaltung aller geltenden B-Pläne. Bearbeitungszeit beim
+          Bezirksamt: typischerweise <strong class="text-text-primary">8–12 Wochen</strong>.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          In Sonderfällen greift der <strong class="text-text-primary">Abweichungstatbestand
+          nach §69 HBauO 2026</strong> – etwa wenn Ihr B-Plan die maximale Geschossflächenzahl
+          (GFZ) durch die Aufstockung überschritten würde. Solche Abweichungen werden in
+          Hamburg pragmatisch gehandhabt, erfordern aber eine fundierte Begründung. Wir
+          prüfen das im Vorfeld und stimmen uns bei Bedarf vorab mit dem Bezirksamt ab.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Wichtig für Hamburg: In <strong class="text-text-primary">Erhaltungssatzungsgebieten</strong>
+          (Altstadt, Teile von Eimsbüttel, Harvestehude, Eppendorf) unterliegt die Aufstockung
+          zusätzlichen Gestaltungsanforderungen. Eine vorgeschaltete Bauvoranfrage ist hier
+          unbedingt empfehlenswert – wir übernehmen die Abstimmung mit dem Bezirksamt.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- STATIK -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Tragwerk"
+          heading="Statik und Tragfähigkeit: Die Basis jeder Aufstockung"
+          headingLevel="h2"
+          align="left"
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Eine Dachaufstockung steht und fällt mit der Statik des Bestands. Vor jeder Planung
+          steht daher eine gründliche <strong class="text-text-primary">Tragwerksanalyse</strong>:
+          Welche Lasten trägt das Gebäude heute? Welche Reserven sind vorhanden? Welche
+          Bauteile – Außenwände, Geschossdecken, Fundamente – halten die zusätzlichen
+          Lasten aus?
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          In Hamburg sind die Bestände sehr heterogen: <strong class="text-text-primary">Gründerzeit-
+          und Vorkriegsbauten</strong> (vor 1918) haben oft massive Ziegelwände und Holzbalkendecken
+          – eine Aufstockung in Holzbauweise ist hier meist problemlos möglich.
+          <strong class="text-text-primary">Nachkriegsbauten (1950–1975)</strong> wurden
+          häufig in kostengünstiger Bauweise errichtet und benötigen regelmäßig Verstärkungen.
+          <strong class="text-text-primary">Gebäude ab 1980</strong> sind meist für eine zusätzliche
+          Lastreserve ausgelegt.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Wenn die Statik nicht ausreicht, kommen verschiedene <strong class="text-text-primary">Verstärkungsmaßnahmen</strong>
+          in Frage: zusätzliche Stahlträger in den Außenwänden, Ertüchtigung der Geschossdecken
+          mit Carbonfaser-Lamellen, Verbreiterung der Fundamente oder die Aktivierung von
+          Reservekapazitäten durch Lastumlagerung. Welche Maßnahme die richtige ist, hängt
+          vom Einzelfall ab. Wir arbeiten hier mit erfahrenen Hamburger Statikbüros zusammen,
+          die die Bestandsbauweise Ihrer Immobilie kennen.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Tipp: Wenn Sie unsicher sind, ob Ihr Gebäude aufgestockt werden kann, lassen Sie
+          eine <strong class="text-text-primary">kostenlose Vor-Ort-Erstberatung</strong> durchführen.
+          Wir bewerten die sichtbaren Indikatoren (Bauweise, Zustand, Decken) und sagen Ihnen
+          realistisch, ob eine Aufstockung machbar ist.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- BRANDSCHUTZ, SCHALLSCHUTZ, GEG -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Technische Anforderungen"
+          heading="Brandschutz, Schallschutz und GEG"
+          headingLevel="h2"
+          align="left"
+        />
+        <h3 class="text-xl font-bold text-text-primary mb-3">Brandschutz nach HBauO 2026</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Aufgestockte Geschosse müssen brandschutztechnisch so ertüchtigt werden, dass das
+          Gesamtgebäude die Anforderungen der HBauO 2026 erfüllt. In Mehrfamilienhäusern
+          bedeutet das in der Regel <strong class="text-text-primary">F30/F60-tragende Bauteile</strong>
+          und eine nichtbrennbare <strong class="text-text-primary">Dachkonstruktion oberhalb
+          der obersten Geschossdecke</strong>. Auch die Rettungswege (zweites Treppenhaus
+          oder Rettungsbalkon) sind regelmäßig zu prüfen und ggf. nachzurüsten.
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">Schallschutz nach DIN 4109</h3>
+        <p class="text-text-secondary leading-relaxed">
+          In Mehrfamilienhäusern muss der Schallschutz zwischen dem neuen Geschoss und den
+          Bestandswohnungen mindestens <strong class="text-text-primary">56 dB (Luftschall)
+          und 48 dB (Trittschall)</strong> erreichen. Das erfordert entkoppelte Bodenaufbauten
+          im neuen Geschoss, Vorsatzschalen an den aufgehenden Wänden und – je nach Konstruktion –
+          eine schwere Geschossdecken-Aufdopplung in der darunterliegenden Wohnung.
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">GEG – Wärmeschutz 2026</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Die <strong class="text-text-primary">Gebäudeenergiegesetz (GEG) 2024</strong> schreibt
+          für Aufstockungen verschärfte U-Werte vor: Außenwände max. <strong class="text-text-primary">0,20 W/(m²K)</strong>,
+          Dachflächen max. <strong class="text-text-primary">0,14 W/(m²K)</strong>, Fenster
+          max. 1,0 W/(m²K). Eine Aufstockung in Hamburg muss außerdem die
+          <strong class="text-text-primary">Solar-Pflicht</strong> beachten: Auf Dächern ab
+          50 m² ist seit 01.01.2024 eine Photovoltaik- oder Solarthermie-Anlage Pflicht
+          (Hamburger Klimaschutzgesetz).
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FÖRDERUNG -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Förderung 2026"
+          heading="Welche Förderung gibt es für eine Dachaufstockung in Hamburg?"
+          headingLevel="h2"
+          align="left"
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Eine Dachaufstockung in Hamburg kann über mehrere Programme gleichzeitig gefördert
+          werden. Die wichtigsten im Überblick:
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">KfW 261 – Wohngebäude-Kredit</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Wenn die Aufstockung Teil einer energetischen Gesamtsanierung auf Effizienzhaus-Niveau
+          (mindestens EH 85) ist, können Sie den KfW 261 in Anspruch nehmen. Förderung: zinsverbilligter
+          Kredit bis 150.000 € pro Wohneinheit plus Tilgungszuschuss zwischen <strong class="text-text-primary">5 % (EH 85) und 45 % (EH 40 EE)</strong>.
+          Antrag über die Hausbank. Wichtig: Mittel sind 2026 begrenzt – zügig planen.
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">BAFA BEG Einzelmaßnahmen</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Für die energetische Ertüchtigung im Rahmen der Aufstockung gibt es 15 % Zuschuss
+          auf die förderfähigen Kosten (mit iSFP sogar 20 %). Förderfähige Kosten: 30.000 €
+          pro Wohneinheit und Jahr (mit iSFP 60.000 €). Pflicht: Energieeffizienz-Experte
+          ist eingebunden, Antrag vor Auftragsvergabe.
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">IFB Hamburg – Wärmeschutz im Gebäudebestand (WSG)</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Hamburg-spezifisch: Die IFB fördert die Dachdämmung im Rahmen einer Aufstockung
+          mit <strong class="text-text-primary">43,50 €/m²</strong> (bei nachhaltigen Dämmstoffen
+          +10 €/m²). Voraussetzung: Baugenehmigung mindestens 20 Jahre alt, Förderantrag vor
+          Baubeginn. Ab 5.000 € Förderung ist ein IFB-registrierter Energieberater Pflicht.
+        </p>
+        <h3 class="text-xl font-bold text-text-primary mb-3 mt-6">IFB Hamburg – Modernisierung Mietwohnungen (B/C)</h3>
+        <p class="text-text-secondary leading-relaxed">
+          Für Vermieter: Das IFB-Programm B/C fördert explizit auch Dachaufstockungen im
+          Mietwohnungsbestand mit zinsvergünstigten Darlehen und Zuschussanteilen. Gegenleistung:
+          einkommensabhängige Mietpreisbindung. Ideal für Investoren und Wohnungsbaugesellschaften.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- PROZESS -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Ablauf"
+          heading="In 6 Schritten zu Ihrer Dachaufstockung"
+          subheading="Vom ersten Gespräch bis zur schlüsselfertigen Übergabe – strukturiert und transparent."
+        />
+        <div class="mt-8 space-y-6">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Bestandsaufnahme &amp; Beratung</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Vor-Ort-Termin, Sichtung der Bestandsunterlagen, Bewertung der Statik-Reserven, Ersteinschätzung der Machbarkeit. Kostenlos und unverbindlich.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Tragwerksanalyse &amp; Vorplanung</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Unser Statikpartner prüft das Bestandstragwerk, ermittelt die Tragfähigkeitsreserven und definiert ggf. notwendige Verstärkungsmaßnahmen. Architekt skizziert Volumen, Erschließung und Grundrissoptionen.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">3</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Entwurfs- &amp; Genehmigungsplanung</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Ausgearbeitete Genehmigungsplanung inkl. aller Bauvorlagen, Brandschutzkonzept, Schallschutznachweis, energetischer Nachweis nach GEG. Einreichung beim Bezirksamt.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">4</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Förderanträge &amp; Ausführungsplanung</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Wir stellen die Förderanträge bei KfW, BAFA und/oder IFB Hamburg. Parallel: Ausführungsplanung, Werkplanung, Detailstatik, Bemusterung der Ausstattung.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">5</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Rohbau-Aufstockung &amp; Dach</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Abtrag des alten Dachs, Vorbereitung der Bestandsdecke, Aufrichten der Aufstockung (bei Modulbau 2–3 Tage, bei Holzbau 1–2 Wochen), neues Dach inkl. Dämmung nach GEG.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold">6</div>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-1">Innenausbau &amp; schlüsselfertige Übergabe</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Trockenbau, Elektrik, Heizung, Sanitär, Böden, Malerarbeiten. Schlüsselfertige Übergabe mit Abnahmeprotokoll, Energieausweis und allen Garantieunterlagen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- STADTTEILE -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Hamburg-Standorte"
+          heading="Für welche Hamburger Stadtteile eignet sich eine Aufstockung?"
+          headingLevel="h2"
+          align="left"
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Hamburg hat ein enormes Aufstockungspotenzial. Besonders lohnend:
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Barmbek, Eilbek, Wandsbek:</strong> Viele
+          Nachkriegsbauten mit Flachdach und ausbaufähigem Tragwerk. Hohe Mietnachfrage,
+          moderate Baupreise. Die Bezirksämter sind erfahren.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Eimsbüttel, Altona, St. Pauli:</strong> Dicht
+          bebaute Altbauquartiere mit Erhaltungssatzung. Hier ist die Gestaltungsabstimmung
+          mit dem Bezirksamt entscheidend – aber auch die Wertsteigerung am höchsten.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Winterhude, Eppendorf, Uhlenhorst:</strong>
+          Premium-Standorte. Aufstockungen in Holzbauweise oder als Staffelgeschoss mit
+          Dachterrasse erzielen hier Spitzenergebnisse – sowohl bei Vermietung als auch Verkauf.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Harburg, Bergedorf, Süderelbe:</strong> Hier
+          sind die Baupreise 5–10 % unter dem Hamburger Durchschnitt. Aufstockungen in
+          Reihen- und Mehrfamilienhäusern lohnen sich besonders für Investoren.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- WANN LOHNT SICH EINE AUFSTOCKUNG? -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Potenzial-Check"
+          heading="Wann lohnt sich eine Dachaufstockung?"
+          subheading="Nicht jedes Gebäude eignet sich – aber unter diesen Bedingungen rechnet sich das Projekt."
+        />
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Flachdach vorhanden:</strong> Flachdach-Bauten sind die idealen Aufstockungsobjekte – kein komplizierter Dachabbruch, die Tragwerksverstärkung ist gut planbar.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Tragfähigkeit OK:</strong> Ein Tragwerk aus Beton oder Mauerwerk ab Baujahr 1960 trägt in der Regel ein zusätzliches Holz-Geschoss ohne Verstärkung.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Erschließung möglich:</strong> Das Treppenhaus muss verlängerbar sein. In MFH ist das Standard, in Reihenhäusern oft mit vertretbarem Aufwand möglich.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">B-Plan erlaubt:</strong> Die maximale GFZ/Geschossfläche darf durch die Aufstockung nicht überschritten werden. Wir prüfen das kostenlos vorab.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Hohe Lagequalität:</strong> Je besser die Lage, desto höher die Wertsteigerung. In Eppendorf, HafenCity oder an der Alster rentiert sich die Aufstockung besonders.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-primary font-bold text-lg mt-0.5">→</span>
+            <p class="text-sm text-text-secondary leading-relaxed"><strong class="text-text-primary">Mind. 60 m² Gewinn:</strong> Ab etwa 60 m² zusätzlicher Wohnfläche rechnet sich eine Aufstockung wirtschaftlich – darunter überwiegen die Fixkosten.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- RISIKEN -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <SectionHeader
+          badge="Risiken"
+          heading="Risiken und Herausforderungen ehrlich benannt"
+          headingLevel="h2"
+          align="left"
+        />
+        <p class="text-text-secondary leading-relaxed">
+          Eine Dachaufstockung ist ein größeres Projekt als ein DG-Ausbau – und sie birgt
+          einige typische Risiken, die Sie kennen sollten:
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Statische Überraschungen:</strong> Auch eine
+          gründliche Bestandsanalyse kann nicht alle versteckten Schwachstellen aufdecken.
+          Asbest in alten Dämmungen, durchfeuchtete Tragwerke oder verdeckte Mängel können
+          erst während der Bauphase sichtbar werden. Planen Sie einen Puffer von 10–15 %
+          der Baukosten ein.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Nachbarschaftsrecht:</strong> Eine Aufstockung
+          verändert das Stadtbild und kann Sicht- und Lichtverhältnisse der Nachbarn
+          beeinträchtigen. In Hamburg ist die Nachbarzustimmung nicht zwingend erforderlich,
+          aber eine frühzeitige Information kann Konflikte vermeiden.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Förderbedingungen:</strong> KfW 261 ist
+          budgetabhängig. Wer zu spät plant, läuft Gefahr, dass die Mittel für 2026
+          erschöpft sind. Wir empfehlen eine Förderberatung im frühen Planungsstadium –
+          idealerweise vor der Entwurfsplanung.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          <strong class="text-text-primary">Denkmalschutz &amp; Erhaltungssatzung:</strong>
+          In Schutzgebieten kann eine Aufstockung trotz B-Plan-Eignung am Ende scheitern.
+          Wir prüfen die Schutzstatus vorab und stimmen uns bei Bedarf mit dem Denkmalschutzamt ab.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- MINI-FAQ -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Häufige Fragen"
+          heading="Die wichtigsten Fragen zur Dachaufstockung"
+        />
+        <div class="mt-8 space-y-4">
+          <details class="bg-surface rounded-xl border border-border p-6">
+            <summary class="font-semibold text-text-primary cursor-pointer flex items-center justify-between">
+              Was kostet eine Dachaufstockung in Hamburg pro m²?
+              <span class="text-primary text-2xl">+</span>
+            </summary>
+            <p class="text-sm text-text-secondary leading-relaxed mt-4">
+              Zwischen 2.500 und 4.500 Euro pro Quadratmeter, je nach Konstruktionsart. Holzbau
+              ist günstiger (2.500–3.500 €/m²), Massivbau teurer (3.200–4.500 €/m²). Hinzu
+              kommen Architekten- und Statikkosten (15.000–40.000 €), Erschließung (25.000–80.000 €)
+              und Baunebenkosten (8–15 % der Baukosten). Ein zusätzliches Vollgeschoss mit
+              80 m² liegt typischerweise zwischen 200.000 und 360.000 Euro schlüsselfertig.
+            </p>
+          </details>
+          <details class="bg-surface rounded-xl border border-border p-6">
+            <summary class="font-semibold text-text-primary cursor-pointer flex items-center justify-between">
+              Brauche ich für eine Dachaufstockung in Hamburg eine Baugenehmigung?
+              <span class="text-primary text-2xl">+</span>
+            </summary>
+            <p class="text-sm text-text-secondary leading-relaxed mt-4">
+              Ja, immer. Eine Dachaufstockung verändert die Kubatur des Gebäudes und ist
+              daher nie genehmigungsfrei. Sie durchlaufen ein vereinfachtes Baugenehmigungsverfahren
+              nach §61 HBauO 2026. Die Bearbeitungszeit beim Bezirksamt beträgt 8–12 Wochen.
+            </p>
+          </details>
+          <details class="bg-surface rounded-xl border border-border p-6">
+            <summary class="font-semibold text-text-primary cursor-pointer flex items-center justify-between">
+              Welche Häuser eignen sich für eine Dachaufstockung in Hamburg?
+              <span class="text-primary text-2xl">+</span>
+            </summary>
+            <p class="text-sm text-text-secondary leading-relaxed mt-4">
+              Am besten eignen sich Flachdach-Bauten aus den 1960er- und 1970er-Jahren mit
+              ausreichender Tragfähigkeit. Auch Satteldach-Häuser mit niedriger Firsthöhe sind
+              geeignet. Weniger geeignet sind denkmalgeschützte Gebäude, Häuser in strikten
+              Erhaltungssatzungsgebieten und Gebäude mit unzureichender Statik.
+            </p>
+          </details>
+          <details class="bg-surface rounded-xl border border-border p-6">
+            <summary class="font-semibold text-text-primary cursor-pointer flex items-center justify-between">
+              Welche Förderung gibt es für eine Dachaufstockung in Hamburg?
+              <span class="text-primary text-2xl">+</span>
+            </summary>
+            <p class="text-sm text-text-secondary leading-relaxed mt-4">
+              Für die energetische Ertüchtigung im Rahmen der Aufstockung sind KfW 261
+              (Wohngebäude-Kredit mit 5–45 % Tilgungszuschuss), BAFA BEG EM (15–20 % Zuschuss)
+              und IFB Hamburg WSG (43,50 €/m² für Dachdämmung) relevant. Für Vermieter kommt
+              das IFB-Programm Modernisierung Mietwohnungen (B/C) in Frage.
+            </p>
+          </details>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- INTERNE VERLINKUNG -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl">
+        <SectionHeader
+          badge="Mehr erfahren"
+          heading="Zusammenhängende Themen"
+          headingLevel="h2"
+          align="left"
+        />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/leistungen/dachgeschossausbau" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachgeschossausbau</h3>
+            <p class="text-sm text-text-secondary">Die Alternative ohne neue Kubatur: Bestehendes Dachgeschoss zu Wohnraum ausbauen.</p>
+          </a>
+          <a href="/leistungen/daemmung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Dachdämmung</h3>
+            <p class="text-sm text-text-secondary">GEG-konform, förderfähig durch KfW 261, BAFA und IFB Hamburg WSG.</p>
+          </a>
+          <a href="/genehmigung" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">HBauO 2026 Genehmigung</h3>
+            <p class="text-sm text-text-secondary">§61 vereinfacht, §62 Freistellung, §69 Abweichung – alle Hamburger Wege.</p>
+          </a>
+          <a href="/foerderrechner/" class="group p-6 bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">Förderrechner</h3>
+            <p class="text-sm text-text-secondary">Berechnen Sie KfW, BAFA und IFB Hamburg für Ihr Vorhaben.</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- END CTA -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto content-area">
+        <div class="bg-primary rounded-2xl p-8 lg:p-10 text-center">
+          <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Dachaufstockung in Hamburg planen</h2>
+          <p class="text-white/70 mb-8">
+            Beschreiben Sie uns Ihr Gebäude – wir prüfen die Aufstockungsfähigkeit, die Statik
+            und die Hamburger Genehmigungschancen. Kostenlose und unverbindliche Erstberatung.
+          </p>
+          <a href="/kontakt" class="cta-primary text-base bg-secondary text-primary hover:bg-secondary/90">Beratung anfragen</a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

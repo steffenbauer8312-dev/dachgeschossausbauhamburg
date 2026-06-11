@@ -81,4 +81,24 @@ export const SERVICES: Service[] = [
     ],
     priceRange: '800–2.500 €/m²',
   },
+  {
+    id: 'dachaufstockung',
+    title: 'Dachaufstockung',
+    slug: 'dachaufstockung',
+    shortDescription: 'Ein zusätzliches Vollgeschoss auf Bestandsgebäuden – die wirksamste Methode für mehr Wohnraum in Hamburg.',
+    description: 'Eine Dachaufstockung schafft ein vollständig neues Geschoss auf einem bestehenden Gebäude. In der wachsenden Hansestadt ist das oft die einzige Möglichkeit, zusätzlichen Wohnraum zu schaffen, ohne neue Grundstücksfläche zu verbrauchen. Wir planen, statisch bemessen und bauen Ihre Aufstockung – schlüsselfertig und mit Hamburger Genehmigungssicherheit.',
+    benefits: [
+      'Volle Wohnfläche ohne Schrägen – jeder m² ist nutzbar',
+      'Wertsteigerung der Immobilie um 20–30 %',
+      'Kein neuer Boden erforderlich – ökologisch und wirtschaftlich',
+      'Förderfähig: KfW 261, BAFA, IFB Hamburg',
+    ],
+    useCases: [
+      'Zusätzliches Geschoss auf Flachdach-Bauten der 60er/70er-Jahre',
+      'Staffelgeschoss / Penthouse in Premium-Lagen',
+      'Modulare Aufstockung für schnelle Bauweise',
+      'Aufstockung auf Satteldach-Häusern (Firstanhebung)',
+    ],
+    priceRange: '2.500–4.500 €/m²',
+  },
 ]

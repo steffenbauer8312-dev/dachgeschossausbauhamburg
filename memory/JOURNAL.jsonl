@@ -1,0 +1,1 @@
+{"ts":"2026-06-01T09:57:34.438Z","tags":["deploy","css-fix"],"text":"Förderrechner CSS-Problem behoben. CSS war als inline <style> im Astro-Block und wurde von Tailwind/base-Styles überschrieben. Lösung: CSS in eigene Datei src/styles/foerderrechner.css ausgelagert und per import eingebunden. Funktioniert jetzt korrekt."}
