@@ -43,13 +43,20 @@ import Container from '@/components/ui/Container.astro';
           </div>
 
           <div>
-            <h2 class="text-lg font-bold text-text-primary mb-3">3. Web3Forms (Kontaktformular)</h2>
+            <h2 class="text-lg font-bold text-text-primary mb-3">3. Kontaktformular (Cloudflare Worker / Brevo)</h2>
             <p>
-              Diese Website nutzt den Service Web3Forms, um Formulareingaben sicher zu
-              übermitteln. Wenn Sie das Kontaktformular ausfüllen, werden Ihre Eingaben
-              direkt an Web3Forms übertragen. Web3Forms verarbeitet diese Daten in unserem
-              Auftrag gemäß der Web3Forms-Datenschutzerklärung. Weitere Informationen:
-              <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">web3forms.com/privacy</a>.
+              Wenn Sie das Kontaktformular auf dieser Website ausfüllen, werden Ihre
+              Eingaben verschlüsselt per HTTPS an einen Serverless-Worker auf
+              Cloudflare übertragen. Dieser Worker leitet die Daten zur
+              E-Mail-Zustellung an den Dienst <strong>Brevo</strong>
+              (Sendinblue GmbH) weiter. Brevo verarbeitet die Daten als
+              Auftragsverarbeiter gemäß Art. 28 DSGVO. Es findet keine
+              Weitergabe an weitere Dritte statt.
+            </p>
+            <p class="mt-3">
+              Empfänger der Anfrage: Steffen Bauer, Schockenriedstr. 12, 70565 Stuttgart.
+              Datenschutzinformationen zu Brevo:
+              <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">brevo.com/legal/privacypolicy</a>.
             </p>
           </div>
 

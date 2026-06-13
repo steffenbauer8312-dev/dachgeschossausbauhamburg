@@ -2,10 +2,14 @@
 interface Props {
   variant?: 'eigentuemer' | 'investor' | 'default';
   showExtraFields?: boolean;
+  service?: string;
+  source?: string;
 }
 const {
   variant = 'default',
   showExtraFields = true,
+  service = 'Dachgeschossausbau',
+  source = 'Website Formular',
 } = Astro.props;
 
 const projectTypes = [
@@ -46,13 +50,6 @@ const headingLabels = {
   default:     'Kostenlose Beratung anfordern',
 };
 const heading = headingLabels[variant] || headingLabels.default;
-
-const subjectLabels = {
-  eigentuemer: 'Leadgen Eigentümer',
-  investor:    'Leadgen Investor',
-  default:     'Leadgen Hamburg',
-};
-const subjectTag = subjectLabels[variant] || subjectLabels.default;
 ---
 
 <section id="kontakt-formular" class="bg-primary text-white rounded-2xl p-5 lg:p-6">
@@ -62,16 +59,21 @@ const subjectTag = subjectLabels[variant] || subjectLabels.default;
   </p>
 
   <form
-    action="https://api.web3forms.com/submit"
+    action="/api/lead"
     method="POST"
     id="leadgen-form"
     class="space-y-3"
   >
-    <!-- Web3Forms Access Key -->
-    <input type="hidden" name="access_key" value="03797b00-547c-4cf8-8cdb-109a618abe0c" />
-    <input type="hidden" name="subject" value={`${subjectTag} – dachgeschossausbauhamburg.de`} />
-    <input type="hidden" name="reply_to" id="reply_to" value="" />
+    <!-- Hidden Fields (Worker-Kontext) -->
+    <input type="hidden" name="service" value={service} />
+    <input type="hidden" name="city" value="Hamburg" />
+    <input type="hidden" name="source" value={source} />
+    <input type="hidden" name="domain" value="dachgeschossausbauhamburg.de" />
+    <input type="hidden" name="redirect" value="/danke/" />
     <input type="hidden" name="variant" value={variant} />
+    <input type="hidden" name="reply_to" id="reply_to" value="" />
+    <!-- Honeypot (Spamschutz) -->
+    <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true" />
 
     <!-- Name -->
     <div>
@@ -195,7 +197,7 @@ const subjectTag = subjectLabels[variant] || subjectLabels.default;
       btnLoading.classList.add('flex');
       submitBtn.disabled = true;
 
-      // reply_to für Web3Forms setzen
+      // reply_to setzen
       const emailInput = document.getElementById('email') as HTMLInputElement | null;
       const replyToField = document.getElementById('reply_to') as HTMLInputElement | null;
       if (emailInput && replyToField) {
@@ -206,19 +208,35 @@ const subjectTag = subjectLabels[variant] || subjectLabels.default;
         const res = await fetch(form.action, {
           method: 'POST',
           body: new FormData(form),
-          headers: { Accept: 'application/json' },
+          redirect: 'follow',
         });
+
         if (res.ok) {
+          // Worker schickt 303 → /danke/ (wenn redirect field gesetzt)
+          if (res.redirected) {
+            window.location.href = res.url;
+            return;
+          }
+          // Fallback: JSON {ok:true} → inline success
           form.classList.add('hidden');
           successEl.classList.remove('hidden');
-        } else {
-          throw new Error('Server error');
+          return;
         }
-      } catch {
+
+        // 4xx/5xx – versuche Fehlermeldung auszulesen
+        let detail = '';
+        try {
+          const data = await res.json();
+          detail = data?.error || '';
+        } catch { /* ignore */ }
+        throw new Error(detail || `HTTP ${res.status}`);
+      } catch (err) {
         errorEl.classList.remove('hidden');
         btnText.classList.remove('hidden');
         btnLoading.classList.add('hidden');
         submitBtn.disabled = false;
+        // eslint-disable-next-line no-console
+        console.error('[leadgen] submit failed', err);
       }
     });
   }

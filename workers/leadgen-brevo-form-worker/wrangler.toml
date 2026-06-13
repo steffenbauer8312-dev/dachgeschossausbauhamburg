@@ -1,0 +1,17 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "leadgen-brevo-form-worker"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+
+# Production-Route (anpassen, sobald die Domain in Cloudflare aufgeschaltet ist)
+# routes = [
+#   { pattern = "dachgeschossausbauhamburg.de/api/lead", zone_name = "dachgeschossausbauhamburg.de" },
+#   { pattern = "dachgeschossausbaumuenchen.de/api/lead",  zone_name = "dachgeschossausbaumuenchen.de"  },
+# ]
+
+[observability]
+enabled = true
+
+# Secrets werden via `wrangler secret put BREVO_API_KEY` gesetzt
+# und NICHT in dieser Datei committed.

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Vielen Dank – Ihre Anfrage ist eingegangen | Dachgeschossausbau Hamburg';
+const description = 'Vielen Dank für Ihre Anfrage zum Dachgeschossausbau in Hamburg. Wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag bei Ihnen.';
+
+const canonical = 'https://www.dachgeschossausbauhamburg.de/danke/';
+const PHONE_TEL = '+494012345678';
+const PHONE_DISPLAY = '040 / 123 456 78';
+---
+
+<BaseLayout {title} {description} {canonical} currentPath="/danke/" noindex={true}>
+  <section class="bg-primary text-white">
+    <div class="container mx-auto px-4 py-16 lg:py-24 max-w-3xl text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-secondary/15 mb-6">
+        <svg class="w-10 h-10 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1 class="text-3xl lg:text-5xl font-bold mb-4 leading-tight">
+        Vielen Dank für Ihre Anfrage.
+      </h1>
+      <p class="text-lg lg:text-xl text-white/80 leading-relaxed">
+        Wir haben Ihre Anfrage erhalten und melden uns innerhalb von
+        <strong class="text-secondary">24 Stunden</strong> mit einem konkreten
+        Vorschlag bei Ihnen – kostenlos und unverbindlich.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="container mx-auto px-4 py-12 lg:py-16 max-w-4xl">
+      <h2 class="text-2xl lg:text-3xl font-bold text-text-primary mb-6">
+        Wie es jetzt weitergeht
+      </h2>
+      <ol class="space-y-5 text-text-secondary">
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white font-bold">1</span>
+          <div>
+            <strong class="text-text-primary">Prüfung Ihrer Angaben</strong><br />
+            Wir schauen uns Ihre Eckdaten (Standort, Projekttyp, Zeitrahmen) an und ordnen Ihre Anfrage dem passenden Spezialisten aus unserem Netzwerk zu.
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white font-bold">2</span>
+          <div>
+            <strong class="text-text-primary">Persönlicher Anruf</strong><br />
+            Ein Hamburger Fachbetrieb meldet sich telefonisch bei Ihnen, um offene Fragen zu klären und einen Vor-Ort-Termin abzustimmen.
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white font-bold">3</span>
+          <div>
+            <strong class="text-text-primary">Individuelles Angebot</strong><br />
+            Sie erhalten ein schriftliches, transparentes Angebot mit Kostenaufstellung – abgestimmt auf Ihr Objekt und die Hamburger Anforderungen (HBauO 2026, GEG, Denkmalschutz).
+          </div>
+        </li>
+      </ol>
+
+      <div class="mt-10 p-6 bg-accent/5 border border-accent/20 rounded-xl">
+        <h3 class="font-semibold text-text-primary mb-2">Sie haben es eilig?</h3>
+        <p class="text-text-secondary mb-4">
+          Rufen Sie uns direkt an – werktags von 8:00 bis 18:00 Uhr.
+        </p>
+        <a
+          href={`tel:${PHONE_TEL}`}
+          class="cta-primary inline-flex"
+        >
+          {PHONE_DISPLAY} – Jetzt anrufen
+        </a>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a
+          href="/"
+          class="text-text-secondary hover:text-primary underline underline-offset-4"
+        >
+          Zurück zur Startseite
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
