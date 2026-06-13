@@ -2,13 +2,15 @@
 name = "leadgen-brevo-form-worker"
 main = "src/index.js"
 compatibility_date = "2024-09-23"
-workers_dev = true
+# workers.dev-Subdomain ist bewusst DEAKTIVIERT – der Worker wird ausschließlich
+# über die Cloudflare-Zone-Routes der einzelnen Domains angesprochen.
+workers_dev = false
 
-# Production-Route (anpassen, sobald die Domain in Cloudflare aufgeschaltet ist)
-# routes = [
-#   { pattern = "dachgeschossausbauhamburg.de/api/lead", zone_name = "dachgeschossausbauhamburg.de" },
-#   { pattern = "dachgeschossausbaumuenchen.de/api/lead",  zone_name = "dachgeschossausbaumuenchen.de"  },
-# ]
+# Beispiel-Routen. Echte Routen werden pro Domain (Zone) im Cloudflare-Dashboard
+# oder via `wrangler routes put` konfiguriert. Hier nur als Referenz:
+#   dachgeschossausbauhamburg.de/api/lead    → Worker
+#   dachgeschossausbaumuenchen.de/api/lead   → Worker
+#   … (alle 24 Domains)
 
 [observability]
 enabled = true

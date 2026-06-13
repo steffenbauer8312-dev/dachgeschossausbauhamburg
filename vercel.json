@@ -2,12 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
-  "rewrites": [
-    {
-      "source": "/api/lead",
-      "destination": "https://leadgen-brevo-form-worker.<account-subdomain>.workers.dev/api/lead"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

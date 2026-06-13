@@ -52,33 +52,23 @@ curl -X POST http://127.0.0.1:8787/api/lead \
 npm run deploy
 ```
 
-Cloudflare vergibt eine URL nach dem Schema
-`https://leadgen-brevo-form-worker.<DEIN-ACCOUNT-SUBDOMAIN>.workers.dev`.
+Der Worker hat **keine eigene workers.dev-URL** (`workers_dev = false`).
+Er ist ausschließlich über die Cloudflare-Zone-Routes der einzelnen
+Domains erreichbar (z. B. `dachgeschossausbauhamburg.de/api/lead`).
 
 ## Routes (Production)
 
-Die produktive Route wird in Cloudflare direkt auf der Zone konfiguriert
-(nicht hier einchecken, da Account-spezifisch). Üblicherweise:
+Die Routen werden pro Domain (Zone) im Cloudflare-Dashboard konfiguriert
+(oder via `wrangler routes put`). Pro Domain eine Route nach Schema:
 
-- `https://dachgeschossausbauhamburg.de/api/lead`
-- `https://dachgeschossausbaumuenchen.de/api/lead`
+| Pattern                              | Service                       |
+| ------------------------------------ | ----------------------------- |
+| `dachgeschossausbauhamburg.de/api/lead`  | `leadgen-brevo-form-worker`   |
+| `dachgeschossausbaumuenchen.de/api/lead` | `leadgen-brevo-form-worker`   |
+| `…` (alle 24 Domains)                | `leadgen-brevo-form-worker`   |
 
-### Vercel-Rewrite einrichten
-
-Damit `/api/lead` auf Vercel an den Worker durchgereicht wird, in
-`vercel.json` einen Rewrite anlegen:
-
-```json
-{
-  "rewrites": [
-    {
-      "source": "/api/lead",
-      "destination": "https://leadgen-brevo-form-worker.<DEIN-ACCOUNT-SUBDOMAIN>.workers.dev/api/lead"
-    }
-  ]
-}
-```
-
-`<DEIN-ACCOUNT-SUBDOMAIN>` durch den echten Subdomain ersetzen, der nach
-`npm run deploy` ausgegeben wird (Dashboard › Workers › Worker öffnen).
+Da der Worker unter `*.workers.dev` **nicht** öffentlich erreichbar ist,
+gibt es auf Vercel-Seite **keinen Rewrite** für `/api/lead`. Der Traffic
+für `/api/lead` wird von Cloudflare direkt an den Worker geleitet und
+nie an Vercel weitergereicht.
 
