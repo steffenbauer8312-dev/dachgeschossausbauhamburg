@@ -1,92 +1,144 @@
 ---
-const objectTypes = [
-  { value: 'einfamilienhaus',   label: 'Einfamilienhaus' },
-  { value: 'mehrfamilienhaus',  label: 'Mehrfamilienhaus' },
-  { value: 'reihenhaus',        label: 'Reihenhaus' },
-  { value: 'sonstiges',         label: 'Sonstiges' },
+interface Props {
+  variant?: 'eigentuemer' | 'investor' | 'default';
+  showExtraFields?: boolean;
+}
+const {
+  variant = 'default',
+  showExtraFields = true,
+} = Astro.props;
+
+const projectTypes = [
+  { value: 'eigentuemer-dachgeschoss',    label: 'Dachgeschossausbau (Wohnung im Dach)' },
+  { value: 'eigentuemer-aufstockung',     label: 'Dachaufstockung (neues Vollgeschoss)' },
+  { value: 'eigentuemer-gaube',           label: 'Dachgaube / Dachaufbau' },
+  { value: 'eigentuemer-daemmung',        label: 'Dachdämmung / Dachsanierung' },
+  { value: 'eigentuemer-innenausbau',     label: 'Innenausbau / Komplettausbau' },
+  { value: 'investor-mehrfamilien',       label: 'Investor: Mehrfamilienhaus-Dachgeschoss' },
+  { value: 'investor-aufstockung',        label: 'Investor: Mehrere Wohneinheiten / Aufstockung' },
+  { value: 'investor-gewerbe',            label: 'Investor: Gewerbeumwandlung' },
+  { value: 'denkmal',                     label: 'Denkmalgeschütztes Gebäude' },
+  { value: 'sonstiges',                   label: 'Sonstiges / Beratung' },
 ];
 
-const timeframes = [
-  { value: 'asap',     label: 'So bald wie möglich' },
-  { value: '3months', label: 'In 3 Monaten' },
-  { value: '6months', label: 'In 6 Monaten' },
-  { value: '12months', label: 'In 12 Monaten oder später' },
+const hamburgDistricts = [
+  'Hamburg-Mitte',
+  'Altona',
+  'Eimsbüttel',
+  'Hamburg-Nord (Winterhude, Eppendorf, Uhlenhorst)',
+  'Wandsbek',
+  'Bergedorf',
+  'Harburg',
+  'Hamburg-Umland (Stormarn, Pinneberg, Harburg-Umland)',
+  'Andere Region',
 ];
+
+const ctaLabels = {
+  eigentuemer: 'Kostenlose Erstberatung anfragen',
+  investor:    'Projekt besprechen – kostenlose Beratung',
+  default:     'Unverbindliches Angebot anfordern',
+};
+const cta = ctaLabels[variant] || ctaLabels.default;
+
+const headingLabels = {
+  eigentuemer: 'Ihren Dachausbau in Hamburg unverbindlich anfragen',
+  investor:    'Ihr Investment-Projekt in Hamburg besprechen',
+  default:     'Kostenlose Beratung anfordern',
+};
+const heading = headingLabels[variant] || headingLabels.default;
+
+const subjectLabels = {
+  eigentuemer: 'Leadgen Eigentümer',
+  investor:    'Leadgen Investor',
+  default:     'Leadgen Hamburg',
+};
+const subjectTag = subjectLabels[variant] || subjectLabels.default;
 ---
 
 <section id="kontakt-formular" class="bg-primary text-white rounded-2xl p-5 lg:p-6">
-  <h2 class="text-lg lg:text-xl font-bold mb-1">
-    Kostenlose Beratung anfordern
-  </h2>
+  <h2 class="text-lg lg:text-xl font-bold mb-1">{heading}</h2>
   <p class="text-white/70 mb-5 text-xs">
-    Wir melden uns innerhalb von 24 Stunden mit einem konkreten Angebot.
+    Wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag.
   </p>
 
-  <form action="https://api.web3forms.com/submit" method="POST" id="leadgen-form" class="space-y-3">
+  <form
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    id="leadgen-form"
+    class="space-y-3"
+  >
+    <!-- Web3Forms Access Key -->
     <input type="hidden" name="access_key" value="03797b00-547c-4cf8-8cdb-109a618abe0c" />
-    <input type="hidden" name="subject" value="Leadgen Hamburg – dachgeschossausbauhamburg.de" />
+    <input type="hidden" name="subject" value={`${subjectTag} – dachgeschossausbauhamburg.de`} />
     <input type="hidden" name="reply_to" id="reply_to" value="" />
+    <input type="hidden" name="variant" value={variant} />
 
     <!-- Name -->
     <div>
       <label for="name" class="block text-xs font-medium mb-1">Name *</label>
-      <input type="text" id="name" name="name" required placeholder="Max Mustermann"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50" />
+      <input
+        type="text" id="name" name="name" required
+        placeholder="Max Mustermann"
+        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
+      />
     </div>
 
-    <!-- E-Mail -->
+    <!-- Email -->
     <div>
       <label for="email" class="block text-xs font-medium mb-1">E-Mail *</label>
-      <input type="email" id="email" name="email" required placeholder="ihre@email.de"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50" />
+      <input
+        type="email" id="email" name="email" required
+        placeholder="ihre@email.de"
+        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
+      />
     </div>
 
     <!-- Telefon -->
     <div>
       <label for="phone" class="block text-xs font-medium mb-1">Telefon *</label>
-      <input type="tel" id="phone" name="phone" required placeholder="+49 40 12345678"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50" />
+      <input
+        type="tel" id="phone" name="phone" required
+        placeholder="+49 40 12345678"
+        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
+      />
     </div>
 
-    <!-- PLZ -->
-    <div>
-      <label for="plz" class="block text-xs font-medium mb-1">Hamburger PLZ *</label>
-      <input type="text" id="plz" name="plz" required placeholder="z.B. 20257" pattern="[0-9]{5}"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50" />
-    </div>
+    {showExtraFields && (
+      <>
+        <!-- Projekttyp -->
+        <div>
+          <label for="project_type" class="block text-xs font-medium mb-1">Projekttyp *</label>
+          <select
+            id="project_type" name="project_type" required
+            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
+          >
+            <option value="" class="bg-primary">Bitte wählen…</option>
+            {projectTypes.map(p => <option value={p.value}>{p.label}</option>)}
+          </select>
+        </div>
 
-    <!-- Objekttyp -->
-    <div>
-      <label for="object_type" class="block text-xs font-medium mb-1">Objekttyp *</label>
-      <select id="object_type" name="object_type" required
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50">
-        <option value="" class="bg-primary">Bitte wählen…</option>
-        {objectTypes.map(o => <option value={o.value}>{o.label}</option>)}
-      </select>
-    </div>
-
-    <!-- Quadratmeter -->
-    <div>
-      <label for="sqm" class="block text-xs font-medium mb-1">Dachfläche (ca. m²)</label>
-      <input type="number" id="sqm" name="sqm" min="10" max="500" placeholder="z.B. 60"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50" />
-    </div>
-
-    <!-- Zeitraum -->
-    <div>
-      <label for="timeframe" class="block text-xs font-medium mb-1">Bevorzugter Zeitraum</label>
-      <select id="timeframe" name="timeframe"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50">
-        <option value="" class="bg-primary">Bitte wählen…</option>
-        {timeframes.map(t => <option value={t.value}>{t.label}</option>)}
-      </select>
-    </div>
+        <!-- Standort -->
+        <div>
+          <label for="district" class="block text-xs font-medium mb-1">Hamburger Bezirk / Region</label>
+          <select
+            id="district" name="district"
+            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
+          >
+            <option value="" class="bg-primary">Bitte wählen…</option>
+            {hamburgDistricts.map(d => <option value={d}>{d}</option>)}
+          </select>
+        </div>
+      </>
+    )}
 
     <!-- Nachricht -->
     <div>
       <label for="message" class="block text-xs font-medium mb-1">Ihre Nachricht</label>
-      <textarea id="message" name="message" rows="2" placeholder="Beschreiben Sie kurz Ihr Projekt…"
-        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 resize-none"></textarea>
+      <textarea
+        id="message" name="message" rows="2"
+        placeholder="Beschreiben Sie kurz Ihr Projekt (z.B. Dachfläche, Wohneinheiten, Zeitraum)…"
+        class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary resize-none"
+      ></textarea>
     </div>
 
     <!-- Datenschutz -->
@@ -96,8 +148,12 @@ const timeframes = [
     </p>
 
     <!-- Submit -->
-    <button type="submit" class="bg-secondary text-primary font-semibold w-full text-sm py-3 rounded-lg hover:bg-secondary/90 transition-colors" id="form-submit">
-      <span id="btn-text">Unverbindliches Angebot anfordern</span>
+    <button
+      type="submit"
+      class="cta-primary w-full text-sm"
+      id="form-submit"
+    >
+      <span id="btn-text">{cta}</span>
       <span id="btn-loading" class="hidden items-center gap-2">
         <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
@@ -107,16 +163,18 @@ const timeframes = [
       </span>
     </button>
 
-    <!-- Success/Error -->
+    <!-- Success -->
     <div id="form-success" class="hidden text-center py-6">
       <svg class="w-12 h-12 text-secondary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
       </svg>
       <p class="font-semibold text-lg">Danke für Ihre Anfrage!</p>
-      <p class="text-white/70 text-sm mt-2">Wir melden uns innerhalb von 24 Stunden.</p>
+      <p class="text-white/70 text-sm mt-2">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
     </div>
+
+    <!-- Error -->
     <div id="form-error" class="hidden text-center py-4 text-sm text-red-300">
-      Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.
+      Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.
     </div>
   </form>
 </section>
@@ -153,7 +211,9 @@ const timeframes = [
         if (res.ok) {
           form.classList.add('hidden');
           successEl.classList.remove('hidden');
-        } else throw new Error('Server error');
+        } else {
+          throw new Error('Server error');
+        }
       } catch {
         errorEl.classList.remove('hidden');
         btnText.classList.remove('hidden');
