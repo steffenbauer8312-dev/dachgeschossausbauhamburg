@@ -114,8 +114,8 @@ const heading = headingLabels[variant] || headingLabels.default;
             id="project_type" name="project_type" required
             class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
           >
-            <option value="" class="bg-primary">Bitte wählen…</option>
-            {projectTypes.map(p => <option value={p.value}>{p.label}</option>)}
+            <option value="" class="bg-primary text-white">Bitte wählen…</option>
+            {projectTypes.map(p => <option value={p.value} class="bg-white text-text-primary">{p.label}</option>)}
           </select>
         </div>
 
@@ -126,8 +126,8 @@ const heading = headingLabels[variant] || headingLabels.default;
             id="district" name="district"
             class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary"
           >
-            <option value="" class="bg-primary">Bitte wählen…</option>
-            {hamburgDistricts.map(d => <option value={d}>{d}</option>)}
+            <option value="" class="bg-primary text-white">Bitte wählen…</option>
+            {hamburgDistricts.map(d => <option value={d} class="bg-white text-text-primary">{d}</option>)}
           </select>
         </div>
       </>
