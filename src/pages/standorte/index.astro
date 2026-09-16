@@ -1,0 +1,270 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+
+const currentPath = '/standorte/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Standorte', href: '/standorte/' },
+];
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Dachgeschossausbau Hamburg – Alle Stadtteile im Überblick',
+  description: 'Hamburger Stadtteile für Dachgeschossausbau: Eppendorf, Altona, Winterhude, Eimsbüttel, Harburg, Bergedorf – mit Kosten, Mieten und Genehmigungs-Hinweisen.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-02-15',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['DG-Ausbau Hamburg Stadtteile', 'Eppendorf DG-Ausbau', 'Altona Dachgeschossausbau', 'Hamburg Dachgeschossausbau'],
+  url: 'https://dachgeschossausbauhamburg.de/standorte/',
+}));
+
+interface StandortOverview {
+  name: string;
+  bezirk: string;
+  slug: string;
+  description: string;
+  kaufpreis: string;
+  miete: string;
+  ehsg: boolean;
+  denkmal: boolean;
+  stichwort: string;
+}
+
+const STANDORTE: StandortOverview[] = [
+  {
+    name: 'Eppendorf',
+    bezirk: 'Eimsbüttel',
+    slug: 'eppendorf',
+    description: 'Top-Lage mit Gründerzeitvillen, hohe Mieten und starke Wertsteigerung. Erhaltungssatzung Eimsbüttel-Nord.',
+    kaufpreis: '5.000–8.000 €/m²',
+    miete: '14–18 €/m²',
+    ehsg: true,
+    denkmal: true,
+    stichwort: 'Premium-Lage',
+  },
+  {
+    name: 'Altona',
+    bezirk: 'Altona',
+    slug: 'altona',
+    description: 'Vielseitiger Bezirk: Altstadt/Nord mit Erhaltungssatzung, Elbvororte mit Villen und Denkmalschutz.',
+    kaufpreis: '4.500–7.500 €/m²',
+    miete: '12–18 €/m²',
+    ehsg: true,
+    denkmal: true,
+    stichwort: 'Mix aus Alt & Neu',
+  },
+  {
+    name: 'Winterhude',
+    bezirk: 'Hamburg-Nord',
+    slug: 'winterhude',
+    description: 'Wachstums-Mikrolage mit Villen und Jugendstil, beliebt bei Familien und Investoren gleichermaßen.',
+    kaufpreis: '4.500–7.000 €/m²',
+    miete: '13–17 €/m²',
+    ehsg: true,
+    denkmal: true,
+    stichwort: 'Wachstums-Lage',
+  },
+  {
+    name: 'Eimsbüttel',
+    bezirk: 'Eimsbüttel',
+    slug: 'eimsbuettel',
+    description: 'Familienfreundlich, höchste Mieten Hamburgs. Eimsbütteler Erhaltungssatzung schützt das Straßenbild.',
+    kaufpreis: '5.500–9.000 €/m²',
+    miete: '14–22 €/m²',
+    ehsg: true,
+    denkmal: true,
+    stichwort: 'Familien-Tipp',
+  },
+  {
+    name: 'Harburg',
+    bezirk: 'Harburg',
+    slug: 'harburg',
+    description: 'Preisgünstigster Standort mit höchster Cashflow-Rendite (7–13 %). Viele Fördermöglichkeiten.',
+    kaufpreis: '2.800–4.500 €/m²',
+    miete: '9–13 €/m²',
+    ehsg: false,
+    denkmal: false,
+    stichwort: 'Beste Rendite',
+  },
+  {
+    name: 'Bergedorf',
+    bezirk: 'Bergedorf',
+    slug: 'bergedorf',
+    description: 'Ländlicher Charme, Backstein-Villen und gute Mietrendite. Wassernahe Lagen brauchen Feuchteschutz.',
+    kaufpreis: '3.500–5.000 €/m²',
+    miete: '10–14 €/m²',
+    ehsg: false,
+    denkmal: false,
+    stichwort: 'Wachstum & Natur',
+  },
+];
+---
+
+<BaseLayout
+  title="Dachgeschossausbau Hamburg – Alle Stadtteile"
+  description="Dachgeschossausbau in allen Hamburger Stadtteilen: Eppendorf, Altona, Winterhude, Eimsbüttel, Harburg, Bergedorf. Mit Kosten, Mieten und Bauaufsicht."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Standorte', url: 'https://dachgeschossausbauhamburg.de/standorte/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Stadtteil-Übersicht · Hamburg
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Dachgeschossausbau in Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Sechs Hamburger Stadtteile, in denen wir regelmäßig DG-Projekte umsetzen. Jeder mit
+          eigenem Charakter, eigenen Preisen und eigenen Regeln bei Erhaltungssatzung und Denkmalschutz.
+        </p>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">6</div>
+            <div class="text-xs text-white/60 mt-1">Stadtteile</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">24+</div>
+            <div class="text-xs text-white/60 mt-1">Projekte 2024–2026</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">5 Wo.</div>
+            <div class="text-xs text-white/60 mt-1">Ø bis Genehmigung</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">4,9★</div>
+            <div class="text-xs text-white/60 mt-1">Kundenbewertung</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Stadtteile -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Stadtteile"
+        heading="Wo wir in Hamburg aktiv sind"
+        subheading="Klicken Sie auf einen Stadtteil für detaillierte Informationen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {STANDORTE.map((stadtteil) => (
+          <a
+            href={`/standorte/${stadtteil.slug}/`}
+            class="group bg-surface rounded-2xl p-6 border border-border hover:border-primary transition-all"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <span class="inline-block text-xs font-semibold text-secondary uppercase tracking-wider">
+                {stadtteil.bezirk}
+              </span>
+              <div class="flex flex-col gap-1 items-end">
+                {stadtteil.ehsg && (
+                  <span class="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-800 rounded">
+                    EHSG
+                  </span>
+                )}
+                {stadtteil.denkmal && (
+                  <span class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                    Denkmal
+                  </span>
+                )}
+              </div>
+            </div>
+            <h2 class="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
+              DG-Ausbau {stadtteil.name}
+            </h2>
+            <p class="text-xs text-secondary font-semibold mb-3">
+              {stadtteil.stichwort}
+            </p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              {stadtteil.description}
+            </p>
+            <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+              <div class="bg-bg rounded-lg p-2">
+                <div class="text-text-secondary">Kaufpreis</div>
+                <div class="font-semibold text-text-primary">{stadtteil.kaufpreis}</div>
+              </div>
+              <div class="bg-bg rounded-lg p-2">
+                <div class="text-text-secondary">Miete</div>
+                <div class="font-semibold text-text-primary">{stadtteil.miete}</div>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
+              Stadtteil-Details ansehen
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Standort-Vergleich -->
+  <section class="py-16">
+    <Container>
+      <SectionHeader
+        badge="Direktvergleich"
+        heading="Welcher Stadtteil passt zu Ihnen?"
+        subheading="Drei Paare im direkten Vergleich."
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto text-center">
+        <a
+          href="/standorte/vergleich/"
+          class="inline-flex items-center gap-2 cta-primary text-base px-8 py-4"
+        >
+          Zum Stadtteil-Vergleich
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Welcher Stadtteil passt zu Ihnen?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Lassen Sie uns gemeinsam durchgehen, was für Ihr Projekt die richtige Wahl ist –
+            kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
