@@ -1,0 +1,381 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
+
+const currentPath = '/vergleich/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Vergleich', href: '/vergleich/' },
+];
+
+interface ComparisonRow {
+  criterium: string;
+  values: { label: string; value: string; highlight?: boolean }[];
+}
+
+interface ComparisonTable {
+  id: string;
+  title: string;
+  subtitle: string;
+  columns: string[];
+  rows: ComparisonRow[];
+}
+
+const COMPARISONS: ComparisonTable[] = [
+  {
+    id: 'gauben',
+    title: 'Dachgauben: Welche Form passt zu Ihrem Dach?',
+    subtitle: 'Schleppgaube, Fledermausgaube, Trapezgaube und Segmentgaube im direkten Vergleich für Hamburg.',
+    columns: ['Kriterium', 'Schleppgaube', 'Fledermausgaube', 'Trapezgaube', 'Segmentgaube'],
+    rows: [
+      { criterium: 'Kosten (inkl. Einbau)', values: [
+        { label: 'Kosten', value: '8.000–18.000 €' },
+        { label: 'Kosten', value: '15.000–25.000 €' },
+        { label: 'Kosten', value: '10.000–20.000 €', highlight: true },
+        { label: 'Kosten', value: '14.000–24.000 €' },
+      ]},
+      { criterium: 'Stehhöhe / Innenraum', values: [
+        { label: 'Innenraum', value: 'Hoch' },
+        { label: 'Innenraum', value: 'Sehr hoch', highlight: true },
+        { label: 'Innenraum', value: 'Mittel' },
+        { label: 'Innenraum', value: 'Hoch' },
+      ]},
+      { criterium: 'Lichtfläche', values: [
+        { label: 'Licht', value: 'Mittel' },
+        { label: 'Licht', value: 'Groß', highlight: true },
+        { label: 'Licht', value: 'Groß' },
+        { label: 'Licht', value: 'Mittel' },
+      ]},
+      { criterium: 'Hamburg-Typisch', values: [
+        { label: 'Typisch', value: 'Sehr verbreitet', highlight: true },
+        { label: 'Typisch', value: 'Eppendorf/Altona' },
+        { label: 'Typisch', value: 'Neubau' },
+        { label: 'Typisch', value: 'Altbau' },
+      ]},
+      { criterium: 'Erhaltungssatzung', values: [
+        { label: 'EHSG', value: 'Bevorzugt ✓', highlight: true },
+        { label: 'EHSG', value: 'Streng geprüft' },
+        { label: 'EHSG', value: 'Selten genehmigt' },
+        { label: 'EHSG', value: 'Bedingt genehmigt' },
+      ]},
+      { criterium: 'Dachneigung ideal', values: [
+        { label: 'Neigung', value: '30–50°' },
+        { label: 'Neigung', value: '20–35°', highlight: true },
+        { label: 'Neigung', value: '25–45°' },
+        { label: 'Neigung', value: '30–45°' },
+      ]},
+    ],
+  },
+  {
+    id: 'daemmung',
+    title: 'Dämmung: Aufsparren, Zwischensparren oder Untersparre?',
+    subtitle: 'Drei Dämmarten im direkten Vergleich – Kosten, Dämmleistung und Eignung für Hamburg.',
+    columns: ['Kriterium', 'Aufsparrendämmung', 'Zwischensparrendämmung', 'Untersparrendämmung'],
+    rows: [
+      { criterium: 'Kosten (€/m²)', values: [
+        { label: 'Kosten', value: '180–280 €', highlight: true },
+        { label: 'Kosten', value: '60–120 €' },
+        { label: 'Kosten', value: '40–80 €' },
+      ]},
+      { criterium: 'Dämmleistung (U-Wert)', values: [
+        { label: 'U-Wert', value: '0,14–0,18', highlight: true },
+        { label: 'U-Wert', value: '0,22–0,28' },
+        { label: 'U-Wert', value: '0,30–0,40' },
+      ]},
+      { criterium: 'Wärmebrücken', values: [
+        { label: 'Brücken', value: 'Keine ✓', highlight: true },
+        { label: 'Brücken', value: 'An Sparren' },
+        { label: 'Brücken', value: 'An Sparren' },
+      ]},
+      { criterium: 'Eingriff ins Dach', values: [
+        { label: 'Eingriff', value: 'Komplette Eindeckung' },
+        { label: 'Eingriff', value: 'Innen offen', highlight: true },
+        { label: 'Eingriff', value: 'Innen offen', highlight: true },
+      ]},
+      { criterium: 'KfW 261 förderfähig', values: [
+        { label: 'Förderung', value: 'Ja ✓' },
+        { label: 'Förderung', value: 'Ja (mit iSFP) ✓' },
+        { label: 'Förderung', value: 'Eingeschränkt' },
+      ]},
+      { criterium: 'Bestandssanierung', values: [
+        { label: 'Bestand', value: 'Möglich' },
+        { label: 'Bestand', value: 'Ideal ✓', highlight: true },
+        { label: 'Bestand', value: 'Ideal ✓', highlight: true },
+      ]},
+    ],
+  },
+  {
+    id: 'foerderung',
+    title: 'Förderung: KfW 261, BAFA oder §35c EStG?',
+    subtitle: 'Welches Programm für welchen Hamburger Eigentümer? Kombinationsregeln im Überblick.',
+    columns: ['Kriterium', 'KfW 261', 'BAFA Einzelmaßnahmen', '§35c EStG'],
+    rows: [
+      { criterium: 'Förderhöhe', values: [
+        { label: 'Höhe', value: 'Bis 150.000 € Kredit' },
+        { label: 'Höhe', value: 'Bis 12.000 € Zuschuss' },
+        { label: 'Höhe', value: 'Bis 40.000 € Abzug', highlight: true },
+      ]},
+      { criterium: 'Tilgungszuschuss', values: [
+        { label: 'Zuschuss', value: 'Bis 40% (mit WPB)', highlight: true },
+        { label: 'Zuschuss', value: '15–20%' },
+        { label: 'Zuschuss', value: '20% (Steuer)' },
+      ]},
+      { criterium: 'Mit KfW kombinierbar', values: [
+        { label: 'Kombi', value: 'Nicht mit BAFA' },
+        { label: 'Kombi', value: 'Nicht mit KfW' },
+        { label: 'Kombi', value: 'Mit KfW möglich ✓', highlight: true },
+      ]},
+      { criterium: 'Eigenleistung nötig', values: [
+        { label: 'Eigenleistung', value: 'Nein' },
+        { label: 'Eigenleistung', value: 'Nein' },
+        { label: 'Eigenleistung', value: 'Nein' },
+      ]},
+      { criterium: 'Antragstellung', values: [
+        { label: 'Antrag', value: 'Über Hausbank' },
+        { label: 'Antrag', value: 'Direkt bei BAFA' },
+        { label: 'Antrag', value: 'Steuererklärung', highlight: true },
+      ]},
+      { criterium: 'Schnelligkeit', values: [
+        { label: 'Tempo', value: '6–12 Wochen' },
+        { label: 'Tempo', value: '4–8 Wochen', highlight: true },
+        { label: 'Tempo', value: 'Mit Steuererklärung' },
+      ]},
+      { criterium: 'Ideal für', values: [
+        { label: 'Ideal', value: 'Große Sanierungen' },
+        { label: 'Ideal', value: 'Einzelmaßnahmen' },
+        { label: 'Ideal', value: 'Selbstnutzer', highlight: true },
+      ]},
+    ],
+  },
+  {
+    id: 'ausbau-vs-aufstockung',
+    title: 'DG-Ausbau vs. Aufstockung – was lohnt sich in Hamburg?',
+    subtitle: 'Zwei Wege zu mehr Wohnfläche: bestehendes DG ausbauen oder ein ganzes Geschoss aufsetzen.',
+    columns: ['Kriterium', 'DG-Ausbau', 'Aufstockung'],
+    rows: [
+      { criterium: 'Kosten (€/m²)', values: [
+        { label: 'Kosten', value: '800–2.500 €', highlight: true },
+        { label: 'Kosten', value: '2.500–4.500 €' },
+      ]},
+      { criterium: 'Genehmigungspflicht', values: [
+        { label: 'Genehmigung', value: 'Oft §62 Freistellung', highlight: true },
+        { label: 'Genehmigung', value: 'Immer Baugenehmigung' },
+      ]},
+      { criterium: 'Statik aufwendig', values: [
+        { label: 'Statik', value: 'Mittel (Bestand)' },
+        { label: 'Statik', value: 'Hoch (neues Geschoss)' },
+      ]},
+      { criterium: 'Bauzeit', values: [
+        { label: 'Bauzeit', value: '8–16 Wochen', highlight: true },
+        { label: 'Bauzeit', value: '16–32 Wochen' },
+      ]},
+      { criterium: 'Wohnflächengewinn', values: [
+        { label: 'Fläche', value: '30–80 m² (DG)' },
+        { label: 'Fläche', value: '60–120 m² (komplett neu)', highlight: true },
+      ]},
+      { criterium: 'Mieter im Haus bleiben', values: [
+        { label: 'Mieter', value: 'Möglich', highlight: true },
+        { label: 'Mieter', value: 'Kaum möglich' },
+      ]},
+      { criterium: 'Denkmalschutz geeignet', values: [
+        { label: 'Denkmal', value: 'Ja, mit Auflagen' },
+        { label: 'Denkmal', value: 'Selten möglich' },
+      ]},
+    ],
+  },
+  {
+    id: 'eigennutzung-vs-vermietung',
+    title: 'Eigennutzung vs. Vermietung – was ist wirtschaftlicher?',
+    subtitle: 'Vergleich der zwei Hauptnutzungsarten für Hamburger DG-Wohnungen.',
+    columns: ['Kriterium', 'Eigennutzung', 'Vermietung'],
+    rows: [
+      { criterium: 'Refinanzierung', values: [
+        { label: 'Refi', value: 'Durch Wertsteigerung' },
+        { label: 'Refi', value: 'Durch Mieteinnahmen', highlight: true },
+      ]},
+      { criterium: 'Rendite-Range', values: [
+        { label: 'Rendite', value: '5–8% p.a. (Wertsteigerung)' },
+        { label: 'Rendite', value: '7–13% p.a. (Cashflow)', highlight: true },
+      ]},
+      { criterium: 'Steuerlich absetzbar', values: [
+        { label: 'Steuer', value: 'Nein (selbstgenutzt)' },
+        { label: 'Steuer', value: '§35c EStG, AfA', highlight: true },
+      ]},
+      { criterium: 'Förderung', values: [
+        { label: 'Förderung', value: '§35c EStG' },
+        { label: 'Förderung', value: 'KfW 261 + §35c', highlight: true },
+      ]},
+      { criterium: 'Persönlicher Nutzen', values: [
+        { label: 'Nutzen', value: 'Eigener Wohnraum ✓', highlight: true },
+        { label: 'Nutzen', value: 'Mieteinnahmen' },
+      ]},
+      { criterium: 'Hamburg-Mieten (DG, €/m²)', values: [
+        { label: 'Mieten', value: '—' },
+        { label: 'Mieten', value: '12–29 €/m²', highlight: true },
+      ]},
+    ],
+  },
+  {
+    id: 'general-vs-einzel',
+    title: 'Generalunternehmer (GU) vs. Einzelgewerke',
+    subtitle: 'Wer koordiniert Ihr Projekt? Vergleich der beiden Modelle.',
+    columns: ['Kriterium', 'Generalunternehmer', 'Einzelne Handwerker'],
+    rows: [
+      { criterium: 'Koordination', values: [
+        { label: 'Koord.', value: 'GU macht alles ✓', highlight: true },
+        { label: 'Koord.', value: 'Sie selbst' },
+      ]},
+      { criterium: 'Ansprechpartner', values: [
+        { label: 'Partner', value: '1 Person' },
+        { label: 'Partner', value: '5–8 Handwerker' },
+      ]},
+      { criterium: 'Haftung', values: [
+        { label: 'Haftung', value: '1 Vertragspartner', highlight: true },
+        { label: 'Haftung', value: 'Jeder einzeln' },
+      ]},
+      { criterium: 'Preis (typisch)', values: [
+        { label: 'Preis', value: '+10–15% Aufschlag' },
+        { label: 'Preis', value: 'Günstiger (Einzelpreise)', highlight: true },
+      ]},
+      { criterium: 'Zeitersparnis', values: [
+        { label: 'Zeit', value: 'Hoch ✓', highlight: true },
+        { label: 'Zeit', value: 'Wochen Aufwand' },
+      ]},
+      { criterium: 'Risiko', values: [
+        { label: 'Risiko', value: 'Niedrig', highlight: true },
+        { label: 'Risiko', value: 'Hoch (Schnittstellen)' },
+      ]},
+    ],
+  },
+];
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Dachgeschossausbau Hamburg – 6 große Vergleiche auf einen Blick',
+  description: 'Gauben, Dämmung, Förderung, Eigen-/Vermietung, GU/Einzel, Ausbau/Aufstockung: alle Vergleiche für Hamburger Eigentümer.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-02-15',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Dachgeschossausbau Vergleich', 'Gauben Vergleich', 'Förderung Vergleich', 'KfW BAFA Vergleich'],
+  url: 'https://dachgeschossausbauhamburg.de/vergleich/',
+}));
+---
+
+<BaseLayout
+  title="Vergleich Dachgeschossausbau – 6 Tabellen | Hamburg"
+  description="Dachgauben, Dämmung, Förderung, Eigen-/Vermietung im direkten Vergleich: Welche Lösung passt zu Ihrem Hamburger DG-Projekt?"
+  canonical="/vergleich/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Vergleich', url: 'https://dachgeschossausbauhamburg.de/vergleich/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Direktvergleich
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Welche Lösung passt zu Ihrem Projekt?
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Sechs Vergleiche, die jeder Hamburger Eigentümer kennen sollte – von der Gaubenform
+          über die Förderung bis zur Frage Eigennutzung vs. Vermietung.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70">
+          {COMPARISONS.map((c) => (
+            <a
+              href={`#${c.id}`}
+              class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition-colors"
+            >
+              {c.title.split(':')[0]}
+            </a>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Vergleichstabellen -->
+  {COMPARISONS.map((comp, idx) => (
+    <section id={comp.id} class={`py-20 ${idx % 2 === 1 ? 'bg-bg' : ''}`}>
+      <Container>
+        <SectionHeader
+          badge="Vergleich"
+          heading={comp.title}
+          subheading={comp.subtitle}
+          align="left"
+        />
+        <div class="max-w-6xl mx-auto">
+          <div class="overflow-x-auto rounded-xl border border-border bg-surface">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-primary text-white text-left">
+                  {comp.columns.map((col, i) => (
+                    <th class={`px-6 py-4 font-semibold ${i > 0 ? 'text-left' : ''}`}>
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                {comp.rows.map((row) => (
+                  <tr>
+                    <td class="px-6 py-4 font-semibold text-text-primary align-top">
+                      {row.criterium}
+                    </td>
+                    {row.values.map((v) => (
+                      <td class={`px-6 py-4 align-top ${v.highlight ? 'bg-secondary/10 font-semibold text-text-primary' : 'text-text-secondary'}`}>
+                        {v.value}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </Container>
+    </section>
+  ))}
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Welche Lösung passt zu Ihnen?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Lassen Sie uns gemeinsam durchgehen, was für Ihr Projekt die richtige Wahl ist –
+            kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

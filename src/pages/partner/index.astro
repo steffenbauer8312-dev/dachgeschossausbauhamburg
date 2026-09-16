@@ -1,0 +1,175 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+} from '@/lib/schema';
+
+const currentPath = '/partner/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Partner', href: '/partner/' },
+];
+
+interface Partner {
+  name: string;
+  category: string;
+  description: string;
+  url?: string;
+  why: string;
+}
+
+const PARTNERS: Partner[] = [
+  {
+    name: 'Hamburgische Architektenkammer',
+    category: 'Berufsständische Vertretung',
+    description: 'Offizielles Register aller in Hamburg zugelassenen Architekten – Pflicht-Quelle für Eigentümer bei Baugenehmigungen.',
+    url: 'https://www.akhh.de/',
+    why: 'Hier prüfen Sie, ob Ihr Architekt wirklich eingetragen ist.',
+  },
+  {
+    name: 'Hamburgische Ingenieurkammer-Bau',
+    category: 'Berufsständische Vertretung',
+    description: 'Register der zugelassenen Bauingenieure und Tragwerksplaner in Hamburg.',
+    url: 'https://www.hikb.de/',
+    why: 'Verzeichnis für die Suche nach qualifizierten Statikern für Ihr DG-Projekt.',
+  },
+  {
+    name: 'Energie-Effizienz-Experten (dena)',
+    category: 'Energieberatung',
+    description: 'Bundesweite Liste zertifizierter Energieberater – für iSFP und KfW-Bestätigung.',
+    url: 'https://www.energie-effizienz-experten.de/',
+    why: 'Wer einen iSFP-Bonus für BAFA-Förderung braucht, kommt hier zum passenden Energieberater.',
+  },
+  {
+    name: 'GEG-Rechner',
+    category: 'Technische Tools',
+    description: 'Online-Tool zur U-Wert-Berechnung nach Gebäudeenergiegesetz.',
+    url: 'https://www.geg-rechner.de/',
+    why: 'Kostenlos prüfen, ob Ihre geplante Dämmung den GEG-Standard erfüllt.',
+  },
+  {
+    name: 'IFBHH (Hamburgische Investitions- und Förderbank)',
+    category: 'Förderung Hamburg',
+    description: 'Hamburgs zentrale Förderbank – IFBHH-Förderprogramme für Hamburger Eigentümer.',
+    url: 'https://www.ifbhh.de/',
+    why: 'Hamburg-spezifische Förderprogramme: Modernisierung von Mietwohnungen, Wärmeschutz.',
+  },
+  {
+    name: 'Hamburger Mietenspiegel online',
+    category: 'Markttransparenz',
+    description: 'Offizieller Mietenspiegel Hamburg – Datenquelle für ortsübliche Vergleichsmiete.',
+    url: 'https://www.hamburg.de/mietenspiegel/',
+    why: 'Pflichtgrundlage für jede DG-Vermietung in Hamburg.',
+  },
+  {
+    name: 'Handwerkskammer Hamburg',
+    category: 'Berufsständische Vertretung',
+    description: 'Handwerksrolle für Hamburg und Schleswig-Holstein – Eintragung, Qualitätssicherung.',
+    url: 'https://www.hwk-hamburg.de/',
+    why: 'Wer einen Handwerksbetrieb beauftragt, sollte hier den HWK-Eintrag prüfen.',
+  },
+  {
+    name: 'Bezirksamt Hamburg-Mitte (Bauaufsicht)',
+    category: 'Behörden',
+    description: 'Aufsichtsbehörde für Baugenehmigungen im Bezirk Hamburg-Mitte.',
+    url: 'https://www.hamburg.de/bbauo/',
+    why: 'Zuständig für Bauanträge im Bezirk Hamburg-Mitte.',
+  },
+];
+---
+
+<BaseLayout
+  title="Partner & Hamburger Anlaufstellen – Dachgeschossausbau Hamburg"
+  description="Geprüfte Hamburger Partner für Ihren DG-Ausbau: Architektenkammer, Ingenieurkammer, IFBHH, Energieberater, Bezirksämter."
+  canonical="/partner/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Partner', url: 'https://dachgeschossausbauhamburg.de/partner/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Geprüfte Hamburger Anlaufstellen
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Partner &amp; Behörden für Ihr Projekt
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Die wichtigsten Hamburger Kammern, Behörden und Tools, die Sie für Ihren DG-Ausbau
+          kennen sollten. Alle Links geprüft, alle Quellen seriös.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Partner-Liste -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Netzwerk"
+        heading="Wer in Hamburg wichtig ist"
+        subheading="Vom Architektenregister bis zum Energieberater – hier finden Sie die richtigen Stellen."
+      />
+      <div class="max-w-4xl mx-auto space-y-4">
+        {PARTNERS.map((p) => (
+          <article class="bg-surface rounded-2xl p-6 border border-border hover:border-primary transition-colors">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <span class="inline-block text-xs font-semibold text-secondary uppercase tracking-wider">
+                {p.category}
+              </span>
+              {p.url && (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm font-semibold text-primary hover:underline whitespace-nowrap"
+                >
+                  Website besuchen →
+                </a>
+              )}
+            </div>
+            <h2 class="text-xl font-bold text-text-primary mb-2">{p.name}</h2>
+            <p class="text-text-secondary leading-relaxed mb-3">
+              {p.description}
+            </p>
+            <div class="bg-bg border-l-2 border-primary pl-4 py-2 rounded-r text-sm text-text-secondary">
+              <strong>Warum relevant:</strong> {p.why}
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Den richtigen Partner an Ihrer Seite
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir arbeiten seit Jahren mit qualifizierten Hamburger Architekten, Statikern und Handwerkern zusammen – fragen Sie uns nach Empfehlungen.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

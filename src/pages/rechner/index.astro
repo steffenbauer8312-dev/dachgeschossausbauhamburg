@@ -1,0 +1,219 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  generateArticleSchema,
+} from '@/lib/schema';
+
+const currentPath = '/rechner/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Rechner', href: '/rechner/' },
+];
+
+interface Calculator {
+  slug: string;
+  title: string;
+  description: string;
+  href: string;
+  status: 'live' | 'in-vorbereitung';
+  badge: string;
+  icon: 'geld' | 'miet' | 'rendite' | 'energie';
+}
+
+const CALCULATORS: Calculator[] = [
+  {
+    slug: 'foerderrechner',
+    title: 'Förderrechner – KfW & BAFA kombiniert',
+    description: 'Welche Förderung steht mir zu? Kombinieren Sie KfW 261, BAFA, iSFP-Bonus, WPB-Bonus und §35c EStG.',
+    href: '/foerderrechner/',
+    status: 'live',
+    badge: 'Bereit',
+    icon: 'geld',
+  },
+  {
+    slug: 'kostenrechner',
+    title: 'Kostenrechner – DG-Ausbau pro m²',
+    description: 'Ausbaufläche, Gauben, Dämmung, Bad: Berechnen Sie die voraussichtlichen Gesamtkosten für Ihren Hamburger DG-Ausbau.',
+    href: '/rechner/kosten/',
+    status: 'in-vorbereitung',
+    badge: 'Q4/2026',
+    icon: 'geld',
+  },
+  {
+    slug: 'mietrechner',
+    title: 'Mietrechner – Was können Sie verlangen?',
+    description: 'Welche Miete ist nach Hamburger Mietenspiegel 2026 für Ihre DG-Wohnung realistisch? Stadtteil-genau.',
+    href: '/rechner/miete/',
+    status: 'in-vorbereitung',
+    badge: 'Q4/2026',
+    icon: 'miet',
+  },
+  {
+    slug: 'renditerechner',
+    title: 'Renditerechner – Lohnt sich der DG-Ausbau?',
+    description: 'Cashflow, Brutto-Rendite, Steuer-Effekt: Wann refinanziert sich der DG-Ausbau bei Ihnen?',
+    href: '/rechner/rendite/',
+    status: 'in-vorbereitung',
+    badge: 'Q4/2026',
+    icon: 'rendite',
+  },
+  {
+    slug: 'u-wert-rechner',
+    title: 'U-Wert-Rechner – Dämmleistung prüfen',
+    description: 'Welchen U-Wert erreichen Sie mit welcher Dämmart? Aufsparren, Zwischensparren, Kombination.',
+    href: '/rechner/u-wert/',
+    status: 'in-vorbereitung',
+    badge: 'Q1/2027',
+    icon: 'energie',
+  },
+  {
+    slug: 'kniestock-rechner',
+    title: 'Kniestock-Rechner – Genug Stehhöhe?',
+    description: 'Berechnen Sie die nutzbare Wohnfläche nach Dachneigung und Kniestockhöhe – mit Empfehlung zur Gaube.',
+    href: '/rechner/kniestock/',
+    status: 'in-vorbereitung',
+    badge: 'Q1/2027',
+    icon: 'energie',
+  },
+];
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Rechner für Dachgeschossausbau Hamburg – Förderung, Kosten, Rendite',
+  description: 'Sechs interaktive Rechner für Ihren Hamburger DG-Ausbau: Förderrechner (live), Kosten, Miete, Rendite, U-Wert, Kniestock.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Förderrechner Hamburg', 'DG-Ausbau Rechner', 'Kostenrechner Dachgeschoss'],
+  url: 'https://dachgeschossausbauhamburg.de/rechner/',
+}));
+---
+
+<BaseLayout
+  title="Rechner Dachgeschossausbau Hamburg – Förderung, Kosten, Rendite"
+  description="Interaktive Rechner für Ihren DG-Ausbau: Förderrechner (live), Kosten, Mietrechner, Rendite, U-Wert, Kniestock – alle Hamburg-spezifisch."
+  canonical="/rechner/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Rechner', url: 'https://dachgeschossausbauhamburg.de/rechner/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Interaktive Tools
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Rechner für Ihren DG-Ausbau
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Sechs Hamburg-spezifische Rechner – von der Förderung bis zur Wirtschaftlichkeit.
+          Einer ist live, fünf folgen in den nächsten Wochen.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Rechner-Grid -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Tools"
+        heading="Welcher Rechner passt zu Ihrer Frage?"
+        subheading="Alle Rechner sind Hamburg-spezifisch kalibriert und kostenlos nutzbar."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {CALCULATORS.map((calc) => (
+          <a
+            href={calc.href}
+            class={`group relative bg-surface rounded-2xl p-6 border transition-all ${
+              calc.status === 'live'
+                ? 'border-secondary hover:border-primary'
+                : 'border-border hover:border-primary/50'
+            }`}
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                {calc.icon === 'geld' && (
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {calc.icon === 'miet' && (
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                )}
+                {calc.icon === 'rendite' && (
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                )}
+                {calc.icon === 'energie' && (
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+              </div>
+              <span class={`text-xs font-semibold px-3 py-1 rounded-full ${
+                calc.status === 'live'
+                  ? 'bg-secondary text-primary'
+                  : 'bg-bg text-text-secondary border border-border'
+              }`}>
+                {calc.badge}
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
+              {calc.title}
+            </h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              {calc.description}
+            </p>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
+              {calc.status === 'live' ? 'Rechner öffnen' : 'Mehr erfahren'}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Persönliche Beratung statt Rechner?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Unsere Experten rechnen Ihr Projekt kostenlos und unverbindlich durch – mit allen Hamburg-Spezifika.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

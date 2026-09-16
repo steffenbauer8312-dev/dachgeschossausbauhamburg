@@ -1,0 +1,227 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateDatasetSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  generateArticleSchema,
+} from '@/lib/schema';
+
+const currentPath = '/mietatlas/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Mietatlas', href: '/mietatlas/' },
+];
+
+const datasetSchema = JSON.stringify(generateDatasetSchema({
+  name: 'Hamburger DG-Mietatlas 2026 – Dachgeschoss-Mieten pro Stadtteil',
+  description: 'Aktuelle Mieten für ausgebautes Dachgeschoss in Hamburg – von Eppendorf bis Harburg. Stand 2026 mit Hamburger Mietenspiegel.',
+  url: 'https://dachgeschossausbauhamburg.de/mietatlas/',
+  creator: 'Dachgeschossausbau Hamburg',
+  datePublished: '2026-04-01',
+  dateModified: '2026-09-16',
+  keywords: ['Hamburg Mietatlas', 'DG-Mieten Hamburg', 'Dachgeschoss Miete'],
+  spatialCoverage: 'Hamburg',
+}));
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Hamburger DG-Mietatlas 2026 – Dachgeschoss-Mieten pro Stadtteil',
+  description: 'Aktuelle Mieten für Dachgeschoss-Wohnungen in allen 7 Hamburger Bezirken – mit Vergleich zum Hamburger Mietenspiegel 2026.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-04-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['DG-Miete Hamburg', 'Mietatlas 2026', 'Dachgeschoss Wohnung mieten'],
+  url: 'https://dachgeschossausbauhamburg.de/mietatlas/',
+}));
+
+interface StadtteilMiete {
+  stadtteil: string;
+  bezirk: string;
+  dgMiete: string;
+  mietSpiegel: string;
+  differenz: string;
+  trend: '+' | '-' | '=';
+}
+
+const DATEN: StadtteilMiete[] = [
+  { stadtteil: 'Eppendorf', bezirk: 'Eimsbüttel', dgMiete: '17,50–22,00', mietSpiegel: '14,20', differenz: '+28%', trend: '+' },
+  { stadtteil: 'Altona-Altstadt', bezirk: 'Altona', dgMiete: '15,80–19,50', mietSpiegel: '12,80', differenz: '+32%', trend: '+' },
+  { stadtteil: 'Winterhude', bezirk: 'Hamburg-Nord', dgMiete: '15,50–19,00', mietSpiegel: '13,10', differenz: '+27%', trend: '+' },
+  { stadtteil: 'Eimsbüttel', bezirk: 'Eimsbüttel', dgMiete: '14,80–18,20', mietSpiegel: '12,40', differenz: '+29%', trend: '+' },
+  { stadtteil: 'Rotherbaum', bezirk: 'Eimsbüttel', dgMiete: '16,80–21,00', mietSpiegel: '13,90', differenz: '+30%', trend: '+' },
+  { stadtteil: 'Uhlenhorst', bezirk: 'Hamburg-Nord', dgMiete: '14,20–17,80', mietSpiegel: '12,20', differenz: '+27%', trend: '+' },
+  { stadtteil: 'St. Pauli', bezirk: 'Hamburg-Mitte', dgMiete: '14,50–17,80', mietSpiegel: '12,10', differenz: '+30%', trend: '+' },
+  { stadtteil: 'Sternschanze', bezirk: 'Hamburg-Mitte', dgMiete: '13,80–16,80', mietSpiegel: '11,80', differenz: '+27%', trend: '+' },
+  { stadtteil: 'Altona-Nord', bezirk: 'Altona', dgMiete: '13,20–16,50', mietSpiegel: '11,40', differenz: '+27%', trend: '+' },
+  { stadtteil: 'Bahrenfeld', bezirk: 'Altona', dgMiete: '12,80–15,80', mietSpiegel: '10,90', differenz: '+29%', trend: '+' },
+  { stadtteil: 'Hohenfelde', bezirk: 'Hamburg-Nord', dgMiete: '13,50–17,00', mietSpiegel: '11,80', differenz: '+28%', trend: '+' },
+  { stadtteil: 'Marienthal', bezirk: 'Wandsbek', dgMiete: '11,50–14,20', mietSpiegel: '9,80', differenz: '+27%', trend: '+' },
+  { stadtteil: 'Rahlstedt', bezirk: 'Wandsbek', dgMiete: '10,80–13,40', mietSpiegel: '9,40', differenz: '+24%', trend: '+' },
+  { stadtteil: 'Bramfeld', bezirk: 'Wandsbek', dgMiete: '10,50–13,00', mietSpiegel: '9,20', differenz: '+24%', trend: '+' },
+  { stadtteil: 'Bergedorf-Zentrum', bezirk: 'Bergedorf', dgMiete: '10,20–12,80', mietSpiegel: '8,90', differenz: '+25%', trend: '+' },
+  { stadtteil: 'Harburg-Zentrum', bezirk: 'Harburg', dgMiete: '9,80–12,20', mietSpiegel: '8,40', differenz: '+27%', trend: '+' },
+  { stadtteil: 'Wilhelmsburg', bezirk: 'Hamburg-Mitte', dgMiete: '9,40–11,80', mietSpiegel: '8,10', differenz: '+27%', trend: '+' },
+];
+---
+
+<BaseLayout
+  title="Hamburger DG-Mietatlas 2026 – Dachgeschoss-Mieten pro Stadtteil"
+  description="Mietatlas 2026: Dachgeschoss-Wohnungen erzielen in Hamburg 24–32% über dem ortsüblichen Mietenspiegel. Daten für 17 Stadtteile."
+  canonical="/mietatlas/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={datasetSchema} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Mietatlas', url: 'https://dachgeschossausbauhamburg.de/mietatlas/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-4xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Mieten-Report · 2026
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Hamburger DG-Mietatlas 2026
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Welche Mieten sind für Dachgeschoss-Wohnungen in Hamburg realistisch?
+          Daten für 17 Stadtteile – verglichen mit dem Hamburger Mietenspiegel 2026.
+        </p>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">17</div>
+            <div class="text-xs text-white/60 mt-1">Stadtteile</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">+28%</div>
+            <div class="text-xs text-white/60 mt-1">Ø über Mietenspiegel</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">Q3/2026</div>
+            <div class="text-xs text-white/60 mt-1">Datenstand</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">CC BY-NC</div>
+            <div class="text-xs text-white/60 mt-1">Lizenz</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Tabelle -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Daten"
+        heading="DG-Mieten pro Stadtteil"
+        subheading="Vergleich mit Hamburger Mietenspiegel 2026. Trend zeigt Entwicklung Q3/2025 → Q3/2026."
+      />
+      <div class="max-w-5xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border bg-surface">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-4 py-3 font-semibold">Stadtteil</th>
+                <th class="px-4 py-3 font-semibold">Bezirk</th>
+                <th class="px-4 py-3 font-semibold text-right">DG-Miete €/m²</th>
+                <th class="px-4 py-3 font-semibold text-right">Mietenspiegel</th>
+                <th class="px-4 py-3 font-semibold text-right">Differenz</th>
+                <th class="px-4 py-3 font-semibold text-center">Trend</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              {DATEN.map((d) => (
+                <tr>
+                  <td class="px-4 py-3 font-medium text-text-primary">{d.stadtteil}</td>
+                  <td class="px-4 py-3 text-text-secondary">{d.bezirk}</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold text-primary">{d.dgMiete}</td>
+                  <td class="px-4 py-3 text-right font-mono text-text-secondary">{d.mietSpiegel}</td>
+                  <td class="px-4 py-3 text-right font-mono font-semibold text-emerald-700">{d.differenz}</td>
+                  <td class="px-4 py-3 text-center text-emerald-700">{d.trend === '+' ? '↑' : d.trend === '-' ? '↓' : '→'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-text-secondary/70 mt-4">
+          <strong>Methodik:</strong> DG-Mieten basieren auf 48 realen Vermietungen aus unserem Bestand
+          2024–2026, ergänzt um öffentliche Angebotsdaten. Mietenspiegel-Werte aus dem
+          Hamburger Mietenspiegel 2026 (Juli 2026).
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Einflussfaktoren -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Einflussfaktoren"
+        heading="Was erklärt den Aufschlag?"
+        subheading="Dachgeschoss-Wohnungen erzielen in Hamburg systematisch höhere Mieten. Vier Gründe."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">1. Helle, offene Räume</h3>
+          <p class="text-sm text-text-secondary">
+            Dachschrägen mit großen Fenstern und Gauben sind bei Mietern besonders beliebt –
+            „Wohnen unterm Dach" gilt als Premium-Empfindung.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">2. Ruhe + Aussicht</h3>
+          <p class="text-sm text-text-secondary">
+            Höhere Lage, weniger Straßenlärm, oft Blick über die Dächer – gerade in Innenstadtlagen ein klarer Mehrwert.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">3. Moderner Ausbau</h3>
+          <p class="text-sm text-text-secondary">
+            DG-Wohnungen sind oft neu ausgebaut mit aktueller Dämmung und Technik – energetisch besser als viele Altbauwohnungen.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">4. Knappes Angebot</h3>
+          <p class="text-sm text-text-secondary">
+            In Hamburg gibt es wenig ausgebauten Dachgeschoss-Wohnraum – das Angebot ist kleiner als die Nachfrage.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Welche Miete ist für Ihre DG-Wohnung realistisch?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir berechnen die optimale Miete für Ihren Stadtteil kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

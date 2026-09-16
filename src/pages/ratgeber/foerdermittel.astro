@@ -4,7 +4,14 @@ import Container from '@/components/ui/Container.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
 
 const faqs = [
   {
@@ -17,15 +24,19 @@ const faqs = [
   },
   {
     question: "Gilt §35c EStG auch für Vermieter?",
-    answer: "Ja. §35c EStG ist auch für Vermieter nutzbar, die das Dachgeschoss vermieten. Die Steuerermäßigung kann über Werbungskosten geltend gemacht werden – als Nachtrag in der Einkommensteuererklärung über drei Jahre verteilt. Voraussetzung: Die Handwerkerrechnung muss auf Sie als Eigentümer ausgestellt sein, und nur die Arbeitskosten (nicht Material) zählen. Bei Vermietung werden die Kosten als Werbungskosten abgesetzt, was den Steuervorteil in der Praxis sogar erhöhen kann."
+    answer: "Ja. §35c EStG ist auch für Vermieter nutzbar, die das Dachgeschoss vermieten. Die Steuerermäßigung kann über Werbungskosten geltend gemacht werden – als Nachtrag in der Einkommensteuerklärung über drei Jahre verteilt. Voraussetzung: Die Handwerkerrechnung muss auf Sie als Eigentümer ausgestellt sein, und nur die Arbeitskosten (nicht Material) zählen. Bei Vermietung werden die Kosten als Werbungskosten abgesetzt, was den Steuervorteil in der Praxis sogar erhöhen kann."
   }
 ];
 
 const articleSchema = generateArticleSchema({
   headline: "Fördermittel für Dachgeschossausbau in Hamburg 2026 – KfW 261, BAFA, §35c EStG",
   description: "Umfassender Ratgeber zu Fördermitteln für Dachgeschossausbau in Hamburg: KfW 261 Wohngebäude-Kredit, BAFA BEG EM Einzelmaßnahmen und §35c EStG. Bis zu 45% Tilgungszuschuss sichern.",
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
   datePublished: "2026-01-15",
-  dateModified: "2026-05-13",
+  dateModified: "2026-09-16",
+  lastReviewed: "2026-09-16",
+  keywords: ["KfW 261", "BAFA Einzelmaßnahmen", "§35c EStG", "Förderung Hamburg", "DG-Ausbau Förderung"],
   url: "https://dachgeschossausbauhamburg.de/ratgeber/foerdermittel/"
 });
 ---

@@ -1,0 +1,191 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  generateArticleSchema,
+} from '@/lib/schema';
+import { GLOSSAR, GLOSSAR_CATEGORIES } from '@/data/glossar';
+
+const currentPath = '/glossar/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Glossar', href: '/glossar/' },
+];
+
+const groupedByCategory = GLOSSAR_CATEGORIES.map((cat) => ({
+  ...cat,
+  entries: GLOSSAR.filter((e) => e.category === cat.id).sort((a, b) =>
+    a.term.localeCompare(b.term, 'de')
+  ),
+}));
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Glossar Dachgeschossausbau Hamburg – Fachbegriffe A bis Z',
+  description: 'Die 40 wichtigsten Fachbegriffe rund um Dachgeschossausbau in Hamburg: HBauO, KfW 261, BAFA, Erhaltungssatzung, Denkmalschutz, Gauben, Dämmung.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-02-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Glossar Dachgeschossausbau', 'Fachbegriffe HBauO', 'KfW Glossar', 'Hamburger Bauordnung Begriffe'],
+  url: 'https://dachgeschossausbauhamburg.de/glossar/',
+}));
+---
+
+<BaseLayout
+  title="Glossar Dachgeschossausbau – 40 Fachbegriffe erklärt | Hamburg"
+  description="Aufsparrendämmung, HBauO, KfW 261, §62 Freistellung: 40 Fachbegriffe rund um Dachgeschossausbau in Hamburg verständlich erklärt."
+  canonical="/glossar/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Glossar', url: 'https://dachgeschossausbauhamburg.de/glossar/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Fachbegriffe A–Z
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Glossar Dachgeschossausbau
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          {GLOSSAR.length} Fachbegriffe rund um Dachgeschossausbau in Hamburg – von HBauO §62 über
+          KfW 261 bis zur Schleppgaube. Verständlich erklärt von unserem Hamburger Architekten- und Statikerteam.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Schnellnavigation -->
+  <section class="py-8 bg-bg border-b border-border sticky top-16 lg:top-20 z-10">
+    <Container>
+      <div class="flex flex-wrap gap-2 justify-center text-sm">
+        {GLOSSAR_CATEGORIES.map((cat) => (
+          <a
+            href={`#${cat.id}`}
+            class="px-4 py-2 bg-surface border border-border rounded-full text-text-secondary hover:border-primary hover:text-primary transition-colors"
+          >
+            {cat.label} ({GLOSSAR.filter((e) => e.category === cat.id).length})
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Glossar pro Kategorie -->
+  {groupedByCategory.map((cat) => (
+    <section id={cat.id} class="py-16 even:bg-bg">
+      <Container>
+        <SectionHeader
+          badge={cat.label}
+          heading={cat.label}
+          subheading={cat.description}
+          align="left"
+        />
+        <div class="max-w-4xl mx-auto space-y-3">
+          {cat.entries.map((entry) => (
+            <details class="group bg-surface rounded-xl border border-border hover:border-primary transition-colors">
+              <summary class="cursor-pointer list-none p-6 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="text-primary font-bold text-sm">
+                    {entry.term.charAt(0)}
+                  </span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-bold text-text-primary mb-1 group-open:text-primary transition-colors">
+                    {entry.term}
+                  </h3>
+                  <p class="text-sm text-text-secondary">{entry.shortDefinition}</p>
+                </div>
+                <svg class="w-5 h-5 text-text-secondary group-open:rotate-180 transition-transform flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 pl-20">
+                <p class="text-text-secondary leading-relaxed mb-4">
+                  {entry.longDefinition}
+                </p>
+                {entry.relatedLinks && entry.relatedLinks.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {entry.relatedLinks.map((link) => (
+                      <a
+                        href={link.href}
+                        class="inline-flex items-center gap-1 text-xs text-secondary hover:underline"
+                      >
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </Container>
+    </section>
+  ))}
+
+  <!-- Alle Begriffe A-Z (kompakt) -->
+  <section class="py-16">
+    <Container>
+      <SectionHeader
+        badge="Schnellzugriff"
+        heading="Alle Begriffe alphabetisch"
+        subheading="Die komplette Liste auf einen Blick."
+        align="left"
+      />
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+        {GLOSSAR
+          .slice()
+          .sort((a, b) => a.term.localeCompare(b.term, 'de'))
+          .map((entry) => (
+            <a
+              href={`#${entry.slug}`}
+              onclick={`document.getElementById('${entry.category}')?.scrollIntoView({behavior: 'smooth'}); setTimeout(() => { const el = document.querySelector('[data-slug="${entry.slug}"]'); el?.setAttribute('open', 'true'); el?.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 400); return false;`}
+              class="text-text-secondary hover:text-primary py-1 border-b border-border/50"
+            >
+              {entry.term}
+            </a>
+          ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Begriff nicht gefunden?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Fragen Sie uns direkt – unser Architekten- und Statikerteam antwortet innerhalb von 24 Stunden.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

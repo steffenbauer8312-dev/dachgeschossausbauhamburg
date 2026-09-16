@@ -5,7 +5,14 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
 
 const currentPath = '/ratgeber/dachsanierung/';
 
@@ -75,9 +82,12 @@ const schritte = [
   <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
     headline: 'Dachsanierung Hamburg 2025/2026 – Kosten, Förderung, Genehmigung',
     description: 'Was kostet eine Dachsanierung in Hamburg? Welche Fördermittel gibt es? Wann ist eine Genehmigung nötig? Und wann lohnt sich die Kombination mit einem DG-Ausbau?',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_STATIKER,
     datePublished: '2026-05-14',
-    dateModified: '2026-05-14',
-    author: 'Dachgeschossausbau Hamburg',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Dachsanierung Hamburg', 'Kosten Dachsanierung', 'KfW Dach', 'Hamburg Dach'],
     url: 'https://dachgeschossausbauhamburg.de/ratgeber/dachsanierung/',
   }))} />
   <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
@@ -203,7 +213,7 @@ const schritte = [
             <strong>Beispiel:</strong> Für ein typisches Hamburger Satteldach (120 m² Dachfläche) ergeben sich folgende Richtwerte: Neueindeckung mit Zwischensparrendämmung: 18.000–30.000 €. Mit Aufsparrendämmung und Gauben: 35.000–60.000 €. Gerüst, Statik und Genehmigungen kommen zusätzlich hinzu (2.000–6.000 €).
           </p>
           <p>
-            Die Hamburger Preise liegen rund 10–15 Prozent über dem Bundesdurchschnitt. Das liegt an den spezifischen Anforderungen der maritimen Klimazone: higher Windlasten, erhöhte Feuchtigkeitsbelastung und die Verwendung besonders witterungsbeständiger Materialien. Im Gegenzug profitieren Hamburger Bauherren von der <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Aufhebung der Aufzugspflicht nach §37 Abs. 4 HBauO</a> – im Vergleich zu anderen Bundesländern spart das bei DG-Projekten bis zu 30.000 Euro.
+            Die Hamburger Preise liegen rund 10–15 Prozent über dem Bundesdurchschnitt. Das liegt an den spezifischen Anforderungen der maritimen Klimazone: higher Windlasten, erhöhte Feuchtigkeitsbelastung und die Verwendung besonders witterungsbeständiger Materialien. Im Gegenzug profitieren Hamburger Bauherren von der <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Aufhebung der Aufzugspflicht nach §37 Abs. 4 HBauO</a> – im Vergleich zu anderen Bundesländern spart das bei DG-Projekten bis zu 30.000 Euro. Wer in <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a> oder <a href="/standorte/altona/" class="text-primary underline hover:underline">Altona</a> baut, sollte zusätzlich mit Aufschlägen durch Erhaltungssatzung rechnen – die detaillierten Richtwerte für Ihren Stadtteil finden Sie in unserer <a href="/bezirke/" class="text-primary underline hover:underline">Hamburger Bezirksübersicht</a>.
           </p>
         </div>
       </div>

@@ -1,0 +1,187 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+
+const currentPath = '/ratgeber/hitzeschutz/';
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Sommerlicher Hitzeschutz im DG', href: currentPath },
+];
+
+const faqs = [
+  {
+    question: 'Wie heiß wird ein Hamburger Dachgeschoss im Sommer?',
+    answer: 'Ohne Hitzeschutz können Hamburger Dachgeschosse im Hochsommer 35–45 °C erreichen — deutlich über der Wohlfühltemperatur von 22–26 °C. Mit dem Klimawandel verschärft sich das Problem: Hamburg verzeichnet seit 2010 fast doppelt so viele Hitzetage (über 30 °C) wie in der Referenzperiode 1961–1990.',
+  },
+  {
+    question: 'Welche Dämmung schützt am besten vor Hitze?',
+    answer: 'Aufsparrendämmung mit hohem Flächengewicht und Zellulose oder Mineralwolle schützt am besten vor Sommerhitze. Wichtig: Die Dämmung sollte keine diffusionsoffenen Hohlräume haben — sonst funktioniert der Hitzeschutz nicht. Holzfaserdämmung (z. B. von Gutex oder Steico) bietet durch ihre hohe spezifische Wärmekapazität den besten Hitzeschutz, kostet aber 30–40% mehr als Mineralwolle.',
+  },
+];
+---
+
+<BaseLayout
+  title="Sommerlicher Hitzeschutz im Dachgeschoss Hamburg – 2026"
+  description="Hitzeschutz beim DG-Ausbau Hamburg: Klimawandel, Aufsparrendämmung, Verschattung, Lüftung. So bleibt Ihr DG im Sommer kühl."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Sommerlicher Hitzeschutz im Dachgeschoss Hamburg 2026',
+    description: 'Hitzeschutz beim DG-Ausbau in Hamburg: Mit welchen Maßnahmen bleibt das Dachgeschoss auch in Hitzesommern unter 26 °C?',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_ARCHITEKT,
+    datePublished: '2026-06-05',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Hitzeschutz Dachgeschoss', 'Hamburg Sommer', 'Aufsparrendämmung Hitzeschutz', 'Holzfaserdämmung'],
+    url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Hitzeschutz', url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Klimawandel · Sommerwärme · Wohnkomfort
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Sommerlicher Hitzeschutz im Dachgeschoss
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Hamburg wird heißer. Wer heute ein DG ausbaut, muss an den Klimawandel denken — sonst
+          wird das DG im Sommer zur Sauna. Die gute Nachricht: Mit der richtigen Dämmung
+          und Beschattung lässt sich das Problem wirksam lösen.
+        </p>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">35–45 °C</div>
+            <div class="text-xs text-white/60 mt-1">ohne Hitzeschutz</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">22–26 °C</div>
+            <div class="text-xs text-white/60 mt-1">mit Hitzeschutz</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">2×</div>
+            <div class="text-xs text-white/60 mt-1">mehr Hitzetage seit 2010</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Warum wird das DG so heiß?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Dachflächen sind im Sommer stundenlang direkter Sonneneinstrahlung ausgesetzt. Die
+            Erwärmung überträgt sich auf die Dachkonstruktion und strahlt in den Innenraum ab.
+            Ohne Hitzeschutz heizt sich ein Hamburger DG in einer Hitzewoche auf 35–45 °C auf —
+            unerträglich zum Wohnen und Schlafen. Mit <a href="/glossar/aufsparrendaemmung/" class="text-primary underline hover:underline">Aufsparrendämmung</a>
+            und durchdachter Beschattung sinkt die Temperatur um 8–15 °C.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Die 4 wirksamsten Maßnahmen</h2>
+          <div class="space-y-4 text-text-secondary">
+            <div>
+              <h3 class="font-bold text-text-primary mb-2">1. Dämmung mit hoher Wärmespeicherkapazität</h3>
+              <p class="text-sm">
+                Aufsparrendämmung aus <strong>Holzfasern</strong> (Steico, Gutex, Pavatex) hat die höchste
+                spezifische Wärmekapazität aller Dämmstoffe — verzögert die Hitze um 8–12 Stunden.
+                Kosten 200–280 €/m² statt 180–220 €/m² für Mineralwolle, aber der Hitzeschutz ist
+                deutlich besser.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-2">2. Außenliegende Verschattung</h3>
+              <p class="text-sm">
+                Rollläden, Markisen oder Raffstores außen vor den Dachflächenfenstern. Innenliegende
+                Rollos bringen nur 30 % der Wirkung. Außenrollläden halten 90 % der Sonnenwärme
+                ab, kosten 300–600 € pro Fenster mit Einbau.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-2">3. Querlüftung &amp; Lüftungssystem</h3>
+              <p class="text-sm">
+                Gegenüberliegende Dachflächenfenster oder Gauben ermöglichen Querlüftung —
+                reduziert Innentemperatur um 3–5 °C bei Außentemperaturen unter 28 °C. Bei
+                höheren Außentemperaturen hilft nur mechanische Lüftung mit Wärmerückgewinnung.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-text-primary mb-2">4. Photovoltaik als Hitzeschutz</h3>
+              <p class="text-sm">
+                Eine <strong>PV-Indach-Lösung</strong> (z. B. von Solarwatt oder Meyer Burger) ersetzt die
+                Dacheindeckung und reduziert die Hitze um 5–8 °C zusätzlich. Außerdem produzieren
+                Sie Strom. Mit Hamburgs PV-Pflicht für Dachflächen ab 2025 ist das ein doppelter Gewinn.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Hamburg: Besonderheiten beim Hitzeschutz</h2>
+          <p class="text-text-secondary leading-relaxed mb-3">
+            In <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a> und
+            <a href="/standorte/winterhude/" class="text-primary underline hover:underline">Winterhude</a> gibt es viele
+            erhaltenswerte Dachflächen — die PV-Pflicht gilt dort mit Einschränkungen. In
+            <a href="/standorte/harburg/" class="text-primary underline hover:underline">Harburg</a> und
+            <a href="/standorte/bergedorf/" class="text-primary underline hover:underline">Bergedorf</a> ist freie
+            Gestaltung einfacher. Wir kennen die Hamburger Erhaltungssatzungen und stimmen Hitzeschutz-Maßnahmen
+            mit dem Bezirksamt ab.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Förderung: Holzfaserdämmung wird belohnt</h2>
+          <p class="text-text-secondary leading-relaxed">
+            <a href="/glossar/kfw-261/" class="text-primary underline hover:underline">KfW 261</a> fördert Holzfaserdämmung
+            im Dachgeschoss wie jede andere Dämmung — durch den besseren Hitzeschutz amortisiert
+            sich die Mehrinvestition in 5–8 Jahren. In Kombination mit
+            <a href="/glossar/estg-35c/" class="text-primary underline hover:underline">§35c EStG</a> (Steuerabzug) ist
+            die Holzfaser-Dämmung oft die wirtschaftlichste Lösung.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Ihr DG sommerfit machen</h2>
+          <p class="text-white/80 text-lg mb-8">
+            Wir berechnen den optimalen Hitzeschutz für Ihr Hamburger DG — kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

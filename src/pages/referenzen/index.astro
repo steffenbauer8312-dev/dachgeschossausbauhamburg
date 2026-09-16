@@ -1,0 +1,193 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateReviewSchema,
+} from '@/lib/schema';
+import { REVIEW_SCHEMA_DATA } from '@/data/testimonials';
+
+const currentPath = '/referenzen/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Referenzen', href: '/referenzen/' },
+];
+
+const reviewSchema = JSON.stringify(generateReviewSchema(REVIEW_SCHEMA_DATA));
+const avgRating = (
+  REVIEW_SCHEMA_DATA.reduce((sum, r) => sum + r.rating, 0) / REVIEW_SCHEMA_DATA.length
+).toFixed(1);
+---
+
+<BaseLayout
+  title="Referenzen & Kundenstimmen – Dachgeschossausbau Hamburg"
+  description="Über 180 Dachgeschossausbauten in Hamburg: 4,9★ bei 28 verifizierten Bewertungen. Echte Kundenstimmen aus Eppendorf, Winterhude, Altona & allen Bezirken."
+  canonical="/referenzen/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={reviewSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Referenzen', url: 'https://dachgeschossausbauhamburg.de/referenzen/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Stimmen unserer Kunden
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Referenzen aus Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Über 180 Dachgeschossausbauten in Hamburg seit 2014. Hier sprechen unsere Kunden –
+          mit voller Adresse, echtem Projekt und ehrlicher Bewertung.
+        </p>
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-3xl font-bold text-secondary">{avgRating}★</div>
+            <div class="text-xs text-white/60 mt-1">Durchschnitt</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-3xl font-bold text-secondary">28</div>
+            <div class="text-xs text-white/60 mt-1">Verifizierte Bewertungen</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-3xl font-bold text-secondary">180+</div>
+            <div class="text-xs text-white/60 mt-1">Projekte seit 2014</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-3xl font-bold text-secondary">7</div>
+            <div class="text-xs text-white/60 mt-1">Hamburger Bezirke</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Bewertungs-Grid -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Bewertungen"
+        heading="Was unsere Kunden sagen"
+        subheading="Auswahl aus 28 verifizierten Bewertungen. Alle Projekte in Hamburg umgesetzt, alle Kunden haben einer Veröffentlichung zugestimmt."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {REVIEW_SCHEMA_DATA.map((review) => (
+          <article class="bg-surface rounded-2xl p-6 border border-border flex flex-col">
+            <div class="flex items-center gap-1 mb-3">
+              {[1,2,3,4,5].map((star) => (
+                <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.07 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" />
+                </svg>
+              ))}
+            </div>
+            <blockquote class="text-text-secondary leading-relaxed mb-6 flex-1">
+              „{review.body}"
+            </blockquote>
+            <div class="border-t border-border pt-4">
+              <p class="font-bold text-text-primary text-sm">{review.author}</p>
+              <p class="text-xs text-text-secondary mt-1">
+                {review.project} · {review.location}
+              </p>
+              <p class="text-xs text-text-secondary/70 mt-1">
+                Projekt abgeschlossen: {new Date(review.datePublished).toLocaleDateString('de-DE', { year: 'numeric', month: 'long' })}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Vertrauensfaktoren -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Vertrauen"
+        heading="Warum Hamburger uns empfehlen"
+        subheading="Vier Faktoren, die unsere Projekte ausmachen – und die unsere Kunden in jeder Bewertung nennen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-text-primary mb-2">Termintreue</h3>
+          <p class="text-sm text-text-secondary">
+            92% unserer Projekte werden innerhalb der vereinbarten Bauzeit von 8–16 Wochen
+            fertiggestellt.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-text-primary mb-2">Festpreis</h3>
+          <p class="text-sm text-text-secondary">
+            Keine Nachträge, keine Überraschungen. Was im Angebot steht, gilt – das bestätigen
+            alle unsere Bewertungen.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-text-primary mb-2">Hamburg-Expertise</h3>
+          <p class="text-sm text-text-secondary">
+            Wir kennen jeden Bezirk, jedes Erhaltungssatzungsgebiet und jedes Bezirksamt –
+            das beschleunigt die Genehmigung.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-text-primary mb-2">Genehmigung im Schnitt 5 Wochen</h3>
+          <p class="text-sm text-text-secondary">
+            Wir nutzen §62 Freistellung und §61 vereinfachtes Verfahren konsequent – durchschnittlich
+            5 Wochen bis zur Baugenehmigung.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Werden Sie unsere nächste Referenz
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Kostenlose Erstberatung, ehrliche Einschätzung, klares Angebot. Sprechen wir über Ihr Projekt.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

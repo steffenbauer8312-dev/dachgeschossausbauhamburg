@@ -5,7 +5,14 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
 
 const currentPath = '/ratgeber/vermieter/';
 
@@ -33,8 +40,12 @@ const faqs = [
 const articleSchema = generateArticleSchema({
   headline: 'Dachgeschossausbau als Kapitalanlage in Hamburg – Rendite, Steuervorteile, Risiken',
   description: 'Warum Hamburger Vermieter und Investoren auf DG-Ausbau setzen: Mieterträge, Steuerersparnis durch §35c EStG, Wertsteigerung. Realistische Rendite-Berechnung für Hamburg 2026.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
   datePublished: '2026-01-15',
-  dateModified: '2026-05-13',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['DG-Ausbau Rendite', 'Kapitalanlage Hamburg', '§35c Vermieter', 'KfW 261 Vermieter'],
   url: 'https://dachgeschossausbauhamburg.de/ratgeber/vermieter/',
 });
 ---

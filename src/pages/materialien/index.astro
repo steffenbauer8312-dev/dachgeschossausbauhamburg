@@ -1,0 +1,199 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+} from '@/lib/schema';
+
+const currentPath = '/materialien/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Materialien', href: '/materialien/' },
+];
+
+interface Material {
+  title: string;
+  description: string;
+  type: 'PDF' | 'Excel' | 'Checkliste';
+  pages: number;
+  href: string;
+  fileSize: string;
+  category: 'planung' | 'foerderung' | 'bautechnik';
+}
+
+const MATERIALS: Material[] = [
+  {
+    title: 'DG-Ausbau-Checkliste Hamburg',
+    description: 'Die ultimative Checkliste mit allen 47 Schritten – von der ersten Idee bis zur Abnahme. Mit Hamburger Besonderheiten (HBauO §62, Erhaltungssatzung).',
+    type: 'PDF',
+    pages: 12,
+    href: '/materialien/checkliste-dg-ausbau-hamburg.pdf',
+    fileSize: '480 KB',
+    category: 'planung',
+  },
+  {
+    title: 'Kostenkalkulations-Vorlage (Excel)',
+    description: 'Vorlage zur detaillierten Kostenplanung Ihres DG-Ausbaus – mit vorausgefüllten Hamburger Richtwerten und Förder-Abzug.',
+    type: 'Excel',
+    pages: 4,
+    href: '/materialien/kostenkalkulation-dg-ausbau.xlsx',
+    fileSize: '180 KB',
+    category: 'planung',
+  },
+  {
+    title: 'Förderantrag Schritt-für-Schritt (KfW 261)',
+    description: 'Anleitung mit Screenshots: So füllen Sie den KfW-261-Antrag korrekt aus. Inkl. typischer Fehler, die Hamburger immer wieder machen.',
+    type: 'PDF',
+    pages: 18,
+    href: '/materialien/foerderantrag-kfw-261.pdf',
+    fileSize: '1,2 MB',
+    category: 'foerderung',
+  },
+  {
+    title: 'BAFA-Einzelmaßnahmen Antragsvorlage',
+    description: 'Welche Maßnahmen sind förderfähig? Welche Unterlagen brauchen Sie? Diese Vorlage hilft Ihnen beim Ausfüllen.',
+    type: 'PDF',
+    pages: 9,
+    href: '/materialien/bafa-antragsvorlage.pdf',
+    fileSize: '620 KB',
+    category: 'foerderung',
+  },
+  {
+    title: 'Statik-Gutachten: Was wird geprüft?',
+    description: 'Informationen für Eigentümer: Welche Punkte prüft der Statiker, was kostet das Gutachten, und wann brauchen Sie es wirklich?',
+    type: 'PDF',
+    pages: 6,
+    href: '/materialien/statik-gutachten-info.pdf',
+    fileSize: '340 KB',
+    category: 'bautechnik',
+  },
+  {
+    title: 'Dämmungs-Verlegeplan (Skizze)',
+    description: 'Schematische Darstellung von Aufsparren- und Zwischensparrendämmung. Mit Empfehlungen je nach Hamburger Dachform.',
+    type: 'PDF',
+    pages: 4,
+    href: '/materialien/daemmung-verlegeplan.pdf',
+    fileSize: '280 KB',
+    category: 'bautechnik',
+  },
+];
+
+const categoryLabels = {
+  planung: { label: 'Planung', color: 'bg-blue-100 text-blue-800' },
+  foerderung: { label: 'Förderung', color: 'bg-emerald-100 text-emerald-800' },
+  bautechnik: { label: 'Bautechnik', color: 'bg-purple-100 text-purple-800' },
+};
+---
+
+<BaseLayout
+  title="Materialien & Downloads – Dachgeschossausbau Hamburg"
+  description="Kostenlose Downloads für Ihren DG-Ausbau: Checkliste, Kostenkalkulator, Förderantrag-Vorlagen, Statik-Info – Hamburg-spezifisch."
+  canonical="/materialien/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Materialien', url: 'https://dachgeschossausbauhamburg.de/materialien/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Kostenlose Downloads
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Materialien für Ihren DG-Ausbau
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Checklisten, Vorlagen und Anleitungen, die wir für unsere eigenen Kunden entwickelt haben –
+          jetzt zum kostenlosen Download. Hamburg-spezifisch und rechtssicher.
+        </p>
+        <div class="mt-8 grid grid-cols-3 gap-3 max-w-2xl mx-auto">
+          {MATERIALS.length}<div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">{MATERIALS.length}</div>
+            <div class="text-xs text-white/60 mt-1">Downloads</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">PDF &amp; Excel</div>
+            <div class="text-xs text-white/60 mt-1">Formate</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">100%</div>
+            <div class="text-xs text-white/60 mt-1">Kostenlos</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Materialien -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Downloads"
+        heading="Werkzeuge für Eigentümer"
+        subheading="Alle Vorlagen sind Hamburg-spezifisch und wurden von unserem Architekten-Team erstellt."
+      />
+      <div class="max-w-4xl mx-auto space-y-4">
+        {MATERIALS.map((m) => (
+          <article class="bg-surface rounded-2xl p-6 border border-border hover:border-primary transition-colors">
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class={`text-xs font-semibold px-3 py-1 rounded-full ${categoryLabels[m.category].color}`}>
+                    {categoryLabels[m.category].label}
+                  </span>
+                  <span class="text-xs text-text-secondary bg-bg px-2 py-1 rounded">
+                    {m.type} · {m.pages} Seiten · {m.fileSize}
+                  </span>
+                </div>
+                <h2 class="text-xl font-bold text-text-primary mb-2">{m.title}</h2>
+                <p class="text-text-secondary leading-relaxed">
+                  {m.description}
+                </p>
+              </div>
+              <a
+                href={m.href}
+                class="cta-primary text-sm px-6 py-3 inline-flex items-center gap-2 whitespace-nowrap self-start md:self-center"
+                download
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Benötigen Sie ein individuelles Material?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir erstellen Hamburg-spezifische Vorlagen auf Anfrage – für Architekten, Investoren und Eigentümergemeinschaften.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

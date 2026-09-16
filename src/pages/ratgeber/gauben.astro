@@ -5,7 +5,14 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
 
 const currentPath = '/ratgeber/gauben/';
 
@@ -46,9 +53,12 @@ const faqs = [
   <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
     headline: 'Dachgaube einbauen in Hamburg: Welche Form passt zu Ihrem Dach?',
     description: 'Schleppgaube, Fledermausgaube oder Trapezgaube – und wann sich welche Gaubenform in Hamburg genehmigen lässt. Mit Kostenvergleich, Genehmigungshinweisen und Praxistipps.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_ARCHITEKT,
     datePublished: '2026-05-13',
-    dateModified: '2026-05-13',
-    author: 'Dachgeschossausbau Hamburg',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Dachgaube Hamburg', 'Schleppgaube', 'Fledermausgaube', 'Trapezgaube', 'Gauben Kosten'],
     url: 'https://dachgeschossausbauhamburg.de/ratgeber/gauben/',
   }))} />
   <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />

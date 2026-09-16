@@ -1,45 +1,121 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Leistungen', href: '/leistungen/' },
+  { label: 'Kosten', href: '/kosten/' },
+  { label: 'Genehmigung', href: '/genehmigung/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Projekte', href: '/projekte/' },
+  { label: 'Referenzen', href: '/referenzen/' },
+  { label: 'Kontakt', href: '/kontakt/' },
+];
+
+const standorte = [
+  { label: 'Altona', href: '/standorte/altona/' },
+  { label: 'Bergedorf', href: '/standorte/bergedorf/' },
+  { label: 'Eimsbüttel', href: '/standorte/eimsbuettel/' },
+  { label: 'Eppendorf', href: '/standorte/eppendorf/' },
+  { label: 'Harburg', href: '/standorte/harburg/' },
+  { label: 'Winterhude', href: '/standorte/winterhude/' },
+  { label: 'Alle Bezirke', href: '/bezirke/' },
+];
+
+const ratgeber = [
+  { label: 'Denkmalschutz', href: '/ratgeber/denkmalschutz/' },
+  { label: 'Fördermittel 2026', href: '/ratgeber/foerdermittel/' },
+  { label: 'Dachsanierung', href: '/ratgeber/dachsanierung/' },
+  { label: 'Dachgauben', href: '/ratgeber/gauben/' },
+  { label: 'Prozess', href: '/ratgeber/prozess/' },
+  { label: 'Vermieter-Guide', href: '/ratgeber/vermieter/' },
+];
+
+const rechtliches = [
+  { label: 'Impressum', href: '/impressum/' },
+  { label: 'Datenschutz', href: '/datenschutz/' },
+  { label: 'FAQ', href: '/faq/' },
+];
 ---
 <footer class="bg-primary text-white/80 mt-24">
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
+
       <!-- Brand -->
-      <div>
+      <div class="col-span-2 md:col-span-2">
         <p class="text-white font-bold text-lg mb-4">Dachgeschossausbau Hamburg</p>
-        <p class="text-sm leading-relaxed">
+        <p class="text-sm leading-relaxed mb-4">
           Spezialisiert auf Dachgeschossausbau in Hamburg und Umgebung.
           Für Eigentümer und Investoren kostenfreie Erstberatung.
         </p>
+        <p class="text-xs text-white/60 leading-relaxed">
+          Cremon 11 · 20457 Hamburg<br />
+          Tel. 0152 161 174 39<br />
+          info@dachgeschossausbauhamburg.de
+        </p>
+        <div class="mt-4 flex gap-3">
+          <a href="https://www.facebook.com/dachgeschossausbauhamburg" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Facebook">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0022 12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/dachgeschossausbauhamburg" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Instagram">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2 0 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.5.4 1.1.4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.5.2-1.1.4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.5-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.5-.2 1.1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 5 .3 4.2.6c-.8.3-1.5.7-2.2 1.4C1.3 2.7.9 3.4.6 4.2.3 5 .1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c0 1.3.3 2.1.5 2.9.3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.6.5 2.9.5 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3 0 2.1-.3 2.9-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.6.5-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c0-1.3-.3-2.1-.5-2.9-.3-.8-.7-1.5-1.4-2.2C21.3 1.3 20.6.9 19.8.6 19 .3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-10.4a1.4 1.4 0 11-2.8 0 1.4 1.4 0 012.8 0z"/></svg>
+          </a>
+        </div>
       </div>
 
       <!-- Navigation -->
       <div>
         <p class="text-white font-semibold mb-4">Navigation</p>
-        <ul class="space-y-3 text-sm">
-          <li><a href="/" class="hover:text-white transition-colors">Startseite</a></li>
-          <li><a href="/leistungen" class="hover:text-white transition-colors">Leistungen</a></li>
-          <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
-          <li><a href="/kontakt" class="hover:text-white transition-colors">Kontakt</a></li>
+        <ul class="space-y-2.5 text-sm">
+          {navItems.map(item => (
+            <li><a href={item.href} class="hover:text-white transition-colors">{item.label}</a></li>
+          ))}
         </ul>
       </div>
 
-      <!-- Legal -->
+      <!-- Standorte -->
+      <div>
+        <p class="text-white font-semibold mb-4">Hamburg-Standorte</p>
+        <ul class="space-y-2.5 text-sm">
+          {standorte.map(item => (
+            <li><a href={item.href} class="hover:text-white transition-colors">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Ratgeber -->
+      <div>
+        <p class="text-white font-semibold mb-4">Wissen & Ratgeber</p>
+        <ul class="space-y-2.5 text-sm">
+          {ratgeber.map(item => (
+            <li><a href={item.href} class="hover:text-white transition-colors">{item.label}</a></li>
+          ))}
+          <li><a href="/glossar/" class="hover:text-white transition-colors">Glossar A–Z</a></li>
+          <li><a href="/news/" class="hover:text-white transition-colors">News & Updates</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechtliches -->
       <div>
         <p class="text-white font-semibold mb-4">Rechtliches</p>
-        <ul class="space-y-3 text-sm">
-          <li><a href="/impressum" class="hover:text-white transition-colors">Impressum</a></li>
-          <li><a href="/datenschutz" class="hover:text-white transition-colors">Datenschutzerklärung</a></li>
+        <ul class="space-y-2.5 text-sm">
+          {rechtliches.map(item => (
+            <li><a href={item.href} class="hover:text-white transition-colors">{item.label}</a></li>
+          ))}
         </ul>
         <p class="text-xs mt-6 text-white/60 leading-relaxed">
           Wir koordinieren Projekte mit qualitätsgeprüften Fachbetrieben in Hamburg.
           Für Eigentümer und Investoren entstehen keine zusätzlichen Kosten.
         </p>
       </div>
+
     </div>
 
-    <div class="border-t border-white/20 mt-12 pt-8 text-center text-sm text-white/50">
-      © {currentYear} Dachgeschossausbau Hamburg – Alle Rechte vorbehalten
+    <div class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center text-sm text-white/50">
+      <p>© {currentYear} Dachgeschossausbau Hamburg – Alle Rechte vorbehalten</p>
+      <p class="text-xs">
+        Eine Marke der Steffen Bauer Baukoordination · Hamburg
+      </p>
     </div>
   </div>
 </footer>

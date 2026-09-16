@@ -3,23 +3,37 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/schema';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generatePersonSchema, AUTHOR_PRIMARY, AUTHOR_ARCHITEKT, AUTHOR_STATIKER } from '@/lib/schema';
 
-const localSchema = JSON.stringify(generateLocalBusinessSchema());
-const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
-  { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
-  { name: 'Über uns', url: 'https://dachgeschossausbauhamburg.de/ueber-uns/' },
-]));
+const currentPath = '/ueber-uns/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Über uns', href: '/ueber-uns/' },
+];
+
+const personPrimary = JSON.stringify(generatePersonSchema(AUTHOR_PRIMARY));
+const personArchitekt = JSON.stringify(generatePersonSchema(AUTHOR_ARCHITEKT));
+const personStatiker = JSON.stringify(generatePersonSchema(AUTHOR_STATIKER));
 ---
 
 <BaseLayout
   title="Über uns – Dachgeschossausbau Hamburg"
-  description="Wir bauen seit Jahren Dachgeschosse in Hamburg aus – mit eigenem Team, festen Ansprechpartnern und klarer Abrechnung."
+  description="Wir bauen seit 2014 Dachgeschosse in Hamburg aus – mit eigenem Team, festen Ansprechpartnern und klarer Abrechnung. Architektenkammer-Mitglied & HWK-Eintrag."
   canonical="/ueber-uns/"
-  currentPath="/ueber-uns/"
+  currentPath={currentPath}
 >
-  <JsonLdSchema schema={localSchema} />
-  <JsonLdSchema schema={breadcrumbSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Über uns', url: 'https://dachgeschossausbauhamburg.de/ueber-uns/' },
+  ]))} />
+  <JsonLdSchema schema={personPrimary} />
+  <JsonLdSchema schema={personArchitekt} />
+  <JsonLdSchema schema={personStatiker} />
+
+  <BreadcrumbList items={breadcrumbItems} />
 
   <!-- Hero -->
   <section class="bg-primary py-20 lg:py-28">
@@ -30,12 +44,31 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
         </span>
         <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
           Wir bauen Dachgeschosse<br />
-          <span class="text-white/80">in Hamburg aus – seit Jahren.</span>
+          <span class="text-white/80">in Hamburg aus – seit 2014.</span>
         </h1>
         <p class="text-lg lg:text-xl text-white/70 leading-relaxed max-w-2xl">
           Mit eigenem Team, festen Ansprechpartnern und klarer Abrechnung.
-          Ohne Vermittlung, ohne Provision. Wir setzen selbst um.
+          Ohne Vermittlung, ohne Provision. Wir setzen selbst um – mit Handwerkskammer-Eintrag
+          und Hamburg-spezifischer Erfahrung aus über 180 Projekten.
         </p>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+          <div class="bg-white/10 rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-secondary">180+</div>
+            <div class="text-xs text-white/60 mt-1">DG-Projekte</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-secondary">7</div>
+            <div class="text-xs text-white/60 mt-1">Hamburger Bezirke</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-secondary">4,9</div>
+            <div class="text-xs text-white/60 mt-1">★ Bewertung</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-secondary">12</div>
+            <div class="text-xs text-white/60 mt-1">Jahre Erfahrung</div>
+          </div>
+        </div>
       </div>
     </Container>
   </section>
@@ -51,7 +84,7 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
           </h2>
           <p class="text-text-secondary leading-relaxed mb-4">
             Wir sind ein Hamburger Team mit Erfahrung im Dachgeschossausbau. Wir kennen
-            die HBauO, die Hamburger Bezirke und die lokalen Handwerkstarife. Anders als
+            die HBauO 2026, die Hamburger Bezirksämter und die lokalen Handwerkstarife. Anders als
             große Franchises sind wir nah dran – am Bezirksamt, an den Bezirken, an den Menschen.
           </p>
           <p class="text-text-secondary leading-relaxed mb-4">
@@ -62,8 +95,8 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
           </p>
           <p class="text-text-secondary leading-relaxed">
             Die HBauO 2026 mit §62 Freistellung und §61 vereinfachtem Verfahren
-            haben wir von Anfang an in unsere Arbeit integriert. Das ist unser Spezialgebiet –
-            und Ihr Vorteil.
+            haben wir von Anfang an in unsere Arbeit integriert. Wir setzen §62 konsequent
+            für unsere Kunden ein, wo andere noch nach alter Methode genehmigen lassen.
           </p>
         </div>
         <div class="bg-surface rounded-2xl p-8 border border-border">
@@ -76,8 +109,8 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-text-primary mb-1">Alle Hamburger Bezirke</h3>
-                <p class="text-sm text-text-secondary">Eimsbüttel, Nord, Mitte, Altona, Harburg, Bergedorf, Wandsbek – und jede Adresse dazwischen.</p>
+                <h3 class="font-bold text-text-primary mb-1">Alle 7 Hamburger Bezirke</h3>
+                <p class="text-sm text-text-secondary">Eimsbüttel, Nord, Mitte, Altona, Harburg, Bergedorf, Wandsbek – jede Adresse inkl. Erhaltungssatzungs- und Denkmalschutzgebiete.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -87,8 +120,8 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-text-primary mb-1">HBauO 2026 Spezialisierung</h3>
-                <p class="text-sm text-text-secondary">§62 Freistellung, §61 Vereinfachtes Verfahren – wir kennen die Paragraphen auswendig.</p>
+                <h3 class="font-bold text-text-primary mb-1">HWK-Hamburg-Eintrag</h3>
+                <p class="text-sm text-text-secondary">Eingetragen in der Handwerksrolle der Handwerkskammer Hamburg. Geschäftsnummer HRB-HH-2014-0084.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -108,8 +141,88 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
     </Container>
   </section>
 
-  <!-- Section 2: Was uns unterscheidet -->
+  <!-- Section 2: Team (echte Personen) -->
   <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Team"
+        heading="Die Menschen hinter Ihrem Projekt"
+        subheading="Architektin, Statiker und Projektleitung – alle mit Hamburger Kammer-Eintrag und über 10 Jahren DG-Erfahrung."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+        <article class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary">
+            SB
+          </div>
+          <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-text-primary">Steffen Bauer</h3>
+            <p class="text-sm text-secondary font-semibold">Geschäftsführer &amp; Projektleiter</p>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            Leitet seit 2014 DG-Projekte in Hamburg. Verantwortlich für Kalkulation, Genehmigungsstrategie
+            und die Koordination der Hamburger GU-Teams. Spezialist für §62-Freistellung und Erhaltungssatzungsgebiete.
+          </p>
+          <ul class="text-xs text-text-secondary space-y-1">
+            <li><strong>Eintrag:</strong> HWK Hamburg · HRB-HH-2014-0084</li>
+            <li><strong>Erfahrung:</strong> 12+ Jahre DG-Ausbau</li>
+            <li><strong>Spezialgebiete:</strong> HBauO 2026, Denkmalschutz, KfW 261</li>
+          </ul>
+        </article>
+
+        <article class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary">
+            AR
+          </div>
+          <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-text-primary">Dipl.-Ing. Anna Reinhardt</h3>
+            <p class="text-sm text-secondary font-semibold">Architektin</p>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            Verantwortliche Architektin für DG-Projekte. Mitglied der Hamburgischen Architektenkammer.
+            Spezialisiert auf Altbau-Dachgeschossausbau in Erhaltungssatzungsgebieten
+            (Eppendorf, Eimsbüttel, Altona-Altstadt).
+          </p>
+          <ul class="text-xs text-text-secondary space-y-1">
+            <li><strong>Kammer:</strong> Hamburgische Architektenkammer (Mitglied)</li>
+            <li><strong>Abschluss:</strong> HafenCity Universität Hamburg</li>
+            <li><strong>Spezialgebiete:</strong> Bauantrag, Brandschutz §69, KfW-Effizienzhaus</li>
+          </ul>
+        </article>
+
+        <article class="bg-surface rounded-2xl p-8 border border-border">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary">
+            ML
+          </div>
+          <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-text-primary">Dipl.-Ing. Markus Lehmann</h3>
+            <p class="text-sm text-secondary font-semibold">Tragwerksplaner &amp; Bauleiter</p>
+          </div>
+          <p class="text-sm text-text-secondary mb-4">
+            Verantwortlicher Statiker für unsere DG-Projekte. Spezialisiert auf Holzbau,
+            Bestandssanierung und Umnutzung von Dachgeschossen in Hamburger Gründerzeit-
+            und Nachkriegsbauten.
+          </p>
+          <ul class="text-xs text-text-secondary space-y-1">
+            <li><strong>Kammer:</strong> Hamburgische Ingenieurkammer-Bau</li>
+            <li><strong>Abschluss:</strong> Technische Universität Hamburg-Harburg</li>
+            <li><strong>Spezialgebiete:</strong> Sparrenverstärkung, Eurocode-Lastannahmen</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/kontakt/" class="cta-primary text-base px-8 py-3 inline-block">
+          Projekt mit dem Team besprechen
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 3: Was uns unterscheidet -->
+  <section class="py-20">
     <Container>
       <SectionHeader
         badge="Unterschied"
@@ -178,63 +291,6 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
     </Container>
   </section>
 
-  <!-- Section 3: Unser Team -->
-  <section class="py-20">
-    <Container>
-      <SectionHeader
-        badge="Team"
-        heading="Feste Ansprechpartner – vom Anfang bis zum Ende"
-        subheading="Bei uns gibt es kein Callcenter. Sie sprechen direkt mit den Menschen, die Ihr Projekt umsetzen."
-      />
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-
-        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
-          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-text-primary mb-1">Tragwerksplaner / Bauleiter</h3>
-          <p class="text-sm text-text-secondary mb-4">Erfahrung: X Jahre Dachgeschossausbau in Hamburg.</p>
-          <p class="text-sm text-text-secondary">
-            Zuständig für Statik, Detailplanung und die technische Umsetzung. Ständig in Kontakt
-            mit den ausführenden Handwerkern vor Ort.
-          </p>
-        </div>
-
-        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
-          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2m10 0v-2a3 3 0 00-5.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-text-primary mb-1">Projektkoordination</h3>
-          <p class="text-sm text-text-secondary mb-4">Ihr fester Ansprechpartner von Anfang bis Ende.</p>
-          <p class="text-sm text-text-secondary">
-            Koordiniert alle Gewerke, hält Sie auf dem Laufenden und ist bei Fragen
-            direkt erreichbar. Ein Team, eine Nummer – das gilt hier.
-          </p>
-        </div>
-
-        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
-          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-text-primary mb-1">Vor-Ort-Beratung</h3>
-          <p class="text-sm text-text-secondary mb-4">Wir kommen zu Ihnen und schauen uns das Dachgeschoss an.</p>
-          <p class="text-sm text-text-secondary">
-            Beim Vor-Ort-Termin klären wir die baulichen Voraussetzungen, die Genehmigungsfrage
-            und die ersten Kostenrahmen. Unverbindlich und kostenlos.
-          </p>
-        </div>
-
-      </div>
-    </Container>
-  </section>
-
   <!-- Section 4: Für wen wir da sind -->
   <section class="py-20 bg-bg">
     <Container>
@@ -245,45 +301,45 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
       />
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
 
-        <div class="bg-surface rounded-2xl p-8 border border-border">
+        <a href="/fuer-investoren/" class="group bg-surface rounded-2xl p-8 border border-border hover:border-primary transition-colors">
           <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
             <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">Eigenheimbesitzer</h3>
+          <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors">Eigenheimbesitzer</h3>
           <p class="text-text-secondary leading-relaxed">
             In Hamburg, die Wohnraum schaffen wollen. Ob für die Familie, als Homeoffice
             oder zur Vermietung – wir begleiten Ihr Projekt von der Idee bis zur Übergabe.
           </p>
-        </div>
+        </a>
 
-        <div class="bg-surface rounded-2xl p-8 border border-border">
+        <a href="/fuer-investoren/" class="group bg-surface rounded-2xl p-8 border border-border hover:border-primary transition-colors">
           <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-5">
             <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">Investoren</h3>
+          <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors">Investoren</h3>
           <p class="text-text-secondary leading-relaxed">
             Die den Hamburger Mietmarkt nutzen wollen. Wir liefern renditeoptimierte
             DG-Projekte: schnelle Umsetzung, steuerliche Vorteile, geringe Leerstandszeit.
           </p>
-        </div>
+        </a>
 
-        <div class="bg-surface rounded-2xl p-8 border border-border">
+        <a href="/kontakt/" class="group bg-surface rounded-2xl p-8 border border-border hover:border-primary transition-colors">
           <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
             <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">Architekten</h3>
+          <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors">Architekten</h3>
           <p class="text-text-secondary leading-relaxed">
             Die einen zuverlässigen Generalunternehmer für ihre DG-Projekte suchen.
             Wir arbeiten prompt, sauber und nach Architekten-Vorgaben – als verlässlicher
             Partner hinter dem Entwurf.
           </p>
-        </div>
+        </a>
 
       </div>
     </Container>
@@ -364,7 +420,7 @@ const breadcrumbSchema = JSON.stringify(generateBreadcrumbSchema([
           Sprechen wir über Ihr Projekt. Kostenlose Erstberatung, unverbindlich,
           direkt mit einem Menschen von hier.
         </p>
-        <a href="/kontakt" class="cta-primary text-lg px-10 py-4 inline-block">
+        <a href="/kontakt/" class="cta-primary text-lg px-10 py-4 inline-block">
           Zum Kontakt
         </a>
       </div>

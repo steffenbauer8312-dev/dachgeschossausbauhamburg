@@ -1,0 +1,182 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+import { GLOSSAR, type GlossarEntry } from '@/data/glossar';
+
+export async function getStaticPaths() {
+  return GLOSSAR.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: GlossarEntry;
+}
+
+const { entry } = Astro.props;
+const currentPath = `/glossar/${entry.slug}/`;
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Glossar', href: '/glossar/' },
+  { label: entry.term, href: currentPath },
+];
+
+const relatedEntries = (entry.relatedSlugs || [])
+  .map((s) => GLOSSAR.find((e) => e.slug === s))
+  .filter((e): e is GlossarEntry => Boolean(e));
+
+const CATEGORY_LABELS: Record<string, string> = {
+  recht: 'Recht & Genehmigung',
+  technik: 'Technik & Bauteile',
+  foerderung: 'Förderung & Steuer',
+  bauteil: 'Bauteile',
+  verfahren: 'Verfahren',
+};
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: `${entry.term} – Glossar Dachgeschossausbau Hamburg`,
+  description: entry.shortDefinition,
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-02-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: [entry.term, 'Glossar DG-Ausbau', `Hamburg ${entry.term}`],
+  url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+}));
+
+const definedTermSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: entry.term,
+  description: entry.longDefinition,
+  inDefinedTermSet: {
+    '@type': 'DefinedTermSet',
+    name: 'Glossar Dachgeschossausbau Hamburg',
+    url: 'https://dachgeschossausbauhamburg.de/glossar/',
+  },
+});
+---
+
+<BaseLayout
+  title={`${entry.term} – Glossar Dachgeschossausbau Hamburg`}
+  description={`${entry.term}: ${entry.shortDefinition} Alle wichtigen Fachbegriffe rund um Dachgeschossausbau in Hamburg erklärt.`}
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={definedTermSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Glossar', url: 'https://dachgeschossausbauhamburg.de/glossar/' },
+    { name: entry.term, url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-16 lg:py-20 max-w-4xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-4 uppercase tracking-wider">
+          {CATEGORY_LABELS[entry.category] || entry.category}
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          {entry.term}
+        </h1>
+        <p class="text-xl text-white/80 leading-relaxed">
+          {entry.shortDefinition}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Definition -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-surface rounded-2xl border border-border p-8 lg:p-10 mb-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Definition</h2>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            {entry.longDefinition}
+          </p>
+        </div>
+
+        {entry.relatedLinks && entry.relatedLinks.length > 0 && (
+          <div class="bg-surface rounded-2xl border border-border p-8 mb-8">
+            <h2 class="text-xl font-bold text-text-primary mb-4">Weiterführende Links</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {entry.relatedLinks.map((link) => (
+                <a
+                  href={link.href}
+                  class="flex items-center gap-2 p-4 bg-bg rounded-xl hover:bg-primary/5 transition-colors"
+                >
+                  <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <span class="text-sm font-semibold text-text-primary">{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {relatedEntries.length > 0 && (
+          <div class="bg-surface rounded-2xl border border-border p-8 mb-8">
+            <h2 class="text-xl font-bold text-text-primary mb-4">Verwandte Begriffe</h2>
+            <div class="flex flex-wrap gap-2">
+              {relatedEntries.map((r) => (
+                <a
+                  href={`/glossar/${r.slug}/`}
+                  class="inline-flex items-center gap-1 bg-bg hover:bg-primary/10 px-4 py-2 rounded-full text-sm text-text-primary hover:text-primary transition-colors"
+                >
+                  {r.term}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 text-sm text-text-secondary">
+          <p>
+            <strong class="text-text-primary">Hinweis:</strong>{' '}
+            Dieses Glossar wird von unserem Architekten- und Statikerteam gepflegt.
+            Stand: 16. September 2026. Korrekturen und Ergänzungen an{' '}
+            <a href="mailto:redaktion@dachgeschossausbauhamburg.de" class="text-primary hover:underline">
+              redaktion@dachgeschossausbauhamburg.de
+            </a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA zurück -->
+  <section class="py-12">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center">
+        <a
+          href="/glossar/"
+          class="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+        >
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Zurück zum kompletten Glossar A–Z
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

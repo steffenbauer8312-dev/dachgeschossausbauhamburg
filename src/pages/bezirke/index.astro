@@ -1,0 +1,236 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  generateArticleSchema,
+} from '@/lib/schema';
+import { BEZIRKE } from '@/data/bezirke';
+
+const currentPath = '/bezirke/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Bezirke', href: '/bezirke/' },
+];
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Hamburger Bezirke für Dachgeschossausbau – Alle 7 im Überblick',
+  description: 'Alle 7 Hamburger Bezirksämter mit Bauaufsicht, Erhaltungssatzung, typischen Bauten und DG-Ausbau-Hinweisen für Eigentümer.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-03-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Hamburger Bezirke', 'Bauaufsicht Hamburg', 'Erhaltungssatzung Bezirke', 'Hamburg-Mitte Altona Eimsbüttel'],
+  url: 'https://dachgeschossausbauhamburg.de/bezirke/',
+}));
+---
+
+<BaseLayout
+  title="Hamburger Bezirke für Dachgeschossausbau – Alle 7 im Überblick"
+  description="Alle 7 Hamburger Bezirke für DG-Ausbau: Bauaufsicht, Erhaltungssatzung, typische Bauten, Preise und Hinweise für Ihren Stadtteil."
+  canonical="/bezirke/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Bezirke', url: 'https://dachgeschossausbauhamburg.de/bezirke/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Alle 7 Hamburger Bezirksämter
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Bezirke &amp; Bauaufsicht Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Welche Bauaufsicht ist für Ihr DG-Projekt zuständig? Welche Bezirke haben Erhaltungssatzung?
+          Welche typischen Bauten gibt es? Hier finden Sie es bezirksgenau.
+        </p>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">7</div>
+            <div class="text-xs text-white/60 mt-1">Bezirksämter</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">~1,9 Mio</div>
+            <div class="text-xs text-white/60 mt-1">Einwohner</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">5</div>
+            <div class="text-xs text-white/60 mt-1">mit Erhaltungssatzung</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">1</div>
+            <div class="text-xs text-white/60 mt-1">zentrale Bauaufsicht</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Bezirke-Grid -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Übersicht"
+        heading="Alle 7 Bezirke auf einen Blick"
+        subheading="Klicken Sie auf einen Bezirk, um Details zur Bauaufsicht, zu typischen Bauten und DG-Potenzialen zu sehen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {BEZIRKE.map((bezirk) => (
+          <a
+            href={`/bezirke/${bezirk.slug}/`}
+            class="group bg-surface rounded-2xl p-6 border border-border hover:border-primary transition-all"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <span class="inline-block text-xs font-semibold text-secondary uppercase tracking-wider">
+                Bezirk
+              </span>
+              <div class="flex flex-col gap-1 items-end">
+                {bezirk.erhaltungssatzung && (
+                  <span class="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-800 rounded">
+                    EHSG
+                  </span>
+                )}
+                {bezirk.denkmalschutzHaefig && (
+                  <span class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                    Denkmal
+                  </span>
+                )}
+              </div>
+            </div>
+            <h2 class="text-xl font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">
+              Hamburg-{bezirk.shortName}
+            </h2>
+            <p class="text-xs text-text-secondary mb-4">
+              {bezirk.einwohner} · {bezirk.flaeche}
+            </p>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              {bezirk.description}
+            </p>
+            <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+              <div class="bg-bg rounded-lg p-2">
+                <div class="text-text-secondary">Kaufpreis</div>
+                <div class="font-semibold text-text-primary">{bezirk.kaufpreisAvg}</div>
+              </div>
+              <div class="bg-bg rounded-lg p-2">
+                <div class="text-text-secondary">Miete</div>
+                <div class="font-semibold text-text-primary">{bezirk.mieteAvg}</div>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
+              Bezirksdetails ansehen
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Zentrale Bauaufsicht -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Zentrale Anlaufstelle"
+        heading="Die zentrale Bauaufsicht Hamburg"
+        subheading="Für viele Anliegen ist das zentrale Fachamt Bauaufsicht Hamburg-Mitte der erste Ansprechpartner."
+      />
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Bauaufsicht Hamburg – zentral</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+              <p class="text-text-secondary mb-2">
+                <strong>Adresse:</strong><br />
+                Caffamacherreihe 1–3<br />
+                20355 Hamburg
+              </p>
+              <p class="text-text-secondary mb-2">
+                <strong>Telefon:</strong> 040 / 428 54-2399
+              </p>
+              <p class="text-text-secondary">
+                <strong>Website:</strong>{' '}
+                <a
+                  href="https://www.hamburg.de/bbauo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary hover:underline"
+                >
+                  hamburg.de/bbauo
+                </a>
+              </p>
+            </div>
+            <div>
+              <p class="text-text-secondary mb-3">
+                <strong>Zentrale Aufgaben:</strong>
+              </p>
+              <ul class="space-y-1 text-text-secondary">
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Baugenehmigungen in Erhaltungssatzungsgebieten</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Denkmalschutzrechtliche Genehmigungen</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Bebauungspläne</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Bauaufsichtliche Verfahren</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Welcher Bezirk ist Ihrer?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir kennen jedes Hamburger Bezirksamt und jeden Stadtteil. Sprechen Sie uns an – wir kümmern uns um die Abstimmung.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -5,7 +5,13 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
 
 const currentPath = '/ratgeber/prozess/';
 
@@ -40,9 +46,12 @@ const processSteps = [
   <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
     headline: 'Dachgeschossausbau in Hamburg: Der komplette Prozess von der Idee bis zum Einzug',
     description: 'Was passiert wann? Von der ersten Idee über die Genehmigung bis zum bezugsfertigen Dachgeschoss – ein realistischer Zeitplan für Hamburger Eigentümer.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_STATIKER,
     datePublished: '2026-01-15',
-    dateModified: '2026-05-13',
-    author: 'Dachgeschossausbau Hamburg',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['DG-Ausbau Prozess', 'Hamburg Zeitplan', 'DG-Ausbau Ablauf', 'Bauleiter Hamburg'],
     url: 'https://dachgeschossausbauhamburg.de/ratgeber/prozess/'
   }))} />
 

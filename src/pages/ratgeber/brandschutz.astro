@@ -1,0 +1,186 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+
+const currentPath = '/ratgeber/brandschutz/';
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Brandschutz im Dachgeschoss', href: currentPath },
+];
+
+const faqs = [
+  {
+    question: 'Welche Brandschutz-Anforderungen gelten für DG-Ausbau in Hamburg?',
+    answer: 'Bei DG-Ausbau in Hamburg müssen mindestens feuerhemmende (F30/F60) Trennwände zum Treppenhaus eingebaut werden, Rettungswege (Fenster mit mind. 90×120 cm oder zweiter Rettungsweg) vorhanden sein und ein Rauchmelder-Pflicht-System installiert werden. Bei Wohngebäuden gilt die HBauO 2026 mit den Anforderungen aus §29 ff.',
+  },
+  {
+    question: 'Wie viele Rauchmelder brauche ich im Dachgeschoss?',
+    answer: 'In Hamburg gilt seit 2011 die Rauchmelderpflicht nach HBauO §45: In jedem Aufenthaltsraum (Wohn-, Schlaf-, Kinderzimmer) sowie in jedem Rettungsweg (Flur, Treppenhaus) muss ein Rauchmelder installiert sein. Für ein typisches 60-m²-DG brauchen Sie 3–4 Rauchmelder (à 15–25 €).',
+  },
+  {
+    question: 'Wann brauche ich einen zweiten Rettungsweg?',
+    answer: 'Wenn das DG als eigenständige Wohnung genutzt wird oder Schlafräume hat, ist ein zweiter Rettungsweg Pflicht. Optionen: (1) ein zweites großes Dachflächenfenster (mind. 90×120 cm Öffnungsmaß), (2) eine Außenleiter, oder (3) ein angeschlossener Treppenraum mit eigener Notbeleuchtung.',
+  },
+];
+---
+
+<BaseLayout
+  title="Brandschutz im Dachgeschoss Hamburg – Pflichten 2026"
+  description="Brandschutz beim DG-Ausbau in Hamburg: Rauchmelder, Rettungswege, F30-Trennwände, §69 HBauO. Pflicht-Checkliste für Eigentümer."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Brandschutz im Dachgeschoss Hamburg – alle Pflichten 2026',
+    description: 'Brandschutz beim DG-Ausbau: Rauchmelder, Rettungswege, Trennwände und §69 HBauO. Der komplette Ratgeber für Hamburger Eigentümer.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_ARCHITEKT,
+    datePublished: '2026-05-10',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Brandschutz DG Hamburg', 'Rauchmelder Pflicht', 'Rettungsweg Dachgeschoss', 'HBauO Brandschutz'],
+    url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Brandschutz DG', url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Pflicht-Checkliste · HBauO 2026
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Brandschutz im Dachgeschoss
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Wer ein Hamburger Dachgeschoss ausbaut, muss Brandschutz nach HBauO 2026 sicherstellen.
+          Wir erklären die fünf wichtigsten Pflichten — und welche Ausnahmen es gibt.
+        </p>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">F30/F60</div>
+            <div class="text-xs text-white/60 mt-1">Trennwände</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">90×120 cm</div>
+            <div class="text-xs text-white/60 mt-1">Rettungsfenster</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">3–4 St.</div>
+            <div class="text-xs text-white/60 mt-1">Rauchmelder</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">1. Rauchmelder (§45 HBauO)</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Seit 2011 sind Rauchmelder in allen Hamburger Wohnungen Pflicht. Bei DG-Ausbau heißt das:
+            In jedem Aufenthaltsraum (Wohn-, Schlaf-, Kinderzimmer) und in jedem Rettungsweg
+            (Flur, Treppenhaus) ein Rauchmelder. Wir empfehlen funkvernetzte Geräte (z. B. von
+            Gira, Busch-Jaeger, Pyrexx) — 50–100 € Investition pro Etage, hohe Sicherheit.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">2. Zweiter Rettungsweg</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Ein zweiter Rettungsweg ist Pflicht, wenn das DG als Wohnung genutzt wird oder
+            Schlafräume enthält. In der Praxis gelöst durch eines von drei Konzepten:
+          </p>
+          <ul class="mt-3 space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>Zweites Dachflächenfenster</strong> (mind. 90×120 cm Öffnungsmaß nach DIN EN 14351)</li>
+            <li>✓ <strong>Außenleiter</strong> vom DG direkt ins Freie (bei Gauben möglich)</li>
+            <li>✓ <strong>Zweiter Treppenraum</strong> mit Notbeleuchtung (selten, teuer)</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">3. Trennwände F30 / F60</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Wenn das DG eine eigenständige Wohnung wird, sind feuerhemmende Trennwände zum
+            Treppenhaus und zu angrenzenden Wohnungen Pflicht. F30 (30 Min. Feuerwiderstand)
+            ist Standard; F60 (60 Min.) bei Mehrfamilienhäusern mit mehr als 2 Wohnungen.
+            Wir verwenden Gipskarton-Ständerwände mit Mineralwolldämmung — Standard im Holzbau.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">4. Brandlasten minimieren</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Im DG sollten leicht entflammbare Materialien vermieden werden. Konkret heißt das:
+          </p>
+          <ul class="mt-3 space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>Dämmung:</strong> Mineralwolle statt Polystyrol (HBCD-frei)</li>
+            <li>✓ <strong>Verkleidung:</strong> Gipskarton statt Holzpaneele im Wandbereich zum Treppenhaus</li>
+            <li>✓ <strong>Elektrik:</strong> Brandschutzschalter / FI-Schutzschalter</li>
+            <li>✓ <strong>Boden:</strong> Schwer entflammbare Unterlage unter Parkett &amp; Laminat</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">5. §69 HBauO: Abweichungen im Einzelfall</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Bei <a href="/glossar/69-hbauo/" class="text-primary underline hover:underline">§69 HBauO</a> können
+            Brandschutz-Anforderungen im Einzelfall abweichen, wenn das Vorhaben ansonsten nicht
+            umsetzbar wäre und die öffentliche Sicherheit nicht gefährdet wird. In der Hamburger
+            Praxis wird das z. B. bei erhaltenswerten Altbauten in
+            <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a> oder
+            <a href="/standorte/altona/" class="text-primary underline hover:underline">Altona</a> häufig angewendet —
+            die Brandschutzbehörde prüft pragmatisch. Wir haben mit §69 in 30+ DG-Projekten
+            erfolgreiche Ausnahmen durchgesetzt.
+          </p>
+        </div>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 text-sm text-text-secondary">
+          <p>
+            <strong class="text-text-primary">Kosten Brandschutz im DG:</strong> 3.000–8.000 € für ein
+            typisches Hamburger DG (60–80 m²). Der größte Posten: Rettungsweg-Konzept und
+            ggf. zweite Treppenhaus-Anbindung. Diese Kosten sind Teil des
+            <a href="/ratgeber/foerdermittel/" class="text-primary underline hover:underline">förderfähigen Ausbaus</a>
+            nach <a href="/glossar/kfw-261/" class="text-primary underline hover:underline">KfW 261</a>.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Brandschutz für Ihr DG planen</h2>
+          <p class="text-white/80 text-lg mb-8">
+            Wir prüfen mit Ihnen die Brandschutz-Situation und kümmern uns um die Abstimmung mit dem Bezirksamt.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

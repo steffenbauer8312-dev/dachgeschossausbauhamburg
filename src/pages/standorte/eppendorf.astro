@@ -262,6 +262,106 @@ import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceS
   </section>
 
   <!-- ================================================
+       VERGLEICHBARE STADTTEILE
+       ================================================ -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Stadtteile im Vergleich"
+        heading="Eppendorf vs. andere Stadtteile"
+        subheading="Wie schlägt sich Eppendorf im Hamburg-Vergleich?"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3">
+        <a href="/standorte/winterhude/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Winterhude</p>
+          <p class="text-xs text-text-secondary mt-1">Wachstums-Mikrolage</p>
+        </a>
+        <a href="/standorte/altona/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Altona</p>
+          <p class="text-xs text-text-secondary mt-1">Denkmal + Villen</p>
+        </a>
+        <a href="/standorte/eimsbuettel/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Eimsbüttel</p>
+          <p class="text-xs text-text-secondary mt-1">Familienfreundlich</p>
+        </a>
+        <a href="/standorte/harburg/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Harburg</p>
+          <p class="text-xs text-text-secondary mt-1">Beste Cashflow-Rendite</p>
+        </a>
+        <a href="/standorte/bergedorf/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Bergedorf</p>
+          <p class="text-xs text-text-secondary mt-1">Wachstum, Natur</p>
+        </a>
+        <a href="/standorte/vergleich/" class="bg-primary/5 rounded-xl border border-primary/30 hover:border-primary p-4 transition-colors text-center">
+          <p class="font-semibold text-primary">Alle Vergleiche →</p>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       EPPENDORF FAQ
+       ================================================ -->
+  <section class="py-16">
+    <Container>
+      <SectionHeader
+        badge="Häufige Fragen"
+        heading="Eppendorf-spezifische Fragen zum DG-Ausbau"
+        subheading="Die meistgestellten Fragen aus 24 realen Eppendorf-Projekten 2024–2026."
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto space-y-3">
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">1</span>
+            <span class="font-semibold text-text-primary flex-1">Welche Gaube ist in Eppendorf erfahrungsgemäß am besten genehmigungsfähig?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            In Eppendorf ist die <strong>Schleppgaube</strong> die mit Abstand am häufigsten genehmigte Form. Fledermausgauben werden in der Erhaltungssatzung Eimsbüttel-Nord sehr restriktiv behandelt — wir empfehlen vor Antragstellung eine Bauvoranfrage beim Bezirksamt.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">2</span>
+            <span class="font-semibold text-text-primary flex-1">Muss ich mit Aufschlägen auf Hamburger Standardpreise rechnen?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            Ja, 10–15 % über Hamburger Durchschnitt. Grund: hohe Nachfrage nach qualifizierten Betrieben, Erhaltungssatzungs-Auflagen, anspruchsvolle Altbau-Substanz. Für ein 75-m²-DG rechnen wir mit 175.000–200.000 € Gesamtkosten.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">3</span>
+            <span class="font-semibold text-text-primary flex-1">Welche Förderung ist in Eppendorf realistisch?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            In Eppendorf lohnt sich KfW 261 besonders — durch die sehr schlechte Ausgangslage vieler Altbauten greift der WPB-Bonus (Worst-Performing-Building) mit +5 % Tilgungszuschuss. Effektiv 35–40 % Zuschuss auf die Kreditsumme möglich.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">4</span>
+            <span class="font-semibold text-text-primary flex-1">Wie hoch darf die Miete nach DG-Ausbau in Eppendorf sein?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            In Eppendorf sind nach DG-Ausbau 16–22 €/m² möglich — über dem Hamburger Mietenspiegel. Bei einer 75-m²-DG-Wohnung sind das 1.200–1.650 € Monatsmiete. Details im <a href="/mietatlas/" class="text-primary underline hover:underline">DG-Mietatlas Hamburg</a>.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex-items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">5</span>
+            <span class="font-semibold text-text-primary flex-1">Welche Bezirksamt-Zuständigkeit gilt?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            Eppendorf gehört zum Bezirk Eimsbüttel. Zuständige Bauaufsicht: <strong>Bezirksamt Eimsbüttel, Grindelberg 62–66, 20144 Hamburg</strong>. Mehr unter <a href="/bezirke/eimsbuettel/" class="text-primary underline hover:underline">Bezirk Eimsbüttel</a>.
+          </div>
+        </details>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
        END CTA SECTION
        ================================================ -->
   <section class="py-20 bg-bg">

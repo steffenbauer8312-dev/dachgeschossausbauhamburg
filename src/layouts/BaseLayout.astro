@@ -3,6 +3,8 @@ import BaseHead from '@/components/layout/BaseHead.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
 import StickyCtaBar from '@/components/layout/StickyCtaBar.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import { generatePublisherSchema } from '@/lib/schema';
 import '../styles/global.css';
 
 interface Props {
@@ -11,13 +13,17 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   currentPath?: string;
+  noindex?: boolean;
 }
 const { title, description, ogImage, canonical, currentPath = '/', noindex = false } = Astro.props;
+const publisherSchema = JSON.stringify(generatePublisherSchema());
 ---
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <BaseHead {title} {description} {ogImage} {canonical} {noindex} />
+  <!-- Publisher-Schema auf jeder Seite (Topical Authority Signal) -->
+  <JsonLdSchema schema={publisherSchema} />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3W72LFPSK"></script>
   <script>

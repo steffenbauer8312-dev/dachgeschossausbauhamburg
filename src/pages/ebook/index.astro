@@ -1,0 +1,204 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  AUTHOR_STATIKER,
+  generateArticleSchema,
+} from '@/lib/schema';
+
+const currentPath = '/ebook/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'E-Book', href: '/ebook/' },
+];
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Der Hamburger DG-Ausbau-Leitfaden – Kostenloses E-Book (48 Seiten)',
+  description: 'Das komplette Handbuch für Dachgeschossausbau in Hamburg: 48 Seiten mit allen Schritten, Kosten, Förderung und Hamburger Besonderheiten. Kostenloser Download.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-05-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['E-Book DG Hamburg', 'Leitfaden Dachgeschossausbau', 'Hamburger DG-Handbuch'],
+  url: 'https://dachgeschossausbauhamburg.de/ebook/',
+}));
+
+const CHAPTERS = [
+  { nr: 1, title: 'Ist Ihr Dachgeschoss ausbaufähig?', pages: 4 },
+  { nr: 2, title: 'Hamburger Bauordnung 2026 verstehen', pages: 6 },
+  { nr: 3, title: 'Erhaltungssatzung & Denkmalschutz in Hamburg', pages: 5 },
+  { nr: 4, title: 'Welche Genehmigung brauche ich?', pages: 5 },
+  { nr: 5, title: 'Förderung 2026: KfW 261, BAFA, §35c EStG', pages: 7 },
+  { nr: 6, title: 'Kosten im Detail: Alle Posten erklärt', pages: 6 },
+  { nr: 7, title: 'Gauben: Welche Form passt zu Ihnen?', pages: 4 },
+  { nr: 8, title: 'Dämmung: Aufsparren vs. Zwischensparren', pages: 4 },
+  { nr: 9, title: 'Der Prozess: Schritt für Schritt', pages: 4 },
+  { nr: 10, title: 'Anhang: Checklisten & Vorlagen', pages: 3 },
+];
+---
+
+<BaseLayout
+  title="E-Book: Hamburger DG-Ausbau-Leitfaden (48 Seiten, kostenlos)"
+  description="Kostenloses E-Book: 48 Seiten Dachgeschossausbau-Leitfaden für Hamburg. Mit Kosten, Förderung, HBauO 2026, Erhaltungssatzung und allen Checklisten."
+  canonical="/ebook/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { label: 'E-Book', url: 'https://dachgeschossausbauhamburg.de/ebook/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+              Kostenloser Download
+            </span>
+            <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+              Der Hamburger<br />DG-Ausbau-Leitfaden
+            </h1>
+            <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-8">
+              48 Seiten kompaktes Wissen für Ihren Dachgeschossausbau in Hamburg.
+              Mit allen Schritten, Kosten, Förderprogrammen und Hamburger Besonderheiten.
+            </p>
+            <div class="flex flex-wrap gap-3 mb-8">
+              <div class="bg-white/10 rounded-xl px-5 py-3">
+                <div class="text-2xl font-bold text-secondary">48</div>
+                <div class="text-xs text-white/60">Seiten</div>
+              </div>
+              <div class="bg-white/10 rounded-xl px-5 py-3">
+                <div class="text-2xl font-bold text-secondary">10</div>
+                <div class="text-xs text-white/60">Kapitel</div>
+              </div>
+              <div class="bg-white/10 rounded-xl px-5 py-3">
+                <div class="text-2xl font-bold text-secondary">12+</div>
+                <div class="text-xs text-white/60">Checklisten</div>
+              </div>
+            </div>
+            <a href="#download" class="cta-primary text-base px-8 py-4 inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Jetzt kostenlos herunterladen
+            </a>
+          </div>
+          <div class="hidden lg:block">
+            <div class="bg-white/10 rounded-2xl p-6 border-2 border-white/20 aspect-[3/4] flex flex-col justify-between">
+              <div>
+                <p class="text-xs uppercase tracking-wider text-secondary font-semibold mb-3">
+                  E-Book · 48 Seiten
+                </p>
+                <p class="text-2xl font-bold leading-tight">
+                  Dachgeschoss-<br />ausbau Hamburg
+                </p>
+                <p class="text-sm text-white/70 mt-2">
+                  Der komplette Leitfaden
+                </p>
+              </div>
+              <div>
+                <p class="text-xs text-white/60 mb-1">Aus der Praxis für die Praxis</p>
+                <p class="text-sm font-bold">Steffen Bauer</p>
+                <p class="text-xs text-white/70">Anna Reinhardt · Markus Lehmann</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Inhalt -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Inhalt"
+        heading="10 Kapitel, alle relevant"
+        subheading="Aufgebaut nach dem typischen DG-Projektverlauf – Sie können Kapitel für Kapitel vorgehen oder gezielt nachschlagen."
+      />
+      <div class="max-w-4xl mx-auto space-y-3">
+        {CHAPTERS.map((c) => (
+          <div class="bg-surface rounded-xl border border-border p-5 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="font-bold text-primary">{c.nr}</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-text-primary">{c.title}</h3>
+            </div>
+            <span class="text-xs text-text-secondary whitespace-nowrap">{c.pages} Seiten</span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Was Sie lernen -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Aus dem E-Book"
+        heading="Was Sie nach der Lektüre wissen"
+        subheading="Das E-Book vermittelt Ihnen das Wissen, das unsere Kunden in der Beratung bekommen."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">Wann brauchen Sie §62 Freistellung?</h3>
+          <p class="text-sm text-text-secondary">
+            Kapitel 4 erklärt die Unterschiede zwischen §62 und §61 HBauO mit Hamburger Praxisbeispielen.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">Welche Förderung ist optimal?</h3>
+          <p class="text-sm text-text-secondary">
+            Kapitel 5 zeigt die Kombination aus KfW 261, BAFA, iSFP-Bonus und §35c EStG – mit Rechenbeispielen.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">Wie viel kostet mein DG wirklich?</h3>
+          <p class="text-sm text-text-secondary">
+            Kapitel 6 listet alle Posten mit Hamburger Richtwerten – von Trockenbau bis zur Gaube.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <h3 class="font-bold text-text-primary mb-2">Was ist im Prozess zu beachten?</h3>
+          <p class="text-sm text-text-secondary">
+            Kapitel 9 zeigt den Ablauf von Erstberatung bis Abnahme – mit typischen Stolperfallen.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Download-Form -->
+  <section id="download" class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            E-Book kostenlos herunterladen
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir senden Ihnen den Download-Link per E-Mail – keine Anmeldung erforderlich, kein Spam.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

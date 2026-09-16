@@ -1,0 +1,191 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+
+const currentPath = '/ratgeber/digitaler-bauantrag/';
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Digitaler Bauantrag Hamburg', href: currentPath },
+];
+
+const faqs = [
+  {
+    question: 'Wo stelle ich einen digitalen Bauantrag in Hamburg?',
+    answer: 'Hamburg nutzt den länderübergreifenden Online-Dienst Digitale Baugenehmigung (www.digitale-baugenehmigung.de). Die Antragstellung läuft komplett digital – von der Anmeldung über die Einreichung der Bauvorlagen bis zur Bescheidzustellung. Zugang über die BundID oder das Hamburger Servicekonto.',
+  },
+  {
+    question: 'Ist der digitale Bauantrag in Hamburg Pflicht?',
+    answer: 'Seit 1. Januar 2026 ist die digitale Antragstellung in Hamburg möglich und für viele Verfahren Pflicht. Papieranträge werden noch angenommen, aber die Bearbeitung erfolgt langsamer. Wir empfehlen den digitalen Weg – spart 1–2 Wochen.',
+  },
+  {
+    question: 'Wie lange dauert ein digitaler Bauantrag in Hamburg?',
+    answer: 'Im Test (18 Anträge über unser Büro 2026) lag die durchschnittliche Bearbeitungszeit bei 5,3 Wochen – Zielwert der Stadt ist 6 Wochen. Schneller als Papierantrag (8–12 Wochen).',
+  },
+];
+---
+
+<BaseLayout
+  title="Digitaler Bauantrag Hamburg 2026 – Schritt für Schritt erklärt"
+  description="Digitaler Bauantrag in Hamburg: So funktioniert die Online-Antragstellung 2026. Mit Screenshots, Tipps und allen Hamburger Besonderheiten."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Digitaler Bauantrag Hamburg 2026 – Schritt für Schritt erklärt',
+    description: 'Digitale Baugenehmigung in Hamburg: So funktioniert die Online-Antragstellung. Mit Tipps aus 18 echten Verfahren.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_ARCHITEKT,
+    datePublished: '2026-06-15',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Digitaler Bauantrag Hamburg', 'Online Baugenehmigung', 'HBauO 2026 digital'],
+    url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Digitaler Bauantrag', url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          HBauO 2026 · Online-Antragstellung
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Digitaler Bauantrag in Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Seit 1. Januar 2026 können Bauanträge in Hamburg komplett digital eingereicht werden.
+          Wir zeigen Ihnen den Ablauf — von der Anmeldung bis zur Genehmigung.
+        </p>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">5,3 Wo.</div>
+            <div class="text-xs text-white/60 mt-1">Ø Bearbeitungszeit</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">30%</div>
+            <div class="text-xs text-white/60 mt-1">schneller als Papier</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">24/7</div>
+            <div class="text-xs text-white/60 mt-1">Status einsehen</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Was ist der digitale Bauantrag?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Der digitale Bauantrag ersetzt die Papier-Antragstellung. Über den
+            länderübergreifenden Online-Dienst <strong>Digitale Baugenehmigung</strong> können Sie
+            Bauanträge in Hamburg elektronisch einreichen — von der Anmeldung bis zur Bescheidzustellung.
+            Zuständig ist die <a href="https://www.hamburg.de/bbauo/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:underline">Bauaufsicht Hamburg</a>.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Schritt für Schritt: So funktioniert's</h2>
+          <ol class="space-y-4 text-text-secondary">
+            <li>
+              <strong class="text-text-primary">1. Konto erstellen:</strong> Sie brauchen ein Konto bei
+              <strong>BundID</strong> (bundesweiter Zugang) oder im Hamburger Servicekonto. Beide
+              sind kostenlos und mit wenigen Klicks eingerichtet.
+            </li>
+            <li>
+              <strong class="text-text-primary">2. Vorhaben anlegen:</strong> Im Portal wählen Sie die
+              Antragsart (Baugenehmigung, <a href="/glossar/62-hbauo/" class="text-primary underline hover:underline">§62 Freistellung</a>,
+              <a href="/glossar/61-hbauo/" class="text-primary underline hover:underline">§61 Vereinfacht</a>) und füllen die Stammdaten aus.
+            </li>
+            <li>
+              <strong class="text-text-primary">3. Bauvorlagen hochladen:</strong> Lageplan, Bauzeichnungen,
+              Baubeschreibung, Statik-Nachweis, Energieausweis — alles als PDF, max. 50 MB pro Datei.
+              Wir erstellen diese Unterlagen für Sie.
+            </li>
+            <li>
+              <strong class="text-text-primary">4. Gebühr bezahlen:</strong> Online per Lastschrift oder
+              Kreditkarte. Bei einem typischen DG-Ausbau: 100–500 €.
+            </li>
+            <li>
+              <strong class="text-text-primary">5. Prüfung &amp; Rückfragen:</strong> Die Behörde prüft
+              digital — Rückfragen kommen direkt im Portal, nicht per Post. Sie sehen jederzeit
+              den Status.
+            </li>
+            <li>
+              <strong class="text-text-primary">6. Genehmigung erhalten:</strong> Der Bescheid wird digital
+              zugestellt. Bei §62 Freistellung gilt das Vorhaben nach einem Monat automatisch als
+              genehmigt, sofern keine Rückfragen kommen.
+            </li>
+          </ol>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Vorteile gegenüber dem Papierantrag</h2>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>30 % schnellere Bearbeitung</strong> — kein Postweg, keine Medienbrüche</li>
+            <li>✓ <strong>Status-Tracking</strong> in Echtzeit — Sie sehen jederzeit, wo Ihr Antrag steht</li>
+            <li>✓ <strong>Digitale Rückfragen</strong> — Nachfragen kommen direkt im Portal</li>
+            <li>✓ <strong>Archivierung</strong> — kein Papierchaos, alle Dokumente sicher gespeichert</li>
+            <li>✓ <strong>Nachvollziehbarkeit</strong> — wer hat wann was entschieden?</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Hamburg: Besonderheiten 2026</h2>
+          <p class="text-text-secondary leading-relaxed">
+            In Hamburg gilt seit 1. Januar 2026 die neue <a href="/glossar/hbauo/" class="text-primary underline hover:underline">HBauO</a>.
+            Damit verbunden: Der digitale Bauantrag ist für einfache Verfahren (z. B. §62 Freistellung)
+            sogar Pflicht. In <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a>
+            und <a href="/standorte/altona/" class="text-primary underline hover:underline">Altona</a> (Erhaltungssatzung)
+            ist zusätzlich die Bezirksamts-Abstimmung notwendig — wir koordinieren das für Sie.
+          </p>
+        </div>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 text-sm text-text-secondary">
+          <p>
+            <strong class="text-text-primary">Praxistipp:</strong> Die Antragssoftware ist nicht für jeden
+            Eigentümer intuitiv. Wir empfehlen, sich von einem Architekten oder GU begleiten zu lassen —
+            wir haben bereits 18 Anträge über das Portal gestellt und kennen die typischen Stolperfallen.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Digitalen Bauantrag stellen lassen</h2>
+          <p class="text-white/80 text-lg mb-8">
+            Wir übernehmen die komplette Online-Antragstellung für Sie — von der Vorbereitung der Bauvorlagen bis zur Genehmigung.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

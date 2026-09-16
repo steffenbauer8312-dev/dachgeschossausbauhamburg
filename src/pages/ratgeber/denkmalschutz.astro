@@ -5,7 +5,14 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import LeadGenForm from '@/components/forms/LeadGenForm.astro';
 import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
 import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '@/lib/schema';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
 
 const currentPath = '/ratgeber/denkmalschutz/';
 
@@ -46,9 +53,15 @@ const faqs = [
   <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
     headline: 'Denkmalschutz & Dachgeschossausbau in Hamburg – Was ist erlaubt, was nicht?',
     description: 'Der Ratgeber erklärt das Genehmigungsverfahren nach §6 HDSchG, was in denkmalgeschützten Gebäuden genehmigt wird, welche Kosten anfallen und welche Förderungen es gibt.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_ARCHITEKT,
     datePublished: '2026-01-15',
-    dateModified: '2026-05-13',
-    author: 'Dachgeschossausbau Hamburg',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Denkmalschutz Hamburg', 'HDSchG', 'DG-Ausbau Denkmal', 'Erhaltungssatzung Hamburg', 'Denkmalschutzamt Hamburg'],
+    wordCount: 2500,
+    speakable: ['/html/head/title', '/html/body//h1', '/html/body//article//p[1]'],
+    url: 'https://dachgeschossausbauhamburg.de/ratgeber/denkmalschutz/',
   }))} />
   <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
 

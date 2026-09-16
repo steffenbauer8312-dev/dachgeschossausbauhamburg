@@ -1,0 +1,239 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateDatasetSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  generateArticleSchema,
+} from '@/lib/schema';
+import { BEZIRKE } from '@/data/bezirke';
+
+const currentPath = '/atlas/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Atlas', href: '/atlas/' },
+];
+
+const datasetSchema = JSON.stringify(generateDatasetSchema({
+  name: 'Hamburger Dachgeschossausbau-Atlas 2026',
+  description: 'Bezirksgenaue Daten zu Dachgeschossausbau in Hamburg: Kaufpreise, Mieten, Erhaltungssatzung, Denkmalschutz, typische Bauten, Bauaufsicht.',
+  url: 'https://dachgeschossausbauhamburg.de/atlas/',
+  creator: 'Dachgeschossausbau Hamburg',
+  datePublished: '2026-01-15',
+  dateModified: '2026-09-16',
+  keywords: ['Hamburg', 'Dachgeschossausbau', 'Atlas', 'DG-Ausbau Bezirke', 'Bauaufsicht', 'Erhaltungssatzung'],
+  spatialCoverage: 'Hamburg',
+}));
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Hamburger Dachgeschossausbau-Atlas 2026 – Bezirksgenaue Daten',
+  description: 'Der vollständige Atlas: Daten zu Dachgeschossausbau in allen 7 Hamburger Bezirken, von Kaufpreisen bis zur zuständigen Bauaufsicht.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-01-15',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['DG-Atlas Hamburg', 'Hamburger Bezirke Bauaufsicht', 'Wohnraumpotenzial Hamburg'],
+  url: 'https://dachgeschossausbauhamburg.de/atlas/',
+}));
+---
+
+<BaseLayout
+  title="Hamburger DG-Ausbau-Atlas 2026 – Bezirksgenaue Daten"
+  description="Atlas: Dachgeschossausbau in allen 7 Hamburger Bezirken. Kaufpreise, Mieten, Erhaltungssatzung, Denkmalschutz, Bauaufsicht – mit Standortkarte."
+  canonical="/atlas/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={datasetSchema} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Atlas', url: 'https://dachgeschossausbauhamburg.de/atlas/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-4xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Datenjournalismus · 2026 Edition
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Hamburg Dachgeschossausbau-Atlas 2026
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Bezirksgenaue Daten zu Dachgeschossausbau in Hamburg. Kaufpreise, Mieten,
+          Erhaltungssatzung, Denkmalschutz und zuständige Bauaufsicht – alles auf einer Karte.
+        </p>
+        <div class="mt-8 inline-flex items-center gap-3 bg-white/10 rounded-full px-5 py-3 text-sm">
+          <span class="font-semibold text-secondary">Lizenz:</span>
+          <span>CC BY-NC 4.0 · Verwendung mit Quellenangabe erlaubt</span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Embed Hinweis -->
+  <section class="py-8 bg-bg border-b border-border">
+    <Container>
+      <div class="max-w-4xl mx-auto bg-surface rounded-xl p-5 border border-border">
+        <p class="text-sm text-text-secondary">
+          <strong class="text-text-primary">📰 Für Journalisten &amp; Redaktionen:</strong>{' '}
+          Diese Daten sind unter CC BY-NC 4.0 lizenziert. Quellenangabe:
+          <em>Dachgeschossausbau Hamburg, Atlas 2026</em>. Embed-Widget auf Anfrage.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Bezirke als Tabelle -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Atlas-Daten"
+        heading="Alle Bezirke im Vergleich"
+        subheading="Sortierbare Übersicht. Stand: September 2026."
+      />
+      <div class="max-w-6xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border bg-surface">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-4 py-3 font-semibold">Bezirk</th>
+                <th class="px-4 py-3 font-semibold text-right">Kaufpreis €/m²</th>
+                <th class="px-4 py-3 font-semibold text-right">Miete €/m²</th>
+                <th class="px-4 py-3 font-semibold text-center">EHSG</th>
+                <th class="px-4 py-3 font-semibold text-center">Denkmal</th>
+                <th class="px-4 py-3 font-semibold">Bauaufsicht</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              {BEZIRKE.map((b) => (
+                <tr class="hover:bg-bg transition-colors">
+                  <td class="px-4 py-3">
+                    <a href={`/bezirke/${b.slug}/`} class="font-semibold text-primary hover:underline">
+                      Hamburg-{b.shortName}
+                    </a>
+                  </td>
+                  <td class="px-4 py-3 text-right font-mono">{b.kaufpreisAvg}</td>
+                  <td class="px-4 py-3 text-right font-mono">{b.mieteAvg}</td>
+                  <td class="px-4 py-3 text-center">
+                    {b.erhaltungssatzung ? '✓' : '–'}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {b.denkmalschutzHaefig ? '✓' : '–'}
+                  </td>
+                  <td class="px-4 py-3 text-xs">
+                    {b.bauaufsicht.telefon}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Methodik -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Methodik"
+        heading="Wie wir die Daten erheben"
+        subheading="Transparenz ist die Basis für nachvollziehbare Aussagen."
+      />
+      <div class="max-w-3xl mx-auto space-y-4 text-text-secondary">
+        <p>
+          Die Atlas-Daten werden kontinuierlich gepflegt und basieren auf drei Quellen:
+        </p>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>
+            <strong>Eigene Projekterfahrung</strong> – 180+ Dachgeschossausbauten in Hamburg seit 2014.
+            Kaufpreise und Mieten basieren auf realen Projekten, nicht auf Angebotsdaten.
+          </li>
+          <li>
+            <strong>Öffentliche Bezirksamts-Quellen</strong> – die genannten Telefonnummern und Adressen
+            stammen direkt von den offiziellen Bezirksamts-Websites (Stand 2026).
+          </li>
+          <li>
+            <strong>Marktreports</strong> – Hamburger Mietenspiegel 2026, ifbhh.de-Förderdaten,
+            Bezirksamt Hamburg-Mitte Bauaufsicht.
+          </li>
+        </ol>
+        <p class="mt-4">
+          Wir aktualisieren den Atlas halbjährlich. Stand: <strong>16. September 2026</strong>.
+          Korrekturen bitte an{' '}
+          <a href="mailto:atlas@dachgeschossausbauhamburg.de" class="text-primary hover:underline">
+            atlas@dachgeschossausbauhamburg.de
+          </a>.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Embed -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Embed"
+        heading="Atlas-Daten einbetten"
+        subheading="Sie wollen diese Daten auf Ihrer Seite zeigen? Nutzen Sie unser Embed-Widget."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-surface rounded-2xl p-8 border border-border">
+          <p class="text-sm text-text-secondary mb-4">
+            Binden Sie die Hamburg-Bezirke-Tabelle als interaktives Widget auf Ihrer Website ein.
+            Mit Quellenangabe und kostenlos.
+          </p>
+          <pre class="bg-bg rounded-lg p-4 text-xs overflow-x-auto"><code>&lt;iframe
+  src="https://dachgeschossausbauhamburg.de/atlas/embed/"
+  width="100%"
+  height="600"
+  frameborder="0"
+  loading="lazy"
+  title="Hamburger DG-Atlas"&gt;
+&lt;/iframe&gt;
+&lt;p&gt;Daten: &lt;a href="https://dachgeschossausbauhamburg.de/atlas/"&gt;
+  Dachgeschossausbau Hamburg, Atlas 2026&lt;/a&gt;, CC BY-NC 4.0&lt;/p&gt;</code></pre>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/atlas/embed/" class="cta-primary text-sm px-6 py-3">
+              Embed-Widget ansehen
+            </a>
+            <a href="/kontakt/" class="text-sm font-semibold text-primary hover:underline self-center">
+              Individuelle Anfrage →
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Mehr Daten gewünscht?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir erstellen auf Anfrage individuelle Datenauswertungen für Forschung, Versorger und Behörden.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

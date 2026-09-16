@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Spezielle Bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /news/
+
+# Sitemaps
 Sitemap: https://www.dachgeschossausbauhamburg.de/sitemap-index.xml
+Sitemap: https://www.dachgeschossausbauhamburg.de/sitemap-presse.xml

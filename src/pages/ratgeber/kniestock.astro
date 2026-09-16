@@ -1,0 +1,187 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
+
+const currentPath = '/ratgeber/kniestock/';
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Kniestock erhöhen', href: currentPath },
+];
+
+const faqs = [
+  {
+    question: 'Was kostet es, den Kniestock in Hamburg zu erhöhen?',
+    answer: 'Eine Kniestock-Erhöhung um 20–30 cm kostet in Hamburg zwischen 8.000 und 18.000 Euro, abhängig von Statik, Mauerwerk und Anschlüssen. Hinzu kommen Architekten- und Statikerkosten (2.000–4.000 €). Genehmigung nach §61 HBauO 4–8 Wochen.',
+  },
+  {
+    question: 'Brauche ich für eine Kniestock-Erhöhung eine Genehmigung?',
+    answer: 'Ja. Jede Veränderung der Außenwandhöhe ist genehmigungspflichtig nach HBauO. In Erhaltungssatzungsgebieten wie Eppendorf oder Eimsbüttel-Nord ist zusätzlich die Zustimmung des Bezirksamts nötig. Die Bearbeitung im vereinfachten Verfahren nach §61 dauert 4–8 Wochen.',
+  },
+];
+---
+
+<BaseLayout
+  title="Kniestock erhöhen Hamburg – Wann sinnvoll, wann nicht?"
+  description="Kniestock in Hamburg erhöhen: Voraussetzungen, Kosten (8.000–18.000 €), Statik und Genehmigung. Für mehr nutzbare Wohnfläche im Dachgeschoss."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Kniestock erhöhen in Hamburg – wann sinnvoll, wann nicht',
+    description: 'Der Kniestock bestimmt die nutzbare Fläche im Dachgeschoss. Dieser Ratgeber erklärt, wann eine Erhöhung sinnvoll ist, welche Kosten anfallen und welche Genehmigungen nötig sind.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_STATIKER,
+    datePublished: '2026-04-10',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Kniestock erhöhen', 'Hamburg Kniestock', 'DG-Ausbau Raumhöhe', 'Kniestock Statik'],
+    url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Kniestock erhöhen', url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Raumhöhe · Statik · Genehmigung
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Kniestock erhöhen in Hamburg
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Der Kniestock entscheidet, wie viel Stehhöhe im Dachgeschoss bleibt. Viele Hamburger
+          Altbauten haben nur 50–80 cm — zu wenig für volle Wohnraumhöhe nach <a href="/glossar/lichte-raumhoehe/" class="text-secondary underline hover:underline">HBauO</a>.
+          Wann lohnt sich die Erhöhung?
+        </p>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">8.000–18.000 €</div>
+            <div class="text-xs text-white/60 mt-1">Kostenrahmen</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">20–30 cm</div>
+            <div class="text-xs text-white/60 mt-1">typische Erhöhung</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="text-2xl font-bold text-secondary">4–8 Wo.</div>
+            <div class="text-xs text-white/60 mt-1">Genehmigung</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Was ist der Kniestock?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Der <a href="/glossar/kniestock/" class="text-primary underline hover:underline">Kniestock</a>
+            (auch Drempel oder Stich) ist die Höhe der Außenwand, die unter der Dachschräge verläuft.
+            Er bestimmt, wie viel Stehhöhe im Dachgeschoss vorhanden ist. Die HBauO Hamburg schreibt
+            eine <a href="/glossar/lichte-raumhoehe/" class="text-primary underline hover:underline">lichte Raumhöhe von 2,30 m</a>
+            vor — über zwei Drittel der Grundfläche des darunter liegenden Geschosses. Bei zu niedrigem
+            Kniestock wird das Dachgeschoss nicht zur offiziellen Wohnfläche.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Hamburger Altbauten: Typische Kniestöcke</h2>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            In Hamburg variieren die Kniestöcke je nach Baualter erheblich:
+          </p>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li class="flex gap-2"><span class="text-primary font-bold">•</span><span><strong>Gründerzeit 1870–1910:</strong> häufig 60–90 cm</span></li>
+            <li class="flex gap-2"><span class="text-primary font-bold">•</span><span><strong>Vorkrieg 1920–1940:</strong> oft 70–100 cm</span></li>
+            <li class="flex gap-2"><span class="text-primary font-bold">•</span><span><strong>Nachkrieg 1950–1970:</strong> typisch 50–80 cm (sehr knapp)</span></li>
+            <li class="flex gap-2"><span class="text-primary font-bold">•</span><span><strong>Neubau ab 1990:</strong> meist 100–150 cm</span></li>
+          </ul>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            Vor allem in <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a>,
+            <a href="/standorte/eimsbuettel/" class="text-primary underline hover:underline">Eimsbüttel</a> und
+            <a href="/standorte/altona/" class="text-primary underline hover:underline">Altona</a> trifft man auf
+            Nachkriegsbauten mit knappen Kniestöcken. Hier ist eine Erhöhung oft der Schlüssel zu mehr
+            Wohnfläche — alternativ oder ergänzend zur <a href="/ratgeber/gauben/" class="text-primary underline hover:underline">Gaube</a>.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Wann lohnt sich die Erhöhung?</h2>
+          <p class="text-text-secondary leading-relaxed mb-4">
+            Eine Kniestock-Erhöhung ist dann sinnvoll, wenn:
+          </p>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li>✓ die aktuelle Stehhöhe nur 1,80–2,20 m beträgt (zu wenig für Wohnraum)</li>
+            <li>✓ das DG als vollwertige Wohnung vermietet werden soll</li>
+            <li>✓ die Statik des Daches die zusätzliche Last trägt (Statik-Gutachten erforderlich)</li>
+            <li>✓ das Gebäude nicht denkmalgeschützt ist oder die Auflagen es erlauben</li>
+            <li>✓ die Maßnahme mit einer Dämmung / <a href="/leistungen/daemmung/" class="text-primary underline hover:underline">Dachsanierung</a> kombiniert wird</li>
+          </ul>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong>Nicht sinnvoll</strong> ist sie, wenn bereits eine <a href="/ratgeber/gauben/" class="text-primary underline hover:underline">Gaube</a>
+            die nötige Stehhöhe schafft, das Mauerwerk zu schwach ist oder der Aufwand in keinem
+            Verhältnis zur gewonnenen Fläche steht.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Ablauf: So gehen wir vor</h2>
+          <ol class="space-y-3 text-text-secondary text-sm">
+            <li><strong>1. Bestandsaufnahme:</strong> Wir prüfen Mauerwerk, Statik und ob eine Erhöhung technisch möglich ist.</li>
+            <li><strong>2. Statik-Gutachten:</strong> Unser <a href="/glossar/sparrenverstaerkung/" class="text-primary underline hover:underline">Tragwerksplaner</a> berechnet, ob die neue Wandhöhe standsicher ist.</li>
+            <li><strong>3. Bauantrag:</strong> Wir reichen den Antrag nach §61 HBauO ein — in Erhaltungssatzungsgebieten zusätzlich mit Bezirksamts-Abstimmung.</li>
+            <li><strong>4. Umsetzung:</strong> Mauerwerk wird aufgemauert (Backstein, Kalksandstein oder Holzrahmen) inkl. Anschlüsse an Dach und Decke.</li>
+            <li><strong>5. Folgegewerke:</strong> Dämmung, Innenausbau, Elektrik — alles aus einer Hand.</li>
+          </ol>
+        </div>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 text-sm text-text-secondary">
+          <p>
+            <strong class="text-text-primary">Hinweis:</strong> Eine Kniestock-Erhöhung ist genehmigungspflichtig
+            — anders als reine Innenausbauten, die unter <a href="/glossar/62-hbauo/" class="text-primary underline hover:underline">§62 HBauO</a>
+            freigestellt sein können. In <a href="/standorte/eppendorf/" class="text-primary underline hover:underline">Eppendorf</a>
+            und <a href="/standorte/altona/" class="text-primary underline hover:underline">Altona</a> (Erhaltungssatzung) ist die Hürde höher.
+            Wir übernehmen die komplette Abstimmung.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Ist Ihr Kniestock zu niedrig?</h2>
+          <p class="text-white/80 text-lg mb-8">
+            Wir prüfen kostenlos, ob eine Erhöhung in Ihrem Haus technisch möglich und wirtschaftlich sinnvoll ist.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

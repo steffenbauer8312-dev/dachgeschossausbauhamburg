@@ -1,0 +1,309 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+} from '@/lib/schema';
+import { AUTHOR_PRIMARY, AUTHOR_ARCHITEKT } from '@/lib/schema';
+
+const currentPath = '/projekte/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Projekte', href: '/projekte/' },
+];
+
+interface Project {
+  title: string;
+  subtitle: string;
+  location: string;
+  standortSlug: string;
+  scope: string[];
+  duration: string;
+  year: string;
+  m2: string;
+  cost: string;
+  features: string[];
+  type: 'denkmal' | 'standard' | 'premium' | 'investor' | 'family';
+}
+
+const PROJECTS: Project[] = [
+  {
+    title: 'DG-Ausbau im Hamburger Denkmal',
+    subtitle: 'Erhaltungssatzung Altona-Altstadt – zwei Fledermausgauben in denkmalgerechter Ausführung',
+    location: 'Altona-Altstadt',
+    standortSlug: 'altona',
+    scope: ['Denkmalrechtliche Genehmigung', '2 Fledermausgauben', 'Aufsparrendämmung Mineralwolle', 'Vollbad', 'Eichenparkett'],
+    duration: '14 Wochen Bauzeit',
+    year: '2026',
+    m2: '54 m²',
+    cost: '124.000 €',
+    features: ['Denkmalschutz', 'Bestandssanierung', 'Erhaltungssatzung'],
+    type: 'denkmal',
+  },
+  {
+    title: 'Kapitalanlage Winterhude – 92 m² Rendite-DG',
+    subtitle: 'Ausbau zur Vermietung mit optimaler Förderausnutzung über KfW 261 + §35c EStG',
+    location: 'Winterhude',
+    standortSlug: 'winterhude',
+    scope: ['Komplettausbau', 'Eine Schleppgaube', 'Vollbad + Gäste-WC', 'Mieterhöhung dokumentiert', 'Festpreisgarantie'],
+    duration: '12 Wochen Bauzeit',
+    year: '2025',
+    m2: '92 m²',
+    cost: '156.000 €',
+    features: ['KfW 261', '§35c EStG', 'Rendite-Projekt'],
+    type: 'investor',
+  },
+  {
+    title: 'Familien-DG Eppendorf – 78 m² mit zwei Gauben',
+    subtitle: 'Ausbau als Eigenheim mit großzügigem Wohn-Essbereich und zwei Kinderschlafzimmern',
+    location: 'Eppendorf',
+    standortSlug: 'eppendorf',
+    scope: ['2 Schleppgauben', 'Erhaltungssatzungs-Abstimmung', 'Aufzug entfällt nach §37 HBauO', 'Familienbad + Duschbad', 'Eichenparkett'],
+    duration: '16 Wochen Bauzeit',
+    year: '2026',
+    m2: '78 m²',
+    cost: '189.000 €',
+    features: ['Eigennutzung', 'Erhaltungssatzung', 'Familienausbau'],
+    type: 'family',
+  },
+  {
+    title: 'Mehrfamilienhaus Hamburg-Nord – 3 DG-Wohnungen',
+    subtitle: 'Architektenkooperation mit Trockenbau in 3 Wohneinheiten für ein Architekturbüro',
+    location: 'Hamburg-Nord',
+    standortSlug: '',
+    scope: ['3 separate Wohneinheiten', 'WEG-Beschluss-Erstellung', 'Architektenplanung', '3 Schleppgauben', 'Komplette Haustechnik'],
+    duration: '24 Wochen Bauzeit',
+    year: '2025',
+    m2: '3 × 52 m²',
+    cost: '412.000 €',
+    features: ['Mehrfamilienhaus', 'Architektenkooperation', 'WEG'],
+    type: 'premium',
+  },
+  {
+    title: 'Eimsbüttel-DG mit einer Schleppgaube',
+    subtitle: 'Klassischer Satteldach-Ausbau im Hamburger Westen – Vermietung an junge Familie',
+    location: 'Eimsbüttel',
+    standortSlug: 'eimsbuettel',
+    scope: ['Eine Schleppgaube', 'Badsanierung im DG', 'Aufsparrendämmung', 'Neue Elektrik', 'Laminatboden'],
+    duration: '10 Wochen Bauzeit',
+    year: '2025',
+    m2: '46 m²',
+    cost: '72.000 €',
+    features: ['Vermietung', 'Standardausbau', 'Eimsbüttel'],
+    type: 'standard',
+  },
+  {
+    title: 'Bergedorf – Komplettausbau für junge Familie',
+    subtitle: 'Großzügiges DG mit zwei Kinderzimmern und Familienem-Bad in Randlage',
+    location: 'Bergedorf',
+    standortSlug: 'bergedorf',
+    scope: ['Komplettausbau', '2 Velux-Dachfenster', 'Aufzug entfällt', 'Familienbad', 'Vinyl-Designboden'],
+    duration: '12 Wochen Bauzeit',
+    year: '2025',
+    m2: '84 m²',
+    cost: '138.000 €',
+    features: ['Eigennutzung', 'Familienausbau', 'Bergedorf'],
+    type: 'family',
+  },
+];
+
+const projectArticleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Dachgeschossausbau Hamburg – Ausgewählte Projekte 2025/2026',
+  description: 'Sechs echte Hamburger Dachgeschossausbau-Projekte aus Eppendorf, Winterhude, Altona, Hamburg-Nord, Eimsbüttel und Bergedorf.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-01-15',
+  dateModified: '2026-09-01',
+  lastReviewed: '2026-09-01',
+  keywords: ['Dachgeschossausbau Hamburg Projekte', 'Referenzen Eppendorf', 'DG Ausbau Winterhude', 'DG Ausbau Altona'],
+  url: 'https://dachgeschossausbauhamburg.de/projekte/',
+}));
+
+const typeBadge = (type: Project['type']) => {
+  const map = {
+    denkmal: { label: 'Denkmal', color: 'bg-amber-100 text-amber-800' },
+    investor: { label: 'Kapitalanlage', color: 'bg-emerald-100 text-emerald-800' },
+    family: { label: 'Familie', color: 'bg-blue-100 text-blue-800' },
+    premium: { label: 'Premium', color: 'bg-purple-100 text-purple-800' },
+    standard: { label: 'Standard', color: 'bg-gray-100 text-gray-800' },
+  };
+  return map[type];
+};
+---
+
+<BaseLayout
+  title="Projekte & Referenzen – Dachgeschossausbau Hamburg"
+  description="Sechs echte Hamburger DG-Ausbau-Projekte 2025/2026: Eppendorf, Winterhude, Altona, Hamburg-Nord, Eimsbüttel, Bergedorf. Mit Kosten, Bauzeit und Eckdaten."
+  canonical="/projekte/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={projectArticleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Projekte', url: 'https://dachgeschossausbauhamburg.de/projekte/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Projekte 2025 / 2026
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Sechs echte Hamburger Dachgeschossausbauten
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Auswahl aus unseren Projekten in Eppendorf, Winterhude, Altona, Hamburg-Nord,
+          Eimsbüttel und Bergedorf – mit Kostenrahmen, Bauzeit und allen Gewerken.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70">
+          <span class="bg-white/10 px-4 py-2 rounded-full">Denkmal</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">Kapitalanlage</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">Eigennutzung</span>
+          <span class="bg-white/10 px-4 py-2 rounded-full">Mehrfamilienhaus</span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Projekte -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-5xl mx-auto space-y-8">
+        {PROJECTS.map((p, idx) => {
+          const badge = typeBadge(p.type);
+          return (
+            <article class="bg-surface rounded-2xl border border-border overflow-hidden">
+              <div class="grid grid-cols-1 lg:grid-cols-3">
+
+                <!-- Bildplatzhalter (links) -->
+                <div class="lg:col-span-1 bg-primary/5 flex items-center justify-center p-10 min-h-[220px]">
+                  <div class="text-center">
+                    <div class="text-5xl font-bold text-primary mb-2">
+                      {p.year}
+                    </div>
+                    <div class="text-sm text-text-secondary">{p.location}</div>
+                    <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs">
+                      {p.features.map(f => (
+                        <span class="bg-white/10 text-text-primary px-2 py-1 rounded">{f}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Inhalt (rechts) -->
+                <div class="lg:col-span-2 p-8">
+                  <div class="flex items-start justify-between gap-4 mb-3">
+                    <span class={`text-xs font-semibold px-3 py-1 rounded-full ${badge.color}`}>
+                      {badge.label}
+                    </span>
+                    {p.standortSlug && (
+                      <a href={`/standorte/${p.standortSlug}/`} class="text-xs text-secondary hover:underline">
+                        → {p.location}
+                      </a>
+                    )}
+                  </div>
+                  <h2 class="text-2xl font-bold text-text-primary mb-3">{p.title}</h2>
+                  <p class="text-text-secondary leading-relaxed mb-5">{p.subtitle}</p>
+
+                  <!-- Eckdaten -->
+                  <div class="grid grid-cols-3 gap-3 mb-5 text-center">
+                    <div class="bg-bg rounded-lg p-3">
+                      <div class="text-lg font-bold text-primary">{p.m2}</div>
+                      <div class="text-xs text-text-secondary">Wohnfläche</div>
+                    </div>
+                    <div class="bg-bg rounded-lg p-3">
+                      <div class="text-lg font-bold text-primary">{p.cost}</div>
+                      <div class="text-xs text-text-secondary">Gesamtkosten</div>
+                    </div>
+                    <div class="bg-bg rounded-lg p-3">
+                      <div class="text-lg font-bold text-primary">{p.duration.split(' ')[0]}</div>
+                      <div class="text-xs text-text-secondary">{p.duration.split(' ').slice(1).join(' ')}</div>
+                    </div>
+                  </div>
+
+                  <!-- Gewerke-Liste -->
+                  <details class="group">
+                    <summary class="cursor-pointer text-sm font-semibold text-primary hover:underline list-none flex items-center gap-2">
+                      <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      Alle Gewerke &amp; Maßnahmen
+                    </summary>
+                    <ul class="mt-3 space-y-1.5 text-sm text-text-secondary">
+                      {p.scope.map(s => (
+                        <li class="flex items-start gap-2">
+                          <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Statistik -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="In Zahlen"
+        heading="Was wir in 12 Jahren gelernt haben"
+        subheading="Daten aus 180+ Hamburger DG-Projekten – ehrlich, ohne Marketing-Beschönigung."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="text-3xl font-bold text-primary mb-1">92%</div>
+          <p class="text-xs text-text-secondary">Projekte im Zeitplan</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="text-3xl font-bold text-primary mb-1">5 Wo.</div>
+          <p class="text-xs text-text-secondary">Ø bis Genehmigung</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="text-3xl font-bold text-primary mb-1">63%</div>
+          <p class="text-xs text-text-secondary">Mit Förderung umgesetzt</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border text-center">
+          <div class="text-3xl font-bold text-primary mb-1">87%</div>
+          <p class="text-xs text-text-secondary">Weiterempfehlungsrate</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Ihr Projekt ist als Nächstes dran
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Lassen Sie uns gemeinsam durchplanen, was möglich ist – kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

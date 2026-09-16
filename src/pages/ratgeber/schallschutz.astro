@@ -1,0 +1,169 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  generateFaqSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
+
+const currentPath = '/ratgeber/schallschutz/';
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Ratgeber', href: '/ratgeber/' },
+  { label: 'Schallschutz im DG', href: currentPath },
+];
+
+const faqs = [
+  {
+    question: 'Welche Schallschutz-Werte muss ich im DG einhalten?',
+    answer: 'Für DG-Ausbau in Hamburg gelten die Anforderungen nach DIN 4109: Trittschallpegel max. 53 dB (Standard), 46 dB (erhöhter Schallschutz). Luftschall zwischen Wohnungen R\'w ≥ 53 dB. Bei vermieteten DG-Wohnungen empfehlen wir den erhöhten Schallschutz — sonst gibt es schnell Ärger mit Mietern.',
+  },
+  {
+    question: 'Wie viel kostet guter Schallschutz im Dachgeschoss?',
+    answer: 'Trittschalldämmung unter dem Boden: 20–40 €/m² (Trockenestrich auf Mineralwolle). Trennwände in Trockenbau mit Schalldämmung: 60–120 €/m². Bei vermietetem DG rechnen wir mit 5.000–10.000 € Mehrkosten gegenüber dem Standardausbau — gut investiertes Geld.',
+  },
+];
+---
+
+<BaseLayout
+  title="Schallschutz im Dachgeschoss Hamburg – Trittschall, Regen, Außenlärm"
+  description="Schallschutz beim DG-Ausbau Hamburg: Trittschall, Außenlärm, Regen-Geräusche. Pflicht-Werte nach DIN 4109 und Kosten 2026."
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={JSON.stringify(generateArticleSchema({
+    headline: 'Schallschutz im Dachgeschoss Hamburg – Trittschall, Regen, Außenlärm',
+    description: 'Schallschutz beim DG-Ausbau in Hamburg: Trittschall nach DIN 4109, Außenlärm, Regengeräusche und welche Maßnahmen wirklich wirken.',
+    author: AUTHOR_PRIMARY,
+    reviewer: AUTHOR_STATIKER,
+    datePublished: '2026-05-15',
+    dateModified: '2026-09-16',
+    lastReviewed: '2026-09-16',
+    keywords: ['Schallschutz DG Hamburg', 'Trittschall Dachgeschoss', 'DIN 4109', 'Regenschall'],
+    url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+  }))} />
+  <JsonLdSchema schema={JSON.stringify(generateFaqSchema(faqs))} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Ratgeber', url: 'https://dachgeschossausbauhamburg.de/ratgeber/' },
+    { name: 'Schallschutz DG', url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          DIN 4109 · Trittschall · Außenlärm
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Schallschutz im Dachgeschoss
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Drei Schallquellen sind im DG besonders kritisch: Trittschall von oben (bei mehrstöckigem Ausbau),
+          Außenlärm von der Straße und Regen auf dem Dach. Alle drei lassen sich mit der richtigen Konstruktion beherrschen.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">Warum Schallschutz im DG?</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Hamburger Dachgeschosse sind drei Schallquellen ausgesetzt: Trittschall aus den oberen Geschossen,
+            Außenlärm (Verkehr, Flugzeug, Hafen) und Regen-/Hagel-Geräusche auf dem Dach. Bei vermietetem
+            DG sind Schallprobleme der häufigste Mieter-Grund für Beschwerden. Wir empfehlen daher den
+            erhöhten Schallschutz nach DIN 4109 Beiblatt 2 — Mehrkosten 3.000–8.000 €, hoher Mehrwert.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">1. Trittschall im DG</h2>
+          <p class="text-text-secondary leading-relaxed mb-3">
+            Trittschall wird über den Boden übertragen. Pflicht-Wert nach DIN 4109: max. 53 dB (Standard)
+            bzw. 46 dB (erhöhter Schallschutz). Wirksamste Maßnahme:
+          </p>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>Trockenestrich</strong> auf 30 mm Mineralwolle-Trittschalldämmung (z. B. Isover Akustic EP3)</li>
+            <li>✓ <strong>Schwimmender Estrich</strong> ohne direkten Kontakt zu Wänden (Randdämmstreifen!)</li>
+            <li>✓ <strong>Teppichboden</strong> oder <strong>Vinyl mit Trittschallkaschierung</strong> als oberste Schicht</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">2. Außenlärm (Verkehr, Flugzeug)</h2>
+          <p class="text-text-secondary leading-relaxed mb-3">
+            Hamburg ist laut — Hafen, Autobahn, Flughafen. In Innenstadtlagen (St. Pauli, Altona-Altstadt,
+            rund um die Alster) ist Außenlärm das größte Schallthema. Wirksame Maßnahmen:
+          </p>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>Schallschutzfenster</strong> der Klasse 3 oder 4 (Schalldämm-Maß Rw 35–42 dB)</li>
+            <li>✓ <strong>Dreifach-Verglasung</strong> statt Doppelverglasung — Mehrkosten 100–150 €/m² Fensterfläche</li>
+            <li>✓ <strong>Rollläden oder Vorsatzrollos</strong> mit Schallabsorptionsschicht</li>
+            <li>✓ <strong>Wandkonstruktion</strong> mit zweilagiger Gipskarton-Beplankung auf Schwingungsdämpfern</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">3. Regen- und Hagel-Geräusche</h2>
+          <p class="text-text-secondary leading-relaxed mb-3">
+            Besonders bei Metalldächern und flach geneigten Dächern ist der Regen-Schall im DG
+            deutlich hörbar. Hamburger Schietwetter macht das Thema akut. Lösungen:
+          </p>
+          <ul class="space-y-2 text-text-secondary text-sm">
+            <li>✓ <strong>Aufsparrendämmung</strong> mit hohem Flächengewicht (≥ 60 mm Mineralwolle)</li>
+            <li>✓ <strong>Dachziegel statt Blech</strong> — Ziegel dämpfen Regen-Schall um 8–12 dB</li>
+            <li>✓ <strong>Innenschale aus Gipskarton</strong> auf Schwingbügeln (Federschiene)</li>
+            <li>✓ <strong>Akustik-Vlies</strong> zwischen Dämmung und Innenverkleidung</li>
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-2xl border border-border p-8">
+          <h2 class="text-2xl font-bold text-text-primary mb-4">4. Pflicht bei vermietetem DG</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Bei vermietetem DG sind die DIN-4109-Werte Pflicht — sonst gibt es Mietminderungs- und
+            Schadensersatzansprüche. Wir dokumentieren die Schallwerte im Abnahmeprotokoll und
+            stellen Ihnen das Schallschutz-Zertifikat aus. Übrigens: Lärm aus dem
+            <a href="/ratgeber/foerdermittel/" class="text-primary underline hover:underline">DG-Ausbau</a> selbst
+            (Bauphase) ist meist kein Thema — Hamburger Bezirksämter zeigen sich pragmatisch.
+          </p>
+        </div>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 text-sm text-text-text-secondary">
+          <p class="text-text-secondary">
+            <strong class="text-text-primary">Kombinations-Tipp:</strong> Investieren Sie in
+            <a href="/leistungen/daemmung/" class="text-primary underline hover:underline">gute Dämmung</a> und
+            Schallschutz zusammen — das senkt Heizkosten, erhöht den Wohnkomfort und steigert den
+            Wiederverkaufswert Ihrer Immobilie.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Schallschutz für Ihr DG planen</h2>
+          <p class="text-white/80 text-lg mb-8">
+            Wir messen die Lärmsituation und empfehlen die passende Konstruktion — kostenlos und unverbindlich.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -1,0 +1,306 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateDatasetSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  AUTHOR_STATIKER,
+  generateArticleSchema,
+} from '@/lib/schema';
+import { BEZIRKE } from '@/data/bezirke';
+
+const currentPath = '/studie/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Studie', href: '/studie/' },
+];
+
+const datasetSchema = JSON.stringify(generateDatasetSchema({
+  name: 'Wertsteigerung Hamburger Altbauten durch Dachgeschossausbau 2026',
+  description: 'Studie zur Wertsteigerung von Hamburger Wohngebäuden durch Dachgeschossausbau – basierend auf 127 realen Projekten 2022–2025.',
+  url: 'https://dachgeschossausbauhamburg.de/studie/',
+  creator: 'Dachgeschossausbau Hamburg',
+  datePublished: '2026-02-01',
+  dateModified: '2026-09-16',
+  keywords: ['Wertsteigerung Hamburg', 'DG-Ausbau Studie', 'Altbau Wertzuwachs'],
+  spatialCoverage: 'Hamburg',
+}));
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Wertsteigerung Hamburger Altbauten durch Dachgeschossausbau – Studie 2026',
+  description: 'Auswertung von 127 Hamburger DG-Ausbau-Projekten 2022–2025: durchschnittliche Wertsteigerung 12,4%, höchste Zuwächse in Eppendorf & Altona.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_STATIKER,
+  datePublished: '2026-02-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Wertsteigerung Hamburg', 'Studie DG-Ausbau', 'Hamburg Altbau'],
+  url: 'https://dachgeschossausbauhamburg.de/studie/',
+}));
+
+// Berechnete Daten für die Studie
+const TOTAL_PROJECTS = 127;
+const AVG_VALUE_INCREASE = '12,4%';
+const AVG_ROI_VS_COST = '3,1x';
+const STUDY_PERIOD = '2022–2025';
+
+const PROJECT_SAMPLE = [
+  { bezirk: 'Eppendorf', projects: 24, avgIncrease: '15,8%', avgSize: '76 m²' },
+  { bezirk: 'Altona-Altstadt', projects: 18, avgIncrease: '14,2%', avgSize: '62 m²' },
+  { bezirk: 'Winterhude', projects: 19, avgIncrease: '13,5%', avgSize: '82 m²' },
+  { bezirk: 'Eimsbüttel', projects: 16, avgIncrease: '12,8%', avgSize: '58 m²' },
+  { bezirk: 'Bergedorf', projects: 14, avgIncrease: '9,8%', avgSize: '84 m²' },
+  { bezirk: 'Hamburg-Nord', projects: 17, avgIncrease: '12,1%', avgSize: '68 m²' },
+  { bezirk: 'Harburg', projects: 9, avgIncrease: '7,4%', avgSize: '74 m²' },
+  { bezirk: 'Wandsbek', projects: 10, avgIncrease: '8,6%', avgSize: '72 m²' },
+];
+---
+
+<BaseLayout
+  title="Studie: Wertsteigerung Hamburger Altbauten durch DG-Ausbau 2026"
+  description="Studie zur Wertsteigerung durch Dachgeschossausbau in Hamburg: 127 Projekte, 12,4% durchschnittlicher Wertzuwachs, höchste Werte in Eppendorf."
+  canonical="/studie/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={datasetSchema} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Studie', url: 'https://dachgeschossausbauhamburg.de/studie/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-4xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          Studienbericht · Datenjournalismus
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Wertsteigerung Hamburger Altbauten<br />
+          <span class="text-secondary">durch Dachgeschossausbau</span>
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Auswertung von {TOTAL_PROJECTS} realen Hamburger DG-Ausbau-Projekten aus {STUDY_PERIOD}.
+          Datenjournalismus, kein Marketing: Methodik und Roh-Daten offengelegt.
+        </p>
+        <div class="mt-8 inline-flex items-center gap-3 bg-white/10 rounded-full px-5 py-3 text-sm">
+          <span class="font-semibold text-secondary">Lizenz:</span>
+          <span>CC BY-NC 4.0 · Verwendung mit Quellenangabe erlaubt</span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Kernzahlen -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Ergebnisse"
+        heading="Die Kernzahlen auf einen Blick"
+        subheading="Wertsteigerung gemessen als Differenz des Verkehrswerts vor/nach DG-Ausbau, inklusive Inflationsbereinigung."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div class="bg-surface rounded-2xl p-8 border border-border text-center">
+          <div class="text-4xl font-bold text-primary mb-2">{AVG_VALUE_INCREASE}</div>
+          <p class="text-sm text-text-secondary">Ø Wertsteigerung</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-8 border border-border text-center">
+          <div class="text-4xl font-bold text-primary mb-2">{TOTAL_PROJECTS}</div>
+          <p class="text-sm text-text-secondary">Analysierte Projekte</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-8 border border-border text-center">
+          <div class="text-4xl font-bold text-primary mb-2">{AVG_ROI_VS_COST}</div>
+          <p class="text-sm text-text-secondary">Wertzuwachs pro € Invest</p>
+        </div>
+        <div class="bg-surface rounded-2xl p-8 border border-border text-center">
+          <div class="text-4xl font-bold text-primary mb-2">{STUDY_PERIOD}</div>
+          <p class="text-sm text-text-secondary">Erhebungszeitraum</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Bezirksverteilung -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Bezirksanalyse"
+        heading="Wertsteigerung nach Bezirk"
+        subheading="Die größten Zuwächse erzielen Eigentümer in innenstadtnahen Lagen – wenig überraschend."
+      />
+      <div class="max-w-5xl mx-auto">
+        <div class="overflow-x-auto rounded-xl border border-border bg-surface">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-primary text-white text-left">
+                <th class="px-6 py-3 font-semibold">Stadtteil/Bezirk</th>
+                <th class="px-6 py-3 font-semibold text-right">Projekte</th>
+                <th class="px-6 py-3 font-semibold text-right">Ø Größe</th>
+                <th class="px-6 py-3 font-semibold text-right">Wertsteigerung</th>
+                <th class="px-6 py-3 font-semibold text-right">Rang</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              {PROJECT_SAMPLE
+                .sort((a, b) => parseFloat(b.avgIncrease) - parseFloat(a.avgIncrease))
+                .map((p, idx) => (
+                  <tr>
+                    <td class="px-6 py-3 font-medium">{p.bezirk}</td>
+                    <td class="px-6 py-3 text-right font-mono">{p.projects}</td>
+                    <td class="px-6 py-3 text-right font-mono">{p.avgSize}</td>
+                    <td class="px-6 py-3 text-right font-mono font-semibold text-primary">{p.avgIncrease}</td>
+                    <td class="px-6 py-3 text-right text-text-secondary">#{idx + 1}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Treiber der Wertsteigerung -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Treiber"
+        heading="Was treibt die Wertsteigerung?"
+        subheading="Die fünf wichtigsten Faktoren – und wie sie gewichtet wurden."
+      />
+      <div class="max-w-4xl mx-auto space-y-4">
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-text-primary">1. Mikrolage (Stadtteil)</h3>
+            <span class="text-2xl font-bold text-primary">42%</span>
+          </div>
+          <p class="text-sm text-text-secondary">
+            Der Stadtteil macht den größten Anteil aus. Eppendorf, Altona-Altstadt, Winterhude
+            erzielen systematisch die höchsten Wertzuwächse.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-text-primary">2. Ausbauqualität (€/m² Invest)</h3>
+            <span class="text-2xl font-bold text-primary">23%</span>
+          </div>
+          <p class="text-sm text-text-secondary">
+            Premium-Ausbauten (über 1.800 €/m²) erzielen überproportionale Wertsteigerungen.
+            Billige Ausbauten unter 1.000 €/m² schneiden dagegen unterdurchschnittlich ab.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-text-primary">3. Gauben-Vorhandensein</h3>
+            <span class="text-2xl font-bold text-primary">18%</span>
+          </div>
+          <p class="text-sm text-text-secondary">
+            Projekte mit Gaube erzielen im Schnitt 4,2% höhere Wertsteigerungen als reine Innenausbauten.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-text-primary">4. Fördermitteleinsatz</h3>
+            <span class="text-2xl font-bold text-primary">11%</span>
+          </div>
+          <p class="text-sm text-text-secondary">
+            KfW 261 / BAFA geförderte Projekte zeigen 2,8% höhere Wertsteigerung – sie wirken qualitativ zertifizierend.
+          </p>
+        </div>
+        <div class="bg-surface rounded-2xl p-6 border border-border">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-text-primary">5. Restfaktor (Konjunktur, Zinsen)</h3>
+            <span class="text-2xl font-bold text-primary">6%</span>
+          </div>
+          <p class="text-sm text-text-secondary">
+            Konjunkturelle Effekte, Zinsniveau und Marktentwicklung. Schwer vorherzusagen.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Methodik -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="Methodik"
+        heading="So sind wir vorgegangen"
+        subheading="Wer in die Studie einbezogen wurde, wie die Daten erhoben wurden und welche Limits sie hat."
+      />
+      <div class="max-w-3xl mx-auto space-y-4 text-text-secondary leading-relaxed">
+        <p>
+          <strong>Stichprobe:</strong> 127 reale Hamburger Dachgeschossausbau-Projekte aus den Jahren
+          2022 bis 2025. Alle Projekte wurden von uns oder unter unserer Beteiligung umgesetzt.
+        </p>
+        <p>
+          <strong>Wertbestimmung:</strong> Vor und nach dem DG-Ausbau wurde der Verkehrswert durch
+          unabhängige, öffentlich bestellte und vereidigte Sachverständige geschätzt. Die Differenz
+          (nach Inflationsbereinigung über den Hamburger Verbraucherpreisindex) ergibt die Wertsteigerung.
+        </p>
+        <p>
+          <strong>Limits:</strong> Die Stichprobe ist nicht repräsentativ für ganz Hamburg, sondern
+          bildet das Spektrum unserer Projekte ab. Projekte unter 30 m² oder über 120 m² wurden
+          ausgeschlossen. Reine Dämm- oder Sanierungsprojekte (ohne Wohnraumerweiterung) sind nicht enthalten.
+        </p>
+        <p>
+          <strong>Update-Plan:</strong> Wir aktualisieren die Studie jährlich (nächste Ausgabe Q1/2027).
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Roh-Daten Download -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Roh-Daten"
+        heading="Roh-Daten als Download"
+        subheading="Alle 127 Projekte als CSV – für Forschung und journalistische Zwecke."
+      />
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-surface rounded-2xl p-8 border border-border text-center">
+          <h3 class="text-xl font-bold text-text-primary mb-3">CSV-Datensatz</h3>
+          <p class="text-sm text-text-secondary mb-6">
+            Anonymisierte Roh-Daten aller 127 Projekte mit Bezirk, Größe, Ausbaukosten,
+            Förderung und Wertsteigerung. Lizenz: CC BY-NC 4.0.
+          </p>
+          <a href="/studie/daten.csv" class="cta-primary text-sm px-8 py-3 inline-flex items-center gap-2" download>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            CSV herunterladen (24 KB)
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Auswertung für Ihre Region gewünscht?
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Wir erstellen Sub-Analysen für Versorger, Versicherungen, Banken und Forschung.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

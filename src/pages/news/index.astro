@@ -1,0 +1,149 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+  AUTHOR_STATIKER,
+} from '@/lib/schema';
+import { NEWS, NEWS_CATEGORIES } from '@/data/news';
+
+const currentPath = '/news/';
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'News', href: '/news/' },
+];
+
+const categoryColorMap = Object.fromEntries(NEWS_CATEGORIES.map(c => [c.id, c.color]));
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: 'Dachgeschossausbau Hamburg – News & Updates 2026',
+  description: 'Aktuelle News aus Hamburg: HBauO 2026, KfW-Förderung, Mietenspiegel, Erhaltungssatzung und Bautechnik-Trends für Dachgeschossausbau.',
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-06-01',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: ['Hamburg DG-Ausbau News', 'HBauO Update', 'KfW 261 Aktuell'],
+  url: 'https://dachgeschossausbauhamburg.de/news/',
+}));
+---
+
+<BaseLayout
+  title="News & Updates Dachgeschossausbau Hamburg 2026"
+  description="Aktuelle News aus Hamburg: HBauO 2026, KfW 261, Mietenspiegel, Erhaltungssatzung und Bautechnik-Trends – alle 2 Wochen aktualisiert."
+  canonical="/news/"
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'News', url: 'https://dachgeschossausbauhamburg.de/news/' },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="py-20 lg:py-24 text-center max-w-3xl mx-auto">
+        <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+          News &amp; Updates
+        </span>
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+          Was gibt's Neues in Hamburg?
+        </h1>
+        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Aktuelle Entwicklungen rund um Dachgeschossausbau in Hamburg – von der HBauO 2026 über
+          Förderprogramme bis zur Bautechnik. Wir aktualisieren alle 2 Wochen.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70">
+          {NEWS_CATEGORIES.map((c) => (
+            <a href={`#${c.id}`} class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition-colors">
+              {c.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- News nach Kategorie -->
+  {NEWS_CATEGORIES.map((cat, idx) => {
+    const items = NEWS.filter((n) => n.category === cat.id)
+      .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime());
+    return (
+      <section id={cat.id} class={`py-16 ${idx % 2 === 1 ? 'bg-bg' : ''}`}>
+        <Container>
+          <SectionHeader
+            badge={cat.label}
+            heading={`${cat.label}: ${items.length} aktuelle Beiträge`}
+            subheading={`Die neuesten ${cat.label}-Themen aus Hamburg.`}
+            align="left"
+          />
+          <div class="max-w-4xl mx-auto space-y-4">
+            {items.map((item) => (
+              <article class="bg-surface rounded-2xl p-6 border border-border hover:border-primary transition-colors">
+                <div class="flex items-start justify-between gap-4 mb-3">
+                  <span class={`text-xs font-semibold px-3 py-1 rounded-full ${cat.color}`}>
+                    {cat.label}
+                  </span>
+                  <time class="text-xs text-text-secondary">
+                    {new Date(item.datePublished).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                </div>
+                <h2 class="text-xl font-bold text-text-primary mb-2">{item.title}</h2>
+                <p class="text-text-secondary leading-relaxed mb-3">
+                  {item.excerpt}
+                </p>
+                <details class="group">
+                  <summary class="cursor-pointer text-sm font-semibold text-primary hover:underline list-none flex items-center gap-2">
+                    <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Artikel lesen
+                  </summary>
+                  <div class="mt-4 text-text-secondary leading-relaxed">
+                    {item.body}
+                  </div>
+                  <div class="mt-3 flex flex-wrap gap-2 text-xs text-text-secondary/70">
+                    {item.tags.map((tag) => (
+                      <span class="bg-bg px-2 py-1 rounded">#{tag}</span>
+                    ))}
+                    <span class="text-text-secondary/70">· von {item.author}</span>
+                  </div>
+                </details>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+    );
+  })}
+
+  <!-- Newsletter-Hinweis (Anker für LeadGen) -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            Keine wichtige Änderung verpassen
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Lassen Sie sich kostenlos per E-Mail über Änderungen bei HBauO, Förderung und Hamburger Sonderregelungen informieren.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

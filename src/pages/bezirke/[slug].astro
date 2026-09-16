@@ -1,0 +1,251 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LeadGenForm from '@/components/forms/LeadGenForm.astro';
+import JsonLdSchema from '@/components/seo/JsonLdSchema.astro';
+import BreadcrumbList from '@/components/seo/BreadcrumbList.astro';
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  AUTHOR_PRIMARY,
+  AUTHOR_ARCHITEKT,
+} from '@/lib/schema';
+import { BEZIRKE, type Bezirk } from '@/data/bezirke';
+
+export async function getStaticPaths() {
+  return BEZIRKE.map((bezirk) => ({
+    params: { slug: bezirk.slug },
+    props: { bezirk },
+  }));
+}
+
+interface Props {
+  bezirk: Bezirk;
+}
+
+const { bezirk } = Astro.props;
+const currentPath = `/bezirke/${bezirk.slug}/`;
+
+const breadcrumbItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Bezirke', href: '/bezirke/' },
+  { label: `Hamburg-${bezirk.shortName}`, href: currentPath },
+];
+
+const otherBezirke = BEZIRKE.filter((b) => b.slug !== bezirk.slug).slice(0, 4);
+
+const articleSchema = JSON.stringify(generateArticleSchema({
+  headline: `Dachgeschossausbau in Hamburg-${bezirk.shortName} – Bauaufsicht, EHSG, typische Bauten`,
+  description: `${bezirk.description} Zuständige Bauaufsicht: ${bezirk.bauaufsicht.name}, ${bezirk.bauaufsicht.telefon}.`,
+  author: AUTHOR_PRIMARY,
+  reviewer: AUTHOR_ARCHITEKT,
+  datePublished: '2026-03-15',
+  dateModified: '2026-09-16',
+  lastReviewed: '2026-09-16',
+  keywords: [
+    `DG-Ausbau Hamburg-${bezirk.shortName}`,
+    `Bauaufsicht ${bezirk.name}`,
+    `${bezirk.name} Dachgeschossausbau`,
+    bezirk.erhaltungssatzung ? `Erhaltungssatzung ${bezirk.shortName}` : null,
+  ].filter(Boolean) as string[],
+  url: `https://dachgeschossausbauhamburg.de${currentPath}`,
+}));
+---
+
+<BaseLayout
+  title={`Dachgeschossausbau Hamburg-${bezirk.shortName} – Bauaufsicht, Kosten, Genehmigung`}
+  description={`DG-Ausbau in Hamburg-${bezirk.shortName}: ${bezirk.description.slice(0, 80)} Zuständige Bauaufsicht mit Telefonnummer.`}
+  canonical={currentPath}
+  currentPath={currentPath}
+>
+  <JsonLdSchema schema={JSON.stringify(generateLocalBusinessSchema())} />
+  <JsonLdSchema schema={articleSchema} />
+  <JsonLdSchema schema={JSON.stringify(generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dachgeschossausbauhamburg.de/' },
+    { name: 'Bezirke', url: 'https://dachgeschossausbauhamburg.de/bezirke/' },
+    { name: `Hamburg-${bezirk.shortName}`, url: `https://dachgeschossausbauhamburg.de${currentPath}` },
+  ]))} />
+
+  <BreadcrumbList items={breadcrumbItems} />
+
+  <!-- Hero -->
+  <section class="bg-primary text-white">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 py-20 lg:py-24 items-start">
+        <div>
+          <span class="inline-block text-sm font-semibold text-secondary mb-6 uppercase tracking-wider">
+            Hamburg · Bezirk · DG-Ausbau
+          </span>
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            Dachgeschossausbau<br />
+            Hamburg-{bezirk.shortName}
+          </h1>
+          <p class="text-lg lg:text-xl text-white/80 leading-relaxed mb-6 max-w-xl">
+            {bezirk.description}
+          </p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="bg-white/10 text-white px-3 py-1.5 rounded-full text-sm">
+              {bezirk.einwohner} Einwohner
+            </span>
+            <span class="bg-white/10 text-white px-3 py-1.5 rounded-full text-sm">
+              {bezirk.flaeche}
+            </span>
+            {bezirk.erhaltungssatzung && (
+              <span class="bg-amber-500/20 text-amber-200 px-3 py-1.5 rounded-full text-sm font-semibold">
+                Erhaltungssatzung
+              </span>
+            )}
+            {bezirk.denkmalschutzHaefig && (
+              <span class="bg-purple-500/20 text-purple-200 px-3 py-1.5 rounded-full text-sm font-semibold">
+                Denkmalschutz häufig
+              </span>
+            )}
+          </div>
+          <div class="grid grid-cols-2 gap-4 max-w-md">
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-xs text-white/60">Kaufpreis</div>
+              <div class="text-lg font-bold text-secondary">{bezirk.kaufpreisAvg}</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="text-xs text-white/60">Miete</div>
+              <div class="text-lg font-bold text-secondary">{bezirk.mieteAvg}</div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:sticky lg:top-28">
+          <div class="bg-surface rounded-2xl p-8 text-text-primary">
+            <h2 class="text-xl font-bold mb-4 text-primary">Zuständige Bauaufsicht</h2>
+            <div class="space-y-3 text-sm">
+              <p>
+                <strong class="text-text-primary">{bezirk.bauaufsicht.name}</strong>
+              </p>
+              <p class="text-text-secondary">
+                <strong>Adresse:</strong><br />
+                {bezirk.bauaufsicht.adresse}
+              </p>
+              <p class="text-text-secondary">
+                <strong>Telefon:</strong>{' '}
+                <a href={`tel:${bezirk.bauaufsicht.telefon.replace(/\s/g, '')}`} class="text-primary hover:underline">
+                  {bezirk.bauaufsicht.telefon}
+                </a>
+              </p>
+              {bezirk.bauaufsicht.email && (
+                <p class="text-text-secondary">
+                  <strong>E-Mail:</strong>{' '}
+                  <a href={`mailto:${bezirk.bauaufsicht.email}`} class="text-primary hover:underline">
+                    {bezirk.bauaufsicht.email}
+                  </a>
+                </p>
+              )}
+              <p class="text-text-secondary">
+                <strong>Sachgebiet:</strong> {bezirk.bauaufsicht.sachgebiet}
+              </p>
+              <a
+                href={bezirk.bauaufsicht.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block text-sm text-primary hover:underline font-semibold"
+              >
+                Website besuchen →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Typische Bauten -->
+  <section class="py-20 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Bestand"
+        heading="Typische Bauten in Hamburg-{bezirk.shortName}"
+        subheading="Welche Dachformen und Baualter prkl die Bauplanung bestimmen."
+      />
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {bezirk.typischeBauten.map((bau) => (
+            <div class="bg-surface rounded-xl p-5 border border-border text-center">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </div>
+              <p class="text-sm font-semibold text-text-primary">{bau}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Hinweise -->
+  <section class="py-20">
+    <Container>
+      <SectionHeader
+        badge="DG-Ausbau in {bezirk.shortName}"
+        heading="Was Sie wissen müssen"
+        subheading="Die wichtigsten Besonderheiten für Ihren DG-Ausbau in diesem Bezirk."
+      />
+      <div class="max-w-3xl mx-auto space-y-3">
+        {bezirk.hinweise.map((hinweis) => (
+          <div class="bg-surface rounded-xl border border-border p-5 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="text-text-secondary leading-relaxed">{hinweis}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Verlinkte Stadtteile -->
+  {bezirk.typischeBauten && bezirk.typischeBauten.length > 0 && (
+    <section class="py-16 bg-bg">
+      <Container>
+        <SectionHeader
+          badge="Vergleichbare Bezirke"
+          heading="Andere Hamburger Bezirke"
+          subheading="Wenn Sie auch in anderen Bezirken Eigentum haben oder sich orientieren möchten."
+          align="left"
+        />
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
+          {otherBezirke.map((b) => (
+            <a
+              href={`/bezirke/${b.slug}/`}
+              class="group bg-surface rounded-xl p-4 border border-border hover:border-primary transition-colors text-center"
+            >
+              <p class="font-semibold text-text-primary group-hover:text-primary transition-colors">
+                Hamburg-{b.shortName}
+              </p>
+              <p class="text-xs text-text-secondary mt-1">{b.einwohner}</p>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="py-20">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-primary rounded-2xl p-10 lg:p-14 text-white text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            DG-Ausbau in Hamburg-{bezirk.shortName} starten
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+            Kostenlose Erstberatung mit unserem Hamburg-{bezirk.shortName}-spezialisierten Team. Wir kümmern uns um die Abstimmung mit {bezirk.bauaufsicht.name}.
+          </p>
+          <LeadGenForm />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -572,6 +572,97 @@ import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceS
   </section>
 
   <!-- ================================================
+       VERGLEICHBARE STADTTEILE
+       ================================================ -->
+  <section class="py-16 bg-bg">
+    <Container>
+      <SectionHeader
+        badge="Stadtteile im Vergleich"
+        heading="Winterhude vs. andere Stadtteile"
+        subheading="Wie schlägt sich Winterhude im Hamburg-Vergleich?"
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3">
+        <a href="/standorte/eppendorf/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Eppendorf</p>
+          <p class="text-xs text-text-secondary mt-1">Top-Wertsteigerung</p>
+        </a>
+        <a href="/standorte/altona/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Altona</p>
+          <p class="text-xs text-text-secondary mt-1">Denkmal + Villen</p>
+        </a>
+        <a href="/standorte/eimsbuettel/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Eimsbüttel</p>
+          <p class="text-xs text-text-secondary mt-1">Familienfreundlich</p>
+        </a>
+        <a href="/standorte/harburg/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Harburg</p>
+          <p class="text-xs text-text-secondary mt-1">Beste Cashflow-Rendite</p>
+        </a>
+        <a href="/standorte/bergedorf/" class="bg-surface rounded-xl border border-border hover:border-primary p-4 transition-colors">
+          <p class="font-semibold text-text-primary">Bergedorf</p>
+          <p class="text-xs text-text-secondary mt-1">Wachstum, Natur</p>
+        </a>
+        <a href="/standorte/vergleich/" class="bg-primary/5 rounded-xl border border-primary/30 hover:border-primary p-4 transition-colors text-center">
+          <p class="font-semibold text-primary">Alle Vergleiche →</p>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
+       WINTERHUDE FAQ
+       ================================================ -->
+  <section class="py-16">
+    <Container>
+      <SectionHeader
+        badge="Häufige Fragen"
+        heading="Winterhude-spezifische Fragen"
+        subheading="Aus 19 realen Winterhude-Projekten 2024–2026."
+        align="left"
+      />
+      <div class="max-w-3xl mx-auto space-y-3">
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">1</span>
+            <span class="font-semibold text-text-primary flex-1">Welche Dachformen gibt es in Winterhude?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            Winterhude ist geprägt von <strong>Gründerzeitvillen und Jugendstilbauten</strong> (1900–1930) mit Satteldach und Steildach, dazu viele Nachkriegsbauten (1950–70) mit Flachdach. Letztere bieten weniger DG-Potenzial, aber die Villen sind ideale DG-Objekte.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">2</span>
+            <span class="font-semibold text-text-primary flex-1">Wie ist die Mietrendite in Winterhude?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            In Winterhude erreichen DG-Wohnungen Brutto-Mietrenditen von 6,5–8,5 % auf den Ausbau-Investment. In Kombination mit Wertsteigerung 8–12 % und §35c EStG ist die Nettorendite für Vermieter attraktiv. Details: <a href="/ratgeber/vermieter/" class="text-primary underline hover:underline">Vermieter-Ratgeber</a>.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">3</span>
+            <span class="font-semibold text-text-primary flex-1">Wieviel Stellplatz-Befreiung gibt es?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            Winterhude liegt im Bezirk Hamburg-Nord. Bei reinem DG-Ausbau (keine Nutzungsänderung) ist eine Stellplatz-Befreiung in 80 % unserer Projekte möglich. Bei Nutzungsänderung (z. B. Einliegerwohnung) prüft das Bezirksamt Hamburg-Nord strenger.
+          </div>
+        </details>
+        <details class="group bg-surface rounded-xl border border-border">
+          <summary class="cursor-pointer p-5 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold">4</span>
+            <span class="font-semibold text-text-primary flex-1">Welche Bezirksamt-Zuständigkeit gilt?</span>
+          </summary>
+          <div class="px-5 pb-5 pl-16 text-text-secondary leading-relaxed">
+            Winterhude gehört zum Bezirk Hamburg-Nord. Zuständige Bauaufsicht: <strong>Bezirksamt Hamburg-Nord, Kümmellstraße 5, 20249 Hamburg</strong>. Mehr unter <a href="/bezirke/hamburg-nord/" class="text-primary underline hover:underline">Bezirk Hamburg-Nord</a>.
+          </div>
+        </details>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ================================================
        END CTA SECTION
        ================================================ -->
   <section class="py-20 bg-bg">
